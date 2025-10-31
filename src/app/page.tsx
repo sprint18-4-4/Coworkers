@@ -1,5 +1,6 @@
 import type { FC } from "react";
 
+// Color Swatches
 type Swatch = {
   label: string;
   tokenClass: string;
@@ -12,7 +13,7 @@ type Section = {
   items: Swatch[];
 };
 
-const sections: Section[] = [
+const colorSections: Section[] = [
   {
     title: "brand",
     items: [
@@ -167,44 +168,284 @@ const sections: Section[] = [
   },
 ];
 
-const SwatchCard: FC<Swatch> = ({ label, tokenClass, hex, note }) => {
-  return (
-    <div className="flex items-center gap-3 rounded-xl bg-background-secondary p-3 ring-1 ring-border-primary/10">
-      <div
-        aria-label={label}
-        className={`h-12 w-12 flex-shrink-0 rounded-lg ${tokenClass} ring-1 ring-black/5`}
-      />
-      <div className="min-w-0">
-        <div className="text-lg-medium text-text-inverse">{label}</div>
-        <div className="text-md-regular text-text-default">
-          {hex}
-          {note ? ` ${note}` : ""}
-        </div>
+const SwatchCard: FC<Swatch> = ({ label, tokenClass, hex, note }) => (
+  <div className="flex items-center gap-3 rounded-xl bg-background-secondary p-3 ring-1 ring-border-primary/10">
+    <div
+      aria-label={label}
+      className={`h-12 w-12 flex-shrink-0 rounded-lg ${tokenClass} ring-1 ring-black/5`}
+    />
+    <div className="min-w-0">
+      <div className="text-lg-medium text-text-inverse">{label}</div>
+      <div className="text-md-regular text-text-default">
+        {hex}
+        {note ? ` ${note}` : ""}
       </div>
     </div>
-  );
+  </div>
+);
+
+const ColorSectionBlock: FC<Section> = ({ title, items }) => (
+  <section className="space-y-4">
+    <h2 className="text-2xl-semibold text-text-inverse">{title}</h2>
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      {items.map((it) => (
+        <SwatchCard key={`${title}-${it.label}`} {...it} />
+      ))}
+    </div>
+  </section>
+);
+
+// Typography Table
+type Row = {
+  styleName: string;
+  cls: string;
+  sizeLine: string;
+  weightLabel: "Bold" | "Semibold" | "Medium" | "Regular";
 };
 
-const SectionBlock: FC<Section> = ({ title, items }) => {
-  return (
-    <section className="space-y-4">
-      <h2 className="text-2xl-semibold text-text-inverse">{title}</h2>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {items.map((it) => (
-          <SwatchCard key={`${title}-${it.label}`} {...it} />
+const typoRows: Row[] = [
+  {
+    styleName: "Text-4xl",
+    cls: "text-4xl",
+    sizeLine: "40px / 48px",
+    weightLabel: "Medium",
+  },
+  {
+    styleName: "Text-3xl",
+    cls: "text-3xl-bold",
+    sizeLine: "32px / 38px",
+    weightLabel: "Bold",
+  },
+  {
+    styleName: "Text-3xl",
+    cls: "text-3xl-semibold",
+    sizeLine: "32px / 38px",
+    weightLabel: "Semibold",
+  },
+  {
+    styleName: "Text-2xl",
+    cls: "text-2xl-bold",
+    sizeLine: "24px / 28px",
+    weightLabel: "Bold",
+  },
+  {
+    styleName: "Text-2xl",
+    cls: "text-2xl-semibold",
+    sizeLine: "24px / 28px",
+    weightLabel: "Semibold",
+  },
+  {
+    styleName: "Text-2xl",
+    cls: "text-2xl-medium",
+    sizeLine: "24px / 28px",
+    weightLabel: "Medium",
+  },
+  {
+    styleName: "Text-2xl",
+    cls: "text-2xl-regular",
+    sizeLine: "24px / 28px",
+    weightLabel: "Regular",
+  },
+  {
+    styleName: "Text-xl",
+    cls: "text-xl-bold",
+    sizeLine: "20px / 24px",
+    weightLabel: "Bold",
+  },
+  {
+    styleName: "Text-xl",
+    cls: "text-xl-semibold",
+    sizeLine: "20px / 24px",
+    weightLabel: "Semibold",
+  },
+  {
+    styleName: "Text-xl",
+    cls: "text-xl-medium",
+    sizeLine: "20px / 24px",
+    weightLabel: "Medium",
+  },
+  {
+    styleName: "Text-xl",
+    cls: "text-xl-regular",
+    sizeLine: "20px / 24px",
+    weightLabel: "Regular",
+  },
+  {
+    styleName: "Text-2lg",
+    cls: "text-2lg-bold",
+    sizeLine: "18px / 21px",
+    weightLabel: "Bold",
+  },
+  {
+    styleName: "Text-2lg",
+    cls: "text-2lg-semibold",
+    sizeLine: "18px / 21px",
+    weightLabel: "Semibold",
+  },
+  {
+    styleName: "Text-2lg",
+    cls: "text-2lg-medium",
+    sizeLine: "18px / 21px",
+    weightLabel: "Medium",
+  },
+  {
+    styleName: "Text-2lg",
+    cls: "text-2lg-regular",
+    sizeLine: "18px / 21px",
+    weightLabel: "Regular",
+  },
+  {
+    styleName: "Text-lg",
+    cls: "text-lg-bold",
+    sizeLine: "16px / 19px",
+    weightLabel: "Bold",
+  },
+  {
+    styleName: "Text-lg",
+    cls: "text-lg-semibold",
+    sizeLine: "16px / 19px",
+    weightLabel: "Semibold",
+  },
+  {
+    styleName: "Text-lg",
+    cls: "text-lg-medium",
+    sizeLine: "16px / 19px",
+    weightLabel: "Medium",
+  },
+  {
+    styleName: "Text-lg",
+    cls: "text-lg-regular",
+    sizeLine: "16px / 19px",
+    weightLabel: "Regular",
+  },
+  {
+    styleName: "Text-md",
+    cls: "text-md-bold",
+    sizeLine: "14px / 17px",
+    weightLabel: "Bold",
+  },
+  {
+    styleName: "Text-md",
+    cls: "text-md-semibold",
+    sizeLine: "14px / 17px",
+    weightLabel: "Semibold",
+  },
+  {
+    styleName: "Text-md",
+    cls: "text-md-medium",
+    sizeLine: "14px / 17px",
+    weightLabel: "Medium",
+  },
+  {
+    styleName: "Text-md",
+    cls: "text-md-regular",
+    sizeLine: "14px / 17px",
+    weightLabel: "Regular",
+  },
+  {
+    styleName: "Text-sm",
+    cls: "text-sm-semibold",
+    sizeLine: "13px / 16px",
+    weightLabel: "Semibold",
+  },
+  {
+    styleName: "Text-sm",
+    cls: "text-sm-medium",
+    sizeLine: "13px / 16px",
+    weightLabel: "Medium",
+  },
+  {
+    styleName: "Text-xs",
+    cls: "text-xs-semibold",
+    sizeLine: "12px / 14px",
+    weightLabel: "Semibold",
+  },
+  {
+    styleName: "Text-xs",
+    cls: "text-xs-medium",
+    sizeLine: "12px / 14px",
+    weightLabel: "Medium",
+  },
+  {
+    styleName: "Text-xs",
+    cls: "text-xs-regular",
+    sizeLine: "12px / 14px",
+    weightLabel: "Regular",
+  },
+];
+
+const HeaderCell: FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className,
+}) => (
+  <div
+    className={`px-4 py-3 text-left text-md-medium text-text-secondary ${className ?? ""}`}
+  >
+    {children}
+  </div>
+);
+
+const BodyCell: FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className,
+}) => (
+  <div
+    className={`px-4 py-4 text-md-regular text-text-default ${className ?? ""}`}
+  >
+    {children}
+  </div>
+);
+
+const TypographyTable: FC = () => (
+  <section className="space-y-4">
+    <h2 className="text-2xl-semibold text-text-inverse">Pretendard</h2>
+    <div className="overflow-hidden rounded-xl ring-1 ring-border-primary/10">
+      <div className="grid grid-cols-[2fr,1.2fr,1.4fr,1fr,2fr] bg-background-secondary">
+        <HeaderCell>Style Name</HeaderCell>
+        <HeaderCell>Font Type</HeaderCell>
+        <HeaderCell>Size/Line height</HeaderCell>
+        <HeaderCell>Weight</HeaderCell>
+        <HeaderCell>Preview</HeaderCell>
+      </div>
+      <div className="divide-y divide-border-primary/10 bg-background-secondary">
+        {typoRows.map((r, i) => (
+          <div
+            key={`${r.cls}-${i}`}
+            className="grid grid-cols-[2fr,1.2fr,1.4fr,1fr,2fr]"
+          >
+            <BodyCell className="text-text-inverse text-md-medium">
+              {r.styleName}
+            </BodyCell>
+            <BodyCell>Pretendard</BodyCell>
+            <BodyCell>{r.sizeLine}</BodyCell>
+            <BodyCell>{r.weightLabel}</BodyCell>
+            <BodyCell>
+              <span className={`${r.cls} text-text-inverse`}>Pretendard</span>
+            </BodyCell>
+          </div>
         ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
+// Page
 export default function Page() {
   return (
     <main className="min-h-dvh bg-background-primary px-5 py-8 font-pretendard">
-      <div className="mx-auto max-w-6xl space-y-10">
-        {sections.map((s) => (
-          <SectionBlock key={s.title} {...s} />
-        ))}
+      <div className="mx-auto max-w-6xl space-y-12">
+        {/* Colors */}
+        <section className="space-y-8">
+          <h1 className="text-3xl-semibold text-text-inverse">Design Tokens</h1>
+          <div className="space-y-10">
+            {colorSections.map((s) => (
+              <ColorSectionBlock key={s.title} {...s} />
+            ))}
+          </div>
+        </section>
+
+        {/* Typography */}
+        <TypographyTable />
       </div>
     </main>
   );
