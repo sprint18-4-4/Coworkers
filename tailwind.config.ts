@@ -1,3 +1,4 @@
+import { flexCenter, flexColCenter } from "./src/utils/customPlugins";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -9,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [flexCenter, flexColCenter],
 };
 
 export default config;
