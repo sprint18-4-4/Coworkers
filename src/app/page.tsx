@@ -170,10 +170,7 @@ const colorSections: Section[] = [
 
 const SwatchCard: FC<Swatch> = ({ label, tokenClass, hex, note }) => (
   <div className="flex items-center gap-3 rounded-xl bg-background-secondary p-3 ring-1 ring-border-primary/10">
-    <div
-      aria-label={label}
-      className={`h-12 w-12 flex-shrink-0 rounded-lg ${tokenClass} ring-1 ring-black/5`}
-    />
+    <div aria-label={label} className={`h-12 w-12 flex-shrink-0 rounded-lg ${tokenClass} ring-1 ring-black/5`} />
     <div className="min-w-0">
       <div className="text-lg-medium text-text-inverse">{label}</div>
       <div className="text-md-regular text-text-default">
@@ -374,26 +371,12 @@ const typoRows: Row[] = [
   },
 ];
 
-const HeaderCell: FC<{ children: React.ReactNode; className?: string }> = ({
-  children,
-  className,
-}) => (
-  <div
-    className={`px-4 py-3 text-left text-md-medium text-text-secondary ${className ?? ""}`}
-  >
-    {children}
-  </div>
+const HeaderCell: FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => (
+  <div className={`px-4 py-3 text-left text-md-medium text-text-secondary ${className ?? ""}`}>{children}</div>
 );
 
-const BodyCell: FC<{ children: React.ReactNode; className?: string }> = ({
-  children,
-  className,
-}) => (
-  <div
-    className={`px-4 py-4 text-md-regular text-text-default ${className ?? ""}`}
-  >
-    {children}
-  </div>
+const BodyCell: FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => (
+  <div className={`px-4 py-4 text-md-regular text-text-default ${className ?? ""}`}>{children}</div>
 );
 
 const TypographyTable: FC = () => (
@@ -409,13 +392,8 @@ const TypographyTable: FC = () => (
       </div>
       <div className="divide-y divide-border-primary/10 bg-background-secondary">
         {typoRows.map((r, i) => (
-          <div
-            key={`${r.cls}-${i}`}
-            className="grid grid-cols-[2fr,1.2fr,1.4fr,1fr,2fr]"
-          >
-            <BodyCell className="text-text-inverse text-md-medium">
-              {r.styleName}
-            </BodyCell>
+          <div key={`${r.cls}-${i}`} className="grid grid-cols-[2fr,1.2fr,1.4fr,1fr,2fr]">
+            <BodyCell className="text-text-inverse text-md-medium">{r.styleName}</BodyCell>
             <BodyCell>Pretendard</BodyCell>
             <BodyCell>{r.sizeLine}</BodyCell>
             <BodyCell>{r.weightLabel}</BodyCell>
