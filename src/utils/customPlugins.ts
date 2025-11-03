@@ -43,3 +43,16 @@ export const flexColCenter = plugin(function ({ addUtilities }) {
   };
   addUtilities(utilities);
 });
+
+/**
+ * shadow-xl
+ * 사용 예시: <div className="shadow-xl">...</div>
+ */
+export const shadowXl = plugin(function ({ addUtilities }) {
+  const utilities: Record<string, CSSRuleObject> = {
+    ".shadow-xl": {
+      boxShadow: "0px 15px 50px -12px rgba(0, 0, 0, 0.05)",
+    },
+  };
+  addUtilities(utilities);
+});
