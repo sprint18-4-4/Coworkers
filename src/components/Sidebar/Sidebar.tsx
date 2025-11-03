@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
 
 const SidebarItem = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
   return (
@@ -30,21 +31,20 @@ const Sidebar = () => {
       <div className={`w-full flex-1 min-h-0 flex flex-col justify-between ${isOpen ? "px-6" : "px-[10px]"}`}>
         <div className="w-full flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-start gap-[12px]">
           <div className="w-full pb-3 flex flex-col gap-2">
-            <SidebarItem title="경영관리팀" isOpen={isOpen} />
-            <SidebarItem title="프로덕트팀" isOpen={isOpen} />
-            <SidebarItem title="마케팅팀" isOpen={isOpen} />
-            <SidebarItem title="콘텐츠팀" isOpen={isOpen} />
+            <SidebarDropdown isOpen={isOpen} />
 
             {isOpen && (
               <button
                 type="button"
-                className="w-full px-3 py-2 flex-center gap-[4px] rounded-[8px] border border-[#5189FA] text-lg-semibold text-[#5189FA]"
+                className="w-full px-3 h-[33px] flex-center gap-[4px] rounded-[8px] border border-[#5189FA] text-lg-semibold text-[#5189FA]"
               >
                 + 팀 추가하기
               </button>
             )}
           </div>
+
           <hr className="w-full" />
+
           <div className="w-full">
             <SidebarItem title="자유게시판" isOpen={isOpen} />
           </div>
