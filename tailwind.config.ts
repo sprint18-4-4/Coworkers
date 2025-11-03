@@ -1,4 +1,4 @@
-import { flexCenter, flexColCenter, shadowXl } from "./src/utils/customPlugins";
+import { flexCenter, flexColCenter, customShadow } from "./src/utils/customPlugins";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -91,7 +91,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [flexCenter, flexColCenter, shadowXl],
+  plugins: [flexCenter, flexColCenter, customShadow],
 };
 
 export default config;
