@@ -28,12 +28,11 @@ const SidebarDropdown = ({ isOpen }: { isOpen: boolean }) => {
       <summary className="list-none px-4 py-2 flex items-center justify-between cursor-pointer rounded-[12px] select-none">
         <span className="flex items-center gap-3">
           <div className="w-5 h-5 bg-gray-400" />
-          <span className="text-lg-semibold text-slate-400">팀 선택</span>
+          {isOpen && <span className="text-lg-semibold text-slate-400">팀 선택</span>}
         </span>
-        <div className="w-5 h-5 bg-gray-400 group-open:rotate-180 transition-transform" />
+        {isOpen && <div className="w-5 h-5 bg-gray-400 group-open:rotate-180 transition-transform" />}
       </summary>
 
-      {/* 드롭다운 내용 */}
       <ul className="flex flex-col gap-2 mt-2">
         {MockData.map((item, index) => (
           <li key={index}>

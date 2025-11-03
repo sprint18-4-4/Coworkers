@@ -43,7 +43,7 @@ const Sidebar = () => {
             )}
           </div>
 
-          <hr className="w-full" />
+          <hr className="w-full text-[#E2E8F0]" />
 
           <div className="w-full">
             <SidebarItem title="자유게시판" isOpen={isOpen} />
