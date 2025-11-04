@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Coworkers
 
-## Getting Started
+> 업무 배정·현황 공유 + 익명 롤링페이퍼 기능을 갖춘 협업 서비스
 
-First, run the development server:
+## 🔗 참고 자료
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 디자인(Figma): https://www.figma.com/design/d5ogtLVSv1m7e8kx1Lfamy/%5BCCC%5DCowokers?node-id=52-1213
+- API(Swagger): https://fe-project-cowokers.vercel.app/docs/#/
+- 노션(프로젝트 계획): 추가 예정
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 👥 팀
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 김원선 · 박신천 · 서지권 · 정상인
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧰 기술 스택
 
-## Learn More
+- Framework: **Next.js (App Router)**, React, TypeScript
+- 스타일: **Tailwind CSS**
+- 상태/데이터: **React Query**
+- 배포/스토리지: Vercel, AWS S3
+- 협업: Git & GitHub
+- (선택) Storybook, 테스트 코드
 
-To learn more about Next.js, take a look at the following resources:
+## 🎯 프로젝트 목표
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. 익명 롤링페이퍼 작성/조회/댓글/좋아요
+2. React Query 기반 상태 처리/데이터 관리
+3. 사용자 편의 중심의 직관적 UI/UX
+4. Next.js를 활용한 SPA 구현 및 UI 통일성 유지
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ 주요 기능
 
-## Deploy on Vercel
+- 상단 네비게이션/팀 참여 메뉴
+- 랜딩 분기(로그인 여부에 따라 팀 페이지 또는 로그인)
+- 회원가입/로그인/비밀번호 재설정/간편가입(카카오)
+- 팀 생성/수정/삭제/초대 링크/멤버 리스트
+- 할 일(Task) 목록/추가(한 번·매일·주·월)/상세/수정/삭제/완료
+- 마이 히스토리(일자별 완료 목록)
+- 계정 설정(프로필 이미지/이름/비밀번호/탈퇴)
+- 자유게시판(목록/베스트/검색/CRUD)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ✅ 요구사항(요약 체크리스트)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 공통: 폰트/컬러 시스템 설정, 공용 컴포넌트, 반응형, React Query, Next.js, TS, (선택) Storybook/테스트
+- 네비게이션/프로필 메뉴: 팀 참여하기·마이 히스토리·계정 설정·로그아웃
+- 랜딩: ‘지금 시작하기’ → 로그인 상태 분기
+- 회원가입/로그인: 입력 검증 메시지/에러 처리/간편가입 플로우
+- 팀: 중복 검사·생성 후 이동·수정/삭제·초대 모달(링크 복사)
+- 할 일: 목록/추가 모달·반복 옵션·유효성·상세 CRUD/완료
+- 마이 히스토리: 일자별 완료 목록
+- 계정 설정: 프로필 이미지/이름/비번 변경·회원 탈퇴 모달
+- 자유게시판: 전체/베스트(좋아요순)/검색(제목 부분일치)/CRUD
+
+## 🗂️ 폴더 구조
+
+> 폴더 구조는 **추후 결정(TBD)**. App Router 기준으로 세팅 예정.
