@@ -9,7 +9,8 @@
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.5",
@@ -20,6 +21,8 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^10.0.3",
+    "@storybook/addon-docs": "^10.0.3",
     "@storybook/nextjs": "^10.0.3",
     "@types/node": "^20",
     "@types/react": "^19",
