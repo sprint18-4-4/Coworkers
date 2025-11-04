@@ -43,3 +43,16 @@ export const flexColCenter = plugin(function ({ addUtilities }) {
   };
   addUtilities(utilities);
 });
+
+/**
+ * custom-shadow
+ * 사용 예시: <div className="custom-shadow">...</div>
+ */
+export const customShadow = plugin(function ({ addUtilities }) {
+  const utilities: Record<string, CSSRuleObject> = {
+    ".custom-shadow": {
+      boxShadow: "0px 15px 50px -12px rgba(0, 0, 0, 0.05)",
+    },
+  };
+  addUtilities(utilities);
+});
