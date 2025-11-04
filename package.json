@@ -8,10 +8,13 @@
     "start": "next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepare": "husky",
+    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.5",
+    "@tanstack/react-query-devtools": "^5.90.2",
     "axios": "^1.13.1",
     "next": "16.0.1",
     "react": "19.2.0",
@@ -19,30 +22,35 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^4.1.2",
-    "@storybook/addon-a11y": "^10.0.2",
-    "@storybook/addon-docs": "^10.0.2",
-    "@storybook/addon-vitest": "^10.0.2",
-    "@storybook/nextjs-vite": "^10.0.2",
+    "@storybook/addon-a11y": "^10.0.3",
+    "@storybook/addon-docs": "^10.0.3",
+    "@storybook/nextjs": "^10.0.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitest/browser-playwright": "^4.0.5",
-    "@vitest/coverage-v8": "^4.0.5",
     "autoprefixer": "^10.4.21",
     "babel-plugin-react-compiler": "1.0.0",
-    "chromatic": "^13.3.2",
+    "chromatic": "^13.3.3",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-storybook": "^10.0.2",
-    "playwright": "^1.56.1",
+    "eslint-plugin-storybook": "^10.0.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
-    "storybook": "^10.0.2",
+    "storybook": "^10.0.3",
     "tailwindcss": "^3.4.18",
-    "typescript": "^5",
-    "vitest": "^4.0.5"
+    "typescript": "^5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --config eslint.config.mjs --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,scss,md}": [
+      "prettier --write"
+    ]
   }
 }
