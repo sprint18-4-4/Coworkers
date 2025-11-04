@@ -1,21 +1,9 @@
-const MockData = [
-  {
-    title: "경영관리팀",
-  },
-  {
-    title: "프로덕트팀",
-  },
-  {
-    title: "마케팅팀",
-  },
-  {
-    title: "콘텐츠팀",
-  },
-];
+import { SIDEBAR_MOCK_DATA } from "@/MOCK_DATA";
+import { cn } from "@/utils/cn";
 
 const DropdownItem = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
   return (
-    <div className={`h-[52px] rounded-[12px] p-4 flex items-center gap-3 bg-white ${isOpen ? "w-full" : "w-[52px]"}`}>
+    <div className={cn("h-[52px] rounded-[12px] p-4 flex items-center gap-3 bg-white", isOpen ? "w-full" : "w-[52px]")}>
       <div className="w-5 h-5 bg-black shrink-0" />
       {isOpen && <span className="flex-1 min-w-0 text-lg-regular text-[#1E293B] truncate">{title}</span>}
     </div>
@@ -34,7 +22,7 @@ const SidebarDropdown = ({ isOpen }: { isOpen: boolean }) => {
       </summary>
 
       <ul className="flex flex-col gap-2 mt-2">
-        {MockData.map((item, index) => (
+        {SIDEBAR_MOCK_DATA.map((item, index) => (
           <li key={index}>
             <DropdownItem title={item.title} isOpen={isOpen} />
           </li>

@@ -3,10 +3,11 @@
 import Image from "next/image";
 import { useState } from "react";
 import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
+import { cn } from "@/utils/cn";
 
 const SidebarItem = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
   return (
-    <div className={`h-[52px] rounded-[12px] p-4 flex items-center gap-3 bg-white ${isOpen ? "w-full" : "w-[52px]"}`}>
+    <div className={cn("h-[52px] rounded-[12px] p-4 flex items-center gap-3 bg-white", isOpen ? "w-full" : "w-[52px]")}>
       <div className="w-5 h-5 bg-black shrink-0" />
       {isOpen && <span className="flex-1 min-w-0 text-lg-regular text-[#1E293B] truncate">{title}</span>}
     </div>
@@ -17,7 +18,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <nav className={`h-[100svh] sticky top-0 flex flex-col ${isOpen ? "w-[270px]" : "w-[72px]"}`}>
+    <nav className={cn("h-[100svh] sticky top-0 flex flex-col", isOpen ? "w-[270px]" : "w-[72px]")}>
       <header className="flex items-center gap-[10px] px-6 py-8 relative">
         <div className="flex items-center gap-1">
           <div className="w-6 h-6 bg-black" />
@@ -28,7 +29,7 @@ const Sidebar = () => {
         {isOpen && <div className="w-7 h-7 bg-gray-400" onClick={() => setIsOpen(!isOpen)} />}
       </header>
 
-      <div className={`w-full flex-1 min-h-0 flex flex-col justify-between ${isOpen ? "px-6" : "px-[10px]"}`}>
+      <div className={cn("w-full flex-1 min-h-0 flex flex-col justify-between", isOpen ? "px-6" : "px-[10px]")}>
         <div className="w-full flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-start gap-[12px]">
           <div className="w-full pb-3 flex flex-col gap-2">
             <SidebarDropdown isOpen={isOpen} />
@@ -50,7 +51,10 @@ const Sidebar = () => {
           </div>
         </div>
         <div
-          className={`w-full shrink-0 border-t border-[#E2E8F0] pt-5 pb-6 flex items-center gap-[10px] ${!isOpen && "flex-center"}`}
+          className={cn(
+            "w-full shrink-0 border-t border-[#E2E8F0] pt-5 pb-6 flex items-center gap-[10px]",
+            !isOpen && "flex-center",
+          )}
         >
           <Image src="/TEST_IMG/image-1.jpg" alt="프로필 이미지" width={40} height={40} className="rounded-[12px]" />
           {isOpen && (
