@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["Pretendard", "vercel", "jikwon"]
+  "cSpell.words": ["Pretendard", "vercel", "jikwon"],
+  "postman.settings.dotenv-detection-notification-visibility": false
 }

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import SidebarDropdown from "./_internal/SidebarDropdown/SidebarDropdown";
 import { cn } from "@/utils/cn";
+import { SidebarDropdown } from "@/components";
 
 const SidebarItem = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
   return (
@@ -14,7 +14,7 @@ const SidebarItem = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
   );
 };
 
-const Sidebar = () => {
+const SidebarTablet = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -77,4 +77,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default SidebarTablet;

@@ -8,6 +8,12 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      mobile: { max: "430px" }, // 0–430px
+      tablet: { min: "431px", max: "744px" }, // 431–744px
+      pc: { min: "745px" }, // 745px 이상
+    },
+
     extend: {
       colors: {
         brand: {
