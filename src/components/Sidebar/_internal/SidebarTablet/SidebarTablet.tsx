@@ -5,7 +5,7 @@ import { useState } from "react";
 import { cn } from "@/utils/cn";
 import { SidebarDropdown } from "@/components";
 
-const SidebarItem = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
+export const SidebarItem = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
   return (
     <div className={cn("h-[52px] rounded-[12px] p-4 flex items-center gap-3 bg-white", isOpen ? "w-full" : "w-[52px]")}>
       <div className="w-5 h-5 bg-black shrink-0" />
