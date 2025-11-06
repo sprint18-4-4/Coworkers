@@ -25,7 +25,7 @@ const SidebarMobile = ({ isOpen, setIsOpen, user }: SidebarProps) => {
         />
       </nav>
 
-      <LeftMobile isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <LeftMobile isOpen={isOpen} setIsOpen={() => setIsOpen(!isOpen)} />
     </>
   );
 };

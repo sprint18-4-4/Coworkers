@@ -4,13 +4,13 @@ import { cn } from "@/utils";
 import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
 import SidebarLink from "../SidebarLink/SidebarLink";
 import AddTeamButton from "../AddTeamButton/AddTeamButton";
+import { SidebarProps } from "../../_types";
 
-type LeftMobileProps = {
-  isOpen: boolean;
-  onClose: () => void;
-};
+type LeftMobileProps = Omit<SidebarProps, "user">;
 
-const LeftMobile = ({ isOpen, onClose }: LeftMobileProps) => {
+const LeftMobile = ({ isOpen, setIsOpen }: LeftMobileProps) => {
+  if (!isOpen) return null;
+
   return (
     <>
       <div
@@ -19,7 +19,7 @@ const LeftMobile = ({ isOpen, onClose }: LeftMobileProps) => {
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
           "tablet:hidden pc:hidden",
         )}
-        onClick={onClose}
+        onClick={() => setIsOpen(!isOpen)}
         aria-hidden={!isOpen}
       />
 
@@ -33,7 +33,11 @@ const LeftMobile = ({ isOpen, onClose }: LeftMobileProps) => {
         role="dialog"
         aria-modal="true"
       >
-        <button className="w-6 h-6 bg-gray-300 self-end" onClick={onClose} aria-label="사이드바 닫기" />
+        <button
+          className="w-6 h-6 bg-gray-300 self-end"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="사이드바 닫기"
+        />
 
         <div className="min-w-0 flex flex-col gap-2">
           <SidebarDropdown isOpen />

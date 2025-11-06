@@ -21,8 +21,8 @@ const meta: Meta<typeof LeftMobile> = {
       control: "boolean",
       description: "사이드바 열림/닫힘",
     },
-    onClose: {
-      action: "closed",
+    setIsOpen: {
+      action: "setIsOpen",
     },
   },
 };
@@ -44,9 +44,8 @@ const InteractiveTemplate: Story = {
         <LeftMobile
           {...args}
           isOpen={isOpen}
-          onClose={() => {
-            setIsOpen(false);
-            args.onClose?.();
+          setIsOpen={() => {
+            setIsOpen(!isOpen);
           }}
         />
       </>
@@ -58,6 +57,6 @@ export const Default: Story = {
   ...InteractiveTemplate,
   args: {
     isOpen: true,
-    onClose: () => {},
+    setIsOpen: () => {},
   },
 };
