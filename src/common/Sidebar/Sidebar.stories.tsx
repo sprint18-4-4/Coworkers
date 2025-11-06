@@ -1,8 +1,8 @@
-import { StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import Sidebar from "./Sidebar";
 
-const meta = {
-  title: "Common/Sidebar",
+const meta: Meta<typeof Sidebar> = {
+  title: "Components/Sidebar/Sidebar",
   component: Sidebar,
   tags: ["autodocs"],
   parameters: {
@@ -10,10 +10,12 @@ const meta = {
   },
 };
 
+export default meta;
 type Story = StoryObj<typeof meta>;
 
-export default meta;
-
 export const Default: Story = {
-  args: {},
+  args: {
+    isOpen: true,
+    onClose: () => {},
+  },
 };

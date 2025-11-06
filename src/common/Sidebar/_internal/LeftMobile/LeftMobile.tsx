@@ -1,6 +1,6 @@
 "use client";
 
-import { SidebarDropdown } from "@/components";
+import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
 import { SidebarItem } from "../SidebarTablet/SidebarTablet";
 
 type Props = {

@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import QueryProviders from "../providers";
-import { Sidebar } from "@/components";
-import SidebarMobile from "@/components/Sidebar/_internal/SidebarMobile/SidebarMobile";
+import SidebarMobile from "@/common/Sidebar/_internal/SidebarMobile/SidebarMobile";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
