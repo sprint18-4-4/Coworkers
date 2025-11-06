@@ -17,47 +17,47 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          primary: "#10B981",
-          secondary: "#34D399",
-          tertiary: "#A3E635",
+          primary: "#5189FA",
+          secondary: "#EEF3FF",
+          tertiary: "#315296",
         },
         point: {
           purple: "#A855F7",
           cyan: "#06B6D4",
           pink: "#EC4899",
-          rose: "#F43F5E",
+          rose: "#DBBAC0",
           orange: "#F97316",
           yellow: "#EAB308",
         },
         background: {
-          primary: "#0F172A",
-          secondary: "#1E293B",
-          tertiary: "#334155",
+          primary: "#FFFFFF",
+          secondary: "#F1F5F9",
+          tertiary: "#E2E8F0",
           inverse: "#FFFFFF",
         },
         interaction: {
           inactive: "#94A3B8",
-          hover: "#059669",
-          pressed: "#047857",
+          hover: "#416EC8",
+          pressed: "#3B63B5",
         },
         border: {
           primary: "#F8FAFC",
         },
         text: {
-          primary: "#F8FAFC",
-          secondary: "#CBD5E1",
-          tertiary: "#E2E8F0",
+          primary: "#1E293B",
+          secondary: "#334155",
+          tertiary: "#0F172A",
           default: "#64748B",
           inverse: "#FFFFFF",
           disabled: "#94A3B8",
         },
         status: {
-          danger: "#DC2626",
+          danger: "#FC4B4B",
         },
         icon: {
           primary: "#64748B",
           inverse: "#F8FAFC",
-          brand: "#10B981",
+          brand: "#74A1FB",
         },
       },
 
