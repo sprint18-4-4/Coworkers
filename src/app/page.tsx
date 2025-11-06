@@ -120,7 +120,7 @@ const colorSections: Section[] = [
     items: [
       {
         label: "Border/Primary",
-        tokenClass: "bg-border-primary/50",
+        tokenClass: "bg-border-primary",
         hex: "#F8FAFC",
         note: "50%",
       },
@@ -173,7 +173,7 @@ const SwatchCard: FC<Swatch> = ({ label, tokenClass, hex, note }) => (
   <div className="flex items-center gap-3 rounded-xl bg-background-secondary p-3 ring-1 ring-border-primary/10">
     <div aria-label={label} className={`h-12 w-12 flex-shrink-0 rounded-lg ${tokenClass} ring-1 ring-black/5`} />
     <div className="min-w-0">
-      <div className="text-lg-medium text-text-inverse">{label}</div>
+      <div className="text-lg-medium text-text-primary">{label}</div>
       <div className="text-md-regular text-text-default">
         {hex}
         {note ? ` ${note}` : ""}
@@ -184,7 +184,7 @@ const SwatchCard: FC<Swatch> = ({ label, tokenClass, hex, note }) => (
 
 const ColorSectionBlock: FC<Section> = ({ title, items }) => (
   <section className="space-y-4">
-    <h2 className="text-2xl-semibold text-text-inverse">{title}</h2>
+    <h2 className="text-2xl-semibold text-text-primary">{title}</h2>
     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
       {items.map((it) => (
         <SwatchCard key={`${title}-${it.label}`} {...it} />
@@ -382,7 +382,7 @@ const BodyCell: FC<{ children: React.ReactNode; className?: string }> = ({ child
 
 const TypographyTable: FC = () => (
   <section className="space-y-4">
-    <h2 className="text-2xl-semibold text-text-inverse">Pretendard</h2>
+    <h2 className="text-2xl-semibold text-text-primary">Pretendard</h2>
     <div className="overflow-hidden rounded-xl ring-1 ring-border-primary/10">
       <div className="grid grid-cols-[2fr,1.2fr,1.4fr,1fr,2fr] bg-background-secondary">
         <HeaderCell>Style Name</HeaderCell>
@@ -394,12 +394,12 @@ const TypographyTable: FC = () => (
       <div className="divide-y divide-border-primary/10 bg-background-secondary">
         {typoRows.map((r, i) => (
           <div key={`${r.cls}-${i}`} className="grid grid-cols-[2fr,1.2fr,1.4fr,1fr,2fr]">
-            <BodyCell className="text-text-inverse text-md-medium">{r.styleName}</BodyCell>
+            <BodyCell className="text-text-primary text-md-medium">{r.styleName}</BodyCell>
             <BodyCell>Pretendard</BodyCell>
             <BodyCell>{r.sizeLine}</BodyCell>
             <BodyCell>{r.weightLabel}</BodyCell>
             <BodyCell>
-              <span className={`${r.cls} text-text-inverse`}>Pretendard</span>
+              <span className={`${r.cls} text-text-primary`}>Pretendard</span>
             </BodyCell>
           </div>
         ))}
@@ -411,17 +411,18 @@ const TypographyTable: FC = () => (
 // Page
 export default function Page() {
   return (
-    <main className="min-h-dvh bg-background-primary px-5 py-8 font-pretendard">
+    <main className="min-h-dvh bg-background-tertiary px-5 py-8 font-pretendard">
       <div className="mx-auto max-w-6xl space-y-12">
         {/* Colors */}
         <section className="space-y-8">
-          <h1 className="text-3xl-semibold text-text-inverse">Design Tokens</h1>
+          <h1 className="text-3xl-semibold text-text-primary">Design Tokens</h1>
           <div className="space-y-10">
             {colorSections.map((s) => (
               <ColorSectionBlock key={s.title} {...s} />
             ))}
           </div>
         </section>
+        <div className="w-30 h-30 border border-border-primary" />
 
         {/* Typography */}
         <TypographyTable />
