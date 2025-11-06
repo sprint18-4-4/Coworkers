@@ -1,30 +1,32 @@
 "use client";
 
+import { cn } from "@/utils";
 import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
-import { SidebarItem } from "../SidebarTablet/SidebarTablet";
+import SidebarLink from "../SidebarLink/SidebarLink";
 
-type Props = {
+type LeftMobileProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-const LeftMobile = ({ isOpen, onClose }: Props) => {
+const LeftMobile = ({ isOpen, onClose }: LeftMobileProps) => {
   return (
     <>
-      {/* 백드롭 */}
       <div
-        className={`fixed inset-0 z-30 bg-black/30 transition-opacity duration-200 ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={cn(
+          "fixed inset-0 z-30 bg-black/30 transition-opacity duration-200",
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+        )}
         onClick={onClose}
         aria-hidden={!isOpen}
       />
 
-      {/* 사이드 드로어 */}
       <nav
-        className={`fixed inset-y-0 left-0 z-40 w-[260px] max-w-[85vw] bg-white border-r border-[#E2E8F0]
-        p-4 flex flex-col gap-4 transition-transform duration-200
-        ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={cn(
+          "fixed inset-y-0 left-0 z-40 w-[260px] max-w-[85vw] bg-white border-r border-[#E2E8F0] p-4 flex flex-col gap-4",
+          "transition-transform duration-200",
+          isOpen ? "translate-x-0" : "-translate-x-full",
+        )}
         role="dialog"
         aria-modal="true"
       >
@@ -45,7 +47,7 @@ const LeftMobile = ({ isOpen, onClose }: Props) => {
 
         <hr />
         <div className="w-full">
-          <SidebarItem title="자유게시판" isOpen={isOpen} />
+          <SidebarLink title="자유게시판" isOpen={isOpen} />
         </div>
       </nav>
     </>
