@@ -4,16 +4,7 @@ import Link from "next/link";
 import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
 import AddTeamButton from "../AddTeamButton/AddTeamButton";
 import SidebarLink from "../SidebarLink/SidebarLink";
-
-interface SidebarProps {
-  isOpen: boolean;
-  setIsOpen: (value: boolean) => void;
-  user: {
-    name: string;
-    team: string;
-    image: string;
-  };
-}
+import { SidebarProps } from "../../_types";
 
 const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
   return (
@@ -63,15 +54,15 @@ const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
         >
           <Image
             src={user.image}
-            alt={`${user.name} 이미지`}
+            alt={`${user.nickname} 이미지`}
             width={40}
             height={40}
             className="w-10 h-10 rounded-[12px]"
           />
           {isOpen && (
             <div className="flex flex-col items-start gap-[2px]">
-              <span className="text-[#1E293B] text-lg-medium">{user.name}</span>
-              <span className="text-slate-400 text-md-medium">{user.team}</span>
+              <span className="text-[#1E293B] text-lg-medium">{user.nickname}</span>
+              <span className="text-slate-400 text-md-medium">{user.memberships[0].group.name}</span>
             </div>
           )}
         </footer>

@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 import { SidebarMobile, SidebarTablet } from "./_internal";
+import { User } from "@/types";
 
 interface SidebarProps {
-  user: {
-    name: string;
-    team: string;
-    image: string;
-  };
+  user: User;
 }
 
 const Sidebar = ({ user }: SidebarProps) => {
@@ -17,7 +14,7 @@ const Sidebar = ({ user }: SidebarProps) => {
   return (
     <>
       <SidebarTablet user={user} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <SidebarMobile isOpen={isOpen} setIsOpen={setIsOpen} />
+      <SidebarMobile isOpen={isOpen} setIsOpen={setIsOpen} user={user} />
     </>
   );
 };

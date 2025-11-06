@@ -1,24 +1,34 @@
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { Meta } from "@storybook/nextjs";
 import Sidebar from "./Sidebar";
+import { USER_MOCK_DATA } from "@/MOCK_DATA";
 
 const meta: Meta<typeof Sidebar> = {
   title: "Components/Sidebar/Sidebar",
   component: Sidebar,
   tags: ["autodocs"],
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
+    viewport: {
+      defaultViewport: "responsive",
+    },
+  },
+  args: {
+    user: USER_MOCK_DATA,
+  },
+  argTypes: {
+    user: {
+      control: "object",
+      description: "사용자 정보",
+    },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    user: {
-      name: "안해나",
-      team: "경영관리팀",
-      image: "/TEST_IMG/image-1.jpg",
+export const Default = {
+  parameters: {
+    viewport: {
+      defaultViewport: "responsive",
     },
   },
 };

@@ -1,12 +1,9 @@
 import { cn } from "@/utils";
 import LeftMobile from "../LeftMobile/LeftMobile";
+import Image from "next/image";
+import { SidebarProps } from "../../_types";
 
-interface SidebarMobileProps {
-  isOpen: boolean;
-  setIsOpen: (value: boolean) => void;
-}
-
-const SidebarMobile = ({ isOpen, setIsOpen }: SidebarMobileProps) => {
+const SidebarMobile = ({ isOpen, setIsOpen, user }: SidebarProps) => {
   return (
     <>
       <nav
@@ -19,7 +16,13 @@ const SidebarMobile = ({ isOpen, setIsOpen }: SidebarMobileProps) => {
           <button className="w-6 h-6 bg-gray-300" onClick={() => setIsOpen(!isOpen)} aria-label="사이드바 열기" />
           <h2 className="text-[#5189FA] font-bold text-[20px] pr-[22px] truncate">COWORKERS</h2>
         </div>
-        <div className="w-7 h-7 bg-gray-300" />
+        <Image
+          src={user.image}
+          alt={`${user.nickname} 이미지`}
+          width={28}
+          height={28}
+          className="w-7 h-7 rounded-full"
+        />
       </nav>
 
       <LeftMobile isOpen={isOpen} onClose={() => setIsOpen(false)} />
