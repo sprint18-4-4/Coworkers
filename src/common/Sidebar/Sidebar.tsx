@@ -12,7 +12,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ user }: SidebarProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <>

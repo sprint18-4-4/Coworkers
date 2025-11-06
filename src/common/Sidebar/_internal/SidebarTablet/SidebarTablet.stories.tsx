@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import SidebarTablet from "./SidebarTablet";
+import { USER_MOCK_DATA } from "@/MOCK_DATA";
 
 const meta: Meta<typeof SidebarTablet> = {
   title: "Components/Sidebar/_internal/SidebarTablet",
@@ -15,6 +16,14 @@ const meta: Meta<typeof SidebarTablet> = {
       </div>
     ),
   ],
+  argTypes: {
+    isOpen: {
+      control: "boolean",
+    },
+    user: {
+      control: "object",
+    },
+  },
 };
 
 export default meta;
@@ -23,6 +32,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     isOpen: true,
-    onClose: () => {},
+    user: USER_MOCK_DATA,
   },
 };
