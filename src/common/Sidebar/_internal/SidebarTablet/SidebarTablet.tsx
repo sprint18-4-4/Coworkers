@@ -10,7 +10,7 @@ const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
   return (
     <aside
       className={cn(
-        "flex-col sticky top-0 h-[100vh] border-r border-[#E2E8F0]",
+        "flex-col sticky top-0 h-[100vh] border-r border-background-tertiary",
         isOpen ? "w-[270px]" : "w-[72px]",
         "hidden tablet:flex pc:flex",
       )}
@@ -18,12 +18,12 @@ const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
       <header className="flex items-center gap-[10px] px-6 py-8 relative">
         <Link href="/" className="flex items-center gap-1">
           <div className="w-4 h-4 bg-black" aria-hidden />
-          {isOpen && <h1 className="text-[#5189FA] font-bold text-[20px] leading-none pr-[22px] m-0">COWORKERS</h1>}
+          {isOpen && <h1 className="text-brand-primary font-bold text-[20px] leading-none pr-[22px] m-0">COWORKERS</h1>}
         </Link>
         <button
           type="button"
           className={cn(
-            "ml-auto rounded-full border border-[#E2E8F0]",
+            "ml-auto rounded-full border border-background-tertiary",
             isOpen ? "w-7 h-7 bg-gray-400" : "p-1 ml-[5px] bg-background-primary",
           )}
           aria-label={isOpen ? "사이드바 접기" : "사이드바 펼치기"}
@@ -41,14 +41,14 @@ const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
             {isOpen && <AddTeamButton />}
           </div>
 
-          <hr className={cn("w-full text-[#E2E8F0]", !isOpen && "hidden")} />
+          <hr className={cn("w-full text-background-tertiary", !isOpen && "hidden")} />
 
           <SidebarLink title="자유게시판" isOpen={isOpen} />
         </section>
 
         <footer
           className={cn(
-            "w-full shrink-0 border-t border-[#E2E8F0] pt-5 pb-6 flex items-center gap-[10px]",
+            "w-full shrink-0 border-t border-background-tertiary pt-5 pb-6 flex items-center gap-[10px]",
             !isOpen && "flex-center",
           )}
         >
@@ -61,7 +61,7 @@ const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
           />
           {isOpen && (
             <div className="flex flex-col items-start gap-[2px]">
-              <span className="text-[#1E293B] text-lg-medium">{user.nickname}</span>
+              <span className="text-text-primary text-lg-medium">{user.nickname}</span>
               <span className="text-slate-400 text-md-medium">{user.memberships[0].group.name}</span>
             </div>
           )}

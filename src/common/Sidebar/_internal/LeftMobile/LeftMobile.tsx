@@ -25,7 +25,7 @@ const LeftMobile = ({ isOpen, setIsOpen }: LeftMobileProps) => {
 
       <nav
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-[260px] max-w-[85vw] bg-white border-r border-[#E2E8F0] p-4 flex flex-col gap-4",
+          "fixed inset-y-0 left-0 z-40 w-[260px] max-w-[85vw] bg-white border-r border-text-tertiary p-4 flex flex-col gap-4",
           "transition-transform duration-200",
           isOpen ? "translate-x-0" : "-translate-x-full",
           "tablet:hidden pc:hidden",

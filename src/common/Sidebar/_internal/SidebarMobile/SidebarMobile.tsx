@@ -14,7 +14,7 @@ const SidebarMobile = ({ isOpen, setIsOpen, user }: SidebarProps) => {
       >
         <div className="flex items-center gap-3">
           <button className="w-6 h-6 bg-gray-300" onClick={() => setIsOpen(!isOpen)} aria-label="사이드바 열기" />
-          <h2 className="text-[#5189FA] font-bold text-[20px] pr-[22px] truncate">COWORKERS</h2>
+          <h2 className="text-brand-primary font-bold text-[20px] pr-[22px] truncate">COWORKERS</h2>
         </div>
         <Image
           src={user.image}
