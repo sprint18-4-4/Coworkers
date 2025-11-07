@@ -3,7 +3,7 @@ import { useState } from "react";
 import LeftMobile from "./LeftMobile";
 
 const meta: Meta<typeof LeftMobile> = {
-  title: "Components/Sidebar/_internal/LeftMobile",
+  title: "Common/Sidebar/_internal/LeftMobile",
   component: LeftMobile,
   tags: ["autodocs"],
   parameters: {

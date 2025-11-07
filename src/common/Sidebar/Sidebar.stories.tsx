@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import { USER_MOCK_DATA } from "@/MOCK_DATA";
 
 const meta: Meta<typeof Sidebar> = {
-  title: "Components/Sidebar/Sidebar",
+  title: "Common/Sidebar/Sidebar",
   component: Sidebar,
   tags: ["autodocs"],
   parameters: {

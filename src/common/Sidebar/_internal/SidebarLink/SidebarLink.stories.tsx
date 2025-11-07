@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import SidebarLink from "./SidebarLink";
 
 const meta: Meta<typeof SidebarLink> = {
-  title: "Components/Sidebar/_internal/SidebarLink",
+  title: "Common/Sidebar/_internal/SidebarLink",
   component: SidebarLink,
   tags: ["autodocs"],
   parameters: {

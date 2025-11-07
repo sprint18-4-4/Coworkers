@@ -3,7 +3,7 @@ import SidebarMobile from "./SidebarMobile";
 import { USER_MOCK_DATA } from "@/MOCK_DATA";
 
 const meta = {
-  title: "Components/Sidebar/_internal/SidebarMobile",
+  title: "Common/Sidebar/_internal/SidebarMobile",
   component: SidebarMobile,
   parameters: {
     layout: "fullscreen",

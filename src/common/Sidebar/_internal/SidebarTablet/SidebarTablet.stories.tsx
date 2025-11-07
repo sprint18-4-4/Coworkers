@@ -3,7 +3,7 @@ import SidebarTablet from "./SidebarTablet";
 import { USER_MOCK_DATA } from "@/MOCK_DATA";
 
 const meta: Meta<typeof SidebarTablet> = {
-  title: "Components/Sidebar/_internal/SidebarTablet",
+  title: "Common/Sidebar/_internal/SidebarTablet",
   component: SidebarTablet,
   tags: ["autodocs"],
   parameters: {
