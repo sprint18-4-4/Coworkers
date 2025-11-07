@@ -1,5 +1,5 @@
-import { cn } from "../../utils/cn";
-import React, { ComponentPropsWithRef, forwardRef, useId } from "react";
+import { cn } from "@/utils";
+import { ComponentPropsWithRef, forwardRef, useId } from "react";
 
 type InputVariant = "default" | "error";
 
@@ -10,7 +10,7 @@ type InputVariant = "default" | "error";
  * @param containerClassName - 컨테이너의 className
  */
 
-export interface InputProps extends ComponentPropsWithRef<"input"> {
+interface InputProps extends ComponentPropsWithRef<"input"> {
   label?: string;
   error?: string;
   rightElement?: React.ReactNode;
@@ -36,7 +36,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={cn("w-full", containerClassName)}>
         {label && (
-          <label htmlFor={inputId} className={cn("block text-lg-medium text-text-primary mb-2")}>
+          <label
+            htmlFor={inputId}
+            className={cn("block text-md-medium text-text-primary mb-2", "tablet:text-lg-regular pc:text-lg-regular")}
+          >
             {label}
           </label>
         )}
@@ -48,7 +51,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             type={type}
             disabled={disabled}
             className={cn(
-              "w-full rounded-lg border px-4 py-3 text-lg-regular",
+              "w-full rounded-lg border px-4 py-3 text-md-regular",
               "tablet:text-lg-regular pc:text-lg-regular",
               "placeholder:text-gray-400 placeholder:text-lg-regular",
               "focus:border-interaction-pressed",
