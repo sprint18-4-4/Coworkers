@@ -61,7 +61,7 @@ export const Password: Story = {
         label="비밀번호"
         type="password"
         placeholder="비밀번호를 입력해주세요."
-        // TODO: 아이콘 생성시 변경
+        // TODO(김원선): 아이콘 생성시 변경
         rightElement={<div className="w-6 h-6 bg-gray-400 rounded-full" />}
       />
     </div>
@@ -77,7 +77,7 @@ export const PasswordError: Story = {
         placeholder="비밀번호를 입력해주세요."
         defaultValue="12312"
         error="비밀번호를 8자리 이상 입력해주세요"
-        // TODO: 아이콘 생성시 변경
+        // TODO(김원선): 아이콘 생성시 변경
         rightElement={<div className="w-6 h-6 bg-gray-400 rounded-full" />}
       />
     </div>
@@ -102,7 +102,7 @@ export const DisabledButton: Story = {
         placeholder="수정 불가"
         value="123123123"
         disabled
-        // TODO: 공용 컴포넌트 버튼 생성시 교체
+        // TODO(김원선): 공용 컴포넌트 버튼 생성시 교체
         rightElement={<Button label="변경하기" size="small" primary />}
       />
     </div>
