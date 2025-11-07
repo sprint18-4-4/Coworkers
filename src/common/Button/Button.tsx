@@ -24,6 +24,35 @@ const styleByVariant = {
 type Variant = keyof typeof styleByVariant;
 type Size = keyof typeof styleBySize;
 
+/**
+ * @component
+ * @example
+ * ```tsx
+ * // 기본 사용
+ * <Button variant="solid" size="large">
+ *   생성하기
+ * </Button>
+ *
+ * // 아이콘과 함께 사용
+ * <Button variant="outlinedPrimary" size="medium">
+ *   <CheckIcon />
+ *   <span>확인</span>
+ * </Button>
+ *
+ * // 위험 상태
+ * <Button variant="solid" size="large" danger>
+ *   삭제하기
+ * </Button>
+ *
+ * // 비활성화 상태
+ * <Button variant="solid" size="large" disabled>
+ *   비활성화됨
+ * </Button>
+ * ```
+ *
+ * @param {ButtonProps}
+ */
+
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> {
   children: ReactNode;
   variant: Variant;
