@@ -62,7 +62,7 @@ export const Password: Story = {
         type="password"
         placeholder="비밀번호를 입력해주세요."
         // TODO(김원선): 아이콘 생성시 변경
-        rightElement={<div className="w-6 h-6 bg-gray-400 rounded-full" />}
+        addonAfter={<div className="w-6 h-6 bg-gray-400 rounded-full" />}
       />
     </div>
   ),
@@ -78,7 +78,7 @@ export const PasswordError: Story = {
         defaultValue="12312"
         error="비밀번호를 8자리 이상 입력해주세요"
         // TODO(김원선): 아이콘 생성시 변경
-        rightElement={<div className="w-6 h-6 bg-gray-400 rounded-full" />}
+        addonAfter={<div className="w-6 h-6 bg-gray-400 rounded-full" />}
       />
     </div>
   ),
@@ -103,7 +103,7 @@ export const DisabledButton: Story = {
         value="123123123"
         disabled
         // TODO(김원선): 공용 컴포넌트 버튼 생성시 교체
-        rightElement={<Button label="변경하기" size="small" primary />}
+        addonAfter={<Button label="변경하기" size="small" primary />}
       />
     </div>
   ),
