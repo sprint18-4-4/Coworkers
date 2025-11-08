@@ -74,7 +74,6 @@ export const WithIcon: Story = {
   },
 };
 
-// OutlinedPrimary Variants
 export const OutlinedPrimaryLarge: Story = {
   args: {
     variant: "outlinedPrimary",
