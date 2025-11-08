@@ -44,7 +44,7 @@ const InteractiveTemplate: Story = {
           onClick={() => setIsOpen(true)}
           className="p-2 bg-blue-500 text-white rounded absolute top-4 right-4 z-10"
         >
-          모바일 전용 사이드바 열기
+          모바일 전용 사이드바 열기 <br /> (화면을 모바일 사이즈로 변경해야 합니다.)
         </button>
         <LeftMobile {...args} isOpen={isOpen} handleOpenDropdown={() => setIsOpen(false)} />
       </>
@@ -56,5 +56,6 @@ export const Default: Story = {
   ...InteractiveTemplate,
   args: {
     isOpen: true,
+    handleOpenDropdown: () => {},
   },
 };
