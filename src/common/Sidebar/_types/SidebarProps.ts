@@ -2,6 +2,6 @@ import { User } from "@/types";
 
 export interface SidebarProps {
   isOpen: boolean;
-  setIsOpen: (value: boolean) => void;
+  handleOpenDropdown: (prev: boolean) => void;
   user: User;
 }

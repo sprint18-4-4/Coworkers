@@ -4,17 +4,17 @@ import { useState } from "react";
 import { SidebarMobile, SidebarTablet } from "./_internal";
 import { User } from "@/types";
 
-interface SidebarProps {
-  user: User;
-}
-
-const Sidebar = ({ user }: SidebarProps) => {
+const Sidebar = ({ user }: { user: User }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenDropdown = (prev: boolean) => {
+    setIsOpen(!prev);
+  };
 
   return (
     <>
-      <SidebarTablet user={user} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <SidebarMobile isOpen={isOpen} setIsOpen={setIsOpen} user={user} />
+      <SidebarTablet user={user} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} />
+      <SidebarMobile isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} user={user} />
     </>
   );
 };

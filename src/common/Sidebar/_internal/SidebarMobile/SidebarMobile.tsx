@@ -3,7 +3,7 @@ import LeftMobile from "../LeftMobile/LeftMobile";
 import Image from "next/image";
 import { SidebarProps } from "../../_types";
 
-const SidebarMobile = ({ isOpen, setIsOpen, user }: SidebarProps) => {
+const SidebarMobile = ({ isOpen, handleOpenDropdown, user }: SidebarProps) => {
   return (
     <>
       <nav
@@ -13,7 +13,11 @@ const SidebarMobile = ({ isOpen, setIsOpen, user }: SidebarProps) => {
         )}
       >
         <div className="flex items-center gap-3">
-          <button className="size-6 bg-gray-300" onClick={() => setIsOpen(!isOpen)} aria-label="사이드바 열기" />
+          <button
+            className="size-6 bg-gray-300"
+            onClick={() => handleOpenDropdown(isOpen)}
+            aria-label="사이드바 열기"
+          />
           <h2 className="text-brand-primary font-bold text-5 pr-[22px] truncate">COWORKERS</h2>
         </div>
         <Image
@@ -25,7 +29,7 @@ const SidebarMobile = ({ isOpen, setIsOpen, user }: SidebarProps) => {
         />
       </nav>
 
-      <LeftMobile isOpen={isOpen} setIsOpen={() => setIsOpen(!isOpen)} />
+      <LeftMobile isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} />
     </>
   );
 };

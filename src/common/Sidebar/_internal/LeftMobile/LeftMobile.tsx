@@ -8,12 +8,8 @@ import { SidebarProps } from "../../_types";
 
 type LeftMobileProps = Omit<SidebarProps, "user">;
 
-const LeftMobile = ({ isOpen, setIsOpen }: LeftMobileProps) => {
+const LeftMobile = ({ isOpen, handleOpenDropdown }: LeftMobileProps) => {
   if (!isOpen) return null;
-
-  const handleOpenDropdown = () => {
-    setIsOpen(!isOpen);
-  };
 
   return (
     <>
@@ -23,7 +19,7 @@ const LeftMobile = ({ isOpen, setIsOpen }: LeftMobileProps) => {
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
           "tablet:hidden pc:hidden",
         )}
-        onClick={handleOpenDropdown}
+        onClick={() => handleOpenDropdown(isOpen)}
         aria-hidden={!isOpen}
       />
 
@@ -37,7 +33,11 @@ const LeftMobile = ({ isOpen, setIsOpen }: LeftMobileProps) => {
         role="dialog"
         aria-modal="true"
       >
-        <button className="size-6 bg-gray-300 self-end" onClick={handleOpenDropdown} aria-label="사이드바 닫기" />
+        <button
+          className="size-6 bg-gray-300 self-end"
+          onClick={() => handleOpenDropdown(isOpen)}
+          aria-label="사이드바 닫기"
+        />
 
         <div className="min-w-0 flex flex-col gap-2">
           <SidebarDropdown isOpen />

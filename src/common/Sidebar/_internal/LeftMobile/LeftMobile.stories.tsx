@@ -21,8 +21,9 @@ const meta: Meta<typeof LeftMobile> = {
       control: "boolean",
       description: "사이드바 열림/닫힘",
     },
-    setIsOpen: {
-      action: "setIsOpen",
+    handleOpenDropdown: {
+      action: "handleOpenDropdown",
+      description: "사이드바 토글 핸들러",
     },
   },
 };
@@ -31,8 +32,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const InteractiveTemplate: Story = {
+  args: {
+    isOpen: false,
+  },
   render: function Render(args) {
     const [isOpen, setIsOpen] = useState(args.isOpen);
+
     return (
       <>
         <button
@@ -41,13 +46,7 @@ const InteractiveTemplate: Story = {
         >
           모바일 전용 사이드바 열기
         </button>
-        <LeftMobile
-          {...args}
-          isOpen={isOpen}
-          setIsOpen={() => {
-            setIsOpen(!isOpen);
-          }}
-        />
+        <LeftMobile {...args} isOpen={isOpen} handleOpenDropdown={() => setIsOpen(false)} />
       </>
     );
   },
@@ -57,6 +56,5 @@ export const Default: Story = {
   ...InteractiveTemplate,
   args: {
     isOpen: true,
-    setIsOpen: () => {},
   },
 };

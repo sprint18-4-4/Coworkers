@@ -6,7 +6,7 @@ import AddTeamButton from "../AddTeamButton/AddTeamButton";
 import SidebarLink from "../SidebarLink/SidebarLink";
 import { SidebarProps } from "../../_types";
 
-const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
+const SidebarTablet = ({ isOpen, handleOpenDropdown, user }: SidebarProps) => {
   return (
     <aside
       className={cn(
@@ -27,7 +27,7 @@ const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
             isOpen ? "size-7 bg-gray-400" : "p-1 ml-[5px] bg-background-primary",
           )}
           aria-label={isOpen ? "사이드바 접기" : "사이드바 펼치기"}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => handleOpenDropdown(isOpen)}
         >
           {!isOpen && <div className="size-6 bg-gray-400 rounded-full" aria-hidden />}
         </button>
@@ -71,4 +71,4 @@ const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
   );
 };
 
-export default Sidebar;
+export default SidebarTablet;
