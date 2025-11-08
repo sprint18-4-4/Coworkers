@@ -17,24 +17,24 @@ const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
     >
       <header className="flex items-center gap-[10px] px-6 py-8 relative">
         <Link href="/" className="flex items-center gap-1">
-          <div className="w-4 h-4 bg-black" aria-hidden />
-          {isOpen && <h1 className="text-brand-primary font-bold text-[20px] leading-none pr-[22px] m-0">COWORKERS</h1>}
+          <div className="size-4 bg-black" aria-hidden />
+          {isOpen && <h2 className="text-brand-primary font-bold text-5 leading-none pr-[22px] m-0">COWORKERS</h2>}
         </Link>
         <button
           type="button"
           className={cn(
             "ml-auto rounded-full border border-background-tertiary",
-            isOpen ? "w-7 h-7 bg-gray-400" : "p-1 ml-[5px] bg-background-primary",
+            isOpen ? "size-7 bg-gray-400" : "p-1 ml-[5px] bg-background-primary",
           )}
           aria-label={isOpen ? "사이드바 접기" : "사이드바 펼치기"}
           onClick={() => setIsOpen(!isOpen)}
         >
-          {!isOpen && <div className="w-6 h-6 bg-gray-400 rounded-full" aria-hidden />}
+          {!isOpen && <div className="size-6 bg-gray-400 rounded-full" aria-hidden />}
         </button>
       </header>
 
       <nav className={cn("w-full flex-1 min-h-0 flex flex-col justify-between", isOpen ? "px-6" : "px-[10px]")}>
-        <section className="w-full flex-1 min-h-0 flex flex-col items-center justify-start gap-[12px]">
+        <section className="w-full flex-1 min-h-0 flex flex-col items-center justify-start gap-3">
           <div className={cn("w-full flex flex-col gap-2", isOpen && "pb-3")}>
             <SidebarDropdown isOpen={isOpen} />
 
@@ -57,7 +57,7 @@ const Sidebar = ({ isOpen, setIsOpen, user }: SidebarProps) => {
             alt={`${user.nickname} 이미지`}
             width={40}
             height={40}
-            className="w-10 h-10 rounded-[12px]"
+            className="size-10 rounded-3"
           />
           {isOpen && (
             <div className="flex flex-col items-start gap-[2px]">

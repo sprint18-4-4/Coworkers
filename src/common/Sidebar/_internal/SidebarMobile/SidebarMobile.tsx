@@ -13,15 +13,15 @@ const SidebarMobile = ({ isOpen, setIsOpen, user }: SidebarProps) => {
         )}
       >
         <div className="flex items-center gap-3">
-          <button className="w-6 h-6 bg-gray-300" onClick={() => setIsOpen(!isOpen)} aria-label="사이드바 열기" />
-          <h2 className="text-brand-primary font-bold text-[20px] pr-[22px] truncate">COWORKERS</h2>
+          <button className="size-6 bg-gray-300" onClick={() => setIsOpen(!isOpen)} aria-label="사이드바 열기" />
+          <h2 className="text-brand-primary font-bold text-5 pr-[22px] truncate">COWORKERS</h2>
         </div>
         <Image
           src={user.image}
           alt={`${user.nickname} 이미지`}
           width={28}
           height={28}
-          className="w-7 h-7 rounded-full"
+          className="size-7 rounded-full"
         />
       </nav>
 

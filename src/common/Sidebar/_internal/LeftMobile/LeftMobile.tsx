@@ -37,7 +37,7 @@ const LeftMobile = ({ isOpen, setIsOpen }: LeftMobileProps) => {
         role="dialog"
         aria-modal="true"
       >
-        <button className="w-6 h-6 bg-gray-300 self-end" onClick={handleOpenDropdown} aria-label="사이드바 닫기" />
+        <button className="size-6 bg-gray-300 self-end" onClick={handleOpenDropdown} aria-label="사이드바 닫기" />
 
         <div className="min-w-0 flex flex-col gap-2">
           <SidebarDropdown isOpen />
