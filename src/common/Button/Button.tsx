@@ -25,6 +25,7 @@ type Variant = keyof typeof styleByVariant;
 type Size = keyof typeof styleBySize;
 
 /**
+ * @author sangin
  * @component
  * @example
  * ```tsx
