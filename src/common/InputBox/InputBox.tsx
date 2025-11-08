@@ -4,6 +4,7 @@ import { RefObject, TextareaHTMLAttributes, useId } from "react";
 type InputSize = "sm" | "lg";
 
 /**
+ * @author "KimWonSeon"
  * @param label - textarea 위에 표시될 레이블
  * @param labelClassName - 레이블의 외부 className
  * @param containerClassName - 컨테이너의 className
