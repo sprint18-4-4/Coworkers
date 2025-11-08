@@ -28,6 +28,6 @@ labels: ["bug"]
 - OS: <!-- (예: macOS / Windows / Android / iOS) -->
 - Browser: <!-- (예: Chrome / Firefox / Safari / Edge) -->
 
-## 📸 스크린샷
+## 스크린샷
 
 문제 확인에 도움이 될 스크린샷이 있다면 첨부해주세요.
