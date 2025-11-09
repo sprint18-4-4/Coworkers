@@ -8,13 +8,6 @@ const meta: Meta<typeof Time> = {
   parameters: {
     layout: "centered",
   },
-  decorators: [
-    (Story) => (
-      <div className="border border-gray-200 rounded-[12px]">
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;
