@@ -62,7 +62,7 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "cla
   className?: string;
 }
 
-const Button = ({ children, variant, size, className, danger, ...rest }: ButtonProps) => {
+const Button = ({ children, variant = "solid", size = "large", className, danger, ...rest }: ButtonProps) => {
   return (
     <button
       {...rest}
