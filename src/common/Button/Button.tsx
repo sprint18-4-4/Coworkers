@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
 const BASE_STYLE = "w-full flex-center gap-1";
