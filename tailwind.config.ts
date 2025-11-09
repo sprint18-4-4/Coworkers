@@ -41,7 +41,7 @@ const config: Config = {
           pressed: "#3B63B5",
         },
         border: {
-          primary: "rgba(248, 250, 252, 0.5)",
+          primary: "#E2E8F0",
         },
         text: {
           primary: "#1E293B",

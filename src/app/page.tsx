@@ -1,3 +1,4 @@
+import { Time } from "@/common";
 import { cn } from "@/utils/cn";
 import type { FC } from "react";
 
@@ -426,6 +427,8 @@ export default function Page() {
 
         {/* Typography */}
         <TypographyTable />
+
+        <Time />
       </div>
     </main>
   );
