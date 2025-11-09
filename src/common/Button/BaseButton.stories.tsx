@@ -2,7 +2,7 @@ import BaseButton from "./BaseButton";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof BaseButton> = {
-  title: "common/Button",
+  title: "common/Button/Default",
   component: BaseButton,
   parameters: {
     layout: "centered",
