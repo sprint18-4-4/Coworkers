@@ -427,8 +427,6 @@ export default function Page() {
 
         {/* Typography */}
         <TypographyTable />
-
-        <Time />
       </div>
     </main>
   );

@@ -3,10 +3,12 @@ export const TIME_PERIOD_LIST = [
   { label: "오후", value: "pm" },
 ] as const;
 
-export const TIME_LIST = [
-  { label: "2:30", value: "2:30" },
-  { label: "3:00", value: "3:00" },
-  { label: "3:30", value: "3:30" },
-  { label: "4:00", value: "4:00" },
-  { label: "4:30", value: "4:30" },
-];
+export const HALF_HOUR_TIMES = (() => {
+  const result: { label: string; value: string }[] = [];
+  for (let h = 12; h <= 23; h++) {
+    const hour = h % 12 === 0 ? 12 : h % 12;
+    result.push({ label: `${hour}:00`, value: `${hour}:00` });
+    result.push({ label: `${hour}:30`, value: `${hour}:30` });
+  }
+  return result;
+})();
