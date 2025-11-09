@@ -1,9 +1,9 @@
-import Button from "./Button";
+import BaseButton from "./BaseButton";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 
-const meta: Meta<typeof Button> = {
+const meta: Meta<typeof BaseButton> = {
   title: "common/Button",
-  component: Button,
+  component: BaseButton,
   parameters: {
     layout: "centered",
   },
@@ -31,7 +31,7 @@ const meta: Meta<typeof Button> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof BaseButton>;
 
 export const SolidLarge: Story = {
   args: {
