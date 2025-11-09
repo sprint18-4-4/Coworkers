@@ -1,10 +1,27 @@
 "use client";
 
 import { cn } from "@/utils";
-import { useState } from "react";
 import { HALF_HOUR_TIMES, TIME_PERIOD_LIST } from "./CONST_TIME";
+import { HalfHour } from "@/types/TimeType";
 
-type HalfHour = `${number}:${"00" | "30"}`;
+/**
+ * @author jikwon
+ * @component
+ * @example
+ * ```tsx
+ * const [timePeriod, setTimePeriod] = useState("am");
+ * const [selectedTime, setSelectedTime] = useState<HalfHour>("12:00");
+ *
+ * <Time timePeriod={timePeriod} setTimePeriod={setTimePeriod} selectedTime={selectedTime} setSelectedTime={setSelectedTime}/>
+ * ```
+ */
+
+interface TimeProps {
+  timePeriod: "am" | "pm";
+  setTimePeriod: (period: "am" | "pm") => void;
+  selectedTime: HalfHour;
+  setSelectedTime: (time: HalfHour) => void;
+}
 
 const styles = {
   periodBaseButton:
@@ -12,10 +29,7 @@ const styles = {
   timeBaseButton: "min-h-[34px] text-lg-regular text-text-default",
 } as const;
 
-const Time = () => {
-  const [timePeriod, setTimePeriod] = useState<"am" | "pm">("am");
-  const [selectedTime, setSelectedTime] = useState<HalfHour>("12:00");
-
+const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: TimeProps) => {
   return (
     <section
       className={cn(
