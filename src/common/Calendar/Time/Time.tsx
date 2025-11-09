@@ -2,7 +2,7 @@
 
 import { cn } from "@/utils";
 import { HALF_HOUR_TIMES, TIME_PERIOD_LIST } from "./CONST_TIME";
-import { HalfHour } from "@/types/TimeType";
+import { HalfHour } from "@/types";
 
 /**
  * @author jikwon
