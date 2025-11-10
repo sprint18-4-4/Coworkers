@@ -25,7 +25,7 @@ interface TimeProps {
 
 const styles = {
   periodBaseButton:
-    "w-[78px] h-[40px] px-[10px] py-2 rounded-[12px] border border-border-primary bg-background-primary text-text-default",
+    "w-[78px] h-[40px] px-[10px] py-2 rounded-xl border border-border-primary bg-background-primary text-text-default",
   timeBaseButton: "min-h-[34px] text-lg-regular text-text-default",
 } as const;
 
@@ -33,7 +33,7 @@ const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: Time
   return (
     <div
       className={cn(
-        "w-[288px] h-[176px] rounded-[12px] p-3 flex gap-[10px]",
+        "w-[288px] h-[176px] rounded-xl p-3 flex gap-[10px]",
         "bg-background-primary border border-interaction-hover",
       )}
     >
@@ -54,10 +54,10 @@ const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: Time
       </div>
 
       <div
-        role="listbox"
+        role="radiogroup"
         aria-label="시간 목록"
         className={cn(
-          "flex flex-col items-start w-[172px] h-[152px] pl-4 pr-2 py-2 rounded-[12px]",
+          "flex flex-col items-start w-[172px] h-[152px] pl-4 pr-2 py-2 rounded-xl",
           "bg-background-primary border border-border-primary overflow-y-scroll",
         )}
       >
@@ -65,9 +65,9 @@ const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: Time
           <button
             key={item.value}
             type="button"
-            role="option"
+            role="radio"
             aria-label={item.label}
-            aria-selected={selectedTime === item.value}
+            aria-checked={selectedTime === item.value}
             onClick={() => setSelectedTime(item.value as HalfHour)}
             className={cn(styles.timeBaseButton, selectedTime === item.value && "text-interaction-focus")}
           >
