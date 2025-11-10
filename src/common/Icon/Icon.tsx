@@ -20,7 +20,7 @@ type IconProps = {
   className?: string;
 } & React.SVGProps<SVGSVGElement>;
 
-export const Icon = ({ name, size = "md", responsiveSize, className, ...svgProps }: IconProps) => {
+const Icon = ({ name, size = "md", responsiveSize, className, ...svgProps }: IconProps) => {
   const Svg = ICONS[name];
 
   return (
@@ -33,3 +33,4 @@ export const Icon = ({ name, size = "md", responsiveSize, className, ...svgProps
     />
   );
 };
+export default Icon;
