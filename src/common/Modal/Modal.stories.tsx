@@ -27,7 +27,11 @@ export const Default: Story = {
   },
   render: (args) => (
     <Modal {...args}>
-      <Modal.Title>테스트</Modal.Title>
+      <Modal.Title>멤버 초대</Modal.Title>
+      <Modal.Description className="">그룹에 참여할 수 있는 링크를 복사합니다.</Modal.Description>
+      <Modal.Footer>
+        <button>dddd</button>
+      </Modal.Footer>
     </Modal>
   ),
 };
