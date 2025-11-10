@@ -1,5 +1,5 @@
 import { cn } from "@/utils";
-import { RefObject, TextareaHTMLAttributes, useId } from "react";
+import { Ref, TextareaHTMLAttributes, useId } from "react";
 
 type InputSize = "sm" | "md" | "lg";
 
@@ -20,7 +20,7 @@ interface InputBoxProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>
   textareaClassName?: string;
   size?: InputSize;
   required?: boolean;
-  ref?: RefObject<HTMLTextAreaElement>;
+  ref?: Ref<HTMLTextAreaElement>;
 }
 
 /**
