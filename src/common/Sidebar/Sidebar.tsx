@@ -1,8 +1,21 @@
-const Sidebar = () => {
+"use client";
+
+import { useState } from "react";
+import { SidebarMobile, SidebarTablet } from "./_internal";
+import { User } from "@/types";
+
+const Sidebar = ({ user }: { user: User }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenDropdown = (prev: boolean) => {
+    setIsOpen(!prev);
+  };
+
   return (
-    <div>
-      <h1>사이드바</h1>
-    </div>
+    <>
+      <SidebarTablet user={user} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} />
+      <SidebarMobile isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} user={user} />
+    </>
   );
 };
 
