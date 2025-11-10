@@ -24,29 +24,38 @@ const nextConfig: NextConfig = {
     }
 
     // SVGR 로더 추가 (svg -> React 컴포넌트 import)
-    const svgrRule: RuleSetRule = {
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
+    // const svgrRule: RuleSetRule = {
+    //   test: /\.svg$/i,
+    //   issuer: /\.[jt]sx?$/,
+    //   use: [
+    //     {
+    //       loader: "@svgr/webpack",
+    //       options: {
+    //         svgo: true,
+    //         svgoConfig: {
+    //           plugins: [
+    //             { name: "removeViewBox", active: false }, // viewBox 유지
+    //             { name: "removeDimensions", active: true }, // width/height 제거
+    //           ],
+    //         },
+    //         ref: true,
+    //         titleProp: true,
+    //         prettier: false,
+    //       },
+    //     },
+    //   ],
+    // };
+
+    // const fileLoaderRule = rules.find((rule) => rule.test?.test?.(".svg"));
+
+    config.module.rules.push({
+      test: /\.svg$/,
       use: [
         {
           loader: "@svgr/webpack",
-          options: {
-            svgo: true,
-            svgoConfig: {
-              plugins: [
-                { name: "removeViewBox", active: false }, // viewBox 유지
-                { name: "removeDimensions", active: true }, // width/height 제거
-              ],
-            },
-            ref: true,
-            titleProp: true,
-            prettier: false,
-          },
         },
       ],
-    };
-
-    rules.push(svgrRule);
+    });
 
     // 변경된 rules를 반영해서 반환
     return {
