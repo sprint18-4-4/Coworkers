@@ -31,7 +31,7 @@ const styles = {
 
 const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: TimeProps) => {
   return (
-    <section
+    <div
       className={cn(
         "w-[288px] h-[176px] rounded-[12px] p-3 flex gap-[10px]",
         "bg-background-primary border border-interaction-hover",
@@ -75,7 +75,7 @@ const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: Time
           </button>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 
