@@ -1,8 +1,9 @@
 "use client";
 
 import { ReactNode } from "react";
-import { MODAL_BASE_STYLE, MODAL_OVERLAY_STYLE, MODAL_STYLE_BY_SIZE } from "./MODAL_STYLE";
+import { MODAL_BASE_STYLE, MODAL_OVERLAY_STYLE, MODAL_STYLE_BY_SIZE, MODAL_CLOSE_ICON_STYLE } from "./MODAL_STYLE";
 import { cn } from "@/utils";
+import { Icon } from "@/types";
 
 interface ModalProps {
   isOpen: boolean;
@@ -42,8 +43,8 @@ const ModalIcon = ({ children, className }: ModalSubProps) => {
   return <span className={className}>{children}</span>;
 };
 
-const ModalCloseIcon = ({ children, className }: ModalSubProps) => {
-  return <span className={className}>{children}</span>;
+const ModalCloseIcon = ({ className, onClose }: { className?: string; onClose: (prev: boolean) => void }) => {
+  return <Icon name="x" className={cn(MODAL_CLOSE_ICON_STYLE, className)} onClick={(prev) => onClose(!prev)} />;
 };
 
 const ModalBody = ({ children, className }: ModalSubProps) => {
