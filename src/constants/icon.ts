@@ -121,10 +121,11 @@ export const ICON_SIZES = {
 export type IconSize = keyof typeof ICON_SIZES;
 
 export const ICON_RESPONSIVE_SIZES = {
-  // 예: 모바일 기본(md=24px), 태블릿에선 32px, PC에서는 32px 유지
-  mdUp: "tablet:w-8 tablet:h-8 pc:w-8 pc:h-8",
-  // 예: 모바일 기본(sm=16px), 태블릿 20px, PC 24px
-  growSm: "tablet:w-5 tablet:h-5 pc:w-6 pc:h-6",
+  /** 모바일 기본(md=24px) → 태블릿/PC 32px */
+  mdUp: "tablet:size-8 pc:size-8",
+
+  /** 모바일 기본(sm=16px) → 태블릿 20px, PC 24px */
+  growSm: "tablet:size-5 pc:size-6",
 } as const;
 
 export type IconResponsiveSize = keyof typeof ICON_RESPONSIVE_SIZES;
