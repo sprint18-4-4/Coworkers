@@ -8,6 +8,7 @@ import {
   MODAL_CLOSE_ICON_STYLE,
   MODAL_TITLE_STYLE,
   MODAL_DESCRIPTION_STYLE,
+  MODAL_FOOTER_STYLE,
 } from "./MODAL_STYLE";
 import { cn } from "@/utils";
 import { Icon } from "@/types";
@@ -43,7 +44,7 @@ const ModalDescription = ({ children, className }: ModalSubProps) => {
 };
 
 const ModalFooter = ({ children, className }: ModalSubProps) => {
-  return <footer className={className}>{children}</footer>;
+  return <footer className={cn(MODAL_FOOTER_STYLE, className)}>{children}</footer>;
 };
 
 const ModalIcon = ({ children, className }: ModalSubProps) => {

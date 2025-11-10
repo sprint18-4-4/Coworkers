@@ -31,6 +31,10 @@ const ModalTemplate = (args: ComponentProps<typeof Modal>) => {
         <Modal.CloseIcon onClose={() => setIsOpen(false)} />
         <Modal.Title>멤버 초대</Modal.Title>
         <Modal.Description>그룹에 참여할 수 있는 링크를 복사합니다.</Modal.Description>
+        <Modal.Footer>
+          <button className="w-full bg-blue-400">닫기</button>
+          <button className="w-full bg-blue-400">생성하기</button>
+        </Modal.Footer>
       </Modal>
     </>
   );
