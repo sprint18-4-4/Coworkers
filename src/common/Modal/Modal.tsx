@@ -9,9 +9,11 @@ import {
   MODAL_TITLE_STYLE,
   MODAL_DESCRIPTION_STYLE,
   MODAL_FOOTER_STYLE,
+  MODAL_ICON_STYLE,
 } from "./MODAL_STYLE";
 import { cn } from "@/utils";
 import { Icon } from "@/types";
+import { IconName } from "@/constants/icon";
 
 interface ModalProps {
   isOpen: boolean;
@@ -47,8 +49,8 @@ const ModalFooter = ({ children, className }: ModalSubProps) => {
   return <footer className={cn(MODAL_FOOTER_STYLE, className)}>{children}</footer>;
 };
 
-const ModalIcon = ({ children, className }: ModalSubProps) => {
-  return <span className={className}>{children}</span>;
+const ModalIcon = ({ name, className }: { name: IconName; className?: string }) => {
+  return <Icon name={name} className={cn(MODAL_ICON_STYLE, className)} />;
 };
 
 const ModalCloseIcon = ({ className, onClose }: { className?: string; onClose: (prev: boolean) => void }) => {
