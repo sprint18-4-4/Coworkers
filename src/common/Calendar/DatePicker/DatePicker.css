@@ -1,6 +1,10 @@
 /* 캘린더 전체 */
 .react-calendar {
-  @apply border-none;
+  @apply border-none w-[250px] flex-col-center;
+}
+
+.react-calendar__navigation {
+  @apply m-0 w-full h-[34px];
 }
 
 /* 캘린더 타이틀 */
@@ -13,17 +17,41 @@
   @apply flex justify-end items-center;
 }
 
+/* 캘린더 뷰 컨테이너 */
+.react-calendar__viewContainer {
+  @apply w-[250px];
+}
+
+/* 캘린더 월 뷰 */
+.react-calendar__month-view {
+  @apply w-[250px];
+}
+
+/* 캘린더 월 뷰의 날짜 */
+.react-calendar__month-view__days {
+  @apply flex flex-wrap justify-center;
+}
+
 /* 캘린더 요일 */
 .react-calendar__month-view__weekdays__weekday {
-  @apply text-md-medium text-text-disabled;
+  @apply text-md-medium text-text-disabled !basis-auto min-w-[35px] h-[32px];
 }
 
 /* 캘린더 타일 */
 .react-calendar__tile {
-  @apply px-[10px] rounded-[8px] text-md-regular text-nowrap;
+  @apply px-[10px] py-[7.5px] rounded-[8px] text-md-regular text-nowrap flex-none min-w-[35px] h-[32px];
+}
+
+/* 캘린더 오늘 타일 */
+.react-calendar__tile--now {
+  @apply bg-transparent text-brand-primary;
 }
 
 /* 캘린더 선택된 타일 */
 .react-calendar__tile--active {
-  @apply bg-brand-primary;
+  @apply !bg-brand-primary !text-brand-secondary;
+}
+
+.react-calendar__tile--now:hover {
+  @apply hover:bg-gray-300;
 }
