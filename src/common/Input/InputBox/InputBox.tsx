@@ -62,7 +62,7 @@ const InputBox = ({
   const config = sizeClasses[size];
 
   return (
-    <div className={cn("w-full", containerClassName)}>
+    <div className={cn("w-full flex flex-col", containerClassName)}>
       {label && (
         <label
           htmlFor={inputId}
