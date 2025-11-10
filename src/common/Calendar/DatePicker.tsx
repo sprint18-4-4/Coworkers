@@ -14,9 +14,10 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 function DatePicker() {
   const [value, onChange] = useState<Value>(new Date());
+  console.log(value);
 
   return (
-    <section className="min-w-[282px] min-h-[258px] p-4 bg-white rounded-[16px]">
+    <section className="w-full min-h-[258px] p-4 bg-white rounded-[16px] border border-interaction-hover">
       <Calendar
         onChange={onChange}
         value={value}

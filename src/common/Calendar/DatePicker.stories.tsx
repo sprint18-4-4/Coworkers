@@ -8,6 +8,13 @@ const meta: Meta<typeof DatePicker> = {
   parameters: {
     layout: "centered",
   },
+  decorators: [
+    (Story) => (
+      <div className="p-6 border border-gray-300">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
