@@ -1,4 +1,3 @@
-// src/constants/icon.ts
 import AlertLg from "@/assets/icon/ic_alert_lg.svg";
 import AlertSm from "@/assets/icon/ic_alert_sm.svg";
 import ArrowDownLg from "@/assets/icon/ic_arrow_down_lg.svg";
@@ -114,10 +113,10 @@ export type IconName = keyof typeof ICONS;
 
 export const ICON_SIZES = {
   "x-sm": "w-2.5 h-2.5",
-  sm: "w-4 h-4",
-  rg: "w-5 h-5",
-  md: "w-6 h-6",
-  lg: "w-8 h-8",
+  sm: "size-4",
+  rg: "size-5",
+  md: "size-6",
+  lg: "size-8",
 } as const;
 export type IconSize = keyof typeof ICON_SIZES;
 

@@ -1,4 +1,3 @@
-// src/components/Icon.tsx
 import {
   ICONS,
   ICON_SIZES,
@@ -7,7 +6,7 @@ import {
   type IconSize,
   type IconResponsiveSize,
 } from "@/constants/icon";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils";
 
 type IconProps = {
   /** 사용할 아이콘 이름 */
@@ -26,7 +25,6 @@ const Icon = ({ name, size = "md", responsiveSize, className, ...svgProps }: Ico
   return (
     <Svg
       className={cn(ICON_SIZES[size], responsiveSize && ICON_RESPONSIVE_SIZES[responsiveSize], className)}
-      // 접근성: aria-label 없으면 장식용 처리(스크린리더 무소음)
       aria-hidden={svgProps["aria-label"] ? undefined : true}
       focusable="false"
       {...svgProps}
