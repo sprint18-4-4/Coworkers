@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import QueryProviders from "../providers";
+import { Sidebar } from "@/common";
+import { USER_MOCK_DATA } from "@/MOCK_DATA";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -20,8 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={pretendard.className}>
-      <body>
-        <QueryProviders>{children}</QueryProviders>
+      <body className="flex flex-col tablet:flex-row pc:flex-row">
+        <QueryProviders>
+          <Sidebar user={USER_MOCK_DATA} />
+          <main className="flex-1">{children}</main>
+        </QueryProviders>
       </body>
     </html>
   );
