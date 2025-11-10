@@ -1,7 +1,13 @@
 "use client";
 
 import { ReactNode } from "react";
-import { MODAL_BASE_STYLE, MODAL_OVERLAY_STYLE, MODAL_STYLE_BY_SIZE, MODAL_CLOSE_ICON_STYLE } from "./MODAL_STYLE";
+import {
+  MODAL_BASE_STYLE,
+  MODAL_OVERLAY_STYLE,
+  MODAL_STYLE_BY_SIZE,
+  MODAL_CLOSE_ICON_STYLE,
+  MODAL_TITLE_STYLE,
+} from "./MODAL_STYLE";
 import { cn } from "@/utils";
 import { Icon } from "@/types";
 
@@ -28,7 +34,7 @@ const Modal = ({ isOpen, children, size = "large", className }: ModalProps) => {
 };
 
 const ModalTitle = ({ children, className }: ModalSubProps) => {
-  return <h2 className={cn(className)}>{children}</h2>;
+  return <h2 className={cn(MODAL_TITLE_STYLE, className)}>{children}</h2>;
 };
 
 const ModalDescription = ({ children, className }: ModalSubProps) => {
