@@ -57,7 +57,7 @@ const SidebarTablet = ({ isOpen, handleOpenDropdown, user }: SidebarProps) => {
             alt={`${user.nickname} 이미지`}
             width={40}
             height={40}
-            className="size-10 rounded-3"
+            className="size-10 rounded-xl"
           />
           {isOpen && (
             <div className="flex flex-col items-start gap-[2px]">
