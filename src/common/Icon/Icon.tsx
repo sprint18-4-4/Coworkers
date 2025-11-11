@@ -2,8 +2,6 @@ import { cn } from "@/utils";
 import { IconName, IconResponsiveSize, IconSize } from "@/types";
 import { ICON_RESPONSIVE_SIZES, ICON_SIZES, ICONS } from "./CONST_ICON";
 
-// TODO(신천): 아이콘 스토리북 추가 / PR 따로 생성 (작업 대기중인게 많아서 먼저 이슈 해결 후 스토리북 추가)
-
 /**
  * 공용 아이콘 컴포넌트.
  * - 크기: `size`(모바일 기본) + `responsiveSize`(tablet/pc).
