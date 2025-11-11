@@ -22,6 +22,18 @@
   @apply w-[250px];
 }
 
+.react-calendar__navigation__label {
+  @apply !bg-transparent !text-inherit;
+}
+
+/* 캘린더 네비게이션 hover, focus 스타일 제거 */
+.react-calendar__navigation__prev-button:hover,
+.react-calendar__navigation__prev-button:focus,
+.react-calendar__navigation__next-button:hover,
+.react-calendar__navigation__next-button:focus {
+  @apply !bg-transparent !text-inherit !outline-none !shadow-none;
+}
+
 /* 캘린더 월 뷰 */
 .react-calendar__month-view {
   @apply w-[250px];
