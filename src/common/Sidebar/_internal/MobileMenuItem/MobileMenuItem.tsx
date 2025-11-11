@@ -21,7 +21,7 @@ const MobileMenuItem = ({ menu, href, isOpen }: MobileMenuItemProps) => {
     >
       {/* TODO(지권): 아이콘 변경 */}
       <div className={cn("size-5 bg-slate-300 rounded-full", isActive && "bg-brand-primary text-brand-primary")} />
-      {!isOpen && <span className={cn(isActive ? "text-lg-semibold" : "text-lg-regular")}>{menu}</span>}
+      {isOpen && <span className={cn(isActive ? "text-lg-semibold" : "text-lg-regular")}>{menu}</span>}
     </Link>
   );
 };
