@@ -3,6 +3,22 @@ import "react-calendar/dist/Calendar.css";
 import "./DatePicker.css";
 import { DateValue } from "@/types";
 
+/**
+ * @author jikwon
+ * @component
+ * @example
+ * ```tsx
+ * const [selectedDate, setSelectedDate] = useState<DateValue>(new Date());
+ *
+ * const handleDateChange = (next: DateValue) => {
+ *   setSelectedDate(next);
+ *   console.log("선택된 날짜:", next);
+ * };
+ *
+ * <DatePicker value={selectedDate} onChange={handleDateChange} />
+ * ```
+ */
+
 interface DatePickerProps {
   value: DateValue;
   onChange: (next: DateValue) => void;
