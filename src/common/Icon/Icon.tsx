@@ -1,24 +1,11 @@
-import {
-  ICONS,
-  ICON_SIZES,
-  ICON_RESPONSIVE_SIZES,
-  type IconName,
-  type IconSize,
-  type IconResponsiveSize,
-} from "@/constants/icon";
 import { cn } from "@/utils";
+import { IconName, IconResponsiveSize, IconSize } from "@/types";
+import { ICON_RESPONSIVE_SIZES, ICON_SIZES, ICONS } from "./CONST_ICON";
 
-/** Icon 컴포넌트 Props */
-export type IconProps = {
-  /** 아이콘 키 (`ICONS` 맵에서 관리) */
-  name: IconName;
-  /** 기본 크기 토큰(`size-*` 매핑). @defaultValue "md" */
-  size?: IconSize;
-  /** 반응형 크기 토큰(태블릿/PC 구간에서만 적용) */
-  responsiveSize?: IconResponsiveSize;
-  /** 추가 클래스(색상: `text-*`, 효과 등) */
-  className?: string;
-} & React.SVGProps<SVGSVGElement>;
+// TODO(신천): 아이콘 에러 수정
+// TODO(신천): 로그인 페이지(임시)에서 아이콘 렌더링, text-* 형식으로 작성 되는지 테스트 후 삭제
+
+// TODO(신천): 아이콘 스토리북 추가 / PR 따로 생성 (작업 대기중인게 많아서 먼저 이슈 해결 후 스토리북 추가)
 
 /**
  * 공용 아이콘 컴포넌트.
@@ -46,6 +33,14 @@ export type IconProps = {
  * // 5) 접근성: 의미 있는 아이콘이면 레이블 제공
  * <Icon name="notificationOn" aria-label="알림 켜짐" />
  */
+
+type IconProps = {
+  name: IconName;
+  size?: IconSize;
+  responsiveSize?: IconResponsiveSize;
+  className?: string;
+} & React.SVGProps<SVGSVGElement>;
+
 const Icon = ({ name, size = "md", responsiveSize, className, ...svgProps }: IconProps) => {
   const Svg = ICONS[name];
 

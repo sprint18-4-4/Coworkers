@@ -52,6 +52,8 @@ import X from "@/assets/icon/ic_x.svg";
 import XLg from "@/assets/icon/ic_x_lg.svg";
 import XMd from "@/assets/icon/ic_x_md.svg";
 
+// TODO(신천): TSDoc 추가 필요
+
 // 아이콘 컴포넌트 맵
 export const ICONS = {
   alertLg: AlertLg,
@@ -109,8 +111,6 @@ export const ICONS = {
   xMd: XMd,
 } as const;
 
-export type IconName = keyof typeof ICONS;
-
 export const ICON_SIZES = {
   "x-sm": "w-2.5 h-2.5",
   sm: "size-4",
@@ -118,7 +118,6 @@ export const ICON_SIZES = {
   md: "size-6",
   lg: "size-8",
 } as const;
-export type IconSize = keyof typeof ICON_SIZES;
 
 export const ICON_RESPONSIVE_SIZES = {
   /** 모바일 기본(md=24px) → 태블릿/PC 32px */
@@ -127,5 +126,3 @@ export const ICON_RESPONSIVE_SIZES = {
   /** 모바일 기본(sm=16px) → 태블릿 20px, PC 24px */
   growSm: "tablet:size-5 pc:size-6",
 } as const;
-
-export type IconResponsiveSize = keyof typeof ICON_RESPONSIVE_SIZES;

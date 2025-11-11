@@ -1,9 +1,15 @@
 "use client";
 
+import { Icon } from "@/common";
+
 const page = () => {
   return (
     <div>
-      <h1>로그인 페이지</h1>
+      <Icon name="check" responsiveSize="mdUp" className="text-red-500" />
+      <Icon name="check" responsiveSize="mdUp" className="text-blue-500" />
+      <Icon name="check" responsiveSize="mdUp" className="text-red-500" />
+      <Icon name="check" responsiveSize="mdUp" className="text-red-500" />
+      <Icon name="check" responsiveSize="mdUp" className="text-red-500" />
     </div>
   );
 };
