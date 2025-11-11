@@ -13,11 +13,11 @@ const meta: Meta<typeof MobileMenuItem> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Open: Story = {
   args: {
     menu: "메뉴",
     href: "/test1",
-    isOpen: false,
+    isOpen: true,
   },
   decorators: [
     (Story) => (
@@ -28,11 +28,11 @@ export const Default: Story = {
   ],
 };
 
-export const Opened: Story = {
+export const Close: Story = {
   args: {
     menu: "메뉴",
     href: "/test2",
-    isOpen: true,
+    isOpen: false,
   },
   decorators: [
     (Story) => (
