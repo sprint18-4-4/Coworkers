@@ -1,34 +1,32 @@
-"use client";
-
-import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./DatePicker.css";
+import { DateValue } from "@/types";
 
-// TODO: 캘린더 타일 가로 값 수정
-// TODO: 캘린더 타일 클릭 시 함수 추가
+interface DatePickerProps {
+  value: DateValue;
+  onChange: (next: DateValue) => void;
+}
 
-type ValuePiece = Date | null;
-
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
-function DatePicker() {
-  const [value, onChange] = useState<Value>(new Date());
-  console.log(value);
-
+function DatePicker({ value, onChange }: DatePickerProps) {
   return (
-    <section className="w-full min-h-[258px] p-4 bg-white rounded-[16px] border border-interaction-hover">
+    <div
+      aria-label="날짜 선택"
+      className="w-full min-h-[258px] p-4 bg-white rounded-2xl border border-interaction-hover"
+    >
       <Calendar
-        onChange={onChange}
+        locale="ko-KR"
         value={value}
+        onChange={onChange}
         calendarType="gregory"
+        // TODO(지권): 좌우 화살표 아이콘 추가
         prevLabel={<div className="size-6 bg-black" />}
         nextLabel={<div className="size-6 bg-black" />}
         prev2Label={null}
         next2Label={null}
         formatDay={(_, date) => date.getDate().toString()}
       />
-    </section>
+    </div>
   );
 }
 
