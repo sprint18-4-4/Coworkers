@@ -2,9 +2,6 @@ import { cn } from "@/utils";
 import { IconName, IconResponsiveSize, IconSize } from "@/types";
 import { ICON_RESPONSIVE_SIZES, ICON_SIZES, ICONS } from "./CONST_ICON";
 
-// TODO(신천): 아이콘 에러 수정
-// TODO(신천): 로그인 페이지(임시)에서 아이콘 렌더링, text-* 형식으로 작성 되는지 테스트 후 삭제
-
 // TODO(신천): 아이콘 스토리북 추가 / PR 따로 생성 (작업 대기중인게 많아서 먼저 이슈 해결 후 스토리북 추가)
 
 /**
