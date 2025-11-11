@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import SidebarDropdown from "./SidebarDropdown";
 
 const meta: Meta<typeof SidebarDropdown> = {
-  title: "Common/Sidebar/_internal/SidebarDropdown",
+  title: "Common/Sidebar/_internal/Tablet/SidebarDropdown",
   component: SidebarDropdown,
   tags: ["autodocs"],
   parameters: {

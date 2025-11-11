@@ -1,12 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import SidebarMenu from "./SidebarMenu";
+import MobileMenuItem from "./MobileMenuItem";
 
-const meta: Meta<typeof SidebarMenu> = {
-  title: "Common/Sidebar/_internal/SidebarMobile/SidebarMenu",
-  component: SidebarMenu,
+const meta: Meta<typeof MobileMenuItem> = {
+  title: "Common/Sidebar/_internal/Mobile/MobileMenuItem",
+  component: MobileMenuItem,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    menu: "메뉴",
+    href: "/test1",
+    isOpen: false,
   },
   decorators: [
     (Story) => (
@@ -17,21 +28,10 @@ const meta: Meta<typeof SidebarMenu> = {
   ],
 };
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
-  args: {
-    menu: "메뉴",
-    href: "/",
-    isOpen: false,
-  },
-};
-
 export const Opened: Story = {
   args: {
     menu: "메뉴",
-    href: "/",
+    href: "/test2",
     isOpen: true,
   },
   decorators: [

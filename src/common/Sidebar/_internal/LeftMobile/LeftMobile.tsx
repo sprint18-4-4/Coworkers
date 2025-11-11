@@ -1,10 +1,10 @@
 "use client";
 
 import { cn } from "@/utils";
-import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
+import { SidebarProps } from "@/common/Sidebar/_types";
 import SidebarLink from "../SidebarLink/SidebarLink";
 import AddTeamButton from "../AddTeamButton/AddTeamButton";
-import { SidebarProps } from "../../_types";
+import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
 
 type LeftMobileProps = Omit<SidebarProps, "user">;
 
