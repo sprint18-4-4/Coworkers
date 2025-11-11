@@ -23,28 +23,37 @@ const nextConfig: NextConfig = {
       fileLoaderRule.exclude = /\.svg$/i;
     }
 
+    // SVGR 로더 추가 (svg -> React 컴포넌트 import)
     const svgrRule: RuleSetRule = {
       test: /\.svg$/i,
-      // issuer: /\.[jt]sx?$/,
+
+      use: [
+        {
+          loader: "@svgr/webpack",
+          options: {
+            svgo: true,
+            svgoConfig: {
+              plugins: [
+                { name: "removeViewBox", active: false }, // viewBox 유지
+                { name: "removeDimensions", active: true }, // width/height 제거
+              ],
+            },
+            ref: true,
+            titleProp: true,
+            prettier: false,
+          },
+        },
+      ],
+    };
+
+    config.module.rules.push({
+      test: /\.svg$/,
       use: [
         {
           loader: "@svgr/webpack",
         },
       ],
-    };
-
-    // Next 내부가 oneOf 체계면 그 "맨 앞"에, 아니면 최상위 rules 맨 앞에 꽂아 우선 매칭
-    let inserted = false;
-    for (const rule of rules) {
-      if (typeof rule === "object" && rule !== null && "oneOf" in rule && Array.isArray((rule as RuleSetRule).oneOf)) {
-        (rule as RuleSetRule).oneOf!.unshift(svgrRule);
-        inserted = true;
-        break;
-      }
-    }
-    if (!inserted) {
-      rules.unshift(svgrRule);
-    }
+    });
 
     // 변경된 rules를 반영해서 반환
     return {

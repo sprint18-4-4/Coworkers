@@ -428,6 +428,10 @@ export default function Page() {
         {/* Typography */}
         <TypographyTable />
       </div>
+
+      <Icon name="check" responsiveSize="mdUp" className="text-red-500" />
+      <Icon name="menu" responsiveSize="mdUp" className="text-blue-500" />
+      <Icon name="best" responsiveSize="mdUp" className="text-blue-500" />
     </main>
   );
 }
