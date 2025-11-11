@@ -6,7 +6,7 @@ import AddTeamButton from "../AddTeamButton/AddTeamButton";
 import SidebarLink from "../SidebarLink/SidebarLink";
 import { SidebarProps } from "../../_types";
 
-const SidebarTablet = ({ isOpen, handleOpenDropdown, user }: SidebarProps) => {
+const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
   return (
     <aside
       className={cn(
@@ -35,15 +35,19 @@ const SidebarTablet = ({ isOpen, handleOpenDropdown, user }: SidebarProps) => {
 
       <nav className={cn("w-full flex-1 min-h-0 flex flex-col justify-between", isOpen ? "px-6" : "px-[10px]")}>
         <section className="w-full flex-1 min-h-0 flex flex-col items-center justify-start gap-3">
-          <div className={cn("w-full flex flex-col gap-2", isOpen && "pb-3")}>
-            <SidebarDropdown isOpen={isOpen} />
+          {user && (
+            <>
+              <div className={cn("w-full flex flex-col gap-2", isOpen && "pb-3")}>
+                <SidebarDropdown isOpen={isOpen} />
 
-            {isOpen && <AddTeamButton />}
-          </div>
+                {isOpen && <AddTeamButton />}
+              </div>
 
-          <hr className={cn("w-full text-background-tertiary", !isOpen && "hidden")} />
+              <hr className={cn("w-full text-background-tertiary", !isOpen && "hidden")} />
 
-          <SidebarLink title="자유게시판" isOpen={isOpen} />
+              <SidebarLink title="자유게시판" isOpen={isOpen} />
+            </>
+          )}
         </section>
 
         <footer
@@ -53,18 +57,21 @@ const SidebarTablet = ({ isOpen, handleOpenDropdown, user }: SidebarProps) => {
           )}
         >
           <Image
-            src={user.image}
-            alt={`${user.nickname} 이미지`}
+            src={user?.image || "/TEST_IMG/image-1.jpg"}
+            alt={`${user?.nickname} 이미지`}
             width={40}
             height={40}
             className="size-10 rounded-xl"
           />
-          {isOpen && (
-            <div className="flex flex-col items-start gap-[2px]">
-              <span className="text-text-primary text-lg-medium">{user.nickname}</span>
-              <span className="text-slate-400 text-md-medium">{user.memberships[0].group.name}</span>
-            </div>
-          )}
+          {isOpen &&
+            (user ? (
+              <div className="flex flex-col items-start gap-[2px]">
+                <span className="text-text-primary text-lg-medium">{user.nickname}</span>
+                <span className="text-slate-400 text-md-medium">{user.memberships[0].group.name}</span>
+              </div>
+            ) : (
+              <Link href="/login">로그인</Link>
+            ))}
         </footer>
       </nav>
     </aside>

@@ -3,7 +3,7 @@ import LeftMobile from "../LeftMobile/LeftMobile";
 import Image from "next/image";
 import { SidebarProps } from "../../_types";
 
-const SidebarMobile = ({ isOpen, handleOpenDropdown, user }: SidebarProps) => {
+const SidebarMobile = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
   return (
     <>
       <nav
