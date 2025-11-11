@@ -22,7 +22,7 @@ const Sidebar = ({ user }: { user: User }) => {
 
   return (
     <>
-      <SidebarTablet user={null} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} />
+      <SidebarTablet user={user} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} />
       <SidebarMobile user={user} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} />
     </>
   );
