@@ -1,21 +1,29 @@
+import { IconName } from "@/constants/icon";
+import { Icon } from "@/types";
 import { cn } from "@/utils";
-import { ReactNode } from "react";
-
-export const FLOATING_BUTTON_BASE_STYLE = "size-14 rounded-full py-[14px] px-[21px] flex-center";
-export const FLOATING_BUTTON_STYLE_BY_VARIANT = {
-  primary: "bg-brand-primary",
-  inverse: "bg-background-inverse border border-border-primary shadow-xl",
-};
+import { FLOATING_BUTTON_BASE_STYLE, FLOATING_BUTTON_STYLE_BY_VARIANT } from "./BUTTON_STYLES";
 
 type Variant = keyof typeof FLOATING_BUTTON_STYLE_BY_VARIANT;
 
 interface FloatingButtonProps {
   variant: Variant;
-  icon: ReactNode;
+  iconName: IconName;
+  className?: string;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
 }
 
-const FloatingButton = ({ variant, icon }: FloatingButtonProps) => {
-  return <button className={cn(FLOATING_BUTTON_BASE_STYLE, FLOATING_BUTTON_STYLE_BY_VARIANT[variant])}>d</button>;
+const FloatingButton = ({ variant, iconName, className, type = "button", onClick }: FloatingButtonProps) => {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      aria-label={`btn-${variant}`}
+      className={cn(FLOATING_BUTTON_BASE_STYLE, FLOATING_BUTTON_STYLE_BY_VARIANT[variant], className)}
+    >
+      <Icon name={iconName} className="text-icon-inverse" />
+    </button>
+  );
 };
 
 export default FloatingButton;

@@ -1,4 +1,3 @@
-import { title } from "process";
 import FloatingButton from "./FloatingButton";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 
@@ -9,15 +8,28 @@ const meta: Meta<typeof FloatingButton> = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["primary", "inverse"],
+      description: "버튼 스타일",
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof FloatingButton>;
 
 export const FloatingPrimary: Story = {
-  args: {},
+  args: {
+    variant: "primary",
+    iconName: "plusLg",
+  },
 };
 
-export const FloatingSecondary: Story = {
-  args: {},
+export const FloatingInverse: Story = {
+  args: {
+    variant: "inverse",
+    iconName: "unfilledHeartLg",
+  },
 };
