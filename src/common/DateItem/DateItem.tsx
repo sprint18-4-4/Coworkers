@@ -1,6 +1,16 @@
 import { cn } from "@/utils";
 import Link from "next/link";
 import { DateNumber, Day } from "./_types";
+
+/**
+ * @author jikwon
+ * @component
+ * @example
+ * ```tsx
+ * <DateItem day="월" date={1} />
+ * ```
+ */
+
 interface DateItemProps {
   day: Day;
   date: DateNumber;

@@ -7,6 +7,7 @@ const meta: Meta<typeof DateItem> = {
   tags: ["autodocs"],
   args: {
     day: "월",
+    date: 18,
     isToday: false,
   },
   parameters: {
