@@ -43,6 +43,7 @@ const config: Config = {
         },
         border: {
           primary: "#E2E8F0",
+          secondary: "#CBD5E1",
         },
         text: {
           primary: "#1E293B",
