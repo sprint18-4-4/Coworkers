@@ -1,5 +1,5 @@
 import { IconName } from "@/constants/icon";
-import { RefObject } from "react";
+import { ComponentPropsWithRef, RefObject } from "react";
 import { ReactNode } from "react";
 
 export interface ModalProps {
@@ -33,7 +33,7 @@ export interface ModalFormProps {
   onSubmit: () => void;
 }
 
-export interface ModalInputProps {
+export interface ModalInputProps extends ComponentPropsWithRef<"input"> {
   placeholder: string;
   label?: string;
   error?: string;

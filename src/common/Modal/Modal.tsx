@@ -55,9 +55,16 @@ const ModalForm = ({ children, onSubmit }: ModalFormProps) => {
   return <form onSubmit={onSubmit}>{children}</form>;
 };
 
-const ModalInput = ({ placeholder, label, error, containerClassName, ref }: ModalInputProps) => {
+const ModalInput = ({ placeholder, label, error, containerClassName, ref, ...rest }: ModalInputProps) => {
   return (
-    <Input placeholder={placeholder} label={label} error={error} containerClassName={containerClassName} ref={ref} />
+    <Input
+      placeholder={placeholder}
+      label={label}
+      error={error}
+      containerClassName={containerClassName}
+      ref={ref}
+      {...rest}
+    />
   );
 };
 
