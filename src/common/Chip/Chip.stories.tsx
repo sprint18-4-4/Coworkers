@@ -35,3 +35,19 @@ export const Active: Story = {
     isActive: true,
   },
 };
+
+export const CountOver99WithDefault: Story = {
+  args: {
+    title: "법인 등기",
+    count: 100,
+    isActive: false,
+  },
+};
+
+export const CountOver99WithActive: Story = {
+  args: {
+    title: "법인 등기",
+    count: 100,
+    isActive: true,
+  },
+};
