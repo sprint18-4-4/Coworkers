@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import Input from "./Input";
-import { Button } from "@/stories/Button";
+// import { Button } from "@/stories/Button";
 
 const meta: Meta<typeof Input> = {
   title: "Common/Input",
@@ -103,7 +103,7 @@ export const DisabledButton: Story = {
         value="123123123"
         disabled
         // TODO(김원선): 공용 컴포넌트 버튼 생성시 교체
-        addonAfter={<Button label="변경하기" size="small" primary />}
+        // addonAfter={<Button label="변경하기" size="small" primary />}
       />
     </div>
   ),
