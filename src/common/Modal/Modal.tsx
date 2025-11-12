@@ -4,11 +4,10 @@ import { ReactNode } from "react";
 import {
   MODAL_BASE_STYLE,
   MODAL_OVERLAY_STYLE,
-  MODAL_STYLE_BY_SIZE,
   MODAL_CLOSE_ICON_STYLE,
   MODAL_TITLE_STYLE,
   MODAL_DESCRIPTION_STYLE,
-  MODAL_FOOTER_STYLE,
+  MODAL_BUTTON_STYLE,
   MODAL_ICON_STYLE,
 } from "./MODAL_STYLE";
 import { cn } from "@/utils";
@@ -19,37 +18,49 @@ interface ModalProps {
   isOpen: boolean;
   children: ReactNode;
   className?: string;
-  size?: keyof typeof MODAL_STYLE_BY_SIZE;
 }
 
-interface ModalSubProps {
+interface ModalTitleProps {
+  title: string;
+  className?: string;
+}
+
+interface ModalDescriptionProps {
+  description: string;
+  className?: string;
+}
+
+interface ModalButtonProps {
   children: ReactNode;
   className?: string;
 }
 
-const Modal = ({ isOpen, children, size = "large", className }: ModalProps) => {
+interface ModalIconProps {
+  name: IconName;
+  className?: string;
+}
+
+const Modal = ({ isOpen, children, className }: ModalProps) => {
   if (!isOpen) {
     return null;
   }
 
-  return (
-    <div className={cn(MODAL_BASE_STYLE, MODAL_OVERLAY_STYLE, MODAL_STYLE_BY_SIZE[size], className)}>{children}</div>
-  );
+  return <div className={cn(MODAL_BASE_STYLE, MODAL_OVERLAY_STYLE, className)}>{children}</div>;
 };
 
-const ModalTitle = ({ children, className }: ModalSubProps) => {
-  return <h2 className={cn(MODAL_TITLE_STYLE, className)}>{children}</h2>;
+const ModalTitle = ({ title, className }: ModalTitleProps) => {
+  return <h2 className={cn(MODAL_TITLE_STYLE, className)}>{title}</h2>;
 };
 
-const ModalDescription = ({ children, className }: ModalSubProps) => {
-  return <p className={cn(MODAL_DESCRIPTION_STYLE, className)}>{children}</p>;
+const ModalDescription = ({ description, className }: ModalDescriptionProps) => {
+  return <p className={cn(MODAL_DESCRIPTION_STYLE, className)}>{description}</p>;
 };
 
-const ModalFooter = ({ children, className }: ModalSubProps) => {
-  return <footer className={cn(MODAL_FOOTER_STYLE, className)}>{children}</footer>;
+const ModalButton = ({ children, className }: ModalButtonProps) => {
+  return <div className={cn(MODAL_BUTTON_STYLE, className)}>{children}</div>;
 };
 
-const ModalIcon = ({ name, className }: { name: IconName; className?: string }) => {
+const ModalIcon = ({ name, className }: ModalIconProps) => {
   return <Icon name={name} className={cn(MODAL_ICON_STYLE, className)} />;
 };
 
@@ -57,13 +68,8 @@ const ModalCloseIcon = ({ className, onClose }: { className?: string; onClose: (
   return <Icon name="x" className={cn(MODAL_CLOSE_ICON_STYLE, className)} onClick={(prev) => onClose(!prev)} />;
 };
 
-const ModalBody = ({ children, className }: ModalSubProps) => {
-  return <div>{children}</div>;
-};
-
 Modal.Title = ModalTitle;
-Modal.Body = ModalBody;
-Modal.Footer = ModalFooter;
+Modal.Button = ModalButton;
 
 Modal.Description = ModalDescription;
 Modal.Icon = ModalIcon;
