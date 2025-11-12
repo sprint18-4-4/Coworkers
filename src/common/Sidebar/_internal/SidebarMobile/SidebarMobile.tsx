@@ -1,7 +1,7 @@
 import { cn } from "@/utils";
-import LeftMobile from "../LeftMobile/LeftMobile";
 import Image from "next/image";
 import { SidebarProps } from "../../_types";
+import LeftMobile from "../LeftMobile/LeftMobile";
 
 const SidebarMobile = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
   return (

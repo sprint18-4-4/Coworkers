@@ -1,10 +1,11 @@
 "use client";
 
 import { cn } from "@/utils";
-import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
+import { SidebarProps } from "@/common/Sidebar/_types";
 import SidebarLink from "../SidebarLink/SidebarLink";
 import AddTeamButton from "../AddTeamButton/AddTeamButton";
-import { SidebarProps } from "../../_types";
+import MobileMenuItem from "../MobileMenuItem/MobileMenuItem";
+import { MOBILE_SIDEBAR_MENU_MOCK_DATA } from "@/MOCK_DATA";
 
 type LeftMobileProps = Omit<SidebarProps, "user">;
 
@@ -40,7 +41,11 @@ const LeftMobile = ({ isOpen, handleOpenDropdown }: LeftMobileProps) => {
         />
 
         <div className="min-w-0 flex flex-col gap-2">
-          <SidebarDropdown isOpen />
+          {/* TODO(지권): MOCK_DATA 제거 */}
+          {MOBILE_SIDEBAR_MENU_MOCK_DATA.map((menu) => (
+            <MobileMenuItem key={menu.menu} menu={menu.menu} href={menu.href} isOpen={isOpen} />
+          ))}
+
           <AddTeamButton />
         </div>
 
