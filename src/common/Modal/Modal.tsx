@@ -68,6 +68,16 @@ const ModalInput = ({ placeholder, label, error, containerClassName, ref, ...res
   );
 };
 
+// TODO(상인): Profile이 구현되면 수정
+const ModalProfile = ({}) => {
+  // return <Profile/>
+};
+
+// TODO(상인): Dropdown이 구현되면 수정
+const ModalRepeat = ({}) => {
+  // return <Dropdown/>
+};
+
 Modal.Title = ModalTitle;
 Modal.Button = ModalButton;
 Modal.Form = ModalForm;
@@ -75,5 +85,7 @@ Modal.Input = ModalInput;
 Modal.Description = ModalDescription;
 Modal.Icon = ModalIcon;
 Modal.CloseIcon = ModalCloseIcon;
+Modal.Profile = ModalProfile;
+Modal.Repeat = ModalRepeat;
 
 export default Modal;
