@@ -13,9 +13,16 @@ const meta: Meta<typeof Todo> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     title: "Todo",
     completed: false,
+  },
+};
+
+export const Completed: Story = {
+  args: {
+    title: "Todo",
+    completed: true,
   },
 };
