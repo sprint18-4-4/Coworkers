@@ -13,7 +13,7 @@ import {
 import { cn } from "@/utils";
 import { Icon } from "@/types";
 import { IconName } from "@/constants/icon";
-import Input from "../Input/Input"; // TODO(상인): Input이 배럴패턴으로 등록되면 바꾸기
+import Input from "../Input/Input";
 import { RefObject } from "react";
 
 interface ModalProps {
