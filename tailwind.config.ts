@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     screens: {
       mobile: { max: "430px" }, // 0–430px
-      tablet: { min: "431px", max: "744px" }, // 431–744px
+      tablet: { min: "431px" }, // 431–744px
       pc: { min: "745px" }, // 745px 이상
     },
 
