@@ -13,5 +13,8 @@ export default meta;
 type Story = StoryObj<typeof ProgressButton>;
 
 export const ProgressPrimary: Story = {
-  args: {},
+  args: {
+    text: "할 일",
+    className: "w-[270px] h-[38px]",
+  },
 };

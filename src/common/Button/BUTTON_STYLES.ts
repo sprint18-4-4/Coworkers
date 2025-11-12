@@ -26,3 +26,8 @@ export const FLOATING_BUTTON_STYLE_BY_VARIANT = {
   primary: "bg-brand-primary",
   inverse: "bg-background-inverse border border-border-primary shadow-xl",
 } as const;
+
+// ProgressButton
+
+export const PROGRESS_BUTTON_BASE_STYLE =
+  "w-full cursor-default flex justify-between items-center rounded-xl pl-5 pr-2 bg-state-200 text-md-medium";

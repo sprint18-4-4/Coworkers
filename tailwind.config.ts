@@ -60,6 +60,10 @@ const config: Config = {
           inverse: "#F8FAFC",
           brand: "#74A1FB",
         },
+        state: {
+          200: "#e2e8f0",
+          400: "#94A3B8",
+        },
       },
 
       fontFamily: {
