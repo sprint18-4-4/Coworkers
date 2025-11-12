@@ -1,6 +1,15 @@
 import { cn } from "@/utils";
 import Link from "next/link";
 
+/**
+ * @author jikwon
+ * @component
+ * @example
+ * ```tsx
+ * <Chip title="법인 등기" count={3} isActive={false} />
+ * ```
+ */
+
 interface ChipProps {
   title: string;
   count: number;
@@ -15,8 +24,8 @@ const Chip = ({ title, count, isActive }: ChipProps) => {
       className={cn(
         "px-4 py-3 flex items-center gap-[6px] rounded-full",
         !isActive
-          ? "bg-background-primary text-text-primary border border-border-primary hover:bg-background-secondary transition-colors"
-          : "bg-brand-primary text-text-inverse",
+          ? "text-text-primary bg-background-primary border border-border-primary hover:bg-background-secondary transition-colors"
+          : "text-text-inverse bg-brand-primary",
       )}
     >
       <span className="text-lg-medium">{title}</span>
