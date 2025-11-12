@@ -8,3 +8,4 @@ export { default as InputReply } from "./Input/InputReply/InputReply";
 export { default as Profile } from "./Profile/Profile";
 export { default as ProfileMember } from "./Profile/ProfileMember/ProfileMember";
 export { default as ProfileCard } from "./Profile/ProfileCard/ProfileCard";
+export { default as ProfileEdit } from "./Profile/ProfileEdit/ProfileEdit";
