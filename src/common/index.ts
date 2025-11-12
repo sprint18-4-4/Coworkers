@@ -4,3 +4,4 @@ export { default as Time } from "./Calendar/Time/Time";
 export { default as DatePicker } from "./Calendar/DatePicker/DatePicker";
 export { default as BaseButton } from "./Button/BaseButton";
 export { default as InputBox } from "./Input/InputBox/InputBox";
+export { default as InputReply } from "./Input/InputReply/InputReply";
