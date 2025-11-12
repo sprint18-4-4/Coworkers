@@ -20,5 +20,9 @@ export const Default: Story = {
   args: {
     isOpen: true,
   },
-  render: (args) => <Modal {...args}>dddd</Modal>,
+  render: (args) => (
+    <Modal {...args}>
+      <Modal.Input placeholder="할 일을 입력해주세요" label="할 일 제목" />
+    </Modal>
+  ),
 };
