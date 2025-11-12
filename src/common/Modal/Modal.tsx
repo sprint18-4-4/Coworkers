@@ -1,6 +1,5 @@
 "use client";
 
-import { ReactNode } from "react";
 import {
   MODAL_BASE_STYLE,
   MODAL_OVERLAY_STYLE,
@@ -10,50 +9,19 @@ import {
   MODAL_BUTTON_STYLE,
   MODAL_ICON_STYLE,
 } from "./MODAL_STYLE";
+import {
+  ModalProps,
+  ModalTitleProps,
+  ModalDescriptionProps,
+  ModalButtonProps,
+  ModalIconProps,
+  ModalFormProps,
+  ModalInputProps,
+  ModalCloseIconProps,
+} from "./_types/ModalProps";
 import { cn } from "@/utils";
 import { Icon } from "@/types";
-import { IconName } from "@/constants/icon";
 import Input from "../Input/Input";
-import { RefObject } from "react";
-
-interface ModalProps {
-  isOpen: boolean;
-  children: ReactNode;
-  className?: string;
-}
-
-interface ModalTitleProps {
-  title: string;
-  className?: string;
-}
-
-interface ModalDescriptionProps {
-  description: string;
-  className?: string;
-}
-
-interface ModalButtonProps {
-  children: ReactNode;
-  className?: string;
-}
-
-interface ModalIconProps {
-  name: IconName;
-  className?: string;
-}
-
-interface ModalFormProps {
-  children: ReactNode;
-  onSubmit: () => void;
-}
-
-interface ModalInputProps {
-  placeholder: string;
-  label?: string;
-  error?: string;
-  containerClassName?: string;
-  ref?: RefObject<HTMLInputElement | null>;
-}
 
 const Modal = ({ isOpen, children, className }: ModalProps) => {
   if (!isOpen) {
@@ -79,7 +47,7 @@ const ModalIcon = ({ name, className }: ModalIconProps) => {
   return <Icon name={name} className={cn(MODAL_ICON_STYLE, className)} />;
 };
 
-const ModalCloseIcon = ({ className, onClose }: { className?: string; onClose: (prev: boolean) => void }) => {
+const ModalCloseIcon = ({ className, onClose }: ModalCloseIconProps) => {
   return <Icon name="x" className={cn(MODAL_CLOSE_ICON_STYLE, className)} onClick={(prev) => onClose(!prev)} />;
 };
 
