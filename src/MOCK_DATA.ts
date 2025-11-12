@@ -55,3 +55,22 @@ export const SIDEBAR_MOCK_DATA = [
     title: "콘텐츠팀",
   },
 ];
+
+export const MOBILE_SIDEBAR_MENU_MOCK_DATA = [
+  {
+    menu: "경영관리팀",
+    href: "/",
+  },
+  {
+    menu: "프로덕트팀",
+    href: "/test",
+  },
+  {
+    menu: "마케팅팀",
+    href: "/test2",
+  },
+  {
+    menu: "콘텐츠팀",
+    href: "/test3",
+  },
+];

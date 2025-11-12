@@ -77,5 +77,15 @@ export const Default: Story = {
   args: {
     ...InteractiveTemplate.args,
     isOpen: true,
+    user: USER_MOCK_DATA,
+  },
+};
+
+export const NoUser: Story = {
+  ...InteractiveTemplate,
+  args: {
+    ...InteractiveTemplate.args,
+    isOpen: true,
+    user: null,
   },
 };
