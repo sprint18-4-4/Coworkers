@@ -1,4 +1,3 @@
-// src/app/landing/page.tsx
 "use client";
 
 import Link from "next/link";
@@ -6,7 +5,6 @@ import { Sidebar } from "@/common";
 import type { User } from "@/types";
 import { USER_MOCK_DATA } from "@/MOCK_DATA";
 
-// AFTER (page.tsx만 수정)
 export default function LandingPage() {
   const mockUser = USER_MOCK_DATA as User;
 
@@ -19,13 +17,9 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen">
-      {/* ❌ 사이드바 삭제 */}
-      {/* <aside>...</aside> */}
-
-      {/* ✅ 이중 여백 제거 */}
       <main>
         {/* HERO */}
-        <section className={`w-full bg-[#C9DAFD] ${PAD_LEFT}`}>
+        <section className={`w-full bg-[#F1F5F9] ${PAD_LEFT}`}>
           <div className={`${WRAP} ${GRID} pt-20 pb-12`}>
             <div className={`${TEXT} pc:pr-12`}>
               <div className="mb-4">
@@ -49,7 +43,7 @@ export default function LandingPage() {
         </section>
 
         {/* SECTION 1 */}
-        <section className={`w-full bg-[#C9DAFD]/80 ${PAD_LEFT}`}>
+        <section className={`w-full bg-[#F8FAFC]/80 ${PAD_LEFT}`}>
           <div className={`${WRAP} ${GRID} py-24`}>
             <div className={`${TEXT} pc:pr-10`}>
               <img src="/landing/land-2.svg" alt="" width={40} height={40} className="block mb-3" />
@@ -87,7 +81,7 @@ export default function LandingPage() {
         </section>
 
         {/* SECTION 3 */}
-        <section className={`w-full bg-[#C9DAFD]/80 ${PAD_LEFT}`}>
+        <section className={`w-full bg-[#F1F5F9]/80 ${PAD_LEFT}`}>
           <div className={`${WRAP} ${GRID} py-24`}>
             <div className={`${TEXT} pc:pr-10`}>
               <img src="/landing/land-4.svg" alt="" width={40} height={40} className="block mb-3" />
