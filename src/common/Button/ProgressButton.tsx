@@ -2,6 +2,21 @@ import { Icon } from "@/types";
 import { PROGRESS_BUTTON_BASE_STYLE } from "./BUTTON_STYLES";
 import { cn } from "@/utils";
 
+/**
+ * @author sangin
+ * @component
+ * @example
+ *
+ * // 기본
+ * <ProgressButton text="할 일"/>
+ *
+ * // 커스텀
+ * <ProgressButton text="할 일" className={}/>
+ *
+ * // onClick
+ * <ProgressButton text="할 일" className={} onClick={}/>
+ */
+
 interface ProgressButtonProps {
   text?: string;
   className?: string;

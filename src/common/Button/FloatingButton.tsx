@@ -5,6 +5,18 @@ import { FLOATING_BUTTON_BASE_STYLE, FLOATING_BUTTON_STYLE_BY_VARIANT } from "./
 
 type Variant = keyof typeof FLOATING_BUTTON_STYLE_BY_VARIANT;
 
+/**
+ * @author sangin
+ * @component
+ * @example
+ *
+ * // variant : primary
+ * <FloatingButton variant="primary" iconName="plusSm"/>
+ *
+ * // variant : inverse
+ * <FloatingButton variant="inverse" iconName="plusSm"/>
+ */
+
 interface FloatingButtonProps {
   variant: Variant;
   iconName: IconName;
