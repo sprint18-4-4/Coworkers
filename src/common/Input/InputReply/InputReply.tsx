@@ -1,8 +1,9 @@
 "use client";
 
-import InputBox from "../InputBox/InputBox";
-import { useAutoHeight } from "./_hooks";
 import { useState } from "react";
+import { cn } from "@/utils";
+import { useAutoHeight } from "./_hooks";
+import InputBox from "../InputBox/InputBox";
 
 const InputReply = () => {
   const [value, setValue] = useState("");
@@ -26,14 +27,15 @@ const InputReply = () => {
         textareaClassName="border-none"
         containerClassName="flex-1"
       />
-      {/* TODO(김원선): 버튼 구현시 변경 */}
+      {/* TODO(김원선): 버튼 공통 컴포넌트 구현시 변경 */}
       <button
         type="button"
         onClick={handleSubmit}
         disabled={!value}
-        className={`
-          size-6 rounded-full text-text-inverse mb-3 mr-2
-          ${value ? "bg-brand-primary" : "bg-icon-primary"}`}
+        className={cn(
+          "size-6 rounded-full text-text-inverse mb-3 mr-2",
+          value ? "bg-brand-primary" : "bg-icon-primary",
+        )}
         aria-label={value ? "댓글 작성" : "입력 필요"}
       >
         ↑
