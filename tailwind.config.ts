@@ -42,6 +42,7 @@ const config: Config = {
         },
         border: {
           primary: "rgba(248, 250, 252, 0.5)",
+          secondary: "#CBD5E1",
         },
         text: {
           primary: "#1E293B",
