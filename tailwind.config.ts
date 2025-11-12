@@ -39,9 +39,10 @@ const config: Config = {
           inactive: "#94A3B8",
           hover: "#416EC8",
           pressed: "#3B63B5",
+          focus: "#416EC8",
         },
         border: {
-          primary: "rgba(248, 250, 252, 0.5)",
+          primary: "#E2E8F0",
           secondary: "#CBD5E1",
         },
         text: {
