@@ -42,6 +42,11 @@ interface ModalIconProps {
   className?: string;
 }
 
+interface ModalFormProps {
+  children: ReactNode;
+  onSubmit: () => void;
+}
+
 interface ModalInputProps {
   placeholder: string;
   label?: string;
@@ -78,6 +83,10 @@ const ModalCloseIcon = ({ className, onClose }: { className?: string; onClose: (
   return <Icon name="x" className={cn(MODAL_CLOSE_ICON_STYLE, className)} onClick={(prev) => onClose(!prev)} />;
 };
 
+const ModalForm = ({ children, onSubmit }: ModalFormProps) => {
+  return <form onSubmit={onSubmit}>{children}</form>;
+};
+
 const ModalInput = ({ placeholder, label, error, containerClassName, ref }: ModalInputProps) => {
   return (
     <Input placeholder={placeholder} label={label} error={error} containerClassName={containerClassName} ref={ref} />
@@ -86,6 +95,7 @@ const ModalInput = ({ placeholder, label, error, containerClassName, ref }: Moda
 
 Modal.Title = ModalTitle;
 Modal.Button = ModalButton;
+Modal.Form = ModalForm;
 Modal.Input = ModalInput;
 Modal.Description = ModalDescription;
 Modal.Icon = ModalIcon;
