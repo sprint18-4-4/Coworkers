@@ -35,3 +35,10 @@ export const Default: Story = {
     user: USER_MOCK_DATA,
   },
 };
+
+export const NoUser: Story = {
+  args: {
+    isOpen: true,
+    user: null,
+  },
+};
