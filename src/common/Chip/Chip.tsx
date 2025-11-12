@@ -22,13 +22,14 @@ const Chip = ({ title, count, isActive }: ChipProps) => {
       // TODO(지권): 추후 href 변경 필요
       href={"/"}
       className={cn(
-        "px-4 py-3 flex items-center gap-[6px] rounded-full",
+        "px-3 py-2 flex items-center gap-[6px] rounded-full",
+        "tablet:px-4 tablet:py-3",
         !isActive
           ? "text-text-primary bg-background-primary border border-border-primary hover:bg-background-secondary transition-colors"
           : "text-text-inverse bg-brand-primary",
       )}
     >
-      <span className="text-lg-medium">{title}</span>
+      <span className="text-sm-medium tablet:text-lg-medium">{title}</span>
       <span className={cn("text-lg-bold", !isActive && "text-brand-primary")}>{formatCount(count)}</span>
     </Link>
   );
