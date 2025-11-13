@@ -22,6 +22,7 @@ const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
           alt={alt}
           width={PROFILE_IMAGE_SIZE[size]}
           height={PROFILE_IMAGE_SIZE[size]}
+          quality={85}
           className={cn("w-full h-full object-cover")}
         />
       ) : (

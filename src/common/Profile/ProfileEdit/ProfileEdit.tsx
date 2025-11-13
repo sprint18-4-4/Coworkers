@@ -56,6 +56,7 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
             alt={alt}
             width={IMAGE_SIZE_VALUES[size]}
             height={IMAGE_SIZE_VALUES[size]}
+            quality={85}
             className="w-full h-full object-cover"
           />
         ) : (
