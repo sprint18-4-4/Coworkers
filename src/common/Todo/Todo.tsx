@@ -1,43 +1,47 @@
 "use client";
 
 import { cn } from "@/utils";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 
 /**
  * @author jikwon
  * @component
  * @example
  * ```tsx
- * // 기본 사용
- * <Todo id="todo-1" title="할 일" completed={false} />
+ * const [completed, setCompleted] = useState(false);
+ *
+ * <Todo
+ *   id="todo-1"
+ *   title="법인 설립 안내 드리기"
+ *   completed={completed}
+ *   onChangeCompleted={(_, next) => setCompleted(next)}
+ * />
  */
 
 interface TodoProps {
   id: string;
   title: string;
   completed: boolean;
+  onChangeCompleted: (id: string, next: boolean) => void;
 }
 
-const Todo = ({ id, title, completed }: TodoProps) => {
-  const [checked, setChecked] = useState(completed);
-
-  const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
-    setChecked(e.target.checked);
-    // TODO(지권): 완료/미완료 상태 변경 API 호출
+const Todo = ({ id, title, completed, onChangeCompleted }: TodoProps) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChangeCompleted(id, e.target.checked);
   };
 
   return (
     <label
       htmlFor={id}
-      aria-label={`${title} ${checked ? "완료" : "미완료"}`}
+      aria-label={`${title} ${completed ? "완료" : "미완료"}`}
       className="flex items-center cursor-pointer select-none"
     >
       <span className="relative inline-flex items-center justify-center">
         <input
           id={id}
           type="checkbox"
-          checked={checked}
-          onChange={handleChecked}
+          checked={completed}
+          onChange={handleChange}
           className={cn(
             "appearance-none size-3 rounded-[4px] bg-transparent",
             "border border-icon-primary checked:bg-brand-primary checked:border-none",
@@ -49,7 +53,7 @@ const Todo = ({ id, title, completed }: TodoProps) => {
           className={cn(
             "absolute inset-0 flex items-center justify-center text-[6px] text-text-inverse transition-opacity",
             "tablet:text-[8px]",
-            checked ? "opacity-100" : "opacity-0",
+            completed ? "opacity-100" : "opacity-0",
           )}
         >
           ✓
@@ -59,7 +63,7 @@ const Todo = ({ id, title, completed }: TodoProps) => {
         className={cn(
           "ml-[7px] text-xs-regular",
           "tablet:ml-2 tablet:text-md-regular",
-          checked ? "text-slate-400 line-through" : "text-text-primary",
+          completed ? "text-slate-400 line-through" : "text-text-primary",
         )}
       >
         {title}

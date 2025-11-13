@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
+import { useState } from "react";
 import Todo from "./Todo";
 
 const meta: Meta<typeof Todo> = {
@@ -8,20 +9,26 @@ const meta: Meta<typeof Todo> = {
   parameters: {
     layout: "centered",
   },
-  args: {
-    id: "todo-1",
-    title: "법인 설립 안내 드리기",
-    completed: false,
-  },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+const TodoWithState = () => {
+  const [completed, setCompleted] = useState(false);
 
-export const Completed: Story = {
-  args: {
-    completed: true,
-  },
+  return (
+    <Todo
+      id="todo-1"
+      title="법인 설립 안내 드리기"
+      completed={completed}
+      onChangeCompleted={(_, next) => {
+        setCompleted(next);
+      }}
+    />
+  );
+};
+
+export const Default: Story = {
+  render: TodoWithState,
 };
