@@ -1,3 +1,8 @@
+/**
+ * @author jikwon
+ * @description 유저와 관련된 타입 정의입니다.
+ */
+
 export interface Group {
   teamId: string;
   updatedAt: string;
