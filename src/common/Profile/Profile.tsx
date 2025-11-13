@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/utils";
-import { Icon } from "@/types";
+import Icon from "@/common/Icon/Icon";
 import { PROFILE_SIZE, PROFILE_IMAGE_SIZE } from "./PROFILE_SIZE_STYLES";
 
 /**
@@ -20,7 +20,7 @@ export interface ProfileProps {
 
 const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
   return (
-    <div className={cn("overflow-hidden bg-background-tertiary flexCenter flex-shrink-0", PROFILE_SIZE[size])}>
+    <div className={cn("overflow-hidden bg-background-tertiary flex-center flex-shrink-0", PROFILE_SIZE[size])}>
       {src ? (
         <Image
           src={src}
@@ -31,7 +31,7 @@ const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
         />
       ) : (
         // TODO(김원선): Icon 사이즈 조정 가능시 수정
-        <Icon name="humanLg" size="md" className={cn("flexCenter")} />
+        <Icon name="humanLg" size="md" className={cn("flex-center")} />
       )}
     </div>
   );

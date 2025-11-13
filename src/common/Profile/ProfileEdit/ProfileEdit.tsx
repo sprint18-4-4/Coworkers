@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 import Image from "next/image";
-import { Icon } from "@/types";
+import Icon from "@/common/Icon/Icon";
 import { cn } from "@/utils";
 import { SIZE_CLASSES, IMAGE_SIZE_VALUES, EDIT_ICON_SIZE, EDIT_BUTTON_SIZE } from "../PROFILE_SIZE_STYLES";
 
@@ -40,7 +40,7 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onError, onImageSele
     <label className="relative inline-block cursor-pointer">
       <div
         className={cn(
-          " border-[2px] border-background-tertiary bg-background-tertiary  overflow-hidden flexCenter",
+          " border-[2px] border-background-tertiary bg-background-tertiary  overflow-hidden flex-center",
           SIZE_CLASSES[size],
         )}
       >
