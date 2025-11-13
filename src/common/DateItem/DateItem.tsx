@@ -31,8 +31,8 @@ const DateItem = ({ day, date, isToday }: DateItemProps) => {
           : "bg-background-primary border-border-primary hover:bg-background-secondary transition-colors",
       )}
     >
-      <span className={`text-xs-medium tablet:text-sm-medium ${!isToday && "text-text-default"}`}>{day}</span>
-      <span className={`text-lg-semibold tablet:text-xl-semibold ${!isToday && "text-text-primary"}`}>{date}</span>
+      <span className={`text-xs-medium tablet:text-sm-medium ${!isToday ? "text-text-default" : ""}`}>{day}</span>
+      <span className={`text-lg-semibold tablet:text-xl-semibold ${!isToday ? "text-text-primary" : ""}`}>{date}</span>
     </Link>
   );
 };
