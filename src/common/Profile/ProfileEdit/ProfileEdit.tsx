@@ -1,38 +1,44 @@
 import { ChangeEvent } from "react";
 import Image from "next/image";
-import Icon from "@/common/Icon/Icon";
 import { cn } from "@/utils";
+import Icon from "@/common/Icon/Icon";
+import { ProfileEditProps } from "../_type/types";
 import { SIZE_CLASSES, IMAGE_SIZE_VALUES, EDIT_ICON_SIZE, EDIT_BUTTON_SIZE } from "../PROFILE_SIZE_STYLES";
 
 /**
+ * @author KimWonSeon
+ * @description 프로필 이미지 편집 컴포넌트입니다.
  *
+ * @param src - 표시할 이미지 URL
+ * @param alt - 이미지 대체 텍스트
+ * @param size - md, lg 프로필 크기 옵션
+ * @param onChange - 유효한 파일이 선택되었을 때 호출되는 콜백 함수
  */
 
-export interface ProfileImageProps {
-  src: string | null;
-  alt?: string;
-  size?: "md" | "lg";
-  onError?: (error: string) => void;
-  onImageSelect: (file: File) => void;
-}
-
-const ProfileEdit = ({ src, alt = "프로필", size = "lg", onError, onImageSelect }: ProfileImageProps) => {
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
+const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileEditProps) => {
+  const validateImageFile = (file: File): boolean => {
     if (!file.type.startsWith("image/")) {
-      onError?.("이미지 파일만 업로드 가능합니다");
-      return;
+      return false;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      onError?.("파일 크기는 5MB 이하여야 합니다");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    if (!validateImageFile(file)) {
+      e.target.value = "";
       return;
     }
 
-    onImageSelect(file);
-
+    onChange(file);
     e.target.value = "";
   };
 

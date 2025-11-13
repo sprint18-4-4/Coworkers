@@ -23,13 +23,13 @@ const meta: Meta<typeof ProfileEdit> = {
       options: ["md", "lg"],
       description: "프로필 크기",
     },
-    onImageSelect: {
+    onChange: {
       action: "image selected",
       description: "이미지 선택 핸들러",
     },
   },
   args: {
-    onImageSelect: fn(),
+    onChange: fn(),
   },
 };
 
