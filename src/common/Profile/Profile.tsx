@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/utils";
 import Icon from "@/common/Icon/Icon";
+import { ProfileProps } from "./_type/types";
 import { PROFILE_SIZE, PROFILE_IMAGE_SIZE } from "./PROFILE_SIZE_STYLES";
 
 /**
@@ -12,15 +13,9 @@ import { PROFILE_SIZE, PROFILE_IMAGE_SIZE } from "./PROFILE_SIZE_STYLES";
  * @param size - sm, md, lg 프로필 크기 옵션
  */
 
-export interface ProfileProps {
-  src: string | null;
-  alt?: string;
-  size?: "sm" | "md" | "lg";
-}
-
 const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
   return (
-    <div className={cn("overflow-hidden bg-background-tertiary flex-center flex-shrink-0", PROFILE_SIZE[size])}>
+    <div className={cn("overflow-hidden bg-background-tertiary flex flex-shrink-0", PROFILE_SIZE[size])}>
       {src ? (
         <Image
           src={src}
