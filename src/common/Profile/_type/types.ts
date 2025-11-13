@@ -1,26 +1,36 @@
-export interface CommonProfileProps {
+export interface BaseProfileProps {
   src: string | null;
-  name?: string;
   alt?: string;
-  onClick?: () => void;
 }
 
-export interface ProfileProps extends CommonProfileProps {
+// 프로필 Type
+
+export interface ProfileProps extends BaseProfileProps {
   size?: "sm" | "md" | "lg";
 }
 
-export interface ProfileEditProps extends CommonProfileProps {
+// 프로필 수정 Type
+
+export interface ProfileEditProps extends BaseProfileProps {
   size?: "md" | "lg";
+  onChange: (file: File) => void;
 }
 
-export interface MyProfileType extends CommonProfileProps {
+// 프로필 아이템 Type
+
+export interface ProfileItemProps extends BaseProfileProps {
+  name: string;
+  onClick: () => void;
+}
+
+export interface MyProfileType extends ProfileItemProps {
   type: "myProfile";
   groupName: string;
 }
 
-export interface MemberItemType extends CommonProfileProps {
+export interface MemberItemType extends ProfileItemProps {
   type: "memberItem";
   email: string;
 }
 
-export type ProfileItemProps = MyProfileType | MemberItemType;
+export type ProfileItemType = MyProfileType | MemberItemType;

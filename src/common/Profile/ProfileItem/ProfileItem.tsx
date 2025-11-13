@@ -1,6 +1,6 @@
 import Icon from "@/common/Icon/Icon";
 import Profile from "../Profile";
-import { ProfileItemProps } from "../_type/types";
+import { ProfileItemType } from "../_type/types";
 
 /**
  * @author KimWonSeon
@@ -27,7 +27,7 @@ import { ProfileItemProps } from "../_type/types";
  * />
  */
 
-const ProfileItem = (props: ProfileItemProps) => {
+const ProfileItem = (props: ProfileItemType) => {
   const { src, name, alt = `${name}의 프로필`, type } = props;
 
   if (type === "myProfile") {
