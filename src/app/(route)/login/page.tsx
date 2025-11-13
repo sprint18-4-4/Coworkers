@@ -1,9 +1,9 @@
-"use client";
-
-import { Icon } from "@/common";
-
 const page = () => {
-  return <div></div>;
+  return (
+    <div>
+      <h1>로그인 페이지</h1>
+    </div>
+  );
 };
 
 export default page;

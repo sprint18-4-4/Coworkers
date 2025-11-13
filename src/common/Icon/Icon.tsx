@@ -7,7 +7,7 @@ import { ICON_RESPONSIVE_SIZES, ICON_SIZES, ICONS } from "./CONST_ICON";
  * - 크기: `size`(모바일 기본) + `responsiveSize`(tablet/pc).
  * - 색상: `currentColor` 기반 → `text-*`로 제어.
  * - 접근성: 의미 있으면 `aria-label`, 아니면 생략(자동 `aria-hidden`).
- 
+ *
  * @example
  * // 1) 기본 사용 (24px) — 장식용
  * <Icon name="searchSm" />

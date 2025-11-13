@@ -1,5 +1,3 @@
-import { Icon } from "@/common";
-import { cn } from "@/utils/cn";
 import type { FC } from "react";
 
 // Color Swatches
