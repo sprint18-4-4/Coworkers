@@ -52,6 +52,29 @@ import X from "@/assets/icon/ic_x.svg";
 import XLg from "@/assets/icon/ic_x_lg.svg";
 import XMd from "@/assets/icon/ic_x_md.svg";
 
+/**
+ * 아이콘 레지스트리와 사이즈 토큰 모음
+ * - `ICONS`: SVGR로 변환된 SVG 컴포넌트 매핑(아이콘 키 → React 컴포넌트)
+ * - `ICON_SIZES`: 기본 크기 토큰(Tailwind `size-*`; 예외적으로 `x-sm`는 `w/h` 쌍)
+ * - `ICON_RESPONSIVE_SIZES`: tablet/pc 구간에서만 크기 오버라이드
+ * - 색상은 `currentColor` 기반 → `text-*` 클래스로 제어
+ * - 타입(`IconName`)으로 컴파일 타임에 오타를 방지
+ * @author shincheon
+ *
+ * @example
+ * // 1) 기본 24px(장식용)
+ * <Icon name="searchSm" />
+ *
+ * // 2) 32px로 고정 + 브랜드 컬러
+ * <Icon name="calendarLg" size="lg" className="text-icon-brand" />
+ *
+ * // 3) 모바일 24px → tablet/pc 32px
+ * <Icon name="alertSm" size="md" responsiveSize="mdUp" />
+ *
+ * // 4) 모바일 16px → tablet 20px, pc 24px
+ * <Icon name="searchSm" size="sm" responsiveSize="growSm" />
+ */
+
 // 아이콘 컴포넌트 맵
 export const ICONS = {
   alertLg: AlertLg,
@@ -109,8 +132,6 @@ export const ICONS = {
   xMd: XMd,
 } as const;
 
-export type IconName = keyof typeof ICONS;
-
 export const ICON_SIZES = {
   "x-sm": "w-2.5 h-2.5",
   sm: "size-4",
@@ -118,7 +139,6 @@ export const ICON_SIZES = {
   md: "size-6",
   lg: "size-8",
 } as const;
-export type IconSize = keyof typeof ICON_SIZES;
 
 export const ICON_RESPONSIVE_SIZES = {
   /** 모바일 기본(md=24px) → 태블릿/PC 32px */
@@ -127,5 +147,3 @@ export const ICON_RESPONSIVE_SIZES = {
   /** 모바일 기본(sm=16px) → 태블릿 20px, PC 24px */
   growSm: "tablet:size-5 pc:size-6",
 } as const;
-
-export type IconResponsiveSize = keyof typeof ICON_RESPONSIVE_SIZES;
