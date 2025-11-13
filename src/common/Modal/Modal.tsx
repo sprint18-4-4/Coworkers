@@ -26,23 +26,46 @@ import Input from "../Input/Input";
 import Time from "../Calendar/Time/Time";
 import DatePicker from "../Calendar/DatePicker/DatePicker";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 
 /**
  *  @author sangin
  *  @component
  *  @example
- * <Modal isOpen={isOpen} className="">
+ *
+ * @param onClose onClose는 setIsOpen만 전달해주면 Modal에서 처리하도록 했습니다.
+ * <Modal isOpen={isOpen} onClose={setIsOpen} className="">
  *   <Modal.Title title="제목" />
  *   <Modal.Description description="설명" />
  * </Modal>
  */
 
-const Modal = ({ isOpen, children, className }: ModalProps) => {
-  if (!isOpen) {
-    return null;
-  }
+const Modal = ({ isOpen, children, className, onClose }: ModalProps) => {
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose(false);
+    }
+  };
 
-  return <div className={cn(MODAL_BASE_STYLE, MODAL_OVERLAY_STYLE, className)}>{children}</div>;
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose(false);
+      }
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [onClose]);
+
+  return (
+    isOpen && (
+      <div className={MODAL_OVERLAY_STYLE} onClick={handleOverlayClick}>
+        <div className={cn(MODAL_BASE_STYLE, className)}>{children}</div>
+      </div>
+    )
+  );
 };
 
 const ModalTitle = ({ title, className }: ModalTitleProps) => {
