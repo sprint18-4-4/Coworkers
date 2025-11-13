@@ -1,4 +1,5 @@
 import { IconName } from "@/constants/icon";
+import { DateValue, HalfHour } from "@/types";
 import { ComponentPropsWithRef, RefObject } from "react";
 import { ReactNode } from "react";
 
@@ -44,4 +45,13 @@ export interface ModalInputProps extends ComponentPropsWithRef<"input"> {
 export interface ModalCloseIconProps {
   className?: string;
   onClose: (prev: boolean) => void;
+}
+
+export interface ModalTimeProps {
+  value: DateValue;
+  onChange: (next: DateValue) => void;
+  timePeriod: "am" | "pm";
+  setTimePeriod: (period: "am" | "pm") => void;
+  selectedTime: HalfHour;
+  setSelectedTime: (time: HalfHour) => void;
 }
