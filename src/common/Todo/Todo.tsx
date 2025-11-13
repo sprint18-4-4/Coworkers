@@ -1,0 +1,75 @@
+"use client";
+
+import { cn } from "@/utils";
+import { ChangeEvent } from "react";
+
+/**
+ * @author jikwon
+ * @component
+ * @example
+ * ```tsx
+ * const [completed, setCompleted] = useState(false);
+ *
+ * <Todo
+ *   id="todo-1"
+ *   title="법인 설립 안내 드리기"
+ *   completed={completed}
+ *   onChangeCompleted={(_, next) => setCompleted(next)}
+ * />
+ */
+
+interface TodoProps {
+  id: string;
+  title: string;
+  completed: boolean;
+  onChangeCompleted: (id: string, next: boolean) => void;
+}
+
+const Todo = ({ id, title, completed, onChangeCompleted }: TodoProps) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChangeCompleted(id, e.target.checked);
+  };
+
+  return (
+    <label
+      htmlFor={id}
+      aria-label={`${title} ${completed ? "완료" : "미완료"}`}
+      className="flex items-center cursor-pointer select-none"
+    >
+      <span className="relative inline-flex items-center justify-center">
+        <input
+          id={id}
+          type="checkbox"
+          checked={completed}
+          onChange={handleChange}
+          className={cn(
+            "appearance-none size-3 rounded-[4px] bg-transparent",
+            "border border-icon-primary checked:bg-brand-primary checked:border-none",
+            "tablet:size-4 tablet:rounded-md",
+          )}
+        />
+        {/* TODO(지권): 추후 아이콘 변경 필요 */}
+        <span
+          className={cn(
+            "absolute inset-0 flex items-center justify-center text-[6px] text-text-inverse transition-opacity",
+            "tablet:text-[8px]",
+            completed ? "opacity-100" : "opacity-0",
+          )}
+        >
+          ✓
+        </span>
+      </span>
+      <span
+        className={cn(
+          "ml-[7px] text-xs-regular",
+          "tablet:ml-2 tablet:text-md-regular",
+          completed ? "text-slate-400 line-through" : "text-text-primary",
+        )}
+      >
+        {title}
+      </span>
+    </label>
+  );
+};
+
+export default Todo;
