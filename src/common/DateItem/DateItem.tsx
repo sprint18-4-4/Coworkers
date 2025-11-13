@@ -22,6 +22,7 @@ const DateItem = ({ day, date, isToday }: DateItemProps) => {
     <Link
       // TODO(지권): 추후 href 변경 필요
       href="/"
+      aria-label={`${day} ${date}일`}
       className={cn(
         "box-border flex-col-center gap-1 rounded-lg w-[60px] h-[49px] py-2 border",
         "tablet:w-[100px] tablet:min-h-[68px] tablet:px-4 tablet:py-3 tablet:rounded-xl",
