@@ -1,70 +1,58 @@
 import type { NextConfig } from "next";
 import type { RuleSetRule } from "webpack";
 
+function hasProp<K extends string>(obj: unknown, prop: K): obj is Record<K, unknown> {
+  return typeof obj === "object" && obj !== null && prop in obj;
+}
+function isRuleWithRegExpTest(rule: unknown): rule is RuleSetRule & { test: RegExp } {
+  return hasProp(rule, "test") && rule.test instanceof RegExp;
+}
+
 const nextConfig: NextConfig = {
-  reactCompiler: true,
-
-  webpack: (config) => {
-    // rules를 Webpack 타입으로 협소화
-    const rules = (config.module?.rules ?? []) as RuleSetRule[];
-
-    // 기존 svg 처리 룰 찾기
-    const fileLoaderRule = rules.find(
-      (rule) =>
-        typeof rule === "object" &&
-        rule !== null &&
-        "test" in rule &&
-        rule.test instanceof RegExp &&
-        rule.test.test(".svg"),
+  webpack(config) {
+    const fileLoaderRule = config.module.rules.find(
+      (rule: unknown): rule is RuleSetRule & { test: RegExp } => isRuleWithRegExpTest(rule) && rule.test.test(".svg"),
     );
+    if (!fileLoaderRule) return config;
 
-    // 기존 파일 로더에서 .svg 제외 (충돌 방지)
-    if (fileLoaderRule) {
-      fileLoaderRule.exclude = /\.svg$/i;
-    }
+    // *.svg?url → 기존처럼 URL로 (Next/Image 등)
+    const urlSvgRule: RuleSetRule = { ...fileLoaderRule, test: /\.svg$/i, resourceQuery: /url/ };
 
-    // SVGR 로더 추가 (svg -> React 컴포넌트 import)
-    // const svgrRule: RuleSetRule = {
-    //   test: /\.svg$/i,
-    //   issuer: /\.[jt]sx?$/,
-    //   use: [
-    //     {
-    //       loader: "@svgr/webpack",
-    //       options: {
-    //         svgo: true,
-    //         svgoConfig: {
-    //           plugins: [
-    //             { name: "removeViewBox", active: false }, // viewBox 유지
-    //             { name: "removeDimensions", active: true }, // width/height 제거
-    //           ],
-    //         },
-    //         ref: true,
-    //         titleProp: true,
-    //         prettier: false,
-    //       },
-    //     },
-    //   ],
-    // };
-
-    // const fileLoaderRule = rules.find((rule) => rule.test?.test?.(".svg"));
-
-    config.module.rules.push({
-      test: /\.svg$/,
+    // 나머지 *.svg → React 컴포넌트(@svgr/webpack)
+    const svgrRule: RuleSetRule = {
+      test: /\.svg$/i,
+      issuer: fileLoaderRule.issuer,
+      resourceQuery: { not: [/url/] },
       use: [
         {
           loader: "@svgr/webpack",
+          options: {
+            typescript: true,
+            ref: true,
+            titleProp: true,
+            dimensions: false, // width/height 제거 → Tailwind `size-*`로 제어
+            svgo: true,
+            svgoConfig: {
+              plugins: [
+                { name: "preset-default", params: { overrides: { removeViewBox: false } } },
+                // 핵심: 내부 색/선 속성을 제거해서 currentColor만 따르게 만들기
+                { name: "removeAttrs", params: { attrs: "(fill|stroke|color)" } },
+              ],
+            },
+            // 루트에 기본값 주입: 모두 상속
+            svgProps: {
+              fill: "currentColor",
+              stroke: "currentColor",
+              color: "currentColor",
+            },
+          },
         },
       ],
-    });
-
-    // 변경된 rules를 반영해서 반환
-    return {
-      ...config,
-      module: {
-        ...(config.module ?? {}),
-        rules,
-      },
     };
+
+    config.module.rules.push(urlSvgRule, svgrRule);
+    fileLoaderRule.exclude = /\.svg$/i;
+    return config;
   },
 };
 
