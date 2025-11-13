@@ -27,6 +27,16 @@ import Time from "../Calendar/Time/Time";
 import DatePicker from "../Calendar/DatePicker/DatePicker";
 import dayjs from "dayjs";
 
+/**
+ *  @author sangin
+ *  @component
+ *  @example
+ * <Modal isOpen={isOpen} className="">
+ *   <Modal.Title title="제목" />
+ *   <Modal.Description description="설명" />
+ * </Modal>
+ */
+
 const Modal = ({ isOpen, children, className }: ModalProps) => {
   if (!isOpen) {
     return null;
