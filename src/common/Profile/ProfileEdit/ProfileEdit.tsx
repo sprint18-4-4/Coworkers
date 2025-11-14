@@ -60,14 +60,15 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
             className="w-full h-full object-cover"
           />
         ) : (
-          <Icon name="humanLg" size="lg" className="size-10" />
+          // 여기도 체크 부탁드립니다
+          <Icon name="alert" className="size-10" />
         )}
       </div>
       <div
         className={cn("absolute bottom-0 -right-[5px] bg-background-tertiary rounded-full p-1", EDIT_BUTTON_SIZE[size])}
       >
         {/* TODO(김원선): 아이콘이 css 적용이 안되어, css 적용이 구현 됬을 때 변경 */}
-        <Icon name="plusLg" className={EDIT_ICON_SIZE[size]} />
+        <Icon name="plus" className={EDIT_ICON_SIZE[size]} />
       </div>
       <input
         type="file"
