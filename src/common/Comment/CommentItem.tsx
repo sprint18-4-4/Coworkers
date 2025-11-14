@@ -100,7 +100,7 @@ const CommentItem = ({
 
       {showKebab && (
         <button type="button" className="mr-4" aria-label="댓글 옵션">
-          <Icon name="kebabSm" size="sm" />
+          <Icon name="kebab" />
         </button>
       )}
     </div>
