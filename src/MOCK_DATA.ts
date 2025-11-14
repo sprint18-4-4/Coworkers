@@ -1,3 +1,5 @@
+import { ScheduleItem } from "./app/(route)/my-history/_types";
+
 export const USER_MOCK_DATA = {
   teamId: "1",
   image: "/TEST_IMG/image-1.jpg",
@@ -41,6 +43,7 @@ export const USER_MOCK_DATA = {
     },
   ],
 };
+
 export const SIDEBAR_MOCK_DATA = [
   {
     title: "경영관리팀",
@@ -72,5 +75,58 @@ export const MOBILE_SIDEBAR_MENU_MOCK_DATA = [
   {
     menu: "콘텐츠팀",
     href: "/test3",
+  },
+];
+
+export const MY_HISTORY_ITEM_MOCK_DATA: ScheduleItem[] = [
+  {
+    id: 1,
+    name: "아침 운동하기",
+    description: "30분 러닝 또는 스트레칭",
+    date: "2025-11-14T09:00:00.000Z",
+    doneAt: "2025-11-14T09:30:00.000Z",
+    updatedAt: "2025-11-14T09:30:00.000Z",
+    deletedAt: null,
+    displayIndex: 0,
+    commentCount: 2,
+    recurringId: 101,
+    frequency: "DAILY",
+    writer: {
+      image: "/images/user1.png",
+      nickname: "지권",
+      id: 11,
+    },
+    doneBy: {
+      user: {
+        image: "/images/user1.png",
+        nickname: "지권",
+        id: 11,
+      },
+    },
+  },
+  {
+    id: 2,
+    name: "주간 회고 작성",
+    description: "이번 주 목표 대비 진행 상황 점검",
+    date: "2025-11-15T20:00:00.000Z",
+    doneAt: "2025-11-15T20:15:00.000Z",
+    updatedAt: "2025-11-15T20:15:00.000Z",
+    deletedAt: null,
+    displayIndex: 1,
+    commentCount: 0,
+    recurringId: 202,
+    frequency: "WEEKLY",
+    writer: {
+      image: "/images/user2.png",
+      nickname: "홍길동",
+      id: 12,
+    },
+    doneBy: {
+      user: {
+        image: "/images/user2.png",
+        nickname: "홍길동",
+        id: 12,
+      },
+    },
   },
 ];
