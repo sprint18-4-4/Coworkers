@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   webpack(config) {
+    // @ts-expect-error - Next.js rule type is too complex
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"));
 
     config.module.rules.push(
