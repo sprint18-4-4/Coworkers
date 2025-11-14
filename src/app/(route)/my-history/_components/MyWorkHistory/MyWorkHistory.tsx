@@ -26,8 +26,8 @@ const MyWorkHistory = ({ title, Item }: MyWorkHistoryProps) => {
           2025년 5월
         </time>
         <ul className="flex flex-col gap-1 w-[270px]">
-          {Array.from({ length: 3 }, (_, i) => (
-            <MyWorkHistoryItem key={i} title="법인 설립" count={12} />
+          {Item.map((item) => (
+            <MyWorkHistoryItem key={item.title} title={item.title} count={item.count} />
           ))}
         </ul>
       </section>

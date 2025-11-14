@@ -24,7 +24,7 @@ const WorkHistorySection = () => {
         ))}
       </nav>
 
-      <ScheduleDaySection />
+      <ScheduleDaySection items={[]} />
     </article>
   );
 };

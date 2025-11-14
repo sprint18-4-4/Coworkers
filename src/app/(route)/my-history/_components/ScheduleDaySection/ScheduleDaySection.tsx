@@ -1,14 +1,19 @@
 import { Todo } from "@/common";
 import { cn } from "@/utils";
+import { ScheduleItem } from "../../_types";
 
-const ScheduleDayItem = () => {
+interface ScheduleDayItemProps {
+  item: ScheduleItem;
+}
+
+const ScheduleDayItem = ({ item }: ScheduleDayItemProps) => {
   return (
     <li className="px-[14px] py-3 flex flex-col items-start rounded-lg gap-[10px] bg-background-secondary">
       <div className="flex-center gap-3">
         <Todo title="법인 설립 안내 드리기" id="1" completed={false} onChangeCompleted={() => {}} />
         <div className="flex items-center">
           <div aria-hidden="true" className="size-4 bg-black" />
-          <span>3</span>
+          <span>{item.commentCount}</span>
         </div>
       </div>
       <div className="h-[14px] flex items-center gap-2 text-xs-regular text-text-default">
@@ -26,7 +31,7 @@ const ScheduleDayItem = () => {
   );
 };
 
-const ScheduleDaySection = () => {
+const ScheduleDaySection = ({ items }: { items: ScheduleItem[] }) => {
   return (
     <>
       <div className="flex-center gap-5">
@@ -40,8 +45,8 @@ const ScheduleDaySection = () => {
       <section className="flex flex-col gap-[13px]">
         <h2 className="text-lg-bold text-text-primary">법인 등기</h2>
         <ul className="flex flex-col gap-3">
-          {Array.from({ length: 3 }, (_, i) => (
-            <ScheduleDayItem key={i} />
+          {items.map((item) => (
+            <ScheduleDayItem key={item.id} item={item} />
           ))}
         </ul>
       </section>

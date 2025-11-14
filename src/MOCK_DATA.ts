@@ -41,6 +41,7 @@ export const USER_MOCK_DATA = {
     },
   ],
 };
+
 export const SIDEBAR_MOCK_DATA = [
   {
     title: "경영관리팀",
@@ -72,5 +73,17 @@ export const MOBILE_SIDEBAR_MENU_MOCK_DATA = [
   {
     menu: "콘텐츠팀",
     href: "/test3",
+  },
+];
+
+export const MY_HISTORY_MOCK_DATA = [
+  {
+    title: "경영관리팀",
+    Item: [
+      {
+        title: "법인 설립",
+        count: 12,
+      },
+    ],
   },
 ];
