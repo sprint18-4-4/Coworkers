@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import UnsavedChangesToast from "./Toast";
+import Snackbar from "./Snackbar";
 
 const meta = {
-  title: "Common/Toast",
-  component: UnsavedChangesToast,
+  title: "Common/Snackbar",
+  component: Snackbar,
   parameters: {
     layout: "padded",
   },
@@ -22,7 +22,7 @@ const meta = {
       description: "저장 버튼 클릭 핸들러",
     },
   },
-} satisfies Meta<typeof UnsavedChangesToast>;
+} satisfies Meta<typeof Snackbar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
