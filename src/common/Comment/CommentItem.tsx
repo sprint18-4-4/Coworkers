@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/utils";
 import Icon from "../Icon/Icon";
 import { CommentProps } from "./_types/type";
