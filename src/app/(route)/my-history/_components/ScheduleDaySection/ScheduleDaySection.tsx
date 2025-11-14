@@ -1,5 +1,5 @@
 import { Todo } from "@/common";
-import { cn } from "@/utils";
+import { cn, getFrequencyLabel } from "@/utils";
 import { ScheduleItem } from "../../_types";
 
 interface ScheduleDayItemProps {
@@ -10,21 +10,21 @@ const ScheduleDayItem = ({ item }: ScheduleDayItemProps) => {
   return (
     <li className="px-[14px] py-3 flex flex-col items-start rounded-lg gap-[10px] bg-background-secondary">
       <div className="flex-center gap-3">
-        <Todo title="법인 설립 안내 드리기" id="1" completed={false} onChangeCompleted={() => {}} />
+        <Todo title={item.name} id={item.id.toString()} completed={false} onChangeCompleted={() => {}} />
         <div className="flex items-center">
           <div aria-hidden="true" className="size-4 bg-black" />
           <span>{item.commentCount}</span>
         </div>
       </div>
       <div className="h-[14px] flex items-center gap-2 text-xs-regular text-text-default">
-        <time dateTime={"2024-07-29"} className="flex items-center gap-[6px]">
+        <time dateTime={item.date} className="flex items-center gap-[6px]">
           <div aria-hidden="true" className="size-3 bg-black" />
-          <span>2024년 7월 29일</span>
+          <span>{item.date}</span>
         </time>
         <hr aria-hidden="true" className="w-[1px] h-full bg-slate-700" />
         <div className="flex items-center gap-[6px]">
           <div aria-hidden="true" className="size-3 bg-black" />
-          <span>매일 반복</span>
+          <span>{getFrequencyLabel(item.frequency)}</span>
         </div>
       </div>
     </li>

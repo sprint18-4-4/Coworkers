@@ -2,6 +2,7 @@ import { cn } from "@/utils";
 import { Chip } from "@/common";
 import ScheduleDaySection from "../ScheduleDaySection/ScheduleDaySection";
 import { MONTH_NAV_BUTTON } from "../../_constants";
+import { MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
 
 const WorkHistorySection = () => {
   return (
@@ -24,7 +25,7 @@ const WorkHistorySection = () => {
         ))}
       </nav>
 
-      <ScheduleDaySection items={[]} />
+      <ScheduleDaySection items={MY_HISTORY_ITEM_MOCK_DATA} />
     </article>
   );
 };
