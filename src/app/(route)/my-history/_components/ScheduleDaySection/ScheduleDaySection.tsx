@@ -1,4 +1,4 @@
-import { Todo } from "@/common";
+import { Icon, Todo } from "@/common";
 import { cn, getFrequencyLabel } from "@/utils";
 import { ScheduleItem } from "../../_types";
 
@@ -11,19 +11,21 @@ const ScheduleDayItem = ({ item }: ScheduleDayItemProps) => {
     <li className="px-[14px] py-3 flex flex-col items-start rounded-lg gap-[10px] bg-background-secondary">
       <div className="flex-center gap-3">
         <Todo title={item.name} id={item.id.toString()} completed={false} onChangeCompleted={() => {}} />
-        <div className="flex items-center">
-          <div aria-hidden="true" className="size-4 bg-black" />
+        {/* TODO(지권): 아이콘 변경 */}
+        <div className="flex items-center gap-[2px] text-xs-regular">
+          <Icon name="comment" className="!size-4" />
           <span>{item.commentCount}</span>
         </div>
       </div>
       <div className="h-[14px] flex items-center gap-2 text-xs-regular text-text-default">
+        {/* TODO(지권): 아이콘 변경 */}
         <time dateTime={item.date} className="flex items-center gap-[6px]">
-          <div aria-hidden="true" className="size-3 bg-black" />
+          <Icon name="calendar" className="!size-4" />
           <span>{item.date}</span>
         </time>
         <hr aria-hidden="true" className="w-[1px] h-full bg-slate-700" />
         <div className="flex items-center gap-[6px]">
-          <div aria-hidden="true" className="size-3 bg-black" />
+          <Icon name="repeat" className="!size-4" />
           <span>{getFrequencyLabel(item.frequency)}</span>
         </div>
       </div>
