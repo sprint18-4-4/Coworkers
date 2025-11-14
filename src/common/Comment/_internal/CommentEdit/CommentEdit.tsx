@@ -5,6 +5,16 @@ import { InputBox } from "@/common";
 import { BaseButton } from "@/common";
 import { CommentEditProps } from "../../_types";
 
+/**
+ * @author KimWonSeon
+ * @description 댓글 수정 컴포넌트
+ *
+ * @param initialContent - 수정할 원본 댓글 내용
+ * @param onSave - 저장 버튼 클릭 시 호출되는 콜백
+ * @param onCancel - 취소 버튼 클릭 시 호출되는 콜백
+ * @param className - 컨테이너 추가 className
+ */
+
 const CommentEdit = ({ initialContent, onSave, onCancel, className }: CommentEditProps) => {
   const [content, setContent] = useState(initialContent);
   const { ref: textareaRef } = useAutoHeight(48, 200);
