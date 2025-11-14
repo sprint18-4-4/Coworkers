@@ -1,5 +1,6 @@
 import { IconName } from "@/types";
 import { DateValue, HalfHour } from "@/types";
+import { TimeProps } from "@/types/TimeType";
 import { ComponentPropsWithRef, RefObject } from "react";
 import { ReactNode } from "react";
 
@@ -48,13 +49,9 @@ export interface ModalCloseIconProps {
   onClose: (prev: boolean) => void;
 }
 
-export interface ModalTimeProps {
+export interface ModalTimeProps extends TimeProps {
   value: DateValue;
   onChange: (next: DateValue) => void;
-  timePeriod: "am" | "pm";
-  setTimePeriod: (period: "am" | "pm") => void;
-  selectedTime: HalfHour;
-  setSelectedTime: (time: HalfHour) => void;
 }
 
 export type Panel = "DatePicker" | "Time";
