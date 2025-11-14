@@ -22,7 +22,7 @@ import {
   Panel,
 } from "./_types/ModalProps";
 import { cn } from "@/utils";
-import { Icon } from "@/types";
+import Icon from "../Icon/Icon";
 import Input from "../Input/Input";
 import Time from "../Calendar/Time/Time";
 import DatePicker from "../Calendar/DatePicker/DatePicker";

@@ -1,4 +1,4 @@
-import { IconName } from "@/constants/icon";
+import { IconName } from "@/types";
 import { DateValue, HalfHour } from "@/types";
 import { ComponentPropsWithRef, RefObject } from "react";
 import { ReactNode } from "react";
