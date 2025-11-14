@@ -7,7 +7,7 @@ interface ToastProps {
   onSave: () => void;
 }
 
-const UnsavedChangesToast = ({ show, message, onSave }: ToastProps) => {
+const Snackbar = ({ show, message, onSave }: ToastProps) => {
   if (!show) return null;
 
   return (
@@ -28,4 +28,4 @@ const UnsavedChangesToast = ({ show, message, onSave }: ToastProps) => {
   );
 };
 
-export default UnsavedChangesToast;
+export default Snackbar;
