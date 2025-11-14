@@ -27,7 +27,7 @@ const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
         />
       ) : (
         // TODO(김원선): Icon 사이즈 조정 가능시 수정
-        <Icon name="humanLg" size="md" className="flex-center" />
+        <Icon name="alert" />
       )}
     </div>
   );
