@@ -1,17 +1,52 @@
 "use client";
 
 import { Chip, Todo } from "@/common";
+import { cn } from "@/utils";
 
 const page = () => {
   return (
-    <div className="h-[calc(100vh-56px)] px-4 pt-[17px] flex flex-col gap-[25px] bg-background-secondary">
-      <div className="w-full flex items-center gap-2">
-        <h2 className="text-lg-bold text-text-primary">경영관리팀</h2>
+    <div
+      className={cn(
+        "h-[calc(100vh-52px)] px-4 pt-[17px] flex flex-col gap-[25px] bg-background-secondary",
+        "tablet:h-[100vh] tablet:px-[26px] tablet:pt-[69px]",
+        "pc:mx-0 pc:pl-[91px] pc:pt-[90px]",
+      )}
+    >
+      <div
+        className={cn(
+          "w-full flex items-center gap-2",
+          "pc:px-[26px] pc:py-[18px] pc:justify-between pc:bg-background-primary pc:rounded-xl",
+        )}
+      >
+        <h2 className={cn("text-lg-bold text-text-primary", "tablet:text-2xl-bold", "pc:text-2xl-bold")}>경영관리팀</h2>
         <div className="size-5 bg-black" />
       </div>
 
-      <div className="w-full min-h-[500px] flex flex-col gap-6 px-[22px] py-[33px] rounded-[20px] bg-background-primary">
-        <div className="flex-center gap-[13px]">
+      <>
+        <h2 className="text-xl-bold text-text-primary">내가 한 일</h2>
+        <div className="mt-10 flex flex-col gap-4">
+          <span className="text-lg-medium text-text-primary">2025년 5월</span>
+          <div className="flex flex-col gap-1 w-[270px]">
+            <div className="px-5 h-[54px] flex items-center justify-between rounded-xl bg-background-primary">
+              <button className="text-lg-semibold text-text-primary">법인 설립</button>
+              <span className="text-lg-bold text-brand-primary">12개</span>
+            </div>
+            <div className="px-5 h-[54px] flex items-center justify-between rounded-xl bg-background-primary">
+              <button className="text-lg-semibold text-text-primary">법인 설립</button>
+              <span className="text-lg-bold text-brand-primary">12개</span>
+            </div>
+          </div>
+        </div>
+      </>
+
+      <div
+        className={cn(
+          "w-full min-h-[500px] flex flex-col gap-6 px-[22px] py-[33px] rounded-[20px] bg-background-primary",
+          "tablet:px-[30px] tablet:py-[46px]",
+          "pc:max-w-[760px]",
+        )}
+      >
+        <div className={cn("flex-center gap-[13px]", "tablet:justify-start tablet:text-xl-bold")}>
           <div className="size-4 rounded-full border border-slate-200" />
           <span>2025년 5월</span>
           <div className="size-4 rounded-full border border-slate-200" />
@@ -25,12 +60,12 @@ const page = () => {
 
         <div className="flex-center gap-5">
           <hr className="flex-1 h-[1px] bg-border-primary" />
-          <span className="text-md-regular text-text-default">2025년 5월 21일 (목)</span>
+          <span className={cn("text-md-regular text-text-default", "tablet:text-lg-medium")}>2025년 5월 21일 (목)</span>
           <hr className="flex-1 h-[1px] bg-border-primary" />
         </div>
 
         <div className="flex flex-col gap-[13px]">
-          <h2>법인 등기</h2>
+          <h2 className="text-lg-bold text-text-primary">법인 등기</h2>
           <div className="px-[14px] py-3 rounded-lg bg-background-secondary">
             <div className="flex flex-col items-start gap-[10px]">
               <div className="flex-center gap-3">
