@@ -14,7 +14,6 @@ import HeartActive from "@/assets/icon/ic-heart-active.svg";
 import HeartDefault from "@/assets/icon/ic-heart-default.svg";
 import ImgUpload from "@/assets/icon/ic-img-upload.svg";
 import Invisible from "@/assets/icon/ic-invisible.svg";
-import Kakao from "@/assets/icon/ic-kakaotalk.svg";
 import Kebab from "@/assets/icon/ic-kebab.svg";
 import LeftArrow from "@/assets/icon/ic-left-arrow.svg";
 import LeftFold from "@/assets/icon/ic-left-fold.svg";
@@ -53,7 +52,6 @@ const ICONS = {
   heartDefault: HeartDefault,
   imgUpload: ImgUpload,
   invisible: Invisible,
-  kakao: Kakao,
   kebab: Kebab,
   leftArrow: LeftArrow,
   leftFold: LeftFold,
