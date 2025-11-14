@@ -23,13 +23,13 @@ type Story = StoryObj<typeof FloatingButton>;
 export const FloatingPrimary: Story = {
   args: {
     variant: "primary",
-    iconName: "plusLg",
+    iconName: "plus",
   },
 };
 
 export const FloatingInverse: Story = {
   args: {
     variant: "inverse",
-    iconName: "unfilledHeartLg",
+    iconName: "alert",
   },
 };

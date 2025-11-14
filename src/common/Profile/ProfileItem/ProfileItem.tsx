@@ -49,7 +49,7 @@ const ProfileItem = (props: ProfileItemType) => {
         <p className="text-xs-regular text-text-secondary">{props.email}</p>
       </div>
       <button className="w-4" type="button" onClick={props.onClick} aria-label="메뉴 열기">
-        <Icon name="kebabSm" size="sm" />
+        <Icon name="kebab" />
       </button>
     </div>
   );
