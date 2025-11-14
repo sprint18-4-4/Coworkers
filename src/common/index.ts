@@ -14,3 +14,4 @@ export { default as Chip } from "./Chip/Chip";
 export { default as Profile } from "./Profile/Profile";
 export { default as ProfileItem } from "./Profile/ProfileItem/ProfileItem";
 export { default as ProfileEdit } from "./Profile/ProfileEdit/ProfileEdit";
+export { default as Toast } from "./Toast/Toast";
