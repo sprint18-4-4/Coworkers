@@ -7,6 +7,7 @@ export type IconKeys = keyof typeof ICONS;
 interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconKeys;
   className?: string;
+  label?: string;
 }
 
 /**
@@ -16,10 +17,15 @@ interface IconProps extends SVGProps<SVGSVGElement> {
  * <Icon name="alert" className="text-primary"/>
  * <Icon name="alert" className="text-primary" onClick={}/>
  */
-const Icon = ({ name, className }: IconProps) => {
+const Icon = ({ name, className, label }: IconProps) => {
   const SvgIcon = ICONS[name];
 
-  return <SvgIcon className={cn("size-6 tablet:size-7", className)} aria-hidden="true" />;
+  return (
+    <SvgIcon
+      className={cn("size-6 tablet:size-7", className)}
+      {...(label ? { "aria-label": label } : { "aria-hidden": "true" })}
+    />
+  );
 };
 
 export default Icon;
