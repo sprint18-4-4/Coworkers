@@ -1,9 +1,10 @@
 import { cn } from "@/utils";
 import ICONS from "./CONST_ICON";
+import { SVGProps } from "react";
 
-type IconKeys = keyof typeof ICONS;
+export type IconKeys = keyof typeof ICONS;
 
-interface IconProps {
+interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconKeys;
   className?: string;
 }
@@ -13,6 +14,7 @@ interface IconProps {
  * @example
  * <Icon name="alert"/>
  * <Icon name="alert" className="text-primary"/>
+ * <Icon name="alert" className="text-primary" onClick={}/>
  */
 const Icon = ({ name, className }: IconProps) => {
   const SvgIcon = ICONS[name];
