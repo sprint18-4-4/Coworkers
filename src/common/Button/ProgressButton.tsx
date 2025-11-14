@@ -25,7 +25,7 @@ interface ProgressButtonProps {
 
 const ProgressButton = ({ text, className, onClick }: ProgressButtonProps) => {
   return (
-    <button type="button" aria-label="progress button" className={cn(PROGRESS_BUTTON_BASE_STYLE, className)}>
+    <button type="button" aria-label="진행 버튼" className={cn(PROGRESS_BUTTON_BASE_STYLE, className)}>
       <span>{text}</span>
       <Icon
         name="plusSm"

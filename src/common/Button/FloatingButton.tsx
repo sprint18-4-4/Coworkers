@@ -30,7 +30,7 @@ const FloatingButton = ({ variant, iconName, className, type = "button", onClick
     <button
       type={type}
       onClick={onClick}
-      aria-label={`${iconName} button`}
+      aria-label={`${iconName} 버튼`}
       className={cn(FLOATING_BUTTON_BASE_STYLE, FLOATING_BUTTON_STYLE_BY_VARIANT[variant], className)}
     >
       <Icon name={iconName} className="text-icon-inverse" />
