@@ -1,4 +1,5 @@
 import { Meta } from "@storybook/nextjs";
+import { StoryObj } from "@storybook/nextjs";
 import Sidebar from "./Sidebar";
 import { USER_MOCK_DATA } from "@/MOCK_DATA";
 

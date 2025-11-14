@@ -1,4 +1,4 @@
-import { Icon } from "@/types";
+import Icon from "../Icon/Icon";
 import { PROGRESS_BUTTON_BASE_STYLE } from "./BUTTON_STYLES";
 import { cn } from "@/utils";
 

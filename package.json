@@ -10,7 +10,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky",
-    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
+    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
+    "build-all": "npm run build && npm run build-storybook"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.5",
@@ -19,15 +20,16 @@
     "clsx": "^2.1.1",
     "next": "16.0.1",
     "react": "19.2.0",
+    "react-calendar": "^6.0.0",
     "react-dom": "19.2.0",
     "tailwind-merge": "^3.3.1",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "@storybook/nextjs": "^10.0.3",
     "@chromatic-com/storybook": "^4.1.2",
     "@storybook/addon-a11y": "^10.0.2",
     "@storybook/addon-docs": "^10.0.2",
+    "@storybook/nextjs": "^10.0.3",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^19",

@@ -1,5 +1,5 @@
-import { IconName } from "@/constants/icon";
-import { Icon } from "@/types";
+import { IconName } from "@/types";
+import Icon from "../Icon/Icon";
 import { cn } from "@/utils";
 import { FLOATING_BUTTON_BASE_STYLE, FLOATING_BUTTON_STYLE_BY_VARIANT } from "./BUTTON_STYLES";
 
