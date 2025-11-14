@@ -23,7 +23,6 @@ const PageHeaderBar = ({ title }: PageHeaderBarProps) => {
       )}
     >
       <h2 className={cn("text-lg-bold text-text-primary", "tablet:text-2xl-bold", "pc:text-2xl-bold")}>{title}</h2>
-      {/* TODO(지권): 아이콘 추가 */}
       <Icon name="setting" className="size-5 tablet:size-6" />
     </div>
   );

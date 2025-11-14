@@ -1,8 +1,8 @@
 import { cn } from "@/utils";
 import { Chip, Icon } from "@/common";
-import ScheduleDaySection from "../ScheduleDaySection/ScheduleDaySection";
 import { MONTH_NAV_BUTTON } from "../../_constants";
 import { MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
+import ScheduleDaySection from "../ScheduleDaySection/ScheduleDaySection";
 
 const WorkHistorySection = () => {
   return (
@@ -13,13 +13,14 @@ const WorkHistorySection = () => {
       )}
     >
       <header className={cn("flex-center gap-[13px]", "tablet:justify-start tablet:text-xl-bold", "pc:justify-center")}>
-        {/* TODO(지권): 이전, 다음 아이콘 변경 */}
         <button aria-label="이전" className={MONTH_NAV_BUTTON}>
-          <Icon name="leftArrow" className="!size-3" />
+          <Icon name="leftArrow" className="size-3 tablet:size-3" />
         </button>
-        <time dateTime={"2025-05"}>2025년 5월</time>
+        <time dateTime={"2025-05"} className="text-2lg-bold tablet:text-xl-bold">
+          2025년 5월
+        </time>
         <button aria-label="다음" className={MONTH_NAV_BUTTON}>
-          <Icon name="rightArrow" className="!size-3" />
+          <Icon name="rightArrow" className="size-3 tablet:size-3" />
         </button>
       </header>
 
