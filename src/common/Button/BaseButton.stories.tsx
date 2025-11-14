@@ -2,7 +2,7 @@ import BaseButton from "./BaseButton";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof BaseButton> = {
-  title: "common/Button",
+  title: "common/Button/Default",
   component: BaseButton,
   parameters: {
     layout: "centered",
@@ -90,13 +90,6 @@ export const OutlinedPrimaryMedium: Story = {
     children: "생성하기",
     className: "w-[132px] h-10",
   },
-  decorators: [
-    (Story) => (
-      <div className="bg-black px-24 py-8">
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export const OutlinedPrimarySmall: Story = {
@@ -124,13 +117,6 @@ export const OutlinedSecondaryMedium: Story = {
     children: "생성하기",
     className: "w-[132px] h-10",
   },
-  decorators: [
-    (Story) => (
-      <div className="bg-black px-24 py-8">
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export const OutlinedSecondarySmall: Story = {
