@@ -1,5 +1,4 @@
-import { IconName } from "@/types";
-import Icon from "../Icon/Icon";
+import Icon, { IconKeys } from "../Icon/Icon";
 import { cn } from "@/utils";
 import { FLOATING_BUTTON_BASE_STYLE, FLOATING_BUTTON_STYLE_BY_VARIANT } from "./BUTTON_STYLES";
 
@@ -19,7 +18,7 @@ type Variant = keyof typeof FLOATING_BUTTON_STYLE_BY_VARIANT;
 
 interface FloatingButtonProps {
   variant: Variant;
-  iconName: IconName;
+  iconName: IconKeys;
   className?: string;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
