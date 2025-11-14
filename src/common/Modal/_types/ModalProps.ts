@@ -56,3 +56,5 @@ export interface ModalTimeProps {
   selectedTime: HalfHour;
   setSelectedTime: (time: HalfHour) => void;
 }
+
+export type Panel = "DatePicker" | "Time";
