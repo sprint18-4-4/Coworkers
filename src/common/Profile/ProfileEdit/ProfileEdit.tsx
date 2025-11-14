@@ -46,7 +46,7 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
     <label className="relative inline-block cursor-pointer">
       <div
         className={cn(
-          " border-[2px] border-background-tertiary bg-background-tertiary  overflow-hidden flex-center",
+          " border-[2px] border-background-tertiary bg-background-tertiary overflow-hidden flex-center",
           SIZE_CLASSES[size],
         )}
       >
@@ -67,7 +67,7 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
         className={cn("absolute bottom-0 -right-[5px] bg-background-tertiary rounded-full p-1", EDIT_BUTTON_SIZE[size])}
       >
         {/* TODO(김원선): 아이콘이 css 적용이 안되어, css 적용이 구현 됬을 때 변경 */}
-        <Icon name="plusLg" className={cn(EDIT_ICON_SIZE[size])} />
+        <Icon name="plusLg" className={EDIT_ICON_SIZE[size]} />
       </div>
       <input
         type="file"

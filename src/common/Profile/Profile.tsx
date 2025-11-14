@@ -23,11 +23,11 @@ const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
           width={PROFILE_IMAGE_SIZE[size]}
           height={PROFILE_IMAGE_SIZE[size]}
           quality={85}
-          className={cn("w-full h-full object-cover")}
+          className="w-full h-full object-cover"
         />
       ) : (
         // TODO(김원선): Icon 사이즈 조정 가능시 수정
-        <Icon name="humanLg" size="md" className={cn("flex-center")} />
+        <Icon name="humanLg" size="md" className="flex-center" />
       )}
     </div>
   );

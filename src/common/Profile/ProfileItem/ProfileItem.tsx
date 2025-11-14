@@ -44,7 +44,7 @@ const ProfileItem = (props: ProfileItemType) => {
   return (
     <div className="w-full flex items-center gap-3">
       <Profile src={src} alt={alt} size="md" />
-      <div className="flex flex-col  flex-grow">
+      <div className="flex flex-col flex-grow">
         <p className="text-sm-semibold text-text-primary">{name}</p>
         <p className="text-xs-regular text-text-secondary">{props.email}</p>
       </div>
