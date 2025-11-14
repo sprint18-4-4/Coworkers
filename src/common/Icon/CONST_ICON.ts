@@ -35,6 +35,8 @@ import User from "@/assets/icon/ic-user.svg";
 import Visible from "@/assets/icon/ic-visible.svg";
 import X from "@/assets/icon/ic-x.svg";
 
+import Logo from "@/assets/images/logo.svg";
+
 const ICONS = {
   alert: Alert,
   best: Best,
@@ -72,6 +74,7 @@ const ICONS = {
   x: X,
   leftTriangleArrow: leftTriangleArrow,
   rightTriangleArrow: rightTriangleArrow,
+  logo: Logo,
 } as const;
 
 export default ICONS;

@@ -5,6 +5,7 @@ import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
 import AddTeamButton from "../AddTeamButton/AddTeamButton";
 import SidebarLink from "../SidebarLink/SidebarLink";
 import { SidebarProps } from "../../_types";
+import { Icon } from "@/common";
 
 const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
   return (
@@ -17,19 +18,23 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
     >
       <header className="flex items-center gap-[10px] px-6 py-8 relative">
         <Link href="/" className="flex items-center gap-1">
-          <div className="size-4 bg-black" aria-hidden />
+          <Icon name="logo" />
           {isOpen && <h2 className="text-brand-primary font-bold text-5 leading-none pr-[22px] m-0">COWORKERS</h2>}
         </Link>
         <button
           type="button"
-          className={cn(
-            "ml-auto rounded-full border border-background-tertiary",
-            isOpen ? "size-7 bg-gray-400" : "p-1 ml-[5px] bg-background-primary",
-          )}
           aria-label={isOpen ? "사이드바 접기" : "사이드바 펼치기"}
           onClick={() => handleOpenDropdown(isOpen)}
+          className={cn(
+            "ml-auto rounded-full bg-background-primary",
+            isOpen ? "size-7" : "p-1 ml-[5px] border border-background-tertiary",
+          )}
         >
-          {!isOpen && <div className="size-6 bg-gray-400 rounded-full" aria-hidden />}
+          {isOpen ? (
+            <Icon name="leftFold" className="size-6 tablet:size-6" />
+          ) : (
+            <Icon name="rightFold" className="size-6 tablet:size-6" />
+          )}
         </button>
       </header>
 

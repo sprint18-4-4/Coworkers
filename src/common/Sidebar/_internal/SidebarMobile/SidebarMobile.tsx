@@ -2,6 +2,7 @@ import { cn } from "@/utils";
 import Image from "next/image";
 import { SidebarProps } from "../../_types";
 import LeftMobile from "../LeftMobile/LeftMobile";
+import { Icon } from "@/common";
 
 const SidebarMobile = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
   return (
@@ -14,13 +15,14 @@ const SidebarMobile = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
       >
         <div className={cn("flex items-center", user ? "gap-3" : "gap-[2px]")}>
           {user ? (
-            <button
-              className="size-6 bg-gray-300"
+            <Icon
+              name="menu"
+              className="size-6 tablet:size-6"
               onClick={() => handleOpenDropdown(isOpen)}
               aria-label="사이드바 열기"
             />
           ) : (
-            <div className="size-4 rounded-full bg-brand-primary" />
+            <Icon name="logo" className="size-6 tablet:size-6" />
           )}
           <h2 className="text-brand-primary font-bold text-5 pr-[22px]">COWORKERS</h2>
         </div>
