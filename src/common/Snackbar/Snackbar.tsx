@@ -1,13 +1,13 @@
 import Icon from "../Icon/Icon";
 import BaseButton from "@/common/Button/BaseButton";
 
-interface ToastProps {
+interface SnackbarProps {
   show: boolean;
   message: string;
   onSave: () => void;
 }
 
-const Snackbar = ({ show, message, onSave }: ToastProps) => {
+const Snackbar = ({ show, message, onSave }: SnackbarProps) => {
   if (!show) return null;
 
   return (

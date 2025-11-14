@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import Snackbar from "./Snackbar";
 
 const meta = {
@@ -11,11 +11,11 @@ const meta = {
   argTypes: {
     show: {
       control: "boolean",
-      description: "토스트 표시 여부",
+      description: "스낵바 표시 여부",
     },
     message: {
       control: "text",
-      description: "토스트 메시지",
+      description: "스낵바 메시지",
     },
     onSave: {
       action: "saved",
