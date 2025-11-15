@@ -1,11 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { cn } from "@/utils";
-import Icon from "../Icon/Icon";
 import { CommentProps } from "./_types/type";
+import KebabMenu from "./_internal/KebabMenu/KebabMenu";
 import CommentEdit from "./_internal/CommentEdit/CommentEdit";
-import { Profile } from "@/common";
-import { formatTime } from "@/utils/formatTime";
+import Profile from "@/common/Profile/Profile";
+import { formatTime } from "@/utils/";
 
 /**
  * @author KimWonSeon
@@ -18,11 +19,6 @@ import { formatTime } from "@/utils/formatTime";
  *
  * @param comment - 댓글 데이터
  * @param showKebab - 케밥 메뉴 표시 여부
- * @param isEditing - 수정 모드 활성화 여부
- * @param onEdit - 수정 버튼 클릭 시 호출되는 콜백 (드롭다운에서 사용 예정)
- * @param onDelete - 삭제 버튼 클릭 시 호출되는 콜백 (드롭다운에서 사용 예정)
- * @param onSave - 수정 저장 시 호출되는 콜백
- * @param onCancel - 수정 취소 시 호출되는 콜백
  * @param className - 컨테이너 추가 className
  *
  * @example
@@ -42,27 +38,9 @@ import { formatTime } from "@/utils/formatTime";
  * />
  */
 
-const CommentItem = ({
-  comment,
-  showKebab = false,
-  isEditing = false,
-  onEdit,
-  onDelete,
-  onSave,
-  onCancel,
-  className,
-}: CommentProps) => {
+const CommentItem = ({ comment, showKebab = false, className }: CommentProps) => {
   const { user, content, createdAt } = comment;
-
-  const handleSave = (newContent: string) => {
-    if (!onSave) return;
-    onSave(newContent);
-  };
-
-  const handleCancel = () => {
-    if (!onCancel) return;
-    onCancel();
-  };
+  const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {
     return (
@@ -74,7 +52,7 @@ const CommentItem = ({
           <div className="mb-1">
             <span className="text-lg-bold text-text-primary">{user.nickname}</span>
           </div>
-          <CommentEdit initialContent={content} onSave={handleSave} onCancel={handleCancel} />
+          <CommentEdit initialComment={content} onClose={() => setIsEditing(false)} />
         </div>
       </div>
     );
@@ -93,22 +71,15 @@ const CommentItem = ({
       </div>
 
       <div className="flex-1 flex flex-col gap-1 min-w-0">
-        <div>
-          <span className="text-lg-bold text-text-primary">{user.nickname}</span>
+        <div className="flex items-center">
+          <span className="text-lg-bold text-text-primary flex-grow">{user.nickname}</span>
+          {showKebab && <KebabMenu commentId={comment.id} onEdit={() => setIsEditing(true)} />}
         </div>
         <p className="text-md-regular text-text-primary whitespace-pre-wrap break-words">{content}</p>
         <span className="text-md-medium text-interaction-inactive">{formatTime(createdAt)}</span>
       </div>
-
-      {showKebab && (
-        <button type="button" className="mr-4" aria-label="댓글 옵션">
-          <Icon name="kebab" />
-        </button>
-      )}
     </div>
   );
 };
-
-CommentItem.displayName = "CommentItem";
 
 export default CommentItem;
