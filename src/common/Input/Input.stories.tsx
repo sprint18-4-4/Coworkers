@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import Input from "./Input";
 import BaseButton from "../Button/BaseButton";
+import Icon from "../Icon/Icon";
 
 const meta: Meta<typeof Input> = {
   title: "Common/Input",
@@ -61,8 +62,7 @@ export const Password: Story = {
         label="비밀번호"
         type="password"
         placeholder="비밀번호를 입력해주세요."
-        // TODO(김원선): 아이콘 생성시 변경
-        addonAfter={<div className="w-6 h-6 bg-gray-400 rounded-full" />}
+        addonAfter={<Icon name="visible" className="size-6" />}
       />
     </div>
   ),
@@ -77,8 +77,7 @@ export const PasswordError: Story = {
         placeholder="비밀번호를 입력해주세요."
         defaultValue="12312"
         error="비밀번호를 8자리 이상 입력해주세요"
-        // TODO(김원선): 아이콘 생성시 변경
-        addonAfter={<div className="w-6 h-6 bg-gray-400 rounded-full" />}
+        addonAfter={<Icon name="invisible" className="size-6" />}
       />
     </div>
   ),
@@ -102,8 +101,11 @@ export const DisabledButton: Story = {
         placeholder="수정 불가"
         value="123123123"
         disabled
-        // TODO(김원선): 공용 컴포넌트 버튼 생성시 교체
-        // addonAfter={<BaseButton />}
+        addonAfter={
+          <BaseButton variant="solid" size="small" className="text-text-inverse px-3">
+            <span className="text-md-semibold">변경하기</span>
+          </BaseButton>
+        }
       />
     </div>
   ),

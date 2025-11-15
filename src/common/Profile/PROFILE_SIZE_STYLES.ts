@@ -11,11 +11,17 @@ export const PROFILE_IMAGE_SIZE = {
   lg: 40,
 } as const;
 
+export const PROFILE_ICON_SIZE = {
+  sm: "size-5",
+  md: "size-6 tablet:size-6",
+  lg: "size-[33px] tablet:size-[33px]",
+} as const;
+
 // 프로필 이미지 수정 컴포넌트
 
 export const SIZE_CLASSES = {
   md: "size-16 rounded-[20px]",
-  lg: "size-25 rounded-[32px]",
+  lg: "size-[100px] rounded-[32px]",
 } as const;
 
 export const IMAGE_SIZE_VALUES = {
@@ -23,12 +29,17 @@ export const IMAGE_SIZE_VALUES = {
   lg: 100,
 } as const;
 
+export const PROFILE_EDIT_ICON_SIZE = {
+  md: "size-12 tablet:size-12",
+  lg: "size-20 tablet:size-20",
+} as const;
+
 export const EDIT_BUTTON_SIZE = {
-  md: "size-5",
-  lg: "size-10",
+  md: "size-[22px]",
+  lg: "size-8",
 } as const;
 
 export const EDIT_ICON_SIZE = {
-  md: "size-1.5",
-  lg: "size-2.5",
+  md: "size-2 tablet:size-2",
+  lg: "size-3.5 tablet:size-3.5",
 } as const;
