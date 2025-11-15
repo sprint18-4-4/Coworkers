@@ -48,8 +48,9 @@ const ProfileItem = (props: ProfileItemType) => {
         <p className="text-sm-semibold text-text-primary">{name}</p>
         <p className="text-xs-regular text-text-secondary">{props.email}</p>
       </div>
+      {/* TODO: 케밥 메뉴 컴포넌트는 PR이 할쳐졌을 때 공용으로 쓸 수 있게 수정 */}
       <button className="w-4" type="button" onClick={props.onClick} aria-label="메뉴 열기">
-        <Icon name="kebab" />
+        <Icon name="kebab" className="size-4 tablet:size-4" />
       </button>
     </div>
   );
