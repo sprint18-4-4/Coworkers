@@ -3,6 +3,7 @@
 import { cn } from "@/utils";
 import { HALF_HOUR_TIMES, TIME_PERIOD_LIST } from "./CONST_TIME";
 import { HalfHour } from "@/types";
+import { TimeProps } from "@/types/TimeType";
 
 /**
  * @author jikwon
@@ -15,13 +16,6 @@ import { HalfHour } from "@/types";
  * <Time timePeriod={timePeriod} setTimePeriod={setTimePeriod} selectedTime={selectedTime} setSelectedTime={setSelectedTime}/>
  * ```
  */
-
-interface TimeProps {
-  timePeriod: "am" | "pm";
-  setTimePeriod: (period: "am" | "pm") => void;
-  selectedTime: HalfHour;
-  setSelectedTime: (time: HalfHour) => void;
-}
 
 const styles = {
   periodBaseButton:

@@ -7,6 +7,7 @@ export { default as BaseButton } from "./Button/BaseButton";
 export { default as FloatingButton } from "./Button/FloatingButton";
 export { default as ProgressButton } from "./Button/ProgressButton";
 export { default as InputBox } from "./Input/InputBox/InputBox";
+export { default as Modal } from "./Modal/Modal";
 export { default as InputReply } from "./Input/InputReply/InputReply";
 export { default as DateItem } from "./DateItem/DateItem";
 export { default as Todo } from "./Todo/Todo";
