@@ -3,7 +3,13 @@ import Image from "next/image";
 import { cn } from "@/utils";
 import Icon from "@/common/Icon/Icon";
 import { ProfileEditProps } from "../_type/types";
-import { SIZE_CLASSES, IMAGE_SIZE_VALUES, EDIT_ICON_SIZE, EDIT_BUTTON_SIZE } from "../PROFILE_SIZE_STYLES";
+import {
+  SIZE_CLASSES,
+  IMAGE_SIZE_VALUES,
+  EDIT_ICON_SIZE,
+  EDIT_BUTTON_SIZE,
+  PROFILE_EDIT_ICON_SIZE,
+} from "../PROFILE_SIZE_STYLES";
 
 /**
  * @author KimWonSeon
@@ -60,15 +66,17 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
             className="w-full h-full object-cover"
           />
         ) : (
-          // 여기도 체크 부탁드립니다
-          <Icon name="alert" className="size-10" />
+          <Icon name="user" className={PROFILE_EDIT_ICON_SIZE[size]} />
         )}
       </div>
+      {/* TODO(김원선): 써클 버튼 컴포넌트 구현시 버튼 변경 */}
       <div
-        className={cn("absolute bottom-0 -right-[5px] bg-background-tertiary rounded-full p-1", EDIT_BUTTON_SIZE[size])}
+        className={cn(
+          "absolute -bottom-[5px] -right-[5px] bg-background-tertiary border-[2px] border-background-primary rounded-full p-1 flex-center",
+          EDIT_BUTTON_SIZE[size],
+        )}
       >
-        {/* TODO(김원선): 아이콘이 css 적용이 안되어, css 적용이 구현 됬을 때 변경 */}
-        <Icon name="plus" className={EDIT_ICON_SIZE[size]} />
+        <Icon name="smallPencil" className={EDIT_ICON_SIZE[size]} />
       </div>
       <input
         type="file"
