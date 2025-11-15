@@ -1,10 +1,13 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import Comment from "./CommentItem";
+import { useState } from "react";
+import CommentItem from "./CommentItem";
 import { CommentData } from "@/types";
+import Profile from "../Profile/Profile";
+import { CommentEdit } from "./_internal";
 
-const meta: Meta<typeof Comment> = {
+const meta: Meta<typeof CommentItem> = {
   title: "Common/Comment",
-  component: Comment,
+  component: CommentItem,
   tags: ["autodocs"],
   parameters: {
     layout: "padded",
@@ -61,17 +64,39 @@ export const WithKebab: Story = {
 };
 
 export const EditMode: Story = {
-  args: {
-    comment: mockComment,
-    isEditing: true,
+  render: () => {
+    const CommentWithEdit = () => {
+      const [isEditing, setIsEditing] = useState(true);
+      return (
+        <div className="max-w-2xl">
+          {isEditing ? (
+            <div className="w-full py-2.5 px-5 flex gap-4 bg-icon-inverse tablet:px-7 pc:py-4 pc:px-10">
+              <div className="flex-shrink-0">
+                <Profile src={mockComment.user.image} alt={`${mockComment.user.nickname} 프로필`} size="md" />
+              </div>
+              <div className="flex-grow">
+                <div className="mb-1">
+                  <span className="text-lg-bold text-text-primary">{mockComment.user.nickname}</span>
+                </div>
+                <CommentEdit initialComment={mockComment.content} onClose={() => setIsEditing(false)} />
+              </div>
+            </div>
+          ) : (
+            <CommentItem comment={mockComment} showKebab={true} />
+          )}
+        </div>
+      );
+    };
+
+    return <CommentWithEdit />;
   },
 };
 
 export const ListComments: Story = {
   render: () => (
     <div>
-      <Comment comment={mockComment} showKebab={true} />
-      <Comment comment={longComment} showKebab={true} />
+      <CommentItem comment={mockComment} showKebab={true} />
+      <CommentItem comment={longComment} showKebab={true} />
     </div>
   ),
 };
