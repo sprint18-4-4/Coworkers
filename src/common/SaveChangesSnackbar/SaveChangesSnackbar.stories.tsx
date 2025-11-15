@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import UnsavedSnackbar from "./UnsavedSnackbar";
+import SaveChangesSnackbar from "./SaveChangesSnackbar";
 
 const meta = {
   title: "Common/Snackbar",
-  component: UnsavedSnackbar,
+  component: SaveChangesSnackbar,
   parameters: {
     layout: "padded",
   },
@@ -22,7 +22,7 @@ const meta = {
       description: "저장 버튼 클릭 핸들러",
     },
   },
-} satisfies Meta<typeof UnsavedSnackbar>;
+} satisfies Meta<typeof SaveChangesSnackbar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

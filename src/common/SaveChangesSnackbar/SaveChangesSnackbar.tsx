@@ -1,4 +1,4 @@
-import Icon from "../Icon/Icon";
+import Icon from "@/common/Icon/Icon";
 import BaseButton from "@/common/Button/BaseButton";
 
 interface UnsavedSnackbarProps {
@@ -7,7 +7,7 @@ interface UnsavedSnackbarProps {
   buttonText?: string;
 }
 
-const UnsavedSnackbar = ({ title, onSave, buttonText }: UnsavedSnackbarProps) => {
+const SaveChangesSnackbar = ({ title, onSave, buttonText }: UnsavedSnackbarProps) => {
   return (
     <div
       role="status"
@@ -29,4 +29,4 @@ const UnsavedSnackbar = ({ title, onSave, buttonText }: UnsavedSnackbarProps) =>
   );
 };
 
-export default UnsavedSnackbar;
+export default SaveChangesSnackbar;
