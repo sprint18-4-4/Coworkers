@@ -1,42 +1,42 @@
 import { useState } from "react";
 import { cn } from "@/utils";
 import { useAutoHeight } from "@/common/Input/InputReply/_hooks";
-import { InputBox } from "@/common";
-import { BaseButton } from "@/common";
+import InputBox from "@/common/Input/InputBox/InputBox";
+import BaseButton from "@/common/Button/BaseButton";
 import { CommentEditProps } from "../../_types";
 
 /**
  * @author KimWonSeon
  * @description 댓글 수정 컴포넌트
  *
- * @param initialContent - 수정할 원본 댓글 내용
- * @param onSave - 저장 버튼 클릭 시 호출되는 콜백
- * @param onCancel - 취소 버튼 클릭 시 호출되는 콜백
+ * @param initialComment - 수정할 원본 댓글 내용
+ * @param onClose - 취소 버튼 클릭 시 호출되는 콜백
  * @param className - 컨테이너 추가 className
  */
 
-const CommentEdit = ({ initialContent, onSave, onCancel, className }: CommentEditProps) => {
-  const [content, setContent] = useState(initialContent);
+const CommentEdit = ({ initialComment, onClose, className }: CommentEditProps) => {
+  const [comment, setComment] = useState(initialComment);
   const { ref: textareaRef } = useAutoHeight(48, 200);
 
+  // TODO(김원선): 댓글 수정 API 연동 시 내부 로직으로 API 연동
   const handleSave = () => {
-    const trimmedContent = content.trim();
+    const trimmedContent = comment.trim();
     if (!trimmedContent) return;
 
-    onSave(trimmedContent);
+    onClose();
   };
 
   const handleCancel = () => {
-    setContent(initialContent);
-    onCancel();
+    setComment(initialComment);
+    onClose();
   };
 
   return (
     <div className={cn("w-full flex flex-col items-end bg-icon-inverse", className)}>
       <InputBox
         ref={textareaRef}
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
         placeholder="댓글을 입력해주세요."
         size="sm"
         textareaClassName="border-none p-0 bg-icon-inverse rounded-none tablet:text-md-regular pc:text-md-regular"
@@ -45,7 +45,13 @@ const CommentEdit = ({ initialContent, onSave, onCancel, className }: CommentEdi
         <BaseButton variant="outlinedSecondary" size="small" onClick={handleCancel} className="w-[48px] h-[32px]">
           <span className="text-md-semibold">취소</span>
         </BaseButton>
-        <BaseButton variant="outlinedPrimary" size="small" onClick={handleSave} className="w-[73px] h-[33px]">
+        <BaseButton
+          variant="outlinedPrimary"
+          size="small"
+          onClick={handleSave}
+          disabled={!comment.trim()}
+          className="w-[73px] h-[33px]"
+        >
           <span className="text-md-semibold">수정하기</span>
         </BaseButton>
       </div>
