@@ -1,37 +1,36 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import Snackbar from "./Snackbar";
+import UnsavedSnackbar from "./UnsavedSnackbar";
 
 const meta = {
   title: "Common/Snackbar",
-  component: Snackbar,
+  component: UnsavedSnackbar,
   parameters: {
     layout: "padded",
   },
   tags: ["autodocs"],
   argTypes: {
-    show: {
+    title: {
       control: "boolean",
-      description: "스낵바 표시 여부",
+      description: "스낵바 제목",
     },
-    message: {
+    buttonText: {
       control: "text",
-      description: "스낵바 메시지",
+      description: "버튼 텍스트",
     },
     onSave: {
       action: "saved",
       description: "저장 버튼 클릭 핸들러",
     },
   },
-} satisfies Meta<typeof Snackbar>;
+} satisfies Meta<typeof UnsavedSnackbar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// 기본 상태
 export const Default: Story = {
   args: {
-    show: true,
-    message: "저장하지 않은 변경사항이 있어요!",
+    title: "저장하지 않은 변경사항이 있어요!",
+    buttonText: "변경사항 저장하기",
     onSave: () => {},
   },
 };

@@ -1,15 +1,13 @@
 import Icon from "../Icon/Icon";
 import BaseButton from "@/common/Button/BaseButton";
 
-interface SnackbarProps {
-  show: boolean;
-  message: string;
+interface UnsavedSnackbarProps {
+  title: string;
   onSave: () => void;
+  buttonText?: string;
 }
 
-const Snackbar = ({ show, message, onSave }: SnackbarProps) => {
-  if (!show) return null;
-
+const UnsavedSnackbar = ({ title, onSave, buttonText }: UnsavedSnackbarProps) => {
   return (
     <div
       role="status"
@@ -17,7 +15,7 @@ const Snackbar = ({ show, message, onSave }: SnackbarProps) => {
     >
       <span className="flex items-center gap-2 flex-grow text-md-semibold text-text-inverse tablet:text-lg-semibold">
         <Icon name="alert" className="hidden tablet:block tablet:size-6" />
-        {message}
+        {title}
       </span>
       <BaseButton
         variant="solid"
@@ -25,10 +23,10 @@ const Snackbar = ({ show, message, onSave }: SnackbarProps) => {
         onClick={onSave}
         className="w-[125px] h-[33px] tablet:w-[141px] bg-background-inverse text-md-semibold hover:bg-background-secondary"
       >
-        <span className="text-brand-primary">변경사항 저장하기</span>
+        <span className="text-brand-primary">{buttonText}</span>
       </BaseButton>
     </div>
   );
 };
 
-export default Snackbar;
+export default UnsavedSnackbar;
