@@ -23,18 +23,13 @@ import { formatTime } from "@/utils/";
  *
  * @example
  * ```tsx
- * // 댓글
+ * // 기본 댓글
+ * <CommentItem comment={commentData} />
+ *
+ * // 케밥 메뉴 포함
  * <CommentItem
  *   comment={commentData}
  *   showKebab={true}
- * />
- *
- * // 수정하기
- * <CommentItem
- *   comment={commentData}
- *   isEditing={true}
- *   onSave={(content) => handleSave(comment.id, content)}
- *   onCancel={() => setEditingId(null)}
  * />
  */
 
