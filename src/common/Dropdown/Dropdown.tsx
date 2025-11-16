@@ -78,23 +78,3 @@ Dropdown.Toggle = DropdownToggle;
 Dropdown.Items = DropdownItems;
 Dropdown.Item = DropdownItem;
 export default Dropdown;
-
-// <Dropdown>
-//   <Dropdown.Toggle className="flex gap-2 px-[14px] py-[10px] bg-background-primary rounded-xl">
-//     <span>{selected}</span>
-//     <Icon name="downArrow" />
-//   </Dropdown.Toggle>
-//   <Dropdown.Items className="">
-//     <Dropdown.Item onClick={() => setSelected("최신순")}>최신순</Dropdown.Item>
-//     <Dropdown.Item onClick={() => setSelected("조회순")}>조회순</Dropdown.Item>
-//   </Dropdown.Items>
-// </Dropdown>
-// <Dropdown>
-//   <Dropdown.Toggle>
-//     <Icon name="kebab" />
-//   </Dropdown.Toggle>
-//   <Dropdown.Items className="w-[120px]">
-//     <Dropdown.Item onClick={() => []}>수정하기</Dropdown.Item>
-//     <Dropdown.Item onClick={() => {}}>삭제하기</Dropdown.Item>
-//   </Dropdown.Items>
-// </Dropdown>
