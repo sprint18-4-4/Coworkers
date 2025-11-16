@@ -1,6 +1,14 @@
 import { cn } from "@/utils";
 import Icon from "../Icon/Icon";
 
+/**
+ * @author sangin
+ *
+ * @example
+ * <ProgressBadge current={3} total={5}/>
+ * <ProgressBadge current={0} total={0}/>
+ */
+
 interface ProgressBadgeProps {
   total: number;
   current: number;
