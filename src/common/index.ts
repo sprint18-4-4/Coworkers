@@ -16,3 +16,4 @@ export { default as ProfileItem } from "./Profile/ProfileItem/ProfileItem";
 export { default as ProfileEdit } from "./Profile/ProfileEdit/ProfileEdit";
 export { default as CommentItem } from "./Comment/CommentItem";
 export { default as SaveChangesSnackbar } from "./SaveChangesSnackbar/SaveChangesSnackbar";
+export { default as ProgressBar } from "./ProgressBar/ProgressBar";
