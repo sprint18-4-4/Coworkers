@@ -7,15 +7,11 @@ import { FLOATING_BUTTON_BASE_STYLE } from "./BUTTON_STYLES";
  * @component
  * @example
  *
- * // variant : primary
- * <FloatingButton iconName="plus"/>
+ * <FloatingButton iconName="plus" className={} iconClassName={}/>
  *
- * // variant : inverse
- * <FloatingButton iconName="plus"/>
  */
 
 interface FloatingButtonProps {
-  // variant: Variant;
   iconName: IconKeys;
   className?: string;
   iconClassName?: string;
