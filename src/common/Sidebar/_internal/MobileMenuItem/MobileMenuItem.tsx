@@ -1,3 +1,4 @@
+import { Icon } from "@/common";
 import { cn, useIsActivePath } from "@/utils";
 import Link from "next/link";
 
@@ -19,8 +20,7 @@ const MobileMenuItem = ({ menu, href, isOpen }: MobileMenuItemProps) => {
         isActive && "text-brand-primary bg-blue-50",
       )}
     >
-      {/* TODO(지권): 아이콘 변경 */}
-      <div className={cn("size-5 bg-slate-300 rounded-full", isActive && "bg-brand-primary text-brand-primary")} />
+      <Icon name="chess" className={cn("size-5 tablet:size-5", isActive ? "text-brand-primary" : "text-slate-300")} />
       {isOpen && <span className={cn(isActive ? "text-lg-semibold" : "text-lg-regular")}>{menu}</span>}
     </Link>
   );
