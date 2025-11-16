@@ -1,5 +1,5 @@
 import { IconName } from "@/types";
-import { DateValue, HalfHour } from "@/types";
+import { DateValue } from "@/types";
 import { TimeProps } from "@/types/TimeType";
 import { ComponentPropsWithRef, RefObject } from "react";
 import { ReactNode } from "react";
