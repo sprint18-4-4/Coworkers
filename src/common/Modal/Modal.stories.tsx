@@ -161,3 +161,19 @@ export const Time: Story = {
     return <Wrapper />;
   },
 };
+
+export const Profile: Story = {
+  render: () => {
+    const Wrapper = () => {
+      const [isOpen, setIsOpen] = useState(true);
+      return (
+        <Modal isOpen={isOpen} onClose={setIsOpen}>
+          <Modal.CloseIcon onClose={setIsOpen} />
+          <Modal.Profile src="https://i.pravatar.cc/300" name="우지은" email="jieunn@codeit.com" />
+        </Modal>
+      );
+    };
+
+    return <Wrapper />;
+  },
+};

@@ -28,7 +28,9 @@ import Time from "../Calendar/Time/Time";
 import DatePicker from "../Calendar/DatePicker/DatePicker";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-
+import Profile from "../Profile/Profile";
+import BaseButton from "../Button/BaseButton";
+import { ModalProfileProps } from "./_types/ModalProps";
 /**
  *  @author sangin
  *  @component
@@ -106,9 +108,25 @@ const ModalInput = ({ placeholder, label, error, containerClassName, ref, ...res
   );
 };
 
-// TODO(상인): Profile이 구현되면 수정
-const ModalProfile = ({}) => {
-  // return <Profile/>
+// TODO(상인): 토스트 메시지가 생기면 클립보드 복사 + 토스트메시지 onClick 구현
+const ModalProfile = ({ src, alt, size, name, email }: ModalProfileProps) => {
+  return (
+    <div className="w-full">
+      <div className="flex-col-center gap-4">
+        <Profile src={src} alt={alt} size={size} />
+        <div className="flex-col-center">
+          <span>{name}</span>
+          <span>{email}</span>
+        </div>
+      </div>
+
+      <Modal.Button>
+        <BaseButton variant="solid" size="large" onClick={() => {}}>
+          이메일 복사하기
+        </BaseButton>
+      </Modal.Button>
+    </div>
+  );
 };
 
 // TODO(상인): Dropdown이 구현되면 수정
