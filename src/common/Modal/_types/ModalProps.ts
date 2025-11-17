@@ -1,4 +1,4 @@
-import { IconName } from "@/types";
+import { IconKeys } from "@/common/Icon/Icon";
 import { DateValue } from "@/types";
 import { TimeProps } from "@/types/TimeType";
 import { ComponentPropsWithRef, RefObject } from "react";
@@ -27,7 +27,7 @@ export interface ModalButtonProps {
 }
 
 export interface ModalIconProps {
-  name: IconName;
+  name: IconKeys;
   className?: string;
 }
 
