@@ -2,6 +2,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./DatePicker.css";
 import { DateValue } from "@/types";
+import Icon from "@/common/Icon/Icon";
 
 /**
  * @author jikwon
@@ -35,9 +36,8 @@ function DatePicker({ value, onChange }: DatePickerProps) {
         value={value}
         onChange={onChange}
         calendarType="gregory"
-        // TODO(지권): 좌우 화살표 아이콘 추가
-        prevLabel={<div className="size-6 bg-black" />}
-        nextLabel={<div className="size-6 bg-black" />}
+        prevLabel={<Icon name="leftArrow" className="size-6 tablet:size-6" />}
+        nextLabel={<Icon name="rightArrow" className="size-6 tablet:size-6" />}
         prev2Label={null}
         next2Label={null}
         formatDay={(_, date) => date.getDate().toString()}
