@@ -7,8 +7,9 @@ import { FloatingButton, PageHeaderBar } from "@/common";
 import { CategoryDateHeader, TodoSectionHeader } from "./_components";
 import { TaskListItem } from "@/features";
 import { MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
+import { Suspense } from "react";
 
-const Page = () => {
+const ListPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -49,6 +50,13 @@ const Page = () => {
       />
     </>
   );
+};
+
+const Page = () => {
+  // TODO(지권): 로딩 화면 추가 필요
+  <Suspense fallback={""}>
+    <ListPage />
+  </Suspense>;
 };
 
 export default Page;
