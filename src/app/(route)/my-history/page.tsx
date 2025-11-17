@@ -10,8 +10,8 @@ const page = () => {
     <div
       aria-label="나의 히스토리"
       className={cn(
-        "h-[calc(100vh-52px)] px-4 pt-[17px] flex flex-col gap-[25px] bg-background-secondary",
-        "tablet:h-[100vh] tablet:px-[26px] tablet:pt-[69px]",
+        "min-h-[calc(100vh-52px)] px-4 pt-[17px] flex flex-col gap-[25px] bg-background-secondary",
+        "tablet:min-h-[100vh] tablet:px-[26px] tablet:pt-[69px]",
         "pc:mx-0 pc:pl-[91px] pc:pt-[90px] pc:gap-12",
       )}
     >
