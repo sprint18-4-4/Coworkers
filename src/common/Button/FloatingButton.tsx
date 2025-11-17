@@ -1,38 +1,33 @@
 import Icon, { IconKeys } from "../Icon/Icon";
 import { cn } from "@/utils";
-import { FLOATING_BUTTON_BASE_STYLE, FLOATING_BUTTON_STYLE_BY_VARIANT } from "./BUTTON_STYLES";
-
-type Variant = keyof typeof FLOATING_BUTTON_STYLE_BY_VARIANT;
+import { FLOATING_BUTTON_BASE_STYLE } from "./BUTTON_STYLES";
 
 /**
  * @author sangin
  * @component
  * @example
  *
- * // variant : primary
- * <FloatingButton variant="primary" iconName="plusSm"/>
+ * <FloatingButton iconName="plus" className={} iconClassName={}/>
  *
- * // variant : inverse
- * <FloatingButton variant="inverse" iconName="plusSm"/>
  */
 
 interface FloatingButtonProps {
-  variant: Variant;
   iconName: IconKeys;
   className?: string;
+  iconClassName?: string;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
 }
 
-const FloatingButton = ({ variant, iconName, className, type = "button", onClick }: FloatingButtonProps) => {
+const FloatingButton = ({ iconName, iconClassName, className, type = "button", onClick }: FloatingButtonProps) => {
   return (
     <button
       type={type}
       onClick={onClick}
       aria-label={`${iconName} 버튼`}
-      className={cn(FLOATING_BUTTON_BASE_STYLE, FLOATING_BUTTON_STYLE_BY_VARIANT[variant], className)}
+      className={cn(FLOATING_BUTTON_BASE_STYLE, className)}
     >
-      <Icon name={iconName} className="text-icon-inverse" />
+      <Icon name={iconName} className={cn("text-text-inverse", iconClassName)} />
     </button>
   );
 };
