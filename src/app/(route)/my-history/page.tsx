@@ -3,6 +3,7 @@
 import { cn } from "@/utils";
 import { PageHeaderBar } from "@/common";
 import { MyWorkHistory, WorkHistorySection } from "./_components";
+import { MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
 
 const page = () => {
   return (
@@ -18,7 +19,7 @@ const page = () => {
       <PageHeaderBar title="경영관리팀" />
 
       <div aria-label="나의 히스토리 컨텐츠" className="pc:flex pc:gap-[86px]">
-        <MyWorkHistory title="나의 히스토리" Item={[]} />
+        <MyWorkHistory title="나의 히스토리" items={MY_HISTORY_ITEM_MOCK_DATA.map((item) => ({ item }))} />
         <WorkHistorySection />
       </div>
     </div>

@@ -1,23 +1,24 @@
+import { ScheduleItem } from "../../_types";
+
 type Item = {
-  title: string;
-  count: number;
+  item: ScheduleItem;
 };
 
 interface MyWorkHistoryProps {
   title: string;
-  Item: Item[];
+  items: Item[];
 }
 
-const MyWorkHistoryItem = ({ title, count }: Item) => {
+const MyWorkHistoryItem = ({ item }: Item) => {
   return (
     <li className="px-5 h-[54px] flex items-center justify-between rounded-xl bg-background-primary">
-      <button className="text-lg-semibold text-text-primary">{title}</button>
-      <span className="text-lg-bold text-brand-primary">{count}개</span>
+      <button className="text-lg-semibold text-text-primary">{item.name}</button>
+      {item.commentCount > 0 && <span className="text-lg-bold text-brand-primary">{item.commentCount}개</span>}
     </li>
   );
 };
 
-const MyWorkHistory = ({ title, Item }: MyWorkHistoryProps) => {
+const MyWorkHistory = ({ title, items }: MyWorkHistoryProps) => {
   return (
     <aside aria-label={title} className="hidden pc:block">
       <h2 className="text-xl-bold text-text-primary">{title}</h2>
@@ -26,8 +27,8 @@ const MyWorkHistory = ({ title, Item }: MyWorkHistoryProps) => {
           2025년 5월
         </time>
         <ul className="flex flex-col gap-1 w-[270px]">
-          {Item.map((item) => (
-            <MyWorkHistoryItem key={item.title} title={item.title} count={item.count} />
+          {items.map((item, i) => (
+            <MyWorkHistoryItem key={i} item={item.item} />
           ))}
         </ul>
       </section>

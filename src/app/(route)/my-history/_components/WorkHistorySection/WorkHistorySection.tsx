@@ -30,7 +30,11 @@ const WorkHistorySection = () => {
         ))}
       </nav>
 
-      <ScheduleDaySection items={MY_HISTORY_ITEM_MOCK_DATA} />
+      <div className="w-full flex flex-col gap-12">
+        {Array.from({ length: 3 }, (_, i) => (
+          <ScheduleDaySection key={i} items={MY_HISTORY_ITEM_MOCK_DATA} />
+        ))}
+      </div>
     </article>
   );
 };
