@@ -22,6 +22,7 @@ const MyWorkHistory = ({ title, items }: MyWorkHistoryProps) => {
   return (
     <aside aria-label={title} className="hidden pc:block">
       <h2 className="text-xl-bold text-text-primary">{title}</h2>
+      {/* TODO(지권): 백엔드 명세에 맞게 추가 리팩토링 예정 */}
       <section className="mt-10 flex flex-col gap-4">
         <time dateTime="2025-05" className="text-lg-medium text-text-primary">
           2025년 5월
