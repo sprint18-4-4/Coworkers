@@ -1,3 +1,4 @@
+import { Icon } from "@/common";
 import { SIDEBAR_MOCK_DATA } from "@/MOCK_DATA";
 import { cn } from "@/utils/cn";
 
@@ -15,10 +16,12 @@ const SidebarDropdown = ({ isOpen }: { isOpen: boolean }) => {
     <details className="group w-full rounded-xl bg-white">
       <summary className="list-none px-4 py-2 flex items-center justify-between cursor-pointer rounded-xl select-none">
         <span className="flex items-center gap-3">
-          <div className="size-5 bg-gray-400" />
+          <Icon name="chess" className="size-5 text-slate-300 tablet:size-5" />
           {isOpen && <span className="text-lg-semibold text-slate-400">팀 선택</span>}
         </span>
-        {isOpen && <div className="size-5 bg-gray-400 group-open:rotate-180 transition-transform" />}
+        {isOpen && (
+          <Icon name="downArrow" className="size-5 tablet:size-5 group-open:rotate-180 transition-transform" />
+        )}
       </summary>
 
       <ul className="flex flex-col gap-2 mt-2">

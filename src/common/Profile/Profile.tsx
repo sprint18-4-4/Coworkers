@@ -2,7 +2,7 @@ import Image from "next/image";
 import { cn } from "@/utils";
 import Icon from "@/common/Icon/Icon";
 import { ProfileProps } from "./_type/types";
-import { PROFILE_SIZE, PROFILE_IMAGE_SIZE } from "./PROFILE_SIZE_STYLES";
+import { PROFILE_SIZE, PROFILE_IMAGE_SIZE, PROFILE_ICON_SIZE } from "./PROFILE_SIZE_STYLES";
 
 /**
  * @author KimWonSeon
@@ -15,7 +15,7 @@ import { PROFILE_SIZE, PROFILE_IMAGE_SIZE } from "./PROFILE_SIZE_STYLES";
 
 const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
   return (
-    <div className={cn("overflow-hidden bg-background-tertiary flex flex-shrink-0", PROFILE_SIZE[size])}>
+    <div className={cn("overflow-hidden bg-background-tertiary flex-center flex-shrink-0", PROFILE_SIZE[size])}>
       {src ? (
         <Image
           src={src}
@@ -26,8 +26,7 @@ const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
           className="w-full h-full object-cover"
         />
       ) : (
-        // TODO(김원선): Icon 사이즈 조정 가능시 수정
-        <Icon name="alert" />
+        <Icon name="user" className={PROFILE_ICON_SIZE[size]} />
       )}
     </div>
   );
