@@ -1,5 +1,6 @@
 import { cn } from "@/utils";
 import { SignUpForm, SocialSignUp } from "./_components";
+
 const page = () => {
   return (
     <div className={cn("w-full h-[calc(100vh-52px)] bg-background-secondary flex-center", "tablet:h-svh")}>
