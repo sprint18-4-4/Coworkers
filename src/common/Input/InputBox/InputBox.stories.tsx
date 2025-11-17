@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import InputBox from "./InputBox";
 
 const meta: Meta<typeof InputBox> = {
-  title: "Common/InputBox",
+  title: "Common/Input/InputBox",
   component: InputBox,
   tags: ["autodocs"],
   parameters: {

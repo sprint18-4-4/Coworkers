@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import InputPassword from "./InputPassword";
 
 const meta: Meta<typeof InputPassword> = {
-  title: "Common/InputPassword",
+  title: "Common/Input/InputPassword",
   component: InputPassword,
   parameters: {
     layout: "centered",
