@@ -6,6 +6,7 @@ import SidebarLink from "../SidebarLink/SidebarLink";
 import AddTeamButton from "../AddTeamButton/AddTeamButton";
 import MobileMenuItem from "../MobileMenuItem/MobileMenuItem";
 import { MOBILE_SIDEBAR_MENU_MOCK_DATA } from "@/MOCK_DATA";
+import { Icon } from "@/common";
 
 type LeftMobileProps = Omit<SidebarProps, "user">;
 
@@ -34,8 +35,9 @@ const LeftMobile = ({ isOpen, handleOpenDropdown }: LeftMobileProps) => {
         role="dialog"
         aria-modal="true"
       >
-        <button
-          className="size-6 bg-gray-300 self-end"
+        <Icon
+          name="x"
+          className="size-6 self-end tablet:size-6"
           onClick={() => handleOpenDropdown(isOpen)}
           aria-label="사이드바 닫기"
         />

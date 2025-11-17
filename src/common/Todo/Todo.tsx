@@ -2,6 +2,7 @@
 
 import { cn } from "@/utils";
 import { ChangeEvent } from "react";
+import Icon from "../Icon/Icon";
 
 /**
  * @author jikwon
@@ -48,15 +49,13 @@ const Todo = ({ id, title, completed, onChangeCompleted }: TodoProps) => {
             "tablet:size-4 tablet:rounded-md",
           )}
         />
-        {/* TODO(지권): 추후 아이콘 변경 필요 */}
         <span
           className={cn(
-            "absolute inset-0 flex items-center justify-center text-[6px] text-text-inverse transition-opacity",
-            "tablet:text-[8px]",
+            "absolute inset-0 flex items-center justify-center text-text-inverse transition-opacity",
             completed ? "opacity-100" : "opacity-0",
           )}
         >
-          ✓
+          <Icon name="checkInverse" />
         </span>
       </span>
       <span
