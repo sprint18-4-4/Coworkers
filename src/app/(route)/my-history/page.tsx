@@ -1,9 +1,8 @@
 "use client";
 
-import { PageHeaderBar } from "@/common";
+import { PageHeaderBar, PageLayout } from "@/common";
 import { MyWorkHistory, WorkHistorySection } from "./_components";
 import { MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
-import PageLayout from "@/common/PageLayout/PageLayout";
 
 const page = () => {
   return (

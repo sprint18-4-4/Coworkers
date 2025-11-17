@@ -17,3 +17,4 @@ export { default as ProfileEdit } from "./Profile/ProfileEdit/ProfileEdit";
 export { default as PageHeaderBar } from "./PageHeaderBar/PageHeaderBar";
 export { default as CommentItem } from "./Comment/CommentItem";
 export { default as SaveChangesSnackbar } from "./SaveChangesSnackbar/SaveChangesSnackbar";
+export { default as PageLayout } from "./PageLayout/PageLayout";
