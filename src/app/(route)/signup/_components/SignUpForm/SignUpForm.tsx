@@ -1,31 +1,11 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useState } from "react";
 import { Input, InputPassword, BaseButton } from "@/common";
-
-interface FormData {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-}
+import useSignUpForm from "../../_hooks/useSignUpForm";
 
 const SignUpForm = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    password: "",
-    passwordConfirm: "",
-  });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
+  const { formData, errors, isSubmitting, isButtonEnabled, handleChange, handleSubmit, validateField } =
+    useSignUpForm();
 
   return (
     <div className="min-w-[300px] w-full mt-8 mb-10">
@@ -38,6 +18,8 @@ const SignUpForm = () => {
             placeholder="이름을 입력해주세요."
             value={formData.name}
             onChange={handleChange}
+            onBlur={() => validateField("name")}
+            error={errors.name}
           />
           <Input
             label="이메일"
@@ -46,6 +28,8 @@ const SignUpForm = () => {
             placeholder="이메일을 입력해주세요."
             value={formData.email}
             onChange={handleChange}
+            onBlur={() => validateField("email")}
+            error={errors.email}
           />
           <InputPassword
             label="비밀번호"
@@ -53,6 +37,8 @@ const SignUpForm = () => {
             placeholder="비밀번호을 입력해주세요."
             value={formData.password}
             onChange={handleChange}
+            onBlur={() => validateField("password")}
+            error={errors.password}
           />
           <InputPassword
             label="비밀번호 확인"
@@ -60,10 +46,12 @@ const SignUpForm = () => {
             placeholder="비밀번호를 다시 한 번 입력해주세요."
             value={formData.passwordConfirm}
             onChange={handleChange}
+            onBlur={() => validateField("passwordConfirm")}
+            error={errors.passwordConfirm}
           />
         </div>
         <div className="text-lg-semibold">
-          <BaseButton variant="solid" size="large" type="submit">
+          <BaseButton variant="solid" size="large" type="submit" disabled={!isButtonEnabled || isSubmitting}>
             회원가입
           </BaseButton>
         </div>
