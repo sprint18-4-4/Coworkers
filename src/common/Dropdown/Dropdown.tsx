@@ -16,9 +16,15 @@ import { cn } from "@/utils";
  *     <span>{sorted}</span>
  *     <Icon name="downArrow" />
  *   </Dropdown.Toggle>
- *   <Dropdown.Items className="">
- *     <Dropdown.Item onClick={() => setSorted("최신순")}>최신순</Dropdown.Item>
- *     <Dropdown.Item onClick={() => setSorted("조회순")}>조회순</Dropdown.Item>
+    
+ *   <Dropdown.Items className="w-[120px]">
+ *     {
+ *       list.map(()=>(
+ *         <Dropdown.Item className={}>
+ *           <Dropdown.Action className={} onClick={list.onClick}>{list.label}</Dropdown.Action>
+ *         </Dropdown.Item>
+ *        ))
+ *     }
  *   </Dropdown.Items>
  * </Dropdown>
  * ```
@@ -31,8 +37,13 @@ import { cn } from "@/utils";
  *     <Icon name="kebab" />
  *   </Dropdown.Toggle>
  *   <Dropdown.Items className="w-[120px]">
- *     <Dropdown.Item onClick={() => console.log('수정')}>수정하기</Dropdown.Item>
- *     <Dropdown.Item onClick={() => console.log('삭제')}>삭제하기</Dropdown.Item>
+ *     {
+ *       list.map((item)=>(
+ *         <Dropdown.Item key={} className={}>
+ *           <Dropdown.Action className={} onClick={item.onClick}>{item.label}</Dropdown.Action>
+ *         </Dropdown.Item>
+ *        ))
+ *     }
  *   </Dropdown.Items>
  * </Dropdown>
  * ```
@@ -43,7 +54,7 @@ interface DropdownType {
   className?: string;
 }
 
-interface DropdownItemType extends DropdownType {
+interface DropdownActionType extends DropdownType {
   onClick: () => void;
 }
 
@@ -69,7 +80,7 @@ const DropdownToggle = ({ children, className }: DropdownType) => {
   const { onToggle } = useDropdown();
 
   return (
-    <button className={cn(className)} onClick={onToggle}>
+    <button className={className} onClick={onToggle}>
       {children}
     </button>
   );
@@ -93,7 +104,11 @@ const DropdownItems = ({ children, className }: DropdownType) => {
   );
 };
 
-const DropdownItem = ({ children, className, onClick }: DropdownItemType) => {
+const DropdownItem = ({ children, className }: DropdownType) => {
+  return <li className={cn("w-full", className)}>{children}</li>;
+};
+
+const DropdownAction = ({ children, className, onClick }: DropdownActionType) => {
   const { onClose } = useDropdown();
   const handleButtonClick = () => {
     onClick();
@@ -101,15 +116,14 @@ const DropdownItem = ({ children, className, onClick }: DropdownItemType) => {
   };
 
   return (
-    <li className="w-full">
-      <button className={cn("w-full p-[14px]", className)} onClick={handleButtonClick}>
-        {children}
-      </button>
-    </li>
+    <button className={cn("w-full p-[14px]", className)} onClick={handleButtonClick}>
+      {children}
+    </button>
   );
 };
 
 Dropdown.Toggle = DropdownToggle;
 Dropdown.Items = DropdownItems;
 Dropdown.Item = DropdownItem;
+Dropdown.Action = DropdownAction;
 export default Dropdown;

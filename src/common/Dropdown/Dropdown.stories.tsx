@@ -16,15 +16,22 @@ export const SortDropdown: Story = {
   render: () => {
     const Wrapper = () => {
       const [sorted, setSorted] = useState("최신순");
+      const list = [
+        { label: "최신순", onClick: () => setSorted("최신순") },
+        { label: "좋아요 많은 순", onClick: () => setSorted("좋아요 많은 순") },
+      ];
       return (
         <Dropdown>
           <Dropdown.Toggle className="flex gap-2 px-[14px] py-[10px] bg-background-primary rounded-xl">
             <span>{sorted}</span>
             <Icon name="downArrow" />
           </Dropdown.Toggle>
-          <Dropdown.Items className="">
-            <Dropdown.Item onClick={() => setSorted("최신순")}>최신순</Dropdown.Item>
-            <Dropdown.Item onClick={() => setSorted("조회순")}>조회순</Dropdown.Item>
+          <Dropdown.Items>
+            {list.map((item) => (
+              <Dropdown.Item key={"id"}>
+                <Dropdown.Action onClick={item.onClick}>{item.label}</Dropdown.Action>
+              </Dropdown.Item>
+            ))}
           </Dropdown.Items>
         </Dropdown>
       );
@@ -43,8 +50,12 @@ export const IconDropdown: Story = {
             <Icon name="kebab" />
           </Dropdown.Toggle>
           <Dropdown.Items className="w-[120px]">
-            <Dropdown.Item onClick={() => []}>수정하기</Dropdown.Item>
-            <Dropdown.Item onClick={() => {}}>삭제하기</Dropdown.Item>
+            <Dropdown.Item>
+              <Dropdown.Action onClick={() => {}}>수정하기</Dropdown.Action>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Dropdown.Action onClick={() => {}}>삭제하기</Dropdown.Action>
+            </Dropdown.Item>
           </Dropdown.Items>
         </Dropdown>
       );
