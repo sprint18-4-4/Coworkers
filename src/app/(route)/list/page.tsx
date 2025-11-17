@@ -5,6 +5,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import PageLayout from "@/common/PageLayout/PageLayout";
 import { FloatingButton, PageHeaderBar } from "@/common";
 import { CategoryDateHeader, TodoSectionHeader } from "./_components";
+import { TaskListItem } from "@/features";
+import { MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
 
 const Page = () => {
   const router = useRouter();
@@ -30,13 +32,21 @@ const Page = () => {
             <CategoryDateHeader />
 
             <div className="mt-[37px]">
-              <h4>목록 아이템이 들어갈 영역입니다</h4>
+              {Array.from({ length: 3 }, (_, i) => (
+                <TaskListItem key={i} item={MY_HISTORY_ITEM_MOCK_DATA[i]} />
+              ))}
             </div>
           </div>
         </div>
       </PageLayout>
 
-      <FloatingButton iconName="plus" className="absolute bottom-2 right-2" onClick={onClickFloatingButton} />
+      <FloatingButton
+        iconName="plus"
+        className="absolute bottom-2 right-2"
+        // TODO(지권): 아이콘 크기 수정 안 되는 이슈
+        iconClassName="size-6 tablet:size-6"
+        onClick={onClickFloatingButton}
+      />
     </>
   );
 };

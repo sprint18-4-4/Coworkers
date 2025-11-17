@@ -1,4 +1,4 @@
-import { ScheduleItem } from "./app/(route)/my-history/_types";
+import { TaskListItemType } from "./types";
 
 export const USER_MOCK_DATA = {
   teamId: "1",
@@ -78,7 +78,7 @@ export const MOBILE_SIDEBAR_MENU_MOCK_DATA = [
   },
 ];
 
-export const MY_HISTORY_ITEM_MOCK_DATA: ScheduleItem[] = [
+export const MY_HISTORY_ITEM_MOCK_DATA: TaskListItemType[] = [
   {
     id: 1,
     name: "아침 운동하기",
