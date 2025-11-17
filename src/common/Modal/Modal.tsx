@@ -46,14 +46,14 @@ import { ModalProfileProps } from "./_types/ModalProps";
 const Modal = ({ isOpen, children, className, onClose }: ModalProps) => {
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      onClose(false);
+      onClose();
     }
   };
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose(false);
+        onClose();
       }
     };
     document.addEventListener("keydown", handleEsc);
@@ -88,7 +88,11 @@ const ModalIcon = ({ name, className }: ModalIconProps) => {
 };
 
 const ModalCloseIcon = ({ className, onClose }: ModalCloseIconProps) => {
-  return <Icon name="x" className={cn(MODAL_CLOSE_ICON_STYLE, className)} onClick={(prev) => onClose(!prev)} />;
+  return (
+    <button onClick={() => onClose(false)}>
+      <Icon name="x" className={cn(MODAL_CLOSE_ICON_STYLE, className)} />
+    </button>
+  );
 };
 
 const ModalForm = ({ children, onSubmit }: ModalFormProps) => {
