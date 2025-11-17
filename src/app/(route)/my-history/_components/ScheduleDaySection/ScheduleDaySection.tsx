@@ -19,6 +19,7 @@ const ScheduleDayItem = ({ item }: ScheduleDayItemProps) => {
       <div className="h-[14px] flex items-center gap-2 text-xs-regular text-text-default">
         <time dateTime={item.date} className="flex items-center gap-[6px]">
           <Icon name="calendar" className="size-4 tablet:size-4" />
+          {/* TODO(지권): 날짜 포맷팅 추가 */}
           <span>{item.date}</span>
         </time>
         <hr aria-hidden="true" className="w-[1px] h-full bg-slate-700" />
