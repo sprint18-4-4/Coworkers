@@ -16,7 +16,7 @@ interface ProgressBadgeProps {
 
 const ProgressBadge = ({ total, current }: ProgressBadgeProps) => {
   const positiveTotal = Math.max(0, total);
-  const positiveCurrent = Math.max(0, current);
+  const positiveCurrent = Math.max(0, Math.min(current, positiveTotal));
 
   const TEXT_COLOR = positiveCurrent > 0 ? "text-brand-primary" : "text-state-400";
 
@@ -34,11 +34,17 @@ const ProgressBadge = ({ total, current }: ProgressBadgeProps) => {
           mask: "radial-gradient(closest-side, transparent 60%, black 60%)",
           WebkitMask: "radial-gradient(closest-side, transparent 60%, black 60%)",
         }}
-      ></span>
+      />
     );
   };
   return (
-    <span className="inline-block flex-center gap-1 w-[58px] tablet:w-[66px] py-1 px-2 rounded-full bg-background-primary">
+    <span
+      role="progressbar"
+      aria-label="진행 상태 바"
+      aria-valuemin={0}
+      aria-valuemax={positiveTotal}
+      className="inline-block flex-center gap-1 w-[58px] tablet:w-[66px] py-1 px-2 rounded-full bg-background-primary"
+    >
       <span className="flex-center size-4">{getIcon()}</span>
       <span className={cn("text-md-regular tablet:text-lg-medium", TEXT_COLOR)}>
         {current}/{total}
