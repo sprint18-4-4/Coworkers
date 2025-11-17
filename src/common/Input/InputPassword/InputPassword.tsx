@@ -22,6 +22,7 @@ const InputPassword = ({ label, error, onBlur, ...props }: PasswordInputProps) =
           type="button"
           onClick={() => setShowPassword((prev) => !prev)}
           aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
+          className="h-full flex items-center justify-center"
         >
           <Icon name={showPassword ? "visible" : "invisible"} className="size-6 tablet:size-6" />
         </button>
