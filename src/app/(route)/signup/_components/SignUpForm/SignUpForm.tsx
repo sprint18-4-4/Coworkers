@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Input, Icon, BaseButton } from "@/common";
+import { Input, InputPassword, BaseButton } from "@/common";
 
 interface FormData {
   name: string;
@@ -47,21 +47,19 @@ const SignUpForm = () => {
             value={formData.email}
             onChange={handleChange}
           />
-          <Input
+          <InputPassword
             label="비밀번호"
-            type="password"
             name="password"
             placeholder="비밀번호을 입력해주세요."
             value={formData.password}
-            addonAfter={<Icon name="invisible" className="size-6" />}
+            onChange={handleChange}
           />
-          <Input
+          <InputPassword
             label="비밀번호 확인"
-            type="password"
             name="passwordConfirm"
             placeholder="비밀번호를 다시 한 번 입력해주세요."
             value={formData.passwordConfirm}
-            addonAfter={<Icon name="invisible" className="size-6" />}
+            onChange={handleChange}
           />
         </div>
         <div className="text-lg-semibold">
