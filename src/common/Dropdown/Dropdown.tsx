@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { useDropdown } from "@/hooks";
 import { DropdownContext } from "@/hooks";
 import { cn } from "@/utils";
@@ -60,6 +60,7 @@ interface DropdownActionType extends DropdownType {
 
 const Dropdown = ({ children }: DropdownType) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const onToggle = () => {
     setIsOpen((prev) => !prev);
@@ -69,9 +70,28 @@ const Dropdown = ({ children }: DropdownType) => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <DropdownContext.Provider value={{ isOpen, onToggle, onClose }}>
-      <div className="relative inline-block">{children}</div>
+      <div ref={dropdownRef} className="relative inline-block">
+        {children}
+      </div>
     </DropdownContext.Provider>
   );
 };
