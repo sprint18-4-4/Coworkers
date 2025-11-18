@@ -12,6 +12,4 @@ const meta: Meta<typeof TodoSectionHeader> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const TodoSectionHeaderStory: Story = {
-  render: () => <TodoSectionHeader />,
-};
+export const TodoSectionHeaderStory: Story = {};

@@ -12,12 +12,4 @@ const meta: Meta<typeof TodoSection> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const TodoSectionStory: Story = {
-  parameters: {
-    nextjs: {
-      router: {
-        pathname: "/list?taskId=1",
-      },
-    },
-  },
-};
+export const TodoSectionStory: Story = {};
