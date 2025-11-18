@@ -11,7 +11,6 @@ import Image from "next/image";
  * @param mobileSrc - 모바일에서 사용될 이미지 경로
  * @param tabletSrc - 태블릿에서 사용될 이미지 경로
  * @param desktopSrc - 데스크탑에서 사용될 이미지 경로
- * @param className - picture 태그에 적용되는 클래스
  * @param ImageClassName - 실제 Image 요소에 적용할 클래스
  *
  * @example
@@ -33,7 +32,6 @@ interface ResponsiveImageProps {
   mobileSrc: string;
   tabletSrc: string;
   desktopSrc: string;
-  className?: string;
   ImageClassName?: string;
 }
 
@@ -44,11 +42,10 @@ const ResponsiveImage = ({
   mobileSrc,
   tabletSrc,
   desktopSrc,
-  className = "",
   ImageClassName = "",
 }: ResponsiveImageProps) => {
   return (
-    <picture className={cn("block w-full", className)}>
+    <picture>
       <source media="(max-width: 430px)" srcSet={mobileSrc} />
       <source media="(min-width: 431px) and (max-width: 745px)" srcSet={tabletSrc} />
       <Image

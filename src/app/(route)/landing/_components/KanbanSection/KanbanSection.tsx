@@ -21,6 +21,7 @@ const KanbanSection = () => {
           }
           titleClassName="text-lg-bold tablet:text-2xl-bold text-brand-primary"
           descriptionClassName="text-xs-regular tablet:text-md-regular text-interaction-inactive"
+          className="pc:mt-[78px]"
         />
         <div className="ml-[35px] tablet:ml-[31px] pc:ml-0">
           <div className="max-w-[1024px] w-full">
