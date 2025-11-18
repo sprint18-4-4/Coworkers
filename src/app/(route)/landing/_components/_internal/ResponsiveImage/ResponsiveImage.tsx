@@ -54,6 +54,7 @@ const ResponsiveImage = ({
         width={width}
         height={height}
         className={cn("w-full h-auto object-contain", ImageClassName)}
+        priority
       />
     </picture>
   );
