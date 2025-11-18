@@ -23,7 +23,7 @@ const DetailSection = () => {
           descriptionClassName="text-xs-regular tablet:text-md-regular text-point-blue"
           className="pc:mt-[180px] pc:ml-[0]"
         />
-        <div className="max-w-[982px] w-full ml-[18px] tablet:ml-[44px] pc:ml-[35px]">
+        <div className="max-w-[982px] w-full tablet:ml-[44px] pc:ml-[35px]">
           <ResponsiveImage
             alt="대시보드 이미지"
             width={982}
