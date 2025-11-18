@@ -27,8 +27,10 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
     <>
       <section
         className={cn(
-          "w-full min-h-[100dvh] flex flex-col px-4 py-3 bg-background-primary shadow-lg",
-          "mobile:fixed mobile:inset-0 mobile:z-[999]",
+          "w-full min-h-[calc(100vh-52px)] flex flex-col px-4 py-3 bg-background-primary",
+          "fixed inset-x-0 inset-y-10 z-[999] shadow-lg",
+          "tablet:px-7 tablet:py-10 tablet:inset-x-[150px] tablet:inset-y-0",
+          "pc:static pc:min-w-[200px] pc:p-10",
         )}
       >
         <button aria-label="닫기" onClick={onClickClose}>
@@ -37,7 +39,7 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
 
         <div className="flex flex-col gap-4 mt-5">
           <div className="flex items-center justify-between">
-            <h4 className="text-xl-bold">법인 설립 비용 안내 드리기</h4>
+            <h4 className={cn("text-xl-bold", "tablet:text-2xl-bold")}>법인 설립 비용 안내 드리기</h4>
             <Icon name="kebab" className="size-6 tablet:size-6" />
           </div>
 
@@ -69,9 +71,9 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
             doloribus unde quidem ipsum excepturi.
           </p>
 
-          <div className="flex items-center gap-1 text-lg-bold text-text-primary mt-10">
+          <div className={cn("flex items-center gap-1 text-lg-bold text-text-primary mt-10", "tablet:text-2lg-bold")}>
             <h5>댓글</h5>
-            <span className="text-lg-bold text-brand-primary">3</span>
+            <span className={cn("text-lg-bold text-brand-primary", "tablet:text-2lg-bold")}>3</span>
           </div>
           <div className="flex items-center gap-3 w-full">
             <Profile src={""} />
