@@ -41,7 +41,7 @@ export const Title: Story = {
       const [isOpen, setIsOpen] = useState(true);
 
       return (
-        <Modal isOpen={isOpen} onClose={setIsOpen}>
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <Modal.Title title="멤버 초대" />
         </Modal>
       );
@@ -56,7 +56,7 @@ export const Description: Story = {
       const [isOpen, setIsOpen] = useState(true);
 
       return (
-        <Modal isOpen={isOpen} onClose={setIsOpen}>
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <Modal.Description description="그룹에 참여할 수 있는 링크를 복사합니다." />
         </Modal>
       );
@@ -71,8 +71,8 @@ export const CloseIcon: Story = {
       const [isOpen, setIsOpen] = useState(true);
 
       return (
-        <Modal isOpen={isOpen} onClose={setIsOpen}>
-          <Modal.CloseIcon onClose={setIsOpen} />
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.CloseIcon onClose={() => setIsOpen(false)} />
         </Modal>
       );
     };
@@ -86,7 +86,7 @@ export const Button: Story = {
       const [isOpen, setIsOpen] = useState(true);
 
       return (
-        <Modal isOpen={isOpen} onClose={setIsOpen}>
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <Modal.Button>
             <BaseButton variant="solid" size="large">
               링크 복사하기
@@ -105,7 +105,7 @@ export const Buttons: Story = {
       const [isOpen, setIsOpen] = useState(true);
 
       return (
-        <Modal isOpen={isOpen} onClose={setIsOpen}>
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <Modal.Button>
             <BaseButton variant="outlinedPrimary" size="large" onClick={() => setIsOpen(false)}>
               닫기
@@ -127,7 +127,7 @@ export const Input: Story = {
       const [isOpen, setIsOpen] = useState(true);
 
       return (
-        <Modal isOpen={isOpen} onClose={setIsOpen}>
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <Modal.Input placeholder="할 일을 입력해주세요" label="할 일 제목" />
         </Modal>
       );
@@ -145,7 +145,7 @@ export const Time: Story = {
       const [selectedTime, setSelectedTime] = useState<HalfHour>("12:00");
 
       return (
-        <Modal isOpen={isOpen} onClose={setIsOpen}>
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <Modal.Time
             value={selectedDate}
             onChange={setSelectedDate}
@@ -154,6 +154,22 @@ export const Time: Story = {
             selectedTime={selectedTime}
             setSelectedTime={setSelectedTime}
           />
+        </Modal>
+      );
+    };
+
+    return <Wrapper />;
+  },
+};
+
+export const Profile: Story = {
+  render: () => {
+    const Wrapper = () => {
+      const [isOpen, setIsOpen] = useState(true);
+      return (
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.CloseIcon onClose={() => setIsOpen(false)} />
+          <Modal.Profile src="https://i.pravatar.cc/300" name="우지은" email="jieunn@codeit.com" />
         </Modal>
       );
     };

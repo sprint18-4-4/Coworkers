@@ -1,3 +1,4 @@
+import Icon from "../Icon/Icon";
 import BaseButton from "./BaseButton";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 
@@ -66,7 +67,9 @@ export const WithIcon: Story = {
     size: "medium",
     children: (
       <>
-        <span>ㅁ</span> {/* TODO(정상인): 아이콘 생성시 추가 */}
+        <span>
+          <Icon name="x" className="size-4 tablet:size-5" />
+        </span>
         <span>완료 취소하기</span>
       </>
     ),
