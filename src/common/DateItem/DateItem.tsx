@@ -1,6 +1,6 @@
-import { cn } from "@/utils";
 import Link from "next/link";
-import { DateNumber, Day } from "./_types";
+import { cn } from "@/utils";
+import { DateNumber, Day } from "@/types";
 
 /**
  * @author jikwon

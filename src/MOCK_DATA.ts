@@ -1,4 +1,4 @@
-import { TaskListItemType } from "./types";
+import { DateNumber, Day, TaskListItemType } from "./types";
 
 export const USER_MOCK_DATA = {
   teamId: "1",
@@ -129,4 +129,14 @@ export const MY_HISTORY_ITEM_MOCK_DATA: TaskListItemType[] = [
       },
     },
   },
+];
+
+export const LIST_DATE_MOCK_DATA: { day: Day; date: DateNumber }[] = [
+  { day: "월", date: 1 },
+  { day: "화", date: 2 },
+  { day: "수", date: 3 },
+  { day: "목", date: 4 },
+  { day: "금", date: 5 },
+  { day: "토", date: 6 },
+  { day: "일", date: 7 },
 ];

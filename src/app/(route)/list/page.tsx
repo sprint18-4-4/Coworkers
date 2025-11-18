@@ -1,12 +1,8 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-// TODO(지권): 머지 후 PageLayout import 수정 필요
-import PageLayout from "@/common/PageLayout/PageLayout";
-import { FloatingButton, PageHeaderBar } from "@/common";
-import { CategoryDateHeader, TodoSectionHeader } from "./_components";
-import { TaskListItem } from "@/features";
-import { MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
+import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
+import { TodoSection, TodoSectionHeader } from "./_components";
 import { Suspense } from "react";
 import { cn } from "@/utils";
 
@@ -29,21 +25,7 @@ const ListPage = () => {
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
           <TodoSectionHeader />
-
-          <div
-            className={cn(
-              "bg-background-primary px-[17px] py-[38px] mt-[22px] rounded-[20px]",
-              "pc:px-[42px] pc:max-w-[819px] pc:flex-1",
-            )}
-          >
-            <CategoryDateHeader />
-
-            <div className="mt-[37px] flex flex-col gap-3">
-              {MY_HISTORY_ITEM_MOCK_DATA.map((item) => (
-                <TaskListItem key={item.id} item={item} />
-              ))}
-            </div>
-          </div>
+          <TodoSection />
         </div>
       </PageLayout>
 
