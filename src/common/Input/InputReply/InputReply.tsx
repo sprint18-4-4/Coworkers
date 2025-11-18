@@ -17,7 +17,7 @@ const InputReply = () => {
   };
 
   return (
-    <div className="border border-background-tertiary border-x-0 flex items-end gap-4">
+    <div className="w-full border border-background-tertiary border-x-0 flex items-end gap-4">
       <InputBox
         id="reply"
         ref={textareaRef}

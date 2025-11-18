@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@/utils";
+import { cn, formatTime } from "@/utils";
 import { CommentProps } from "./_types/type";
 import KebabMenu from "./_internal/KebabMenu/KebabMenu";
 import CommentEdit from "./_internal/CommentEdit/CommentEdit";
 import Profile from "@/common/Profile/Profile";
-import { formatTime } from "@/utils/";
 
 /**
  * @author KimWonSeon
@@ -54,13 +53,7 @@ const CommentItem = ({ comment, showKebab = false, className }: CommentProps) =>
   }
 
   return (
-    <div
-      className={cn(
-        "pt-2.5 mx-5 mt-[15px] flex items-start gap-4 border-t-2 border-border-primary",
-        "tablet:mx-7 pc:pt-4 pc:mx-10",
-        className,
-      )}
-    >
+    <div className={cn("pt-2.5 mt-[15px] flex items-start gap-4 pb-[15px] border-b border-border-primary", className)}>
       <div className="flex-shrink-0 size-8">
         <Profile src={user.image} alt={`${user.nickname} 프로필`} size="md" />
       </div>
