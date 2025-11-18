@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { ResponsiveImage } from "../_internal";
@@ -28,12 +26,12 @@ const HeroSection = () => {
         <div className="pc:w-full flex justify-end">
           <div className="max-w-[1330px] w-full">
             <ResponsiveImage
-              alt="대시보드 이미지"
-              width={1330}
-              height={1080}
-              mobileSrc="/landing/img-1-2.png"
-              tabletSrc="/landing/img-1-1.png"
-              desktopSrc="/landing/img-1.png"
+              ImageInfo={{ alt: "대시보드 이미지", width: 1330, height: 1080 }}
+              Src={{
+                mobileSrc: "/landing/img-1-2.png",
+                tabletSrc: "/landing/img-1-1.png",
+                desktopSrc: "/landing/img-1.png",
+              }}
             />
           </div>
         </div>

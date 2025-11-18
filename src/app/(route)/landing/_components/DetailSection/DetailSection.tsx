@@ -16,12 +16,12 @@ const DetailSection = () => {
         />
         <div className="max-w-[982px] w-full pc:ml-[35px]">
           <ResponsiveImage
-            alt="대시보드 이미지"
-            width={982}
-            height={667}
-            mobileSrc={DETAIL_SECTION.mobileSrc}
-            tabletSrc={DETAIL_SECTION.tabletSrc}
-            desktopSrc={DETAIL_SECTION.desktopSrc}
+            ImageInfo={{ alt: "대시보드 이미지", width: 982, height: 667 }}
+            Src={{
+              mobileSrc: DETAIL_SECTION.mobileSrc,
+              tabletSrc: DETAIL_SECTION.tabletSrc,
+              desktopSrc: DETAIL_SECTION.desktopSrc,
+            }}
           />
         </div>
       </div>

@@ -17,12 +17,12 @@ const CooperationSection = () => {
         <div className="ml-[35px] tablet:ml-[62px] pc:ml-0">
           <div className="max-w-[940px] w-full">
             <ResponsiveImage
-              alt="대시보드 이미지"
-              width={940}
-              height={800}
-              mobileSrc={COOPERATION_SECTION.mobileSrc}
-              tabletSrc={COOPERATION_SECTION.tabletSrc}
-              desktopSrc={COOPERATION_SECTION.desktopSrc}
+              ImageInfo={{ alt: "대시보드 이미지", width: 940, height: 800 }}
+              Src={{
+                mobileSrc: COOPERATION_SECTION.mobileSrc,
+                tabletSrc: COOPERATION_SECTION.tabletSrc,
+                desktopSrc: COOPERATION_SECTION.desktopSrc,
+              }}
             />
           </div>
         </div>

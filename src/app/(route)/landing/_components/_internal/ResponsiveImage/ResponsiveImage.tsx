@@ -1,47 +1,27 @@
 import { cn } from "@/utils";
 import Image from "next/image";
 
-/**
- * @author KimWonSeon
- * @description - 데스크탑, 태블릿, 모바일 디바이스별 반응형 이미지 적용 컴포넌트
- *
- * @param alt - 이미지 대체 텍스트
- * @param width - 원본 데스크탑 이미지 넓이
- * @param height - 원본 데스크탑 이미지 높이
- * @param mobileSrc - 모바일에서 사용될 이미지 경로
- * @param tabletSrc - 태블릿에서 사용될 이미지 경로
- * @param desktopSrc - 데스크탑에서 사용될 이미지 경로
- * @param ImageClassName - 실제 Image 요소에 적용할 클래스
- *
- * @example
- * ```tsx
- * <ResponsiveImage
- * alt="대시보드 이미지"
- * width={1330}
- * height={1080}
- * mobileSrc="/landing/img-1-2.png"
- * tabletSrc="/landing/img-1-1.png"
- * desktopSrc="/landing/img-1.png"
- *
- */
-
-interface ResponsiveImageProps {
-  alt: string;
-  width: number;
-  height: number;
+interface ImageSource {
   mobileSrc: string;
   tabletSrc: string;
   desktopSrc: string;
+}
+
+interface ImageInfo {
+  alt: string;
+  width: number;
+  height: number;
+}
+
+interface ResponsiveImageProps {
+  ImageInfo: ImageInfo;
+  Src: ImageSource;
   ImageClassName?: string;
 }
 
 const ResponsiveImage = ({
-  alt,
-  width,
-  height,
-  mobileSrc,
-  tabletSrc,
-  desktopSrc,
+  ImageInfo: { alt, width, height },
+  Src: { mobileSrc, tabletSrc, desktopSrc },
   ImageClassName = "",
 }: ResponsiveImageProps) => {
   return (

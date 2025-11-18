@@ -17,12 +17,12 @@ const KanbanSection = () => {
         <div className="ml-[35px] tablet:ml-[31px] pc:ml-0">
           <div className="max-w-[1024px] w-full">
             <ResponsiveImage
-              alt="대시보드 이미지"
-              width={1024}
-              height={600}
-              mobileSrc={KANBAN_SECTION.mobileSrc}
-              tabletSrc={KANBAN_SECTION.tabletSrc}
-              desktopSrc={KANBAN_SECTION.desktopSrc}
+              ImageInfo={{ alt: "대시보드 이미지", width: 1024, height: 600 }}
+              Src={{
+                mobileSrc: KANBAN_SECTION.mobileSrc,
+                tabletSrc: KANBAN_SECTION.tabletSrc,
+                desktopSrc: KANBAN_SECTION.desktopSrc,
+              }}
             />
           </div>
         </div>
