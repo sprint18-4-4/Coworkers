@@ -1,4 +1,4 @@
-import { ResponsiveImage, TextContent } from "../_internal/";
+import { ResponsiveImage, TextContent } from "../_internal";
 
 const DetailSection = () => {
   return (
