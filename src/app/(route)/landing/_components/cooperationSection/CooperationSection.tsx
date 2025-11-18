@@ -21,7 +21,7 @@ const CooperationSection = () => {
           }
           titleClassName="text-lg-bold tablet:text-2xl-bold text-brand-primary"
           descriptionClassName="text-xs-regular tablet:text-md-regular text-interaction-inactive"
-          className="pc:mt-[180px] pc:ml-[0]"
+          className="pc:mt-[180px] pc:ml-[35px]"
         />
         <div className="ml-[35px] tablet:ml-[62px] pc:ml-0">
           <div className="max-w-[940px] w-full">

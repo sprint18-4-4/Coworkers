@@ -27,7 +27,7 @@ const DetailSection = () => {
           <ResponsiveImage
             alt="대시보드 이미지"
             width={982}
-            height={643}
+            height={667}
             mobileSrc="/landing/img-3-2.png"
             tabletSrc="/landing/img-3-1.png"
             desktopSrc="/landing/img-3.png"
