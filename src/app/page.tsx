@@ -1,4 +1,4 @@
-import { HeroSection, KanbanSection, DetailSection, CooperationSection } from "./(route)/landing";
+import { HeroSection, KanbanSection, DetailSection, CooperationSection, ConversionSection } from "./(route)/landing";
 
 export default function Page() {
   return (
@@ -7,6 +7,7 @@ export default function Page() {
       <KanbanSection />
       <DetailSection />
       <CooperationSection />
+      <ConversionSection />
     </main>
   );
 }
