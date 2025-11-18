@@ -6,7 +6,7 @@ const HeroSection = () => {
   return (
     <section className="w-full bg-background-secondary relative">
       <div className="flex flex-col pc:flex-row">
-        <div className="ml-5 mt-[34px] tablet:mt-[90px] pc:mt-[208px] pc:ml-[76px]">
+        <div className="ml-5 mt-[34px] tablet:mt-[90px] pc:mt-[208px] pc:ml-[160px]">
           <Image src="/landing/land-1.svg" alt="로고" width={48} height={48} className="size-9 pc:size-12" />
           <div className="max-w-[246px] ml-5">
             <p className="text-md-medium tablet:text-lg-medium pc:text-xl-medium pc:mb-1 text-text-disabled">
@@ -33,7 +33,7 @@ const HeroSection = () => {
       <BaseButton
         variant="solid"
         size="large"
-        className="w-[160px] absolute bottom-[53px] right-4 pc:bottom-[208px] pc:left-[106px] pc:right-0"
+        className="w-[160px] absolute bottom-[53px] right-4 pc:bottom-[208px] pc:left-[180px] pc:right-0"
       >
         지금 시작하기
       </BaseButton>
