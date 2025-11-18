@@ -38,7 +38,7 @@ const CommentItem = ({ comment, showKebab = false, className }: CommentProps) =>
 
   if (isEditing) {
     return (
-      <div className={cn("w-full py-2.5 px-5 flex gap-4 bg-icon-inverse", "tablet:px-7 pc:py-4 pc:px-10", className)}>
+      <li className={cn("w-full py-2.5 px-5 flex gap-4 bg-icon-inverse", "tablet:px-7 pc:py-4 pc:px-10", className)}>
         <div className="flex-shrink-0">
           <Profile src={user.image} alt={`${user.nickname} 프로필`} size="md" />
         </div>
@@ -48,7 +48,7 @@ const CommentItem = ({ comment, showKebab = false, className }: CommentProps) =>
           </div>
           <CommentEdit initialComment={content} onClose={() => setIsEditing(false)} />
         </div>
-      </div>
+      </li>
     );
   }
 

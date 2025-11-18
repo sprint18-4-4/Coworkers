@@ -25,7 +25,9 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
 
   return (
     <>
-      <section
+      <article
+        role="dialog"
+        aria-modal="true"
         className={cn(
           "w-full min-h-[calc(100vh-52px)] flex flex-col px-4 py-3 bg-background-primary",
           "fixed inset-x-0 inset-y-10 z-[999] shadow-lg",
@@ -37,10 +39,10 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
           <Icon name="x" className="size-6 tablet-6" />
         </button>
 
-        <div className="flex flex-col gap-4 mt-5">
+        <header className="flex flex-col gap-4 mt-5">
           <div className="flex items-center justify-between">
-            <h4 className={cn("text-xl-bold", "tablet:text-2xl-bold")}>법인 설립 비용 안내 드리기</h4>
-            <Icon name="kebab" className="size-6 tablet:size-6" />
+            <h2 className={cn("text-xl-bold", "tablet:text-2xl-bold")}>법인 설립 비용 안내 드리기</h2>
+            <Icon name="kebab" className="size-6 tablet:size-6" aria-label="옵션 메뉴" />
           </div>
 
           <div className="flex flex-col items-start gap-3">
@@ -75,19 +77,20 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
             <h5>댓글</h5>
             <span className={cn("text-lg-bold text-brand-primary", "tablet:text-2lg-bold")}>3</span>
           </div>
-          <div className="flex items-center gap-3 w-full">
+          <form aria-label="댓글 작성" onSubmit={() => {}} className="flex items-center gap-3 w-full">
             <Profile src={""} />
             <InputReply />
-          </div>
-        </div>
+          </form>
+        </header>
 
-        <section aria-label="댓글 목록">
+        <ul aria-label="댓글 목록" className="mt-1">
           <CommentItem comment={CommentData} />
           <CommentItem comment={CommentData} />
-        </section>
-      </section>
+        </ul>
+      </article>
 
       <BaseButton
+        aria-label="완료 상태 취소하기"
         variant="outlinedPrimary"
         size="large"
         className="fixed bottom-4 right-4 z-[999] max-w-[132px] h-[40px] rounded-[40px] bg-background-inverse"
