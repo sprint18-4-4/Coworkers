@@ -60,12 +60,11 @@ const useSignUpForm = () => {
     if (!validation) return;
 
     if (!validation.isValid) {
-      setErrors((prev) => ({ ...prev, [fieldName]: validation.message }));
+      setErrors((prev) => ({ ...prev, [fieldName]: validation.ErrorMessage }));
     } else {
       setErrors((prev) => {
-        const newErrors = { ...prev };
-        delete newErrors[fieldName];
-        return newErrors;
+        const { [fieldName]: removed, ...reset } = prev;
+        return reset;
       });
     }
   };
@@ -75,22 +74,22 @@ const useSignUpForm = () => {
 
     const nameValidation = validateName(formData.name);
     if (!nameValidation.isValid) {
-      newErrors.name = nameValidation.message;
+      newErrors.name = nameValidation.ErrorMessage;
     }
 
     const emailValidation = validateEmail(formData.email);
     if (!emailValidation.isValid) {
-      newErrors.email = emailValidation.message;
+      newErrors.email = emailValidation.ErrorMessage;
     }
 
     const passwordValidation = validatePassword(formData.password);
     if (!passwordValidation.isValid) {
-      newErrors.password = passwordValidation.message;
+      newErrors.password = passwordValidation.ErrorMessage;
     }
 
     const passwordConfirmValidation = validatePasswordConfirm(formData.password, formData.passwordConfirm);
     if (!passwordConfirmValidation.isValid) {
-      newErrors.passwordConfirm = passwordConfirmValidation.message;
+      newErrors.passwordConfirm = passwordConfirmValidation.ErrorMessage;
     }
 
     setErrors(newErrors);
@@ -100,14 +99,14 @@ const useSignUpForm = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    const fieldName = name as keyof SignUpFormData;
 
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [fieldName]: value }));
 
-    if (errors[name as keyof FormErrors]) {
+    if (errors[fieldName]) {
       setErrors((prev) => {
-        const newErrors = { ...prev };
-        delete newErrors[name as keyof FormErrors];
-        return newErrors;
+        const { [fieldName]: removed, ...rest } = prev;
+        return rest;
       });
     }
   };
@@ -116,9 +115,9 @@ const useSignUpForm = () => {
     e.preventDefault();
 
     if (!validateForm()) {
+      alert("입력하신 정보를 다시 확인해주세요.");
       return;
     }
-
     // TODO(김원선): API 연동시 API 호출
   };
 
