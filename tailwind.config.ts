@@ -24,6 +24,7 @@ const config: Config = {
         point: {
           purple: "#A855F7",
           cyan: "#06B6D4",
+          blue: "#C9DAFD",
           pink: "#EC4899",
           rose: "#DBBAC0",
           orange: "#F97316",

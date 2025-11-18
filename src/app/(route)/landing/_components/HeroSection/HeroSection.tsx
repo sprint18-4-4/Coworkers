@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ResponsiveImage from "../ResponsiveImage/ResponsiveImage";
+import { ResponsiveImage } from "../_internal";
 import { BaseButton } from "@/common";
 
 const HeroSection = () => {

@@ -56,7 +56,7 @@ const ResponsiveImage = ({
         alt={alt}
         width={width}
         height={height}
-        className={cn("w-full h-auto object-contain object-right", ImageClassName)}
+        className={cn("w-full h-auto object-contain", ImageClassName)}
       />
     </picture>
   );
