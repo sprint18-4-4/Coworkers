@@ -3,7 +3,7 @@ import { BaseButton, Icon, ProgressBadge } from "@/common";
 
 const TodoSectionItem = () => {
   return (
-    <div
+    <li
       className={cn(
         "flex items-center gap-[25px] max-w-[180px] h-[44px] pl-4 pr-3 rounded-xl",
         "bg-background-primary border border-border-primary",
@@ -15,8 +15,8 @@ const TodoSectionItem = () => {
         <ProgressBadge current={3} total={5} />
       </div>
       {/* TODO(지권): 상인님 작업 끝난 후 변경 */}
-      <Icon name="kebab" className="hidden size-5 tablet:size-5 tablet:hidden pc:block" />
-    </div>
+      <Icon name="kebab" className="hidden size-5 cursor-pointer tablet:size-5 tablet:hidden pc:block" />
+    </li>
   );
 };
 
@@ -26,13 +26,15 @@ const TodoSectionHeader = () => {
       <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
 
       <section className={cn("flex items-center justify-between gap-12 w-full", "pc:flex-col pc:gap-11")}>
-        <TodoSectionItem />
+        <ul className="pc:w-full pc:flex pc:flex-col pc:gap-1">
+          <TodoSectionItem />
+        </ul>
 
         <BaseButton
           size="large"
           variant="outlinedPrimary"
           aria-label="할 일 추가"
-          className="w-[112px] h-10 px-4 text-nowrap rounded-[40px]"
+          className="w-[112px] h-10 px-4 text-nowrap rounded-[40px] bg-background-primary"
         >
           <Icon name="plus" className="size-5 tablet:size-5" />
           <span className="text-lg-semibold">할 일 추가</span>
