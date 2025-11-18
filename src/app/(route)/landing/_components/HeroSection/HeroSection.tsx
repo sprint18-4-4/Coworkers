@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ResponsiveImage } from "../_internal";
 import { BaseButton } from "@/common";
 
 const HeroSection = () => {
+  const router = useRouter();
+
   return (
     <section className="w-full bg-background-secondary relative">
       <div className="flex flex-col pc:flex-row">
@@ -34,6 +39,7 @@ const HeroSection = () => {
         variant="solid"
         size="large"
         className="w-[160px] absolute bottom-[53px] right-4 pc:bottom-[208px] pc:left-[180px] pc:right-0"
+        onClick={() => router.push("/login")}
       >
         지금 시작하기
       </BaseButton>
