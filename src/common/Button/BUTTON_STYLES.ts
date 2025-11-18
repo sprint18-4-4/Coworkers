@@ -21,7 +21,7 @@ export const BASE_BUTTON_STYLE_BY_VARIANT = {
 
 // FloatingButton
 
-export const FLOATING_BUTTON_BASE_STYLE = "size-14 bg-brand-primary rounded-full py-[14px] px-[21px] flex-center";
+export const FLOATING_BUTTON_BASE_STYLE = "size-14 bg-brand-primary rounded-full flex-center";
 
 // ProgressButton
 
