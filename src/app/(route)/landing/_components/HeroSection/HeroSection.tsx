@@ -1,13 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { ResponsiveImage } from "../_internal";
-import { BaseButton } from "@/common";
+import { cn } from "@/utils";
+import {
+  BASE_BUTTON_BASE_STYLE,
+  BASE_BUTTON_STYLE_BY_SIZE,
+  BASE_BUTTON_STYLE_BY_VARIANT,
+} from "@/common/Button/BUTTON_STYLES";
 
 const HeroSection = () => {
-  const router = useRouter();
-
   return (
     <section className="w-full bg-background-secondary relative">
       <div className="flex flex-col pc:flex-row">
@@ -35,14 +38,17 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <BaseButton
-        variant="solid"
-        size="large"
-        className="w-[160px] absolute bottom-[53px] right-4 pc:bottom-[208px] pc:left-[180px] pc:right-0"
-        onClick={() => router.push("/login")}
+      <Link
+        href="/login"
+        className={cn(
+          BASE_BUTTON_BASE_STYLE,
+          BASE_BUTTON_STYLE_BY_SIZE.large,
+          BASE_BUTTON_STYLE_BY_VARIANT.solid,
+          "block w-[160px] absolute bottom-[53px] right-4 pc:bottom-[208px] pc:left-[180px] pc:right-0",
+        )}
       >
         지금 시작하기
-      </BaseButton>
+      </Link>
     </section>
   );
 };

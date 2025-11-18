@@ -1,11 +1,12 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { BaseButton } from "@/common";
+import Link from "next/link";
+import { cn } from "@/utils";
+import {
+  BASE_BUTTON_BASE_STYLE,
+  BASE_BUTTON_STYLE_BY_SIZE,
+  BASE_BUTTON_STYLE_BY_VARIANT,
+} from "@/common/Button/BUTTON_STYLES";
 
 const ConversionSection = () => {
-  const router = useRouter();
-
   return (
     <footer className="py-[60px] tablet:py-[70px] pc:py-[90px]">
       <div className="flex-col-center gap-7">
@@ -15,9 +16,17 @@ const ConversionSection = () => {
             팀원 모두와 같은 방향, 같은 속도로 나아가는 가장 쉬운 방법
           </p>
         </div>
-        <BaseButton variant="solid" size="large" onClick={() => router.push("/login")} className="w-[160px]">
+        <Link
+          href="/login"
+          className={cn(
+            BASE_BUTTON_BASE_STYLE,
+            BASE_BUTTON_STYLE_BY_SIZE.large,
+            BASE_BUTTON_STYLE_BY_VARIANT.solid,
+            "block w-[160px]",
+          )}
+        >
           지금 시작하기
-        </BaseButton>
+        </Link>
       </div>
     </footer>
   );
