@@ -5,9 +5,4 @@ export interface SignUpFormData {
   passwordConfirm: string;
 }
 
-export interface FormErrors {
-  name?: string;
-  email?: string;
-  password?: string;
-  passwordConfirm?: string;
-}
+export type FormErrors = Partial<Record<keyof SignUpFormData, string>>;
