@@ -1,14 +1,26 @@
 import { Icon, Todo } from "@/common";
-import { getFrequencyLabel } from "@/utils";
+import { cn, getFrequencyLabel } from "@/utils";
 import type { TaskListItemType } from "@/types";
 
 interface TaskListItemProps {
   item: TaskListItemType;
+  onOpenDetail?: () => void;
 }
 
-const TaskListItem = ({ item }: TaskListItemProps) => {
+const TaskListItem = ({ item, onOpenDetail }: TaskListItemProps) => {
   return (
-    <li className="px-[14px] py-3 flex flex-col items-start rounded-lg gap-[10px] bg-background-secondary">
+    <li
+      className={cn(
+        "px-[14px] py-3 flex flex-col items-start rounded-lg gap-[10px] bg-background-secondary",
+        onOpenDetail && "cursor-pointer",
+      )}
+      {...(onOpenDetail && {
+        onClick: onOpenDetail,
+        role: "button",
+        tabIndex: 0,
+        "aria-label": `${item?.name} 상세보기`,
+      })}
+    >
       <div className="w-full flex items-center justify-between">
         <div className="flex-1 flex items-center gap-3">
           <Todo title={item?.name} id={item?.id.toString()} completed={false} onChangeCompleted={() => {}} />

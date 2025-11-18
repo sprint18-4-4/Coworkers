@@ -30,7 +30,9 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
         "fixed inset-0 z-[999]",
       )}
     >
-      <Icon name="x" className="size-6 tablet-6" aria-label="닫기" onClick={onClickClose} />
+      <button aria-label="닫기" onClick={onClickClose}>
+        <Icon name="x" className="size-6 tablet-6" />
+      </button>
 
       <div className="flex flex-col gap-4 mt-5">
         <div className="flex items-center justify-between">
