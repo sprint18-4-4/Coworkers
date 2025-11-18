@@ -33,8 +33,8 @@ const ListPage = () => {
             <CategoryDateHeader />
 
             <div className="mt-[37px]">
-              {Array.from({ length: 3 }, (_, i) => (
-                <TaskListItem key={i} item={MY_HISTORY_ITEM_MOCK_DATA[i]} />
+              {MY_HISTORY_ITEM_MOCK_DATA.map((item) => (
+                <TaskListItem key={item.id} item={item} />
               ))}
             </div>
           </div>
@@ -53,10 +53,12 @@ const ListPage = () => {
 };
 
 const Page = () => {
-  // TODO(지권): 로딩 화면 추가 필요
-  <Suspense fallback={""}>
-    <ListPage />
-  </Suspense>;
+  return (
+    // TODO(지권): 로딩 화면 추가 필요
+    <Suspense fallback={""}>
+      <ListPage />
+    </Suspense>
+  );
 };
 
 export default Page;
