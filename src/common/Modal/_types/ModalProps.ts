@@ -1,4 +1,5 @@
 import { IconKeys } from "@/common/Icon/Icon";
+import { ProfileProps } from "@/common/Profile/_type/types";
 import { DateValue } from "@/types";
 import { TimeProps } from "@/types/TimeType";
 import { ComponentPropsWithRef, RefObject } from "react";
@@ -8,7 +9,7 @@ export interface ModalProps {
   isOpen: boolean;
   children: ReactNode;
   className?: string;
-  onClose: (prev: boolean) => void;
+  onClose: () => void;
 }
 
 export interface ModalTitleProps {
@@ -42,6 +43,11 @@ export interface ModalInputProps extends ComponentPropsWithRef<"input"> {
   error?: string;
   containerClassName?: string;
   ref?: RefObject<HTMLInputElement | null>;
+}
+
+export interface ModalProfileProps extends ProfileProps {
+  name: string;
+  email: string;
 }
 
 export interface ModalCloseIconProps {
