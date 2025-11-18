@@ -1,5 +1,6 @@
 import { DateItem, Icon } from "@/common";
 import { DateNumber, Day } from "@/common/DateItem/_types";
+import { cn } from "@/utils";
 
 const DATE_MOCK: { day: Day; date: DateNumber }[] = [
   { day: "월", date: 1 },
@@ -32,7 +33,7 @@ const CategoryDateHeader = () => {
           </button>
         </div>
       </div>
-      <div className="flex items-center gap-1 mt-6">
+      <div className={cn("flex items-center gap-1 mt-6", "tablet:justify-center tablet:gap-3")}>
         {DATE_MOCK.map((day) => {
           return <DateItem key={day.day} day={day.day} date={day.date} />;
         })}
