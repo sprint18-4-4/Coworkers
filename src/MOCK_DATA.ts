@@ -140,3 +140,11 @@ export const LIST_DATE_MOCK_DATA: { day: Day; date: DateNumber }[] = [
   { day: "토", date: 6 },
   { day: "일", date: 7 },
 ];
+
+export const COMMENT_MOCK_DATA = {
+  id: 1,
+  content: "lorem ipsum dolor sit amet consectetur adipisicing elit",
+  createdAt: "2024-07-29",
+  updatedAt: "2024-07-29",
+  user: { id: 1, nickname: "안해나", image: "" },
+};

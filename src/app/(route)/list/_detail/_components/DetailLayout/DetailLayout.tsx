@@ -1,20 +1,13 @@
 "use client";
 
-import { BaseButton, CommentItem, Icon, InputReply, Profile } from "@/common";
 import { cn } from "@/utils";
+import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
+import { CommentSection, HeaderSection } from "../_internal";
 
 interface DetailLayoutProps {
   id: string;
 }
-
-const CommentData = {
-  id: 1,
-  content: "lorem ipsum dolor sit amet consectetur adipisicing elit",
-  createdAt: "2024-07-29",
-  updatedAt: "2024-07-29",
-  user: { id: 1, nickname: "안해나", image: "" },
-};
 
 const DetailLayout = ({ id }: DetailLayoutProps) => {
   const router = useRouter();
@@ -29,7 +22,7 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
         role="dialog"
         aria-modal="true"
         className={cn(
-          "w-full min-h-[calc(100vh-52px)] flex flex-col px-4 py-3 bg-background-primary",
+          "w-full min-h-[calc(100vh-52px)] flex flex-col px-4 py-3 space-y-6 bg-background-primary",
           "fixed inset-x-0 inset-y-10 z-[999] shadow-lg",
           "tablet:px-7 tablet:py-10 tablet:inset-x-[150px] tablet:inset-y-0",
           "pc:static pc:min-w-[200px] pc:p-10",
@@ -39,54 +32,17 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
           <Icon name="x" className="size-6 tablet-6" />
         </button>
 
-        <header className="flex flex-col gap-4 mt-5">
-          <div className="flex items-center justify-between">
-            <h2 className={cn("text-xl-bold", "tablet:text-2xl-bold")}>법인 설립 비용 안내 드리기</h2>
-            <Icon name="kebab" className="size-6 tablet:size-6" aria-label="옵션 메뉴" />
-          </div>
+        <HeaderSection />
 
-          <div className="flex flex-col items-start gap-3">
-            <div className="flex items-center gap-3">
-              <div className="size-8 rounded-lg bg-black" />
-              <span className="text-md-medium text-text-primary">안해나</span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="flex items-center gap-3">
-                <Icon name="calendar" className="size-4 tablet:size-4" />
-                <span className="text-xs-regular text-text-default">시작 날짜</span>
-                <time dateTime="2024-07-29" className="text-xs-regular text-text-primary">
-                  2024년 7월 29일 오후 3:30
-                </time>
-              </p>
-              <p className="flex items-center gap-3">
-                <Icon name="repeat" className="size-4 tablet:size-4" />
-                <span className="text-xs-regular text-text-default">반복 설정</span>
-                <span className="text-xs-regular text-text-primary">매일 반복</span>
-              </p>
-            </div>
-          </div>
+        <hr />
 
-          <hr className="my-1" />
+        <section className="text-md-regular text-text-primary">
+          <h3 className="sr-only">상세페이지 내용</h3>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, fugit neque sequi labore cupiditate aliquam
+          doloribus unde quidem ipsum excepturi.
+        </section>
 
-          <p className="text-md-regular text-text-primary">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, fugit neque sequi labore cupiditate aliquam
-            doloribus unde quidem ipsum excepturi.
-          </p>
-
-          <div className={cn("flex items-center gap-1 text-lg-bold text-text-primary mt-10", "tablet:text-2lg-bold")}>
-            <h5>댓글</h5>
-            <span className={cn("text-lg-bold text-brand-primary", "tablet:text-2lg-bold")}>3</span>
-          </div>
-          <form aria-label="댓글 작성" onSubmit={() => {}} className="flex items-center gap-3 w-full">
-            <Profile src={""} />
-            <InputReply />
-          </form>
-        </header>
-
-        <ul aria-label="댓글 목록" className="mt-1">
-          <CommentItem comment={CommentData} />
-          <CommentItem comment={CommentData} />
-        </ul>
+        <CommentSection />
       </article>
 
       <BaseButton
