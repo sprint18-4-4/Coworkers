@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from "react";
 
-export const useDropdownClose = (ref: RefObject<HTMLElement | null>, onClose: () => void, isOpen: boolean) => {
+const useDropdownClose = (ref: RefObject<HTMLElement | null>, onClose: () => void, isOpen: boolean) => {
   useEffect(() => {
     if (!isOpen) return;
 
@@ -23,3 +23,5 @@ export const useDropdownClose = (ref: RefObject<HTMLElement | null>, onClose: ()
     };
   }, [isOpen, ref, onClose]);
 };
+
+export default useDropdownClose;

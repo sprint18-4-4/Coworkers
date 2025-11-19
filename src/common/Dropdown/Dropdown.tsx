@@ -1,6 +1,6 @@
 "use client";
 
-import { useDropdownClose } from "@/hooks/useDropdownClose";
+import { useDropdownClose } from "@/hooks";
 import { useRef, useState } from "react";
 import { cn } from "@/utils";
 import Icon, { IconKeys } from "../Icon/Icon";

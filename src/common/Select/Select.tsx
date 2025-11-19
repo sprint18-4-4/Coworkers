@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Icon from "../Icon/Icon";
 import { cn } from "@/utils";
 import { SelectOption } from "./_types/types";
-import { useDropdownClose } from "@/hooks/useDropdownClose";
+import { useDropdownClose } from "@/hooks";
 
 /**
  * @author sangin
