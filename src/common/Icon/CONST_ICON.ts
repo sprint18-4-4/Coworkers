@@ -36,6 +36,7 @@ import Visible from "@/assets/icon/ic-visible.svg";
 import X from "@/assets/icon/ic-x.svg";
 import downTriangleArrow from "@/assets/icon/ic-down-triangle-arrow.svg";
 
+import KakaoTalk from "@/assets/images/kakaotalk.svg";
 import Logo from "@/assets/images/logo.svg";
 
 const ICONS = {
@@ -77,6 +78,7 @@ const ICONS = {
   rightTriangleArrow: rightTriangleArrow,
   downTriangleArrow: downTriangleArrow,
   logo: Logo,
+  kakaotalk: KakaoTalk,
 } as const;
 
 export default ICONS;

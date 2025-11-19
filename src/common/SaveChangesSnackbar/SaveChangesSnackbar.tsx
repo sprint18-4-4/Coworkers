@@ -11,7 +11,7 @@ const SaveChangesSnackbar = ({ title, onSave, buttonText }: UnsavedSnackbarProps
   return (
     <div
       role="status"
-      className="max-w-[868px] min-w-[343px] min-h-[49px] max-h-[57px] bg-brand-primary px-3 py-3 rounded-lg flex items-center gap-2.5"
+      className="max-w-[868px] min-w-[343px] min-h-[49px] max-h-[57px] bg-brand-primary p-3 rounded-lg flex items-center gap-2.5"
     >
       <span className="flex items-center gap-2 flex-grow text-md-semibold text-text-inverse tablet:text-lg-semibold">
         <Icon name="alert" className="hidden tablet:block tablet:size-6" />
