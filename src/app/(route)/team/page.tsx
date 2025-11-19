@@ -1,3 +1,5 @@
+"use client";
+
 import { PageLayout } from "@/common";
 import { MemberWidget, ProgressWidget, TaskList } from "./_components";
 
