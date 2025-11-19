@@ -1,7 +1,7 @@
-import { ScheduleItem } from "../../_types";
+import { TaskListItemType } from "@/types";
 
 type Item = {
-  item: ScheduleItem;
+  item: TaskListItemType;
 };
 
 interface MyWorkHistoryProps {
