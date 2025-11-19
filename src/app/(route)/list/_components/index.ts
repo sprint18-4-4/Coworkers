@@ -1,2 +1,2 @@
-export { default as TodoSectionHeader } from "./TodoSectionHeader/TodoSectionHeader";
+export { default as TodoHeader } from "./TodoHeader/TodoHeader";
 export { default as TodoSection } from "./TodoSection/TodoSection";

@@ -1,7 +1,7 @@
 import { cn } from "@/utils";
 import { BaseButton, Icon, ProgressBadge } from "@/common";
 
-const TodoSectionItem = () => {
+const TodoItem = () => {
   return (
     <li
       className={cn(
@@ -20,14 +20,14 @@ const TodoSectionItem = () => {
   );
 };
 
-const TodoSectionHeader = () => {
+const TodoHeader = () => {
   return (
     <aside className={cn("flex flex-col items-start gap-2", "pc:w-[270px] pc:gap-6")}>
       <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
 
       <section className={cn("flex items-center justify-between gap-12 w-full", "pc:flex-col pc:gap-11")}>
         <ul className="pc:w-full pc:flex pc:flex-col pc:gap-1">
-          <TodoSectionItem />
+          <TodoItem />
         </ul>
 
         <BaseButton
@@ -44,4 +44,4 @@ const TodoSectionHeader = () => {
   );
 };
 
-export default TodoSectionHeader;
+export default TodoHeader;
