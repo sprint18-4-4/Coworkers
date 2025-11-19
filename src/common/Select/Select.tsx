@@ -4,6 +4,25 @@ import { cn } from "@/utils";
 import { SelectOption } from "./_types/types";
 import { useDropdownClose } from "@/hooks/useDropdownClose";
 
+/**
+ * @author sangin
+ *
+ * @example
+ * ```tsx
+ * const [order ,setOrder] = useState("recent")
+ * const options = [
+ *   { label: "최신순", value: "recent" },
+ *   { label: "좋아요순", value: "like" },
+ * ];
+ *
+ * <Select
+ *   value={order}
+ *   onChange={setOrder}
+ *   options={options}
+ * />
+ * ```
+ */
+
 interface DropdownProps<T> {
   value: T;
   options: SelectOption<T>[];
