@@ -3,7 +3,7 @@
 import { cn } from "@/utils";
 import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { TodoSection, TodoSectionHeader } from "./_components";
+import { TodoSection, TodoHeader } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 
 const ListPage = () => {
@@ -24,7 +24,7 @@ const ListPage = () => {
         <PageHeaderBar title="경영관리팀" />
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
-          <TodoSectionHeader />
+          <TodoHeader />
           <TodoSection />
         </div>
       </PageLayout>
