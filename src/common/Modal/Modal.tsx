@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent, ReactNode, useEffect } from "react";
+import { MouseEvent, useEffect } from "react";
 import { cn } from "@/utils";
 import {
   MODAL_BASE_STYLE,
@@ -10,18 +10,14 @@ import {
   MODAL_OVERLAY_STYLE,
 } from "./MODAL_STYLE";
 import Icon from "../Icon/Icon";
+import { ModalProps, ModalContentProps } from "./_types/ModalProps";
 
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  className?: string;
-  children: ReactNode;
-}
-
-interface ModalContentProps {
-  children: ReactNode;
-  className?: string;
-}
+/**
+ * @author sangin
+ * CloseIcon: 필요 시 사용
+ * Body: 자유롭게 모달 안 내용들 넣기 스토리 참조
+ * Footer: 주로 버튼들이 들어갈 영역
+ */
 
 const Modal = ({ isOpen, onClose, className, children }: ModalProps) => {
   const handleOverlayClick = (e: MouseEvent<HTMLDivElement>) => {
