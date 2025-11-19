@@ -4,7 +4,7 @@ import BaseButton from "../Button/BaseButton";
 import Icon from "../Icon/Icon";
 
 const meta: Meta<typeof Input> = {
-  title: "Common/Input",
+  title: "Common/Input/Input",
   component: Input,
   tags: ["autodocs"],
   parameters: {
