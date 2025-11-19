@@ -38,8 +38,10 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
 
         <section className="text-md-regular text-text-primary">
           <h3 className="sr-only">상세페이지 내용</h3>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, fugit neque sequi labore cupiditate aliquam
-          doloribus unde quidem ipsum excepturi.
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, fugit neque sequi labore cupiditate aliquam
+            doloribus unde quidem ipsum excepturi.
+          </p>
         </section>
 
         <CommentSection />
