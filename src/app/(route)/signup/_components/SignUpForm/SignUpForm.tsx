@@ -18,7 +18,7 @@ const SignUpForm = () => {
       name: (value) => validateName(value),
       email: (value) => validateEmail(value),
       password: (value) => validatePassword(value),
-      passwordConfirm: (value, formData) => validatePasswordConfirm(value, formData?.password ?? ""),
+      passwordConfirm: (value, formData) => validatePasswordConfirm(formData?.password ?? "", value),
     },
     onSubmit: async (values) => {
       // TODO(김원선): 회원가입 API 연동
