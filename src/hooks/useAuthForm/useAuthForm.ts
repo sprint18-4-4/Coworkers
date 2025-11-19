@@ -30,9 +30,25 @@ const useAuthForm = (options: UseAuthFormOptions): UseAuthFormReturn => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const isAllFilled = Object.values(formData).every((value) => value.trim().length > 0);
-  const hasError = Object.keys(errors).length > 0;
-  const isButtonEnabled = isAllFilled && !hasError && !isSubmitting;
+  const isFormValid = (): boolean => {
+    const hasEmptyField = Object.values(formData).some((value) => value.trim() === "");
+    if (hasEmptyField) return false;
+
+    if (!validationRules) return true;
+
+    for (const fieldName of Object.keys(validationRules)) {
+      const validator = validationRules[fieldName];
+      if (!validator) continue;
+
+      const value = formData[fieldName] ?? "";
+      const result = validator(value, formData);
+
+      if (!result.isValid) return false;
+    }
+    return true;
+  };
+
+  const isButtonEnabled = isFormValid() && !isSubmitting;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
