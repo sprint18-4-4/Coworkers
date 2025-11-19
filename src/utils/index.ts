@@ -5,3 +5,4 @@ export { getFrequencyLabel } from "@/utils/getFrequencyLabel";
 export { formatTime } from "@/utils/formatTime";
 export * from "@/utils/Validation";
 export { default as tokenStorage } from "@/utils/tokenStorage";
+export { default as setAuthCookies } from "@/utils/setAuthCookies";
