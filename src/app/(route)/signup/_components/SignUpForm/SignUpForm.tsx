@@ -1,11 +1,29 @@
 "use client";
 
 import { Input, InputPassword, BaseButton } from "@/common";
-import useSignUpForm from "../../_hooks/useSignUpForm";
+import { useAuthForm } from "@/hooks/";
+import { validateEmail, validateName, validatePassword, validatePasswordConfirm } from "@/utils";
+
+const INITIAL_VALUES = {
+  name: "",
+  email: "",
+  password: "",
+  passwordConfirm: "",
+} satisfies Record<string, string>;
 
 const SignUpForm = () => {
-  const { formData, errors, isSubmitting, isButtonEnabled, handleChange, handleSubmit, validateField } =
-    useSignUpForm();
+  const { formData, errors, isSubmitting, isButtonEnabled, handleChange, handleSubmit, validateField } = useAuthForm({
+    initialValues: INITIAL_VALUES,
+    validationRules: {
+      name: (value) => validateName(value),
+      email: (value) => validateEmail(value),
+      password: (value) => validatePassword(value),
+      passwordConfirm: (value, formData) => validatePasswordConfirm(value, formData?.password ?? ""),
+    },
+    onSubmit: async (values) => {
+      // TODO(김원선): 회원가입 API 연동
+    },
+  });
 
   return (
     <form onSubmit={handleSubmit} className="min-w-[300px] w-full mt-8 mb-10 gap-10 flex flex-col">
