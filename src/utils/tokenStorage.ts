@@ -36,7 +36,7 @@ const getCookie = (name: string): string | null => {
 
   const encodedName = `${encodeURIComponent(name)}=`;
 
-  const pair = document.cookie.split(";").findLast((cookie) => cookie.startsWith(encodedName));
+  const pair = document.cookie.split("; ").findLast((cookie) => cookie.startsWith(encodedName));
 
   if (!pair) return null;
 
@@ -51,22 +51,19 @@ const clearCookie = (name: string) => {
 const tokenStorage = {
   getAccessToken: (): string | null => getCookie(ACCESS_TOKEN_KEY),
 
-  getRefreshToken: (): string | null => getCookie(REFRESH_TOKEN_KEY),
-
   setAccessToken: (accessToken: string) => {
-    const commonOptions: CookieOptions = {
+    const Options: CookieOptions = {
       path: "/",
-      maxAgeSeconds: 60 * 60 * 24,
+      maxAgeSeconds: 60 * 60 * 1,
       secure: true,
       sameSite: "lax",
     };
 
-    setCookie(ACCESS_TOKEN_KEY, accessToken, commonOptions);
+    setCookie(ACCESS_TOKEN_KEY, accessToken, Options);
   },
 
   clearTokens: () => {
     clearCookie(ACCESS_TOKEN_KEY);
-    clearCookie(REFRESH_TOKEN_KEY);
   },
 };
 

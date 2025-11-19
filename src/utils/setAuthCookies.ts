@@ -7,19 +7,44 @@ type TokenPair = {
   refreshToken: string;
 };
 
-const setAuthCookies = async ({ accessToken, refreshToken }: TokenPair) => {
-  const cookieStore = await cookies();
-  const isProd = process.env.NEXT_PUBLIC_API_URL === "production";
+const isProd = process.env.NEXT_PUBLIC_API_URL === "production";
 
-  cookieStore.set("accessToken", accessToken, {
-    secure: isProd,
-    path: "/",
-  });
+export const setAuthCookies = async ({ accessToken, refreshToken }: TokenPair) => {
+  const cookieStore = await cookies();
 
   cookieStore.set("refreshToken", refreshToken, {
+    httpOnly: true,
     secure: isProd,
+    sameSite: "lax",
     path: "/",
+    maxAge: 60 * 60 * 24 * 7,
+  });
+
+  cookieStore.set("accessToken", accessToken, {
+    httpOnly: false,
+    secure: isProd,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 60 * 60,
   });
 };
 
-export default setAuthCookies;
+export const clearAuthCookies = async () => {
+  const cookieStore = await cookies();
+
+  cookieStore.set("refreshToken", "", {
+    httpOnly: true,
+    secure: isProd,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+  });
+
+  cookieStore.set("accessToken", "", {
+    httpOnly: false,
+    secure: isProd,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+  });
+};
