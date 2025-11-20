@@ -25,7 +25,11 @@ export const POST = async () => {
           path: "/",
           maxAge: 0,
         });
+
+        return NextResponse.json({ message: "Refresh token expired" }, { status: 401 });
       }
+
+      return NextResponse.json({ message: "Failed to refresh token" }, { status: backendResponse.status });
     }
 
     const data = (await backendResponse.json()) as { accessToken: string };
