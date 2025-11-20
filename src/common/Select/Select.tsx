@@ -32,9 +32,6 @@ interface DropdownProps<T> {
   className?: string;
   textAlign?: "left" | "center";
 }
-/**
- * @author sangin
- */
 
 const Select = <T,>({ value, options, onChange, className, textAlign = "left" }: DropdownProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
