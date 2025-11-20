@@ -7,7 +7,7 @@ type TokenPair = {
   refreshToken: string;
 };
 
-const isProd = process.env.NEXT_PUBLIC_API_URL === "production";
+const isProd = process.env.NODE_ENV === "production";
 
 export const setAuthCookies = async ({ accessToken, refreshToken }: TokenPair) => {
   const cookieStore = await cookies();

@@ -34,7 +34,7 @@ export const POST = async () => {
 
     const data = (await backendResponse.json()) as { accessToken: string };
 
-    const isProd = process.env.NEXT_PUBLIC_API_URL === "production";
+    const isProd = process.env.NODE_ENV === "production";
     const response = NextResponse.json({ accessToken: data.accessToken });
 
     response.cookies.set("accessToken", data.accessToken, {
