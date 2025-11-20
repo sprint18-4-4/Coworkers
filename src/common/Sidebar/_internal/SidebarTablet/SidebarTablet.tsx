@@ -11,7 +11,7 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
   return (
     <aside
       className={cn(
-        "flex-col sticky top-0 h-[100vh] border-r border-background-tertiary",
+        "flex-col sticky top-0 h-[100vh] border-r border-background-tertiary z-[999]",
         isOpen ? "w-[270px]" : "w-[72px]",
         "hidden tablet:flex pc:flex",
       )}
@@ -27,13 +27,13 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
           onClick={() => handleOpenDropdown(isOpen)}
           className={cn(
             "ml-auto rounded-full bg-background-primary",
-            isOpen ? "size-7" : "p-1 ml-[5px] border border-background-tertiary",
+            isOpen ? "size-7" : "p-1 border border-background-tertiary",
           )}
         >
           {isOpen ? (
             <Icon name="leftFold" className="size-6 tablet:size-6" />
           ) : (
-            <Icon name="rightFold" className="size-6 tablet:size-6" />
+            <Icon name="rightFold" className="size-6 tablet:size-6 text-slate-300" />
           )}
         </button>
       </header>
@@ -42,13 +42,17 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
         <section className="w-full flex-1 min-h-0 flex flex-col items-center justify-start gap-3">
           {user && (
             <>
-              <div className={cn("w-full flex flex-col gap-2", isOpen && "pb-3")}>
-                <SidebarDropdown isOpen={isOpen} />
+              {user.memberships.length > 0 && (
+                <>
+                  <div className={cn("w-full flex flex-col gap-2", isOpen && "pb-3")}>
+                    <SidebarDropdown isOpen={isOpen} />
 
-                {isOpen && <AddTeamButton />}
-              </div>
+                    {isOpen && <AddTeamButton />}
+                  </div>
 
-              <hr className={cn("w-full text-background-tertiary", !isOpen && "hidden")} />
+                  <hr className={cn("w-full text-background-tertiary", !isOpen && "hidden")} />
+                </>
+              )}
 
               <SidebarLink title="자유게시판" isOpen={isOpen} />
             </>

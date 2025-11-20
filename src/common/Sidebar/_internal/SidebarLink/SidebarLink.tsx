@@ -9,7 +9,7 @@ const SidebarLink = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
       className={cn("h-[52px] rounded-xl p-4 flex items-center gap-3 bg-white", isOpen ? "w-full" : "w-[52px]")}
     >
       <Icon name="board" className="size-5 tablet:size-5 text-slate-300" />
-      {isOpen && <span className="flex-1 min-w-0 text-lg-regular text-brand-primary truncate">{title}</span>}
+      {isOpen && <span className="flex-1 min-w-0 text-lg-regular text-text-primary truncate">{title}</span>}
     </Link>
   );
 };

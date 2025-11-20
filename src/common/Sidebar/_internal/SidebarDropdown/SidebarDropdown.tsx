@@ -3,10 +3,18 @@ import { SIDEBAR_MOCK_DATA } from "@/MOCK_DATA";
 import { cn } from "@/utils/cn";
 
 const DropdownItem = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
+  const isActive = false;
+
   return (
-    <div className={cn("h-[52px] rounded-xl p-4 flex items-center gap-3 bg-white", isOpen ? "w-full" : "w-[52px]")}>
-      <div className="size-5 bg-black shrink-0" />
-      {isOpen && <span className="flex-1 min-w-0 text-lg-regular text-brand-primary truncate">{title}</span>}
+    <div
+      className={cn(
+        "h-[52px] rounded-xl p-4 flex items-center gap-3 bg-primary",
+        isOpen ? "w-full" : "w-[52px]",
+        isActive ? "bg-blue-50 text-brand-primary" : "bg-transparent text-text-primary",
+      )}
+    >
+      <Icon name="chess" className={cn("size-5 tablet:size-5", isActive ? "text-brand-primary" : "text-slate-300")} />
+      {isOpen && <span className="flex-1 min-w-0 text-lg-regular truncate">{title}</span>}
     </div>
   );
 };
@@ -20,7 +28,10 @@ const SidebarDropdown = ({ isOpen }: { isOpen: boolean }) => {
           {isOpen && <span className="text-lg-semibold text-slate-400">팀 선택</span>}
         </span>
         {isOpen && (
-          <Icon name="downArrow" className="size-5 tablet:size-5 group-open:rotate-180 transition-transform" />
+          <Icon
+            name="downArrow"
+            className="size-5 tablet:size-5 group-open:rotate-180 transition-transform text-icon-primary"
+          />
         )}
       </summary>
 
