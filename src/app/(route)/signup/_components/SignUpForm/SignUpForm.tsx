@@ -9,7 +9,7 @@ const INITIAL_VALUES = {
   email: "",
   password: "",
   passwordConfirm: "",
-} satisfies Record<string, string>;
+};
 
 const SignUpForm = () => {
   const { formData, errors, isSubmitting, isButtonEnabled, handleChange, handleSubmit, validateField } = useAuthForm({
