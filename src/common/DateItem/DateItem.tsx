@@ -1,6 +1,6 @@
-import { cn } from "@/utils";
 import Link from "next/link";
-import { DateNumber, Day } from "./_types";
+import { cn } from "@/utils";
+import { DateNumber, Day } from "@/types";
 
 /**
  * @author jikwon
@@ -25,7 +25,7 @@ const DateItem = ({ day, date, isToday }: DateItemProps) => {
       aria-label={`${day} ${date}일`}
       className={cn(
         "box-border flex-col-center gap-1 rounded-lg w-[60px] h-[49px] py-2 border",
-        "tablet:w-[100px] tablet:min-h-[68px] tablet:px-4 tablet:py-3 tablet:rounded-xl",
+        "tablet:flex-1 tablet:min-h-[68px] tablet:px-4 tablet:py-3 tablet:rounded-xl",
         isToday
           ? "bg-slate-800 text-text-inverse border-transparent"
           : "bg-background-primary border-border-primary hover:bg-background-secondary transition-colors",

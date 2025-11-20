@@ -1,38 +1,8 @@
-import { Icon, Todo } from "@/common";
-import { cn, getFrequencyLabel } from "@/utils";
-import { ScheduleItem } from "../../_types";
+import { cn } from "@/utils";
+import { TaskListItem } from "@/features";
+import { TaskListItemType } from "@/types";
 
-interface ScheduleDayItemProps {
-  item: ScheduleItem;
-}
-
-const ScheduleDayItem = ({ item }: ScheduleDayItemProps) => {
-  return (
-    <li className="px-[14px] py-3 flex flex-col items-start rounded-lg gap-[10px] bg-background-secondary">
-      <div className="flex-center gap-3">
-        <Todo title={item.name} id={item.id.toString()} completed={false} onChangeCompleted={() => {}} />
-        <div className="flex items-center gap-[2px] text-xs-regular">
-          <Icon name="comment" className="size-4 tablet:size-4" />
-          <span>{item.commentCount}</span>
-        </div>
-      </div>
-      <div className="h-[14px] flex items-center gap-2 text-xs-regular text-text-default">
-        <time dateTime={item.date} className="flex items-center gap-[6px]">
-          <Icon name="calendar" className="size-4 tablet:size-4" />
-          {/* TODO(지권): 날짜 포맷팅 추가 */}
-          <span>{item.date}</span>
-        </time>
-        <hr aria-hidden="true" className="w-[1px] h-full bg-slate-700" />
-        <div className="flex items-center gap-[6px]">
-          <Icon name="repeat" className="size-4 tablet:size-4" />
-          <span>{getFrequencyLabel(item.frequency)}</span>
-        </div>
-      </div>
-    </li>
-  );
-};
-
-const ScheduleDaySection = ({ items }: { items: ScheduleItem[] }) => {
+const ScheduleDaySection = ({ items }: { items: TaskListItemType[] }) => {
   return (
     <>
       <div className="flex-center gap-5">
@@ -47,7 +17,7 @@ const ScheduleDaySection = ({ items }: { items: ScheduleItem[] }) => {
         <h2 className="text-lg-bold text-text-primary">법인 등기</h2>
         <ul className="flex flex-col gap-3">
           {items.map((item) => (
-            <ScheduleDayItem key={item.id} item={item} />
+            <TaskListItem key={item.id} item={item} />
           ))}
         </ul>
       </section>
