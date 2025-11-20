@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import useForm from "./useForm";
 import useFormValidation from "./useFormValidation";
 import { FormValues, FormErrors, ValidationRules } from "@/types";
 
@@ -24,9 +23,14 @@ interface UseAuthFormReturn {
 const useAuthForm = (options: UseAuthFormOptions): UseAuthFormReturn => {
   const { initialValues, validationRules, onSubmit } = options;
 
-  const { formData, handleChange, resetForm } = useForm(initialValues);
+  const [formData, setFormData] = useState<FormValues>(initialValues);
 
-  const { errors, validateField: baseValidateField, validateForm } = useFormValidation(validationRules ?? {});
+  const {
+    errors,
+    validateField: baseValidateField,
+    validateForm,
+    clearError,
+  } = useFormValidation(validationRules ?? {});
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -65,6 +69,23 @@ const useAuthForm = (options: UseAuthFormOptions): UseAuthFormReturn => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (errors[name]) {
+      clearError(name);
+    }
+  };
+
+  const resetForm = () => {
+    setFormData(initialValues);
   };
 
   const validateField = (fieldName: string) => {
