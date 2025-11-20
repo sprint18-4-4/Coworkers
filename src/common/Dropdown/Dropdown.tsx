@@ -1,149 +1,67 @@
 "use client";
 
-import { ReactNode, useEffect, useRef, useState } from "react";
-import { useDropdown } from "@/hooks";
-import { DropdownContext } from "@/hooks";
+import { useDropdownClose } from "@/hooks";
+import { useRef, useState } from "react";
 import { cn } from "@/utils";
+import Icon, { IconKeys } from "../Icon/Icon";
+import { DropdownOption } from "./_types/types";
 
 /**
  * @author sangin
  *
  * @example
- * 기본 정렬 드롭다운
  * ```tsx
- * <Dropdown>
- *   <Dropdown.Toggle className="flex gap-2 px-[14px] py-[10px] bg-background-primary rounded-xl">
- *     <span>{sorted}</span>
- *     <Icon name="downArrow" />
- *   </Dropdown.Toggle>
-    
- *   <Dropdown.Items className="w-[120px]">
- *     {
- *       list.map(()=>(
- *         <Dropdown.Item className={}>
- *           <Dropdown.Action className={} onClick={list.onClick}>{list.label}</Dropdown.Action>
- *         </Dropdown.Item>
- *        ))
- *     }
- *   </Dropdown.Items>
- * </Dropdown>
- * ```
+ * const options = [
+ *   { label: "마이 히스토리", action: ()=>{} },
+ *   { label: "로그아웃", action: ()=>{} },
+ * ];
  *
- * @example
- * 케밥 메뉴 드롭다운
- * ```tsx
- * <Dropdown>
- *   <Dropdown.Toggle>
- *     <Icon name="kebab" />
- *   </Dropdown.Toggle>
- *   <Dropdown.Items className="w-[120px]">
- *     {
- *       list.map((item)=>(
- *         <Dropdown.Item key={} className={}>
- *           <Dropdown.Action className={} onClick={item.onClick}>{item.label}</Dropdown.Action>
- *         </Dropdown.Item>
- *        ))
- *     }
- *   </Dropdown.Items>
- * </Dropdown>
+ * <Dropdown
+ *   iconName={kebab}
+ *   options={options}
+ *   iconClassName="tablet:size-9 text-red-200"
+ * />
  * ```
  */
 
-interface DropdownType {
-  children: ReactNode;
-  className?: string;
+interface DropdownProps {
+  iconName: IconKeys;
+  iconClassName?: string;
+  options: DropdownOption[];
+  textAlign?: "left" | "center";
 }
 
-interface DropdownActionType extends DropdownType {
-  onClick: () => void;
-}
-
-const Dropdown = ({ children }: DropdownType) => {
+const Dropdown = ({ iconName, iconClassName, options, textAlign = "center" }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const onToggle = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const onClose = () => {
+  const handleClick = (option: DropdownOption) => {
+    option.action();
     setIsOpen(false);
   };
 
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
-
+  useDropdownClose(dropdownRef, () => setIsOpen(false), isOpen);
   return (
-    <DropdownContext.Provider value={{ isOpen, onToggle, onClose }}>
-      <div ref={dropdownRef} className="relative inline-block">
-        {children}
-      </div>
-    </DropdownContext.Provider>
-  );
-};
+    <div className="relative inline-block" ref={dropdownRef}>
+      <button onClick={() => setIsOpen((prev) => !prev)}>
+        <span>
+          <Icon name={iconName} className={iconClassName} />
+        </span>
+      </button>
 
-const DropdownToggle = ({ children, className }: DropdownType) => {
-  const { onToggle } = useDropdown();
-
-  return (
-    <button className={className} onClick={onToggle}>
-      {children}
-    </button>
-  );
-};
-
-const DropdownItems = ({ children, className }: DropdownType) => {
-  const { isOpen } = useDropdown();
-  if (!isOpen) {
-    return null;
-  }
-
-  return (
-    <ul
-      className={cn(
-        "w-full flex flex-col-center border border-border-primary rounded-xl absolute top-full bg-background-primary",
-        className,
+      {isOpen && (
+        <ul className="absolute left-0 top-full mt-1 min-w-[120px] bg-background-primary border rounded-xl shadow-md z-10">
+          {options.map((option) => (
+            <li key={option.label}>
+              <button className={cn("w-full px-3 py-2", `text-${textAlign}`)} onClick={() => handleClick(option)}>
+                <span className="text-md-regular text-text-primary">{option.label}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
       )}
-    >
-      {children}
-    </ul>
+    </div>
   );
 };
 
-const DropdownItem = ({ children, className }: DropdownType) => {
-  return <li className={cn("w-full", className)}>{children}</li>;
-};
-
-const DropdownAction = ({ children, className, onClick }: DropdownActionType) => {
-  const { onClose } = useDropdown();
-  const handleButtonClick = () => {
-    onClick();
-    onClose();
-  };
-
-  return (
-    <button className={cn("w-full p-[14px]", className)} onClick={handleButtonClick}>
-      {children}
-    </button>
-  );
-};
-
-Dropdown.Toggle = DropdownToggle;
-Dropdown.Items = DropdownItems;
-Dropdown.Item = DropdownItem;
-Dropdown.Action = DropdownAction;
 export default Dropdown;
