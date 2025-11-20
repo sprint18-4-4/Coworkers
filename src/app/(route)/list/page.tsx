@@ -5,10 +5,13 @@ import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TodoSection, TodoHeader } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
+import { DetailPage } from "./_detail/_components";
 
 const ListPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const selectedId = searchParams.get("taskId");
 
   const onClickFloatingButton = () => {
     const params = new URLSearchParams(searchParams.toString());
@@ -18,7 +21,7 @@ const ListPage = () => {
   };
 
   return (
-    <>
+    <div className={cn(selectedId && "pc:flex")}>
       <PageLayout ariaLabel="목록 페이지">
         <h1 className="sr-only">목록 페이지</h1>
         <PageHeaderBar title="경영관리팀" />
@@ -35,7 +38,9 @@ const ListPage = () => {
         iconClassName="size-6 tablet:size-6"
         onClick={onClickFloatingButton}
       />
-    </>
+
+      {selectedId && <DetailPage id={selectedId} />}
+    </div>
   );
 };
 
