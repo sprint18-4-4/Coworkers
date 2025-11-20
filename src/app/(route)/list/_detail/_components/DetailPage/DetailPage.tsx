@@ -3,7 +3,7 @@
 import { cn } from "@/utils";
 import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
-import { CommentSection, HeaderSection } from "../_internal";
+import { CommentSection, ContentSection, HeaderSection } from "../_internal";
 
 interface DetailPageProps {
   id: string;
@@ -36,13 +36,7 @@ const DetailPage = ({ id }: DetailPageProps) => {
 
         <hr />
 
-        <section className="text-md-regular text-text-primary">
-          <h3 className="sr-only">상세페이지 내용</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, fugit neque sequi labore cupiditate aliquam
-            doloribus unde quidem ipsum excepturi.
-          </p>
-        </section>
+        <ContentSection content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias nisi qui cumque! Aperiam, architecto itaque!" />
 
         <CommentSection />
       </article>
