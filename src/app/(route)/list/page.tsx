@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TodoSection, TodoHeader } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
-import { DetailLayout } from "./_detail/_components";
+import { DetailPage } from "./_detail/_components";
 
 const ListPage = () => {
   const router = useRouter();
@@ -39,7 +39,7 @@ const ListPage = () => {
         onClick={onClickFloatingButton}
       />
 
-      {selectedId && <DetailLayout id={selectedId} />}
+      {selectedId && <DetailPage id={selectedId} />}
     </div>
   );
 };

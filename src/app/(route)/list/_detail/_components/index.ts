@@ -1,1 +1,1 @@
-export { default as DetailLayout } from "./DetailLayout/DetailLayout";
+export { default as DetailPage } from "./DetailPage/DetailPage";

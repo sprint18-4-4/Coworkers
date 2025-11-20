@@ -5,11 +5,11 @@ import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
 import { CommentSection, HeaderSection } from "../_internal";
 
-interface DetailLayoutProps {
+interface DetailPageProps {
   id: string;
 }
 
-const DetailLayout = ({ id }: DetailLayoutProps) => {
+const DetailPage = ({ id }: DetailPageProps) => {
   const router = useRouter();
 
   const onClickClose = () => {
@@ -60,4 +60,4 @@ const DetailLayout = ({ id }: DetailLayoutProps) => {
   );
 };
 
-export default DetailLayout;
+export default DetailPage;
