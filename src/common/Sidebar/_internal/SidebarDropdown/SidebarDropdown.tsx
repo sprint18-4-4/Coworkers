@@ -1,12 +1,11 @@
 import { Icon } from "@/common";
 import { Membership } from "@/types";
+import { useIsActivePath } from "@/utils";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const DropdownItem = ({ title, id, isOpen }: { title: string; id: string; isOpen: boolean }) => {
-  const params = usePathname();
-  const isActive = params === `/${id}`;
+  const isActive = useIsActivePath(`/${id}`);
 
   return (
     <Link

@@ -15,7 +15,6 @@ import { User } from "@/types";
 
 const Sidebar = ({ user }: { user: User }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log("user: ", user);
 
   const handleOpenDropdown = (prev: boolean) => {
     setIsOpen(!prev);
