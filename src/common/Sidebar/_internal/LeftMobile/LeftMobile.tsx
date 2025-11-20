@@ -40,7 +40,6 @@ const LeftMobile = ({ isOpen, handleOpenDropdown, user }: SidebarProps) => {
         />
 
         <div className="min-w-0 flex flex-col gap-2">
-          {/* TODO(지권): MOCK_DATA 제거 */}
           {user?.memberships.map((membership) => (
             <MobileMenuItem key={membership.groupId} membership={membership} isOpen={isOpen} />
           ))}
