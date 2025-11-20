@@ -36,7 +36,6 @@ const TaskListItem = ({ item, onOpenDetail }: TaskListItemProps) => {
           </div>
         </div>
         <div
-          aria-label="메뉴"
           onClick={(e) => {
             e.stopPropagation();
           }}
