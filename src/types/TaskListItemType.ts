@@ -16,7 +16,7 @@ interface Writer {
   id: number;
 }
 
-export interface ScheduleItem {
+export interface TaskListItemType {
   id: number;
   name: string;
   description: string;

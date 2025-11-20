@@ -23,7 +23,7 @@ const PageHeaderBar = ({ title }: PageHeaderBarProps) => {
       )}
     >
       <h2 className={cn("text-lg-bold text-text-primary", "tablet:text-2xl-bold", "pc:text-2xl-bold")}>{title}</h2>
-      <Icon name="setting" className="size-5 tablet:size-6" />
+      <Icon name="setting" className="size-5 tablet:size-6 text-slate-400" />
     </div>
   );
 };

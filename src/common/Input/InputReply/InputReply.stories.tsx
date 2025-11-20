@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import InputReply from "./InputReply";
 
 const meta: Meta<typeof InputReply> = {
-  title: "Common/InputReply",
+  title: "Common/Input/InputReply",
   component: InputReply,
   tags: ["autodocs"],
   parameters: {
