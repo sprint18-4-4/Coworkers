@@ -36,7 +36,7 @@ const TodoSection = () => {
   const router = useRouter();
 
   const onClickTaskListItem = (id: string) => {
-    router.push(`/list?taskId=${id}`, { scroll: false });
+    router.push(`/task-list?taskId=${id}`, { scroll: false });
   };
 
   return (

@@ -1,23 +1,23 @@
 "use client";
 
 import { cn } from "@/utils";
-import { Suspense } from "react";
+import { Suspense, use } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TodoSection, TodoHeader } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 import { DetailPage } from "./_detail/_components";
 
-const ListPage = () => {
+const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
+  const { teamId } = use(params);
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const selectedId = searchParams.get("taskId");
 
   const onClickFloatingButton = () => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("w", "true");
 
-    router.push(`/list?${params.toString()}`);
+    router.push(`/task-list?${params.toString()}`);
   };
 
   return (
@@ -44,11 +44,11 @@ const ListPage = () => {
   );
 };
 
-const Page = () => {
+const Page = ({ params }: { params: Promise<{ teamId: string }> }) => {
   return (
     // TODO(지권): 로딩 화면 추가 필요
     <Suspense fallback={""}>
-      <ListPage />
+      <ListPage params={params} />
     </Suspense>
   );
 };
