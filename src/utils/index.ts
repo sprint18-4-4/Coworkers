@@ -4,3 +4,4 @@ export { formatCount } from "@/utils/formatCount";
 export { getFrequencyLabel } from "@/utils/getFrequencyLabel";
 export { formatTime } from "@/utils/formatTime";
 export * from "@/utils/Validation";
+export { formatToKoreanDate } from "@/utils/formatDate";

@@ -1,6 +1,5 @@
 import { cn } from "@/utils";
 import { ReactNode } from "react";
-import Icon from "../Icon/Icon";
 import Dropdown from "../Dropdown/Dropdown";
 
 /**

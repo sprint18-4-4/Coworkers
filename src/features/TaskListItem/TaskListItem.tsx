@@ -1,5 +1,5 @@
-import { Icon, Todo } from "@/common";
-import { cn, getFrequencyLabel } from "@/utils";
+import { Dropdown, Icon, Todo } from "@/common";
+import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import type { TaskListItemType } from "@/types";
 
 interface TaskListItemProps {
@@ -8,12 +8,18 @@ interface TaskListItemProps {
 }
 
 const TaskListItem = ({ item, onOpenDetail }: TaskListItemProps) => {
+  const options = [
+    { label: "수정하기", action: () => {} },
+    { label: "삭제하기", action: () => {} },
+  ];
+
   return (
     <li
       className={cn(
-        "px-[14px] py-3 flex flex-col items-start rounded-lg gap-[10px] bg-background-secondary",
+        "flex flex-col items-start rounded-lg gap-[10px] bg-background-secondary",
         onOpenDetail && "cursor-pointer",
       )}
+      style={{ padding: "12px 14px" }}
       {...(onOpenDetail && {
         onClick: onOpenDetail,
         role: "button",
@@ -29,14 +35,19 @@ const TaskListItem = ({ item, onOpenDetail }: TaskListItemProps) => {
             <span>{item?.commentCount}</span>
           </div>
         </div>
-        {/* TODO(지권): 메뉴 공통 컴포넌트 추가 */}
-        <Icon name="kebab" className="size-4 tablet:size-4" aria-label={`${item?.name} 메뉴`} />
+        <div
+          aria-label="메뉴"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <Dropdown iconName="kebab" options={options} iconClassName="size-4 tablet:size-4" />
+        </div>
       </div>
       <div className="h-[14px] flex items-center gap-2 text-xs-regular text-text-default">
         <time dateTime={item?.date} className="flex items-center gap-[6px]">
           <Icon name="calendar" className="size-4 tablet:size-4" />
-          {/* TODO(지권): 날짜 포맷팅 추가 */}
-          <span>{item?.date}</span>
+          <span>{formatToKoreanDate(item?.date)}</span>
         </time>
         <hr aria-hidden="true" className="w-[1px] h-full bg-slate-700" />
         <div className="flex items-center gap-[6px]">
