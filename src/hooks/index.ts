@@ -3,3 +3,4 @@ export { default as DropdownContext } from "./useDropdown/DropdownContext";
 export { default as useAuthForm } from "./useAuthForm/useAuthForm";
 export { default as useForm } from "./useAuthForm/useForm";
 export { default as useFormValidation } from "./useAuthForm/useFormValidation";
+export { default as useDropdownClose } from "./useDropdownClose";
