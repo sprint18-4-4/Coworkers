@@ -41,8 +41,6 @@ const callRefreshEndpoint = async (): Promise<string | null> => {
 
     const data = (await response.json()) as { accessToken: string };
 
-    tokenStorage.setAccessToken(data.accessToken);
-
     return data.accessToken;
   } catch {
     return null;
