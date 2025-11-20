@@ -1,12 +1,9 @@
+import { ValidationResult } from "@/types";
+
 export const EMAIL_REGX = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 export const PW_REGX = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/;
 
-type validationResult = {
-  isValid: boolean;
-  ErrorMessage?: string;
-};
-
-export const validateEmail = (email: string): validationResult => {
+export const validateEmail = (email: string): ValidationResult => {
   if (!email.trim()) {
     return { isValid: false, ErrorMessage: "이메일을 입력해주세요." };
   }
@@ -18,7 +15,7 @@ export const validateEmail = (email: string): validationResult => {
   return { isValid: true };
 };
 
-export const validatePasswordForLogin = (password: string): validationResult => {
+export const validatePasswordForLogin = (password: string): ValidationResult => {
   if (!password.trim()) {
     return { isValid: false, ErrorMessage: "비밀번호를 입력해주세요." };
   }
@@ -26,7 +23,7 @@ export const validatePasswordForLogin = (password: string): validationResult => 
   return { isValid: true };
 };
 
-export const validatePassword = (password: string): validationResult => {
+export const validatePassword = (password: string): ValidationResult => {
   if (!password.trim()) {
     return { isValid: false, ErrorMessage: "비밀번호를 입력해주세요." };
   }
@@ -42,7 +39,7 @@ export const validatePassword = (password: string): validationResult => {
   return { isValid: true };
 };
 
-export const validatePasswordConfirm = (password: string, passwordConfirm: string): validationResult => {
+export const validatePasswordConfirm = (password: string, passwordConfirm: string): ValidationResult => {
   if (!passwordConfirm.trim()) {
     return { isValid: false, ErrorMessage: "비밀번호를 입력해주세요." };
   }
@@ -54,7 +51,7 @@ export const validatePasswordConfirm = (password: string, passwordConfirm: strin
   return { isValid: true };
 };
 
-export const validateName = (name: string): validationResult => {
+export const validateName = (name: string): ValidationResult => {
   if (!name.trim()) {
     return { isValid: false, ErrorMessage: "이름을 입력해주세요." };
   }
