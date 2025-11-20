@@ -27,7 +27,7 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
           onClick={() => handleOpenDropdown(isOpen)}
           className={cn(
             "ml-auto rounded-full bg-background-primary",
-            isOpen ? "size-7" : "p-1 border border-background-tertiary",
+            isOpen ? "size-7" : "p-1 -mx-1.5 border border-background-tertiary",
           )}
         >
           {isOpen ? (
@@ -45,7 +45,7 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
               {user.memberships.length > 0 && (
                 <>
                   <div className={cn("w-full flex flex-col gap-2", isOpen && "pb-3")}>
-                    <SidebarDropdown isOpen={isOpen} />
+                    <SidebarDropdown isOpen={isOpen} membership={user.memberships} />
 
                     {isOpen && <AddTeamButton />}
                   </div>

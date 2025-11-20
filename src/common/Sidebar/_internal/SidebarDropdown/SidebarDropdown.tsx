@@ -1,12 +1,16 @@
 import { Icon } from "@/common";
-import { SIDEBAR_MOCK_DATA } from "@/MOCK_DATA";
+import { Membership } from "@/types";
 import { cn } from "@/utils/cn";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const DropdownItem = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
-  const isActive = false;
+const DropdownItem = ({ title, id, isOpen }: { title: string; id: string; isOpen: boolean }) => {
+  const params = usePathname();
+  const isActive = params === `/${id}`;
 
   return (
-    <div
+    <Link
+      href={`/${id}`}
       className={cn(
         "h-[52px] rounded-xl p-4 flex items-center gap-3 bg-primary",
         isOpen ? "w-full" : "w-[52px]",
@@ -15,11 +19,11 @@ const DropdownItem = ({ title, isOpen }: { title: string; isOpen: boolean }) => 
     >
       <Icon name="chess" className={cn("size-5 tablet:size-5", isActive ? "text-brand-primary" : "text-slate-300")} />
       {isOpen && <span className="flex-1 min-w-0 text-lg-regular truncate">{title}</span>}
-    </div>
+    </Link>
   );
 };
 
-const SidebarDropdown = ({ isOpen }: { isOpen: boolean }) => {
+const SidebarDropdown = ({ isOpen, membership }: { isOpen: boolean; membership: Membership[] }) => {
   return (
     <details className="group w-full rounded-xl bg-white">
       <summary className="list-none px-4 py-2 flex items-center justify-between cursor-pointer rounded-xl select-none">
@@ -36,9 +40,9 @@ const SidebarDropdown = ({ isOpen }: { isOpen: boolean }) => {
       </summary>
 
       <ul className="flex flex-col gap-2 mt-2">
-        {SIDEBAR_MOCK_DATA.map((item, index) => (
+        {membership.map((item, index) => (
           <li key={index}>
-            <DropdownItem title={item.title} isOpen={isOpen} />
+            <DropdownItem title={item.group.name} id={item.group.id.toString()} isOpen={isOpen} />
           </li>
         ))}
       </ul>
