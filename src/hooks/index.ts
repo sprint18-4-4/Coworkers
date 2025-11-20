@@ -1,2 +1,1 @@
-export { default as useDropdown } from "./useDropdown/useDropdown";
-export { default as DropdownContext } from "./useDropdown/DropdownContext";
+export { default as useDropdownClose } from "./useDropdownClose";
