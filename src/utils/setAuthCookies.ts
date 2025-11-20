@@ -17,7 +17,7 @@ export const setAuthCookies = async ({ accessToken, refreshToken }: TokenPair) =
     secure: isProd,
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: 60 * 60 * 24,
   });
 
   cookieStore.set("accessToken", accessToken, {
