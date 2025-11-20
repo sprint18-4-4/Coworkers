@@ -1,6 +1,7 @@
 import { cn } from "@/utils";
 import { ReactNode } from "react";
 import Icon from "../Icon/Icon";
+import Dropdown from "../Dropdown/Dropdown";
 
 /**
  * @author jikwon
@@ -15,6 +16,11 @@ interface PageHeaderBarProps {
 }
 
 const PageHeaderBar = ({ title }: PageHeaderBarProps) => {
+  const options = [
+    { label: "수정하기", action: () => {} },
+    { label: "삭제하기", action: () => {} },
+  ];
+
   return (
     <div
       className={cn(
@@ -23,7 +29,7 @@ const PageHeaderBar = ({ title }: PageHeaderBarProps) => {
       )}
     >
       <h2 className={cn("text-lg-bold text-text-primary", "tablet:text-2xl-bold", "pc:text-2xl-bold")}>{title}</h2>
-      <Icon name="setting" className="size-5 tablet:size-6 text-slate-400" />
+      <Dropdown iconName="setting" options={options} iconClassName="size-5 tablet:size-6 text-slate-400" />
     </div>
   );
 };
