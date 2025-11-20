@@ -1,4 +1,4 @@
-import { Icon } from "@/common";
+import Icon from "@/common/Icon/Icon";
 import { Membership } from "@/types";
 import { useIsActivePath } from "@/utils";
 import { cn } from "@/utils/cn";
