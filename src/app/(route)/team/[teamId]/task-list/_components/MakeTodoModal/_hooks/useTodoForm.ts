@@ -23,6 +23,7 @@ export const useTodoForm = (onClose: () => void) => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // console.log(value);
+    // TODO(지권): 할 일 만들기 함수 추가
     onClose();
   };
 

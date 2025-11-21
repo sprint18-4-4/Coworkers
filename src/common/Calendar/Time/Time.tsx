@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/utils";
-import { HALF_HOUR_TIMES, TIME_PERIOD_LIST } from "./CONST_TIME";
+import { HALF_HOUR_TIMES, TIME_PERIOD_LIST, TIME_STYLES } from "./CONST_TIME";
 import { HalfHour } from "@/types";
 import { TimeProps } from "@/types/TimeType";
 
@@ -16,12 +16,6 @@ import { TimeProps } from "@/types/TimeType";
  * <Time timePeriod={timePeriod} setTimePeriod={setTimePeriod} selectedTime={selectedTime} setSelectedTime={setSelectedTime}/>
  * ```
  */
-
-const styles = {
-  periodBaseButton:
-    "w-[78px] h-[40px] px-[10px] py-2 rounded-xl border border-border-primary bg-background-primary text-text-default",
-  timeBaseButton: "min-h-[34px] text-lg-regular text-text-default",
-} as const;
 
 const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: TimeProps) => {
   return (
@@ -40,7 +34,10 @@ const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: Time
             aria-label={item.label}
             aria-checked={timePeriod === item.value}
             onClick={() => setTimePeriod(item.value)}
-            className={cn(styles.periodBaseButton, timePeriod === item.value && "bg-brand-primary text-text-inverse")}
+            className={cn(
+              TIME_STYLES.periodBaseButton,
+              timePeriod === item.value ? "bg-brand-primary text-text-inverse" : "hover:bg-background-secondary",
+            )}
           >
             {item.label}
           </button>
@@ -51,7 +48,7 @@ const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: Time
         role="radiogroup"
         aria-label="시간 목록"
         className={cn(
-          "flex flex-col items-start w-[172px] h-[152px] pl-4 pr-2 py-2 rounded-xl hide-scrollbar",
+          "flex flex-col items-start w-[172px] h-[152px] rounded-xl hide-scrollbar",
           "bg-background-primary border border-border-primary overflow-y-scroll",
         )}
       >
@@ -63,7 +60,10 @@ const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: Time
             aria-label={item.label}
             aria-checked={selectedTime === item.value}
             onClick={() => setSelectedTime(item.value as HalfHour)}
-            className={cn(styles.timeBaseButton, selectedTime === item.value && "text-interaction-focus")}
+            className={cn(
+              TIME_STYLES.timeBaseButton,
+              selectedTime === item.value ? "text-interaction-focus" : "hover:bg-background-secondary",
+            )}
           >
             {item.label}
           </button>
