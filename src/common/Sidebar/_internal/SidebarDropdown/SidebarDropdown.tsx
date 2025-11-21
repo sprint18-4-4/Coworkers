@@ -13,7 +13,9 @@ const DropdownItem = ({ title, id, isOpen }: { title: string; id: string; isOpen
       className={cn(
         "h-[52px] rounded-xl p-4 flex items-center gap-3 bg-primary",
         isOpen ? "w-full" : "w-[52px]",
-        isActive ? "bg-blue-50 text-brand-primary" : "bg-transparent text-text-primary",
+        isActive
+          ? "bg-blue-50 text-brand-primary"
+          : "bg-transparent text-text-primary hover:bg-gray-100 transition-colors",
       )}
     >
       <Icon name="chess" className={cn("size-5 tablet:size-5", isActive ? "text-brand-primary" : "text-slate-300")} />

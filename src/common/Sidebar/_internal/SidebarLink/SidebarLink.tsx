@@ -13,7 +13,9 @@ const SidebarLink = ({ title, isOpen }: { title: string; isOpen: boolean }) => {
       className={cn(
         "h-[52px] rounded-xl p-4 flex items-center gap-3 bg-white",
         isOpen ? "w-full" : "w-[52px]",
-        isActive ? "bg-blue-50 text-brand-primary" : "bg-transparent text-text-primary",
+        isActive
+          ? "bg-blue-50 text-brand-primary"
+          : "bg-transparent text-text-primary hover:bg-gray-100 transition-colors",
       )}
     >
       <Icon name="board" className={cn("size-5 tablet:size-5", isActive ? "text-brand-primary" : "text-slate-300")} />
