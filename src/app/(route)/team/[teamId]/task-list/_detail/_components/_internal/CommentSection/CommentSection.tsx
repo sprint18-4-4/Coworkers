@@ -1,13 +1,16 @@
 import { cn } from "@/utils";
 import { DetailDataItem } from "@/types";
 import { CommentItem, InputReply, Profile } from "@/common";
-import { COMMENT_MOCK_DATA } from "@/MOCK_DATA";
+import { TASK_DETAIL_COMMENT_MOCK_DATA } from "@/MOCK_DATA";
 
 interface CommentSectionProps {
+  id: string;
   data: DetailDataItem;
 }
 
-const CommentSection = ({ data }: CommentSectionProps) => {
+const commentData = TASK_DETAIL_COMMENT_MOCK_DATA;
+
+const CommentSection = ({ id, data }: CommentSectionProps) => {
   return (
     <>
       <section className="space-y-4">
@@ -22,8 +25,8 @@ const CommentSection = ({ data }: CommentSectionProps) => {
       </section>
 
       <ul aria-label="댓글 목록" className="mt-1">
-        {Array.from({ length: data.commentCount }).map((_, index) => (
-          <CommentItem key={index} comment={COMMENT_MOCK_DATA} />
+        {commentData.map((comment) => (
+          <CommentItem key={comment.id} comment={comment} />
         ))}
       </ul>
     </>

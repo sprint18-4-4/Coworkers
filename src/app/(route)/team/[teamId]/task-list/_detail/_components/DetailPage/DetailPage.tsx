@@ -41,7 +41,7 @@ const DetailPage = ({ id }: DetailPageProps) => {
 
         <ContentSection content={data.description} />
 
-        <CommentSection data={data} />
+        <CommentSection id={id} data={data} />
       </article>
 
       <BaseButton
