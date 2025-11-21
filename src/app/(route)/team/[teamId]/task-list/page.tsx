@@ -17,7 +17,7 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("w", "true");
 
-    router.push(`/task-list?${params.toString()}`);
+    router.push(`team/${teamId}/task-list?${params.toString()}`);
   };
 
   return (
@@ -28,7 +28,7 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
           <TodoHeader />
-          <TodoSection />
+          <TodoSection teamId={teamId} />
         </div>
       </PageLayout>
 
