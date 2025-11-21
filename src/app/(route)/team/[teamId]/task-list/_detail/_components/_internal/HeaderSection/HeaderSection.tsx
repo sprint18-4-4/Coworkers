@@ -18,7 +18,13 @@ const HeaderSection = ({ data }: HeaderSectionProps) => {
     <header className="flex flex-col gap-4 mt-5">
       <div className="flex items-center justify-between">
         <h2 className={cn("text-xl-bold", "tablet:text-2xl-bold")}>{data.name}</h2>
-        <Dropdown iconName="kebab" iconClassName="size-6 tablet:size-6" options={options} />
+        <Dropdown
+          iconName="kebab"
+          iconClassName="size-6 tablet:size-6"
+          options={options}
+          textAlign="left"
+          placement="bottom-right"
+        />
       </div>
 
       <div className="flex flex-col items-start gap-3">
