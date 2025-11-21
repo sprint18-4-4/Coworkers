@@ -2,27 +2,27 @@ import { DateValue, HalfHour } from "@/types";
 import { FormEvent, useState } from "react";
 
 export const useTodoForm = (onClose: () => void) => {
-  const [value, setValue] = useState({
+  const [formData, setFormData] = useState({
     title: "",
     startDate: new Date(),
     startTime: {
       period: "am" as "am" | "pm",
       value: "01:30" as HalfHour,
     },
-    order: "once",
+    order: "ONCE",
     todoMemo: "",
   });
 
   const isFormValid =
-    value.title.trim().length > 0 &&
-    value.todoMemo.trim().length > 0 &&
-    value.startDate !== null &&
-    value.startTime.value !== null &&
-    value.order !== "";
+    formData.title.trim().length > 0 &&
+    formData.todoMemo.trim().length > 0 &&
+    formData.startDate !== null &&
+    formData.startTime.value !== null &&
+    formData.order !== "";
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(value);
+    // console.log(formData);
     // TODO(지권): 할 일 만들기 함수 추가
     onClose();
   };
@@ -32,7 +32,7 @@ export const useTodoForm = (onClose: () => void) => {
 
     const selectedDate = Array.isArray(date) ? date[0] : date;
     if (selectedDate) {
-      setValue((prev) => ({
+      setFormData((prev) => ({
         ...prev,
         startDate: selectedDate,
       }));
@@ -40,7 +40,7 @@ export const useTodoForm = (onClose: () => void) => {
   };
 
   const onChangeTime = (period: "am" | "pm", timeValue: HalfHour) => {
-    setValue((prev) => ({
+    setFormData((prev) => ({
       ...prev,
       startTime: {
         period,
@@ -50,8 +50,8 @@ export const useTodoForm = (onClose: () => void) => {
   };
 
   return {
-    value,
-    setValue,
+    formData,
+    setFormData,
     isFormValid,
     onSubmit,
     onChangeDate,

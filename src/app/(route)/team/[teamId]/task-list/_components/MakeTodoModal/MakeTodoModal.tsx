@@ -10,10 +10,10 @@ import { MODAL_STYLES, REPEAT_OPTIONS } from "./_constants";
 type OpenPicker = "date" | "time" | null;
 
 const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
-  const [order, setOrder] = useState("once");
+  const [order, setOrder] = useState("ONCE");
   const [openPicker, setOpenPicker] = useState<OpenPicker>(null);
 
-  const { value, setValue, isFormValid, onSubmit, onChangeDate, onChangeTime } = useTodoForm(onClose);
+  const { formData, setFormData, isFormValid, onSubmit, onChangeDate, onChangeTime } = useTodoForm(onClose);
 
   return (
     <form onSubmit={onSubmit}>
@@ -25,10 +25,10 @@ const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
           </p>
           <div className="w-full overflow-y-auto max-h-[60vh] flex flex-col gap-4 hide-scrollbar">
             <Input
-              value={value.title}
+              value={formData.title}
               label="할 일 제목"
               placeholder="할 일 제목을 입력해주세요."
-              onChange={(e) => setValue((prev) => ({ ...prev, title: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
             />
             <div className={cn(MODAL_STYLES.baseDiv, "-mb-4")}>
               <p>시작 날짜 및 시간</p>
@@ -37,7 +37,7 @@ const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                   <Input
                     readOnly
                     className={cn(MODAL_STYLES.periodDiv, openPicker === "date" && MODAL_STYLES.periodDivPressed)}
-                    value={formatToKoreanDate(value.startDate)}
+                    value={formatToKoreanDate(formData.startDate)}
                     onClick={() => setOpenPicker((prev) => (prev === "date" ? null : "date"))}
                   />
                 </div>
@@ -45,20 +45,20 @@ const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                   <Input
                     readOnly
                     className={cn(MODAL_STYLES.periodDiv, openPicker === "time" && MODAL_STYLES.periodDivPressed)}
-                    value={`${value.startTime.period === "am" ? "오전" : "오후"} ${value.startTime.value}`}
+                    value={`${formData.startTime.period === "am" ? "오전" : "오후"} ${formData.startTime.value}`}
                     onClick={() => setOpenPicker((prev) => (prev === "time" ? null : "time"))}
                   />
                 </div>
               </div>
               <AnimatedCollapse isOpen={openPicker === "date"}>
-                <DatePicker value={value.startDate} onChange={onChangeDate} />
+                <DatePicker value={formData.startDate} onChange={onChangeDate} />
               </AnimatedCollapse>
               <AnimatedCollapse isOpen={openPicker === "time"}>
                 <Time
-                  timePeriod={value.startTime.period}
-                  setTimePeriod={(period) => onChangeTime(period, value.startTime.value)}
-                  selectedTime={value.startTime.value}
-                  setSelectedTime={(timeValue) => onChangeTime(value.startTime.period, timeValue)}
+                  timePeriod={formData.startTime.period}
+                  setTimePeriod={(period) => onChangeTime(period, formData.startTime.value)}
+                  selectedTime={formData.startTime.value}
+                  setSelectedTime={(timeValue) => onChangeTime(formData.startTime.period, timeValue)}
                 />
               </AnimatedCollapse>
             </div>
@@ -69,8 +69,8 @@ const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
             </div>
 
             <InputBox
-              value={value.todoMemo}
-              onChange={(e) => setValue((prev) => ({ ...prev, todoMemo: e.target.value }))}
+              value={formData.todoMemo}
+              onChange={(e) => setFormData((prev) => ({ ...prev, todoMemo: e.target.value }))}
               size="md"
               label="할 일 메모"
               labelClassName="!text-lg-medium"
@@ -79,6 +79,7 @@ const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
           </div>
         </Modal.Body>
         <Modal.Footer>
+          {/* TODO(지권): Disabled 상태 추가 필요 */}
           <BaseButton type="submit" variant="solid" size="large" className="mt-4" disabled={!isFormValid}>
             만들기
           </BaseButton>
