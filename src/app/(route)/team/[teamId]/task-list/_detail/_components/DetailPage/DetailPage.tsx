@@ -10,6 +10,7 @@ interface DetailPageProps {
   id: string;
 }
 
+// TODO(지권): 실제 상세 데이터로 변경
 const data = TASK_DETAIL_MOCK_DATA;
 
 const DetailPage = ({ id }: DetailPageProps) => {

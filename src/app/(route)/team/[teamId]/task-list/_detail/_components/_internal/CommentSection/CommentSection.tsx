@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@/utils";
 import { DetailDataItem } from "@/types";
 import { CommentItem, InputReply, Profile } from "@/common";
@@ -11,6 +9,7 @@ interface CommentSectionProps {
   data: DetailDataItem;
 }
 
+// TODO(지권): 실제 댓글 데이터로 변경
 const commentData = TASK_DETAIL_COMMENT_MOCK_DATA;
 
 const CommentSection = ({ id, data }: CommentSectionProps) => {

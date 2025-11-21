@@ -29,7 +29,13 @@ const HeaderSection = ({ data }: HeaderSectionProps) => {
 
       <div className="flex flex-col items-start gap-3">
         <div className="flex items-center gap-3">
-          <Image src={data.writer.image} alt={data.writer.nickname} width={24} height={24} className="rounded-lg" />
+          <Image
+            src={data.writer.image}
+            alt={`${data.writer.nickname}의 프로필`}
+            width={24}
+            height={24}
+            className="rounded-lg"
+          />
           <span className="text-md-medium text-text-primary">{data.writer.nickname}</span>
         </div>
         <div className="flex flex-col gap-2">
