@@ -1,4 +1,4 @@
-import { DateNumber, Day, TaskListItemType } from "./types";
+import { DateNumber, Day, DetailDataItem, TaskListItemType } from "./types";
 
 export const USER_MOCK_DATA = {
   teamId: "1",
@@ -147,4 +147,34 @@ export const COMMENT_MOCK_DATA = {
   createdAt: "2024-07-29",
   updatedAt: "2024-07-29",
   user: { id: 1, nickname: "안해나", image: "" },
+};
+
+export const TASK_DETAIL_MOCK_DATA: DetailDataItem = {
+  id: 0,
+  name: "회의록 정리하기",
+  description: "팀 회의에서 나온 내용을 정리하는 작업입니다.",
+  displayIndex: 0,
+  commentCount: 2,
+
+  frequency: "DAILY",
+  recurringId: 0,
+
+  date: "2025-11-21T20:27:10.529Z",
+  doneAt: "2025-11-21T20:27:10.529Z",
+  updatedAt: "2025-11-21T20:27:10.529Z",
+  deletedAt: null,
+
+  doneBy: {
+    user: {
+      id: 1,
+      nickname: "짱구",
+      image: "/TEST_IMG/image-1.jpg",
+    },
+  },
+
+  writer: {
+    id: 2,
+    nickname: "철수",
+    image: "/TEST_IMG/image-1.jpg",
+  },
 };
