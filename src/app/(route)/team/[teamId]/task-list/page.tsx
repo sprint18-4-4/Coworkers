@@ -3,7 +3,7 @@
 import { cn } from "@/utils";
 import { Suspense, use } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { TodoSection, TodoHeader } from "./_components";
+import { TodoSection, TodoHeader, MakeTodoModal } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 import { DetailPage } from "./_detail/_components";
 
@@ -17,7 +17,7 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("w", "true");
 
-    router.push(`team/${teamId}/task-list?${params.toString()}`);
+    router.push(`/team/${teamId}/task-list?${params.toString()}`);
   };
 
   return (
@@ -40,6 +40,16 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
       />
 
       {selectedId && <DetailPage id={selectedId} />}
+      {searchParams.get("w") && (
+        <MakeTodoModal
+          isOpen={!!searchParams.get("w")}
+          onClose={() => {
+            const params = new URLSearchParams(searchParams.toString());
+            params.delete("w");
+            router.push(`/team/${teamId}/task-list?${params.toString()}`);
+          }}
+        />
+      )}
     </div>
   );
 };
