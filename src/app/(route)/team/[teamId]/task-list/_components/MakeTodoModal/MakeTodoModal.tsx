@@ -2,46 +2,18 @@
 
 import { BaseButton, DatePicker, Input, InputBox, Modal, Select, Time } from "@/common";
 import { useState } from "react";
-import AnimatedCollapse from "./_internal/AnimatedCollapse";
-import { cn } from "@/utils";
-
-const STYLES = {
-  baseDiv: "w-full flex flex-col gap-4",
-} as const;
-
-const options = [
-  { label: "한 번", value: "once" },
-  { label: "매일", value: "daily" },
-  { label: "주 반복", value: "weekly" },
-  { label: "월 반복", value: "monthly" },
-];
+import { useTodoForm } from "./_hooks";
+import { cn, formatToKoreanDate } from "@/utils";
+import { AnimatedCollapse } from "./_internal";
+import { MODAL_STYLES, REPEAT_OPTIONS } from "./_constants";
 
 type OpenPicker = "date" | "time" | null;
 
 const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [order, setOrder] = useState("once");
-  const [startTime, setStartTime] = useState(new Date());
   const [openPicker, setOpenPicker] = useState<OpenPicker>(null);
-  const [value, setValue] = useState({
-    title: "",
-    startDate: new Date(),
-    startTime: new Date(),
-    order: "once",
-    todoMemo: "",
-  });
 
-  const isFormValid =
-    value.title.trim().length > 0 &&
-    value.todoMemo.trim().length > 0 &&
-    value.startDate !== null &&
-    value.startTime !== null &&
-    value.order !== "";
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(value);
-    onClose();
-  };
+  const { value, setValue, isFormValid, onSubmit, onChangeDate, onChangeTime } = useTodoForm(onClose);
 
   return (
     <form onSubmit={onSubmit}>
@@ -58,43 +30,48 @@ const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
             placeholder="할 일 제목을 입력해주세요."
             onChange={(e) => setValue((prev) => ({ ...prev, title: e.target.value }))}
           />
-          <div className={cn(STYLES.baseDiv, "-mb-4")}>
+          <div className={cn(MODAL_STYLES.baseDiv, "-mb-4")}>
             <p>시작 날짜 및 시간</p>
             <div className="w-full flex gap-2">
               <div className="flex-[2]">
                 <Input
-                  placeholder="2024년 7월 29일"
+                  readOnly
                   className={cn(
                     "w-full cursor-pointer focus:outline-none",
                     openPicker === "date" && "border-interaction-pressed",
                   )}
-                  readOnly
+                  value={formatToKoreanDate(value.startDate)}
                   onClick={() => setOpenPicker((prev) => (prev === "date" ? null : "date"))}
                 />
               </div>
-              <div className="flex-[1]">
+              <div className="flex-[1.5]">
                 <Input
-                  placeholder="오후 3:30"
+                  readOnly
                   className={cn(
                     "w-full cursor-pointer focus:outline-none",
                     openPicker === "time" && "border-interaction-pressed",
                   )}
-                  readOnly
+                  value={`${value.startTime.period === "am" ? "오전" : "오후"} ${value.startTime.value}`}
                   onClick={() => setOpenPicker((prev) => (prev === "time" ? null : "time"))}
                 />
               </div>
             </div>
             <AnimatedCollapse isOpen={openPicker === "date"}>
-              <DatePicker value={startTime} onChange={() => {}} />
+              <DatePicker value={value.startDate} onChange={onChangeDate} />
             </AnimatedCollapse>
             <AnimatedCollapse isOpen={openPicker === "time"}>
-              <Time timePeriod="am" setTimePeriod={() => {}} selectedTime="12:00" setSelectedTime={() => {}} />
+              <Time
+                timePeriod={value.startTime.period}
+                setTimePeriod={(period) => onChangeTime(period, value.startTime.value)}
+                selectedTime={value.startTime.value}
+                setSelectedTime={(timeValue) => onChangeTime(value.startTime.period, timeValue)}
+              />
             </AnimatedCollapse>
           </div>
 
-          <div className={STYLES.baseDiv} onClick={(e) => e.preventDefault()}>
+          <div className={MODAL_STYLES.baseDiv} onClick={(e) => e.preventDefault()}>
             <p>반복 설정</p>
-            <Select value={order} options={options} onChange={setOrder} />
+            <Select value={order} options={REPEAT_OPTIONS} onChange={setOrder} />
           </div>
 
           <InputBox
