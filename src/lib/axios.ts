@@ -1,12 +1,26 @@
-import axios, {
-  AxiosError,
-  AxiosInstance,
-  InternalAxiosRequestConfig,
-} from "axios";
+import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
+import { tokenStorage } from "@/utils";
 
 const BASEURL = process.env.NEXT_PUBLIC_API_URL;
 
-const instance: AxiosInstance = axios.create({
+type ConfigWithRetry = InternalAxiosRequestConfig & {
+  retry?: boolean;
+};
+
+const NO_AUTH_URLS = ["/", "/auth/signup", "/auth/login", "/auth/refresh-token"];
+
+const shouldAttachToken = (config: InternalAxiosRequestConfig): boolean => {
+  const url = config.url;
+  if (!url) return false;
+
+  if (url.startsWith("/")) {
+    return !NO_AUTH_URLS.includes(url);
+  }
+
+  return !NO_AUTH_URLS.some((noAuthUrl) => url.startsWith(noAuthUrl));
+};
+
+const instance = axios.create({
   baseURL: BASEURL,
   timeout: 5000,
   headers: {
@@ -14,11 +28,35 @@ const instance: AxiosInstance = axios.create({
   },
 });
 
+const callRefreshEndpoint = async (): Promise<string | null> => {
+  try {
+    const response = await fetch("/auth/refresh-token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const data = (await response.json()) as { accessToken: string };
+
+    return data.accessToken;
+  } catch {
+    return null;
+  }
+};
+
 instance.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem("accessToken");
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
+  (config) => {
+    if (!shouldAttachToken(config)) {
+      return config;
+    }
+
+    const accessToken = tokenStorage.getAccessToken();
+
+    if (accessToken && config.headers) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
@@ -28,11 +66,31 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error: AxiosError) => {
-    return Promise.reject(error);
+  (response) => response,
+  async (error: AxiosError) => {
+    const originalConfig = error.config as ConfigWithRetry | undefined;
+
+    if (error.response?.status !== 401 || !originalConfig) {
+      return Promise.reject(error);
+    }
+
+    if (originalConfig.retry) {
+      return Promise.reject(error);
+    }
+
+    originalConfig.retry = true;
+
+    const newAccessToken = await callRefreshEndpoint();
+
+    if (!newAccessToken) {
+      return Promise.reject(error);
+    }
+
+    if (originalConfig.headers) {
+      originalConfig.headers.Authorization = `Bearer ${newAccessToken}`;
+    }
+
+    return instance(originalConfig);
   },
 );
 
