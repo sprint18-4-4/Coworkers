@@ -66,6 +66,8 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
           )}
         >
           <Dropdown
+            options={options}
+            placement="top-left"
             image={
               <div className="flex items-center gap-3">
                 <Image
@@ -83,7 +85,6 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
                 )}
               </div>
             }
-            options={options}
           />
           {isOpen && !user && <Link href="/login">로그인</Link>}
         </footer>

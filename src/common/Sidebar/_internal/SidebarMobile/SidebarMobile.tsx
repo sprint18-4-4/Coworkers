@@ -28,6 +28,8 @@ const SidebarMobile = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
         </div>
         {user && (
           <Dropdown
+            options={options}
+            placement="bottom-right"
             image={
               <Image
                 src={user.image}
@@ -37,7 +39,6 @@ const SidebarMobile = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
                 className="size-7 rounded-full"
               />
             }
-            options={options}
           />
         )}
       </nav>
