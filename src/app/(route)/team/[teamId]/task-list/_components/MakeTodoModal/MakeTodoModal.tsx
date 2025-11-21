@@ -36,10 +36,7 @@ const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                 <div className="flex-[2]">
                   <Input
                     readOnly
-                    className={cn(
-                      "w-full cursor-pointer focus:outline-none",
-                      openPicker === "date" && "border-interaction-pressed",
-                    )}
+                    className={cn(MODAL_STYLES.periodDiv, openPicker === "date" && MODAL_STYLES.periodDivPressed)}
                     value={formatToKoreanDate(value.startDate)}
                     onClick={() => setOpenPicker((prev) => (prev === "date" ? null : "date"))}
                   />
@@ -47,10 +44,7 @@ const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                 <div className="flex-[1.5]">
                   <Input
                     readOnly
-                    className={cn(
-                      "w-full cursor-pointer focus:outline-none",
-                      openPicker === "time" && "border-interaction-pressed",
-                    )}
+                    className={cn(MODAL_STYLES.periodDiv, openPicker === "time" && MODAL_STYLES.periodDivPressed)}
                     value={`${value.startTime.period === "am" ? "오전" : "오후"} ${value.startTime.value}`}
                     onClick={() => setOpenPicker((prev) => (prev === "time" ? null : "time"))}
                   />

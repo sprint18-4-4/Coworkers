@@ -1,5 +1,7 @@
 export const MODAL_STYLES = {
   baseDiv: "w-full flex flex-col gap-4",
+  periodDiv: "w-full cursor-pointer focus:outline-none",
+  periodDivPressed: "border-interaction-pressed",
 } as const;
 
 export const REPEAT_OPTIONS = [
