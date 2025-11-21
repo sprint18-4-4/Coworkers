@@ -49,6 +49,7 @@ const Select = <T,>({ value, options, onChange, className, textAlign = "left" }:
   return (
     <div className="relative inline-block" ref={selectRef}>
       <button
+        aria-label="선택 버튼"
         className={cn(
           "flex justify-between items-center min-w-[110px] tablet:min-w-[120px] h-[44px] px-[10px] py-[14px] bg-background-primary border border-border-primary rounded-xl",
           className,
@@ -58,6 +59,7 @@ const Select = <T,>({ value, options, onChange, className, textAlign = "left" }:
         <span className="text-text-default text-md-medium">{selectedLabel}</span>
         <span>
           <Icon
+            aria-label="화살표"
             name="downArrow"
             className={cn("text-icon-primary transition-transform duration-300", isOpen && "rotate-180")}
           />
@@ -69,8 +71,9 @@ const Select = <T,>({ value, options, onChange, className, textAlign = "left" }:
           {options.map((option) => (
             <li key={option.label}>
               <button
+                aria-label="선택 메뉴"
                 className={cn(
-                  "w-full px-3 py-2",
+                  "w-full px-3 py-2 hover:bg-icon-inverse",
                   option.value === value && "bg-gray-100 font-semibold",
                   `text-${textAlign}`,
                 )}
