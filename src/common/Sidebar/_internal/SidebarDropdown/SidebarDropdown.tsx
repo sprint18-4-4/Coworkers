@@ -27,7 +27,12 @@ const DropdownItem = ({ title, id, isOpen }: { title: string; id: string; isOpen
 const SidebarDropdown = ({ isOpen, membership }: { isOpen: boolean; membership: Membership[] }) => {
   return (
     <details className="group w-full rounded-xl bg-white">
-      <summary className="list-none px-4 py-2 flex items-center justify-between cursor-pointer rounded-xl select-none">
+      <summary
+        className={cn(
+          "list-none px-4 py-2 flex items-center justify-between cursor-pointer rounded-xl select-none",
+          "hover:bg-gray-100 transition-colors",
+        )}
+      >
         <span className="flex items-center gap-3">
           <Icon name="chess" className="size-5 text-slate-300 tablet:size-5" />
           {isOpen && <span className="text-lg-semibold text-slate-400">팀 선택</span>}
