@@ -32,11 +32,11 @@ const TodoSectionHeader = () => {
   );
 };
 
-const TodoSection = () => {
+const TodoSection = ({ teamId }: { teamId: string }) => {
   const router = useRouter();
 
   const onClickTaskListItem = (id: string) => {
-    router.push(`/list?taskId=${id}`, { scroll: false });
+    router.push(`/team/${teamId}/task-list?task-id=${id}`, { scroll: false });
   };
 
   return (
