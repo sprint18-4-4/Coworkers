@@ -11,7 +11,7 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
   const { teamId } = use(params);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const selectedId = searchParams.get("taskId");
+  const selectedId = searchParams.get("task-id");
 
   const onClickFloatingButton = () => {
     const params = new URLSearchParams(searchParams.toString());
