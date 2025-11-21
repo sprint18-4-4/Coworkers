@@ -37,6 +37,7 @@ const LoginForm = () => {
       </div>
       <div className="flex justify-between text-md-medium tablet:text-lg-medium">
         <div className="flex items-center gap-1">
+          {/* TODO(김원선): 이메일 값 저장하는 훅 만들기 */}
           <Icon name="checkboxDefault" className="size-5 tablet:size-5" />
           <span>이메일 기억하기</span>
         </div>
