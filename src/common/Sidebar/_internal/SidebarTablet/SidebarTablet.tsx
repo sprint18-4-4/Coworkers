@@ -4,10 +4,10 @@ import Link from "next/link";
 import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
 import AddTeamButton from "../AddTeamButton/AddTeamButton";
 import SidebarLink from "../SidebarLink/SidebarLink";
-import { SidebarProps } from "../../_types";
-import { Icon } from "@/common";
+import { SidebarDropdownProps } from "../../_types";
+import { Dropdown, Icon } from "@/common";
 
-const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
+const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDropdownProps) => {
   return (
     <aside
       className={cn(
@@ -65,22 +65,27 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
             !isOpen && "flex-center",
           )}
         >
-          <Image
-            src={user?.image || "/TEST_IMG/image-1.jpg"}
-            alt={`${user?.nickname} 이미지`}
-            width={40}
-            height={40}
-            className="size-10 rounded-xl"
-          />
-          {isOpen &&
-            (user ? (
-              <div className="flex flex-col items-start gap-[2px]">
-                <span className="text-text-primary text-lg-medium">{user.nickname}</span>
-                <span className="text-slate-400 text-md-medium">{user.memberships[0].group.name}</span>
+          <Dropdown
+            image={
+              <div className="flex items-center gap-3">
+                <Image
+                  src={user?.image || "/TEST_IMG/image-1.jpg"}
+                  alt={`${user?.nickname} 이미지`}
+                  width={40}
+                  height={40}
+                  className="size-10 rounded-xl"
+                />
+                {isOpen && user && (
+                  <div className="flex flex-col items-start gap-[2px]">
+                    <span className="text-text-primary text-lg-medium">{user.nickname}</span>
+                    <span className="text-slate-400 text-md-medium">{user.memberships[0].group.name}</span>
+                  </div>
+                )}
               </div>
-            ) : (
-              <Link href="/login">로그인</Link>
-            ))}
+            }
+            options={options}
+          />
+          {isOpen && !user && <Link href="/login">로그인</Link>}
         </footer>
       </nav>
     </aside>

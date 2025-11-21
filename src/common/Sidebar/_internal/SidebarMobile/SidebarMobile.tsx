@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { cn } from "@/utils";
 import Image from "next/image";
-import { Icon } from "@/common";
-import { SidebarProps } from "../../_types";
+import { Dropdown, Icon } from "@/common";
+import { SidebarDropdownProps } from "../../_types";
 import LeftMobile from "../LeftMobile/LeftMobile";
 
-const SidebarMobile = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
+const SidebarMobile = ({ user, isOpen, handleOpenDropdown, options }: SidebarDropdownProps) => {
   return (
     <>
       <nav
@@ -27,12 +27,17 @@ const SidebarMobile = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
           </Link>
         </div>
         {user && (
-          <Image
-            src={user.image}
-            alt={`${user.nickname} 이미지`}
-            width={28}
-            height={28}
-            className="size-7 rounded-full"
+          <Dropdown
+            image={
+              <Image
+                src={user.image}
+                alt={`${user.nickname} 이미지`}
+                width={28}
+                height={28}
+                className="size-7 rounded-full"
+              />
+            }
+            options={options}
           />
         )}
       </nav>
