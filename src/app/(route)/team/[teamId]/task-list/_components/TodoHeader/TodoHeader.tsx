@@ -1,7 +1,12 @@
 import { cn } from "@/utils";
-import { BaseButton, Icon, ProgressBadge } from "@/common";
+import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
 
 const TodoItem = () => {
+  const options = [
+    { label: "수정하기", action: () => {} },
+    { label: "삭제하기", action: () => {} },
+  ];
+
   return (
     <li
       className={cn(
@@ -14,8 +19,7 @@ const TodoItem = () => {
         <span className="text-sm-semibold text-text-primary text-nowrap">법인 등기</span>
         <ProgressBadge current={3} total={5} />
       </div>
-      {/* TODO(지권): 상인님 작업 끝난 후 변경 */}
-      <Icon name="kebab" className="hidden size-5 cursor-pointer tablet:size-5 tablet:hidden pc:block" />
+      <Dropdown iconName="kebab" options={options} iconClassName="tablet:size-6 text-slate-300" />
     </li>
   );
 };
