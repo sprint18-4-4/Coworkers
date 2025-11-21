@@ -24,6 +24,7 @@ const config: Config = {
         point: {
           purple: "#A855F7",
           cyan: "#06B6D4",
+          blue: "#C9DAFD",
           pink: "#EC4899",
           rose: "#DBBAC0",
           orange: "#F97316",
@@ -73,9 +74,12 @@ const config: Config = {
       },
 
       fontSize: {
+        "4xl-brand-bold": ["48px", { lineHeight: "57px", fontWeight: "700" }],
         "4xl": ["40px", { lineHeight: "48px", fontWeight: "500" }],
+        "3xl-brand-bold": ["36px", { lineHeight: "43px", fontWeight: "700" }],
         "3xl-bold": ["32px", { lineHeight: "38px", fontWeight: "700" }],
         "3xl-semibold": ["32px", { lineHeight: "38px", fontWeight: "600" }],
+        "2xl-brand-bold": ["28px", { lineHeight: "38px", fontWeight: "700" }],
         "2xl-bold": ["24px", { lineHeight: "28px", fontWeight: "700" }],
         "2xl-semibold": ["24px", { lineHeight: "28px", fontWeight: "600" }],
         "2xl-medium": ["24px", { lineHeight: "28px", fontWeight: "500" }],
