@@ -1,7 +1,7 @@
 "use client";
 
 import { useDropdownClose } from "@/hooks";
-import { useRef, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { cn } from "@/utils";
 import Icon, { IconKeys } from "../Icon/Icon";
 import { DropdownOption } from "./_types/types";
@@ -25,13 +25,14 @@ import { DropdownOption } from "./_types/types";
  */
 
 interface DropdownProps {
-  iconName: IconKeys;
+  iconName?: IconKeys;
+  image?: ReactNode;
   iconClassName?: string;
   options: DropdownOption[];
   textAlign?: "left" | "center";
 }
 
-const Dropdown = ({ iconName, iconClassName, options, textAlign = "center" }: DropdownProps) => {
+const Dropdown = ({ iconName, iconClassName, options, textAlign = "center", image }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -44,9 +45,7 @@ const Dropdown = ({ iconName, iconClassName, options, textAlign = "center" }: Dr
   return (
     <div className="relative inline-block" ref={dropdownRef}>
       <button onClick={() => setIsOpen((prev) => !prev)}>
-        <span>
-          <Icon name={iconName} className={iconClassName} />
-        </span>
+        <span>{iconName ? <Icon name={iconName} className={iconClassName} /> : image}</span>
       </button>
 
       {isOpen && (
