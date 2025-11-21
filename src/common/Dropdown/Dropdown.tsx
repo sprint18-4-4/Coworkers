@@ -68,8 +68,10 @@ const Dropdown = ({
   useDropdownClose(dropdownRef, () => setIsOpen(false), isOpen);
   return (
     <div className="relative inline-block" ref={dropdownRef}>
-      <button onClick={handleDropdownClick}>
-        <span>{iconName ? <Icon name={iconName} className={iconClassName} /> : image}</span>
+      <button aria-label="드롭다운 버튼" onClick={handleDropdownClick}>
+        <span>
+          {iconName ? <Icon aria-label="드롭다운 아이콘" name={iconName} className={iconClassName} /> : image}
+        </span>
       </button>
 
       {isOpen && (
@@ -81,7 +83,11 @@ const Dropdown = ({
         >
           {options.map((option) => (
             <li key={option.label}>
-              <button className={cn("w-full px-3 py-2", `text-${textAlign}`)} onClick={() => handleOptionClick(option)}>
+              <button
+                aria-label="드롭다운 메뉴"
+                className={cn("w-full px-3 py-2", `text-${textAlign}`)}
+                onClick={() => handleOptionClick(option)}
+              >
                 <span className="text-md-regular text-text-primary">{option.label}</span>
               </button>
             </li>
