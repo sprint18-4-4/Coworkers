@@ -51,7 +51,7 @@ const Time = ({ timePeriod, setTimePeriod, selectedTime, setSelectedTime }: Time
         role="radiogroup"
         aria-label="시간 목록"
         className={cn(
-          "flex flex-col items-start w-[172px] h-[152px] pl-4 pr-2 py-2 rounded-xl",
+          "flex flex-col items-start w-[172px] h-[152px] pl-4 pr-2 py-2 rounded-xl hide-scrollbar",
           "bg-background-primary border border-border-primary overflow-y-scroll",
         )}
       >

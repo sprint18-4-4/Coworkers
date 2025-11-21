@@ -23,65 +23,66 @@ const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
           <p className="text-text-default text-md-medium text-center">
             할 일은 실제로 행동 가능한 작업 중심으로 <br /> 작성해주시면 좋습니다.
           </p>
-
-          <Input
-            value={value.title}
-            label="할 일 제목"
-            placeholder="할 일 제목을 입력해주세요."
-            onChange={(e) => setValue((prev) => ({ ...prev, title: e.target.value }))}
-          />
-          <div className={cn(MODAL_STYLES.baseDiv, "-mb-4")}>
-            <p>시작 날짜 및 시간</p>
-            <div className="w-full flex gap-2">
-              <div className="flex-[2]">
-                <Input
-                  readOnly
-                  className={cn(
-                    "w-full cursor-pointer focus:outline-none",
-                    openPicker === "date" && "border-interaction-pressed",
-                  )}
-                  value={formatToKoreanDate(value.startDate)}
-                  onClick={() => setOpenPicker((prev) => (prev === "date" ? null : "date"))}
-                />
+          <div className="w-full overflow-y-auto max-h-[60vh] flex flex-col gap-4 hide-scrollbar">
+            <Input
+              value={value.title}
+              label="할 일 제목"
+              placeholder="할 일 제목을 입력해주세요."
+              onChange={(e) => setValue((prev) => ({ ...prev, title: e.target.value }))}
+            />
+            <div className={cn(MODAL_STYLES.baseDiv, "-mb-4")}>
+              <p>시작 날짜 및 시간</p>
+              <div className="w-full flex gap-2">
+                <div className="flex-[2]">
+                  <Input
+                    readOnly
+                    className={cn(
+                      "w-full cursor-pointer focus:outline-none",
+                      openPicker === "date" && "border-interaction-pressed",
+                    )}
+                    value={formatToKoreanDate(value.startDate)}
+                    onClick={() => setOpenPicker((prev) => (prev === "date" ? null : "date"))}
+                  />
+                </div>
+                <div className="flex-[1.5]">
+                  <Input
+                    readOnly
+                    className={cn(
+                      "w-full cursor-pointer focus:outline-none",
+                      openPicker === "time" && "border-interaction-pressed",
+                    )}
+                    value={`${value.startTime.period === "am" ? "오전" : "오후"} ${value.startTime.value}`}
+                    onClick={() => setOpenPicker((prev) => (prev === "time" ? null : "time"))}
+                  />
+                </div>
               </div>
-              <div className="flex-[1.5]">
-                <Input
-                  readOnly
-                  className={cn(
-                    "w-full cursor-pointer focus:outline-none",
-                    openPicker === "time" && "border-interaction-pressed",
-                  )}
-                  value={`${value.startTime.period === "am" ? "오전" : "오후"} ${value.startTime.value}`}
-                  onClick={() => setOpenPicker((prev) => (prev === "time" ? null : "time"))}
+              <AnimatedCollapse isOpen={openPicker === "date"}>
+                <DatePicker value={value.startDate} onChange={onChangeDate} />
+              </AnimatedCollapse>
+              <AnimatedCollapse isOpen={openPicker === "time"}>
+                <Time
+                  timePeriod={value.startTime.period}
+                  setTimePeriod={(period) => onChangeTime(period, value.startTime.value)}
+                  selectedTime={value.startTime.value}
+                  setSelectedTime={(timeValue) => onChangeTime(value.startTime.period, timeValue)}
                 />
-              </div>
+              </AnimatedCollapse>
             </div>
-            <AnimatedCollapse isOpen={openPicker === "date"}>
-              <DatePicker value={value.startDate} onChange={onChangeDate} />
-            </AnimatedCollapse>
-            <AnimatedCollapse isOpen={openPicker === "time"}>
-              <Time
-                timePeriod={value.startTime.period}
-                setTimePeriod={(period) => onChangeTime(period, value.startTime.value)}
-                selectedTime={value.startTime.value}
-                setSelectedTime={(timeValue) => onChangeTime(value.startTime.period, timeValue)}
-              />
-            </AnimatedCollapse>
-          </div>
 
-          <div className={MODAL_STYLES.baseDiv} onClick={(e) => e.preventDefault()}>
-            <p>반복 설정</p>
-            <Select value={order} options={REPEAT_OPTIONS} onChange={setOrder} />
-          </div>
+            <div className={MODAL_STYLES.baseDiv} onClick={(e) => e.preventDefault()}>
+              <p>반복 설정</p>
+              <Select value={order} options={REPEAT_OPTIONS} onChange={setOrder} />
+            </div>
 
-          <InputBox
-            value={value.todoMemo}
-            onChange={(e) => setValue((prev) => ({ ...prev, todoMemo: e.target.value }))}
-            size="md"
-            label="할 일 메모"
-            labelClassName="!text-lg-medium"
-            placeholder="할 일 메모를 입력해주세요."
-          />
+            <InputBox
+              value={value.todoMemo}
+              onChange={(e) => setValue((prev) => ({ ...prev, todoMemo: e.target.value }))}
+              size="md"
+              label="할 일 메모"
+              labelClassName="!text-lg-medium"
+              placeholder="할 일 메모를 입력해주세요."
+            />
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <BaseButton type="submit" variant="solid" size="large" className="mt-4" disabled={!isFormValid}>
