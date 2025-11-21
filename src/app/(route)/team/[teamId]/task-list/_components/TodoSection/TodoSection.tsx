@@ -1,8 +1,11 @@
+"use client";
+
 import { cn } from "@/utils";
 import { DateItem, Icon } from "@/common";
 import { TaskListItem } from "@/features";
 import { LIST_DATE_MOCK_DATA, MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
 import { TODO_STYLES } from "../../_constants";
+import { useRouter } from "next/navigation";
 
 const TodoSectionHeader = () => {
   return (
@@ -29,7 +32,13 @@ const TodoSectionHeader = () => {
   );
 };
 
-const TodoSection = () => {
+const TodoSection = ({ teamId }: { teamId: string }) => {
+  const router = useRouter();
+
+  const onClickTaskListItem = (id: string) => {
+    router.push(`/team/${teamId}/task-list?task-id=${id}`, { scroll: false });
+  };
+
   return (
     <section
       className={cn(
@@ -47,7 +56,7 @@ const TodoSection = () => {
 
       <ul className="mt-[37px] flex flex-col gap-3">
         {MY_HISTORY_ITEM_MOCK_DATA.map((item) => (
-          <TaskListItem key={item.id} item={item} />
+          <TaskListItem key={item.id} item={item} onOpenDetail={() => onClickTaskListItem(item.id.toString())} />
         ))}
       </ul>
     </section>
