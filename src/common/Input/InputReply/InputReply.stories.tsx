@@ -15,6 +15,11 @@ const meta: Meta<typeof InputReply> = {
       </div>
     ),
   ],
+  args: {
+    value: "",
+    isSubmitting: false,
+    onChange: () => {},
+  },
 };
 
 type Story = StoryObj<typeof meta>;
