@@ -1,19 +1,19 @@
 import { Icon } from "@/common";
+import { Membership } from "@/types";
 import { cn, useIsActivePath } from "@/utils";
 import Link from "next/link";
 
 interface MobileMenuItemProps {
-  menu: string;
-  href: string;
+  membership: Membership;
   isOpen: boolean;
 }
 
-const MobileMenuItem = ({ menu, href, isOpen }: MobileMenuItemProps) => {
-  const isActive = useIsActivePath(href);
+const MobileMenuItem = ({ membership, isOpen }: MobileMenuItemProps) => {
+  const isActive = useIsActivePath(`/${membership.groupId}`);
 
   return (
     <Link
-      href={href}
+      href={`/${membership.groupId}`}
       className={cn(
         "w-full min-h-[52px] p-4 flex gap-3 items-center rounded-xl",
         "text-text-primary bg-background-primary hover:bg-gray-200 transition-colors",
@@ -21,7 +21,7 @@ const MobileMenuItem = ({ menu, href, isOpen }: MobileMenuItemProps) => {
       )}
     >
       <Icon name="chess" className={cn("size-5 tablet:size-5", isActive ? "text-brand-primary" : "text-slate-300")} />
-      {isOpen && <span className={cn(isActive ? "text-lg-semibold" : "text-lg-regular")}>{menu}</span>}
+      {isOpen && <span className={cn(isActive ? "text-lg-semibold" : "text-lg-regular")}>{membership.group.name}</span>}
     </Link>
   );
 };
