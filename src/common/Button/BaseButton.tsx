@@ -53,7 +53,6 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "cla
 const BaseButton = ({ children, variant = "solid", size = "large", className, danger, ...rest }: ButtonProps) => {
   return (
     <button
-      {...rest}
       type="button"
       className={cn(
         BASE_BUTTON_BASE_STYLE,
@@ -63,6 +62,7 @@ const BaseButton = ({ children, variant = "solid", size = "large", className, da
         danger && BASE_BUTTON_DANGER_STYLE,
         className,
       )}
+      {...rest}
     >
       {children}
     </button>

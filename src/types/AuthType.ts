@@ -10,3 +10,8 @@ export type ValidationResult = {
 export type ValidationFunction = (value: string, formData?: FormValues) => ValidationResult;
 
 export type ValidationRules = Record<string, ValidationFunction>;
+
+export type AuthToken = {
+  accessToken: string;
+  refreshToken: string;
+};
