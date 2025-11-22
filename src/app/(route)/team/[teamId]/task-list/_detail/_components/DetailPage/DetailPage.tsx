@@ -4,10 +4,14 @@ import { cn } from "@/utils";
 import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
 import { CommentSection, ContentSection, HeaderSection } from "../_internal";
+import { TASK_DETAIL_MOCK_DATA } from "@/MOCK_DATA";
 
 interface DetailPageProps {
   id: string;
 }
+
+// TODO(지권): 실제 상세 데이터로 변경
+const data = TASK_DETAIL_MOCK_DATA;
 
 const DetailPage = ({ id }: DetailPageProps) => {
   const router = useRouter();
@@ -32,13 +36,13 @@ const DetailPage = ({ id }: DetailPageProps) => {
           <Icon name="x" className="size-6 tablet-6" />
         </button>
 
-        <HeaderSection />
+        <HeaderSection data={data} />
 
         <hr />
 
-        <ContentSection content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias nisi qui cumque! Aperiam, architecto itaque!" />
+        <ContentSection content={data.description} />
 
-        <CommentSection />
+        <CommentSection id={id} data={data} />
       </article>
 
       <BaseButton

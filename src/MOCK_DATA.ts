@@ -1,4 +1,4 @@
-import { DateNumber, Day, TaskListItemType } from "./types";
+import { DateNumber, Day, DetailDataItem, TaskListItemType } from "./types";
 
 export const USER_MOCK_DATA = {
   teamId: "1",
@@ -148,3 +148,88 @@ export const COMMENT_MOCK_DATA = {
   updatedAt: "2024-07-29",
   user: { id: 1, nickname: "안해나", image: "" },
 };
+
+export const TASK_DETAIL_MOCK_DATA: DetailDataItem = {
+  id: 0,
+  name: "회의록 정리하기",
+  description: "팀 회의에서 나온 내용을 정리하는 작업입니다.",
+  displayIndex: 0,
+  commentCount: 2,
+
+  frequency: "DAILY",
+  recurringId: 0,
+
+  date: "2025-11-21T20:27:10.529Z",
+  doneAt: "2025-11-21T20:27:10.529Z",
+  updatedAt: "2025-11-21T20:27:10.529Z",
+  deletedAt: null,
+
+  doneBy: {
+    user: {
+      id: 1,
+      nickname: "짱구",
+      image: "/TEST_IMG/image-1.jpg",
+    },
+  },
+
+  writer: {
+    id: 2,
+    nickname: "철수",
+    image: "/TEST_IMG/image-1.jpg",
+  },
+};
+
+export const TASK_DETAIL_COMMENT_MOCK_DATA = [
+  {
+    user: {
+      image: "/TEST_IMG/image-1.jpg",
+      nickname: "짱구",
+      id: 1,
+    },
+    userId: 1,
+    taskId: 101,
+    updatedAt: "2025-11-21T21:26:31.011Z",
+    createdAt: "2025-11-21T21:26:31.011Z",
+    content: "오늘 해야 할 작업 메모입니다.",
+    id: 1,
+  },
+  {
+    user: {
+      image: "/TEST_IMG/image-1.jpg",
+      nickname: "철수",
+      id: 2,
+    },
+    userId: 2,
+    taskId: 102,
+    updatedAt: "2025-11-21T21:28:10.011Z",
+    createdAt: "2025-11-21T21:28:10.011Z",
+    content: "API 연결 테스트 완료했습니다.",
+    id: 2,
+  },
+  {
+    user: {
+      image: "/TEST_IMG/image-1.jpg",
+      nickname: "유리",
+      id: 3,
+    },
+    userId: 3,
+    taskId: 103,
+    updatedAt: "2025-11-21T21:30:02.011Z",
+    createdAt: "2025-11-21T21:30:02.011Z",
+    content: "UI 최종 수정했습니다.",
+    id: 3,
+  },
+  {
+    user: {
+      image: "/TEST_IMG/image-1.jpg",
+      nickname: "맹구",
+      id: 4,
+    },
+    userId: 4,
+    taskId: 104,
+    updatedAt: "2025-11-21T21:32:44.011Z",
+    createdAt: "2025-11-21T21:32:44.011Z",
+    content: "버그 리포트 정리했습니다.",
+    id: 4,
+  },
+];
