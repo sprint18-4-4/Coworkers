@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { Icon } from "@/common";
 import { Input, InputPassword, BaseButton } from "@/common";
-import { useLogin } from "@/hooks";
+import { useLogin } from "@/api/hooks";
 
 const LoginForm = () => {
   // TODO(김원선): 회원가입 커스텀 훅 공통 훅으로 리팩토링 시 변경
@@ -14,7 +14,7 @@ const LoginForm = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { mutate: login, isPending, error } = useLogin();
+  const { mutate: login, isPending } = useLogin();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -41,19 +41,14 @@ const LoginForm = () => {
           placeholder="비밀번호을 입력해주세요."
         />
       </div>
-      {error && (
-        <div className="text-red-500 text-sm mt-2">
-          {error instanceof Error ? error.message : "로그인에 실패했습니다."}
-        </div>
-      )}
       <div className="flex justify-between text-md-medium tablet:text-lg-medium">
-        <div className="flex items-center gap-1">
+        <button type="button" className="flex items-center gap-1">
           {/* TODO(김원선): 이메일 값 저장하는 훅 만들기 */}
           <Icon name="checkboxDefault" className="size-5 tablet:size-5" />
-          <span>이메일 기억하기</span>\\
-        </div>
+          <span>이메일 기억하기</span>
+        </button>
         {/* TODO(김원선): 팝업 구현 후 연결 */}
-        <button className="text-brand-primary" onClick={() => setIsOpen(false)}>
+        <button type="button" className="text-brand-primary" onClick={() => setIsOpen(false)}>
           비밀번호를 잊으셨나요?
         </button>
       </div>
