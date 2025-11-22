@@ -1,8 +1,11 @@
-import { Icon, ProgressBar } from "@/common";
+import { Dropdown, ProgressBar } from "@/common";
 
-// 팀 데이터 받아오기
-// MemberWidget의 open state를 받아야 할 지도
 const ProgressWidget = () => {
+  const DropdownOptions = [
+    { label: "수정하기", action: () => {} },
+    { label: "삭제하기", action: () => {} },
+  ];
+
   return (
     <section className="relative rounded-[20px] bg-background-primary px-[26px] py-[32px] -mx-[26px] -mt-[17px] tablet:mt-0 tablet:mx-0">
       <div className="w-full pc:w-[95%]">
@@ -26,8 +29,11 @@ const ProgressWidget = () => {
         </dl>
         <ProgressBar percent={25} />
       </div>
-      {/* TODO(상인): 드랍다운 머지시 변경 */}
-      <Icon name="setting" className="absolute right-[26px] top-[32px] pc:bottom-[32px] pc:top-auto" />
+
+      {/* 멤버이면 안보여주기 */}
+      <div className="absolute right-[26px] top-[32px] pc:bottom-[30px] pc:top-auto leading-none">
+        <Dropdown iconName="setting" placement="bottom-right" options={DropdownOptions} />
+      </div>
     </section>
   );
 };
