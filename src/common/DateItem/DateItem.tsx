@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/utils";
-import { startOfWeek, addDays, format } from "date-fns";
 import { ko } from "date-fns/locale";
+import { startOfWeek, addDays, format } from "date-fns";
 
 const getWeek = (date: Date) => {
   const start = startOfWeek(date, { weekStartsOn: 1 });
@@ -13,7 +13,7 @@ const DateItem = ({ onClick, selectedDate }: { onClick: (date: Date) => void; se
   const week = getWeek(selectedDate);
 
   return (
-    <div className="w-full flex gap-3">
+    <div className={cn("w-full flex items-center gap-1 mt-6", "tablet:justify-center tablet:gap-3")}>
       {week.map((day) => {
         const formatted = format(day, "d");
         const weekday = format(day, "EEE", { locale: ko });
@@ -22,6 +22,7 @@ const DateItem = ({ onClick, selectedDate }: { onClick: (date: Date) => void; se
 
         return (
           <button
+            aria-label={`${format(day, "yyyy년 MM월 dd일")}`}
             key={day.toISOString()}
             onClick={(e) => {
               e.preventDefault();
@@ -33,12 +34,12 @@ const DateItem = ({ onClick, selectedDate }: { onClick: (date: Date) => void; se
               isSelected ? "bg-slate-800 text-white" : "border hover:bg-gray-100 transition-colors",
             )}
           >
-            <div className={`text-xs-medium tablet:text-sm-medium ${!isSelected ? "text-text-default" : ""}`}>
+            <span className={`text-xs-medium tablet:text-sm-medium ${!isSelected ? "text-text-default" : ""}`}>
               {weekday}
-            </div>
-            <div className={`text-lg-semibold tablet:text-xl-semibold ${!isSelected ? "text-text-primary" : ""}`}>
+            </span>
+            <span className={`text-lg-semibold tablet:text-xl-semibold ${!isSelected ? "text-text-primary" : ""}`}>
               {formatted}
-            </div>
+            </span>
           </button>
         );
       })}

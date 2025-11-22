@@ -72,9 +72,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate }: TodoSectio
     >
       <TodoSectionHeader selectedDate={selectedDate} onClickMoveWeek={handleMoveWeek} />
 
-      <div className={cn("flex items-center gap-1 mt-6", "tablet:justify-center tablet:gap-3")}>
-        <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
-      </div>
+      <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
 
       <ul className="mt-[37px] flex flex-col gap-3">
         {data.map((item) => (
