@@ -10,11 +10,7 @@ const MemberWidget = () => {
       <FloatingButton iconName="user" onClick={() => setIsOpen((prev) => !prev)} />
 
       {isOpen && (
-        <aside
-          className={
-            "absolute bottom-[65px] right-0 flex flex-col gap-6 w-[240px] border border-border-primary rounded-xl bg-background-primary px-5 py-[24px]"
-          }
-        >
+        <aside className="absolute bottom-[65px] right-0 flex flex-col gap-6 w-[240px] border border-border-primary rounded-xl bg-background-primary px-5 py-[24px]">
           <header className="flex justify-between items-center">
             <span className="flex gap-2">
               <span className="text-lg-medium text-text-primary">멤버</span>
