@@ -3,7 +3,8 @@ import { Icon } from "@/common";
 import { Todo } from "@/common";
 import { useState } from "react";
 
-export const TaskHeader = () => {
+// 추후 Item 받기
+const TaskHeader = () => {
   return (
     <div className="flex justify-between items-center h-[25px]">
       <span className="text-lg-semibold text-text-primary">법인 설립</span>
@@ -17,7 +18,8 @@ export const TaskHeader = () => {
   );
 };
 
-export const TaskList = () => {
+// 추후 Item 받기
+const Tasks = () => {
   const [completed, setCompleted] = useState(false);
   return (
     <ul className="flex flex-col gap-2">
@@ -49,12 +51,16 @@ export const TaskList = () => {
   );
 };
 
-// TODO(상인): 만약 완료 카테고리가 피그마 사항대로 TaskHeader만 보인다면 구조가 바뀔 예정
-const TaskCard = () => {
+interface TaskCardProps {
+  item: [];
+  isRenderList: boolean;
+}
+
+const TaskCard = ({ item, isRenderList }: TaskCardProps) => {
   return (
     <article className="flex flex-col gap-4 px-5 py-4 border border-border-primary rounded-xl bg-background-primary">
       <TaskHeader />
-      <TaskList />
+      {isRenderList && <Tasks />}
     </article>
   );
 };
