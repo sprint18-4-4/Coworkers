@@ -11,7 +11,7 @@ import InputBox from "../InputBox/InputBox";
  *
  * @param value - 입력창 현재 값
  * @param onChange - 입력값이 변경될 때 실행되는 핸드러
- * @param isSubmitting - 데이터 전송 중인지 여부
+ * @param isSubmitting - 데이터 전송 중인지 여부입니다
  * @param className - 최상위 div 적용될 스타일
  *
  * @example
@@ -49,6 +49,7 @@ const InputReply = ({ value, onChange, isSubmitting, className }: InputReplyProp
         onChange={(e) => onChange(e.target.value)}
         textareaClassName="border-none"
         containerClassName="flex-1"
+        disabled={isSubmitting}
       />
       <button
         type="submit"
