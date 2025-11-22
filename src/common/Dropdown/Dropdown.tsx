@@ -77,7 +77,7 @@ const Dropdown = ({
       {isOpen && (
         <ul
           className={cn(
-            "absolute mt-1 min-w-[120px] bg-background-primary border rounded-xl shadow-md z-10",
+            "absolute mt-1 min-w-[120px] bg-background-primary border rounded-xl shadow-md z-10  overflow-hidden",
             placementStyle,
           )}
         >
@@ -85,7 +85,7 @@ const Dropdown = ({
             <li key={option.label}>
               <button
                 aria-label="드롭다운 메뉴"
-                className={cn("w-full px-3 py-2 hover:bg-icon-inverse", `text-${textAlign}`)}
+                className={cn("w-full px-3 py-2 hover:bg-state-200 transition", `text-${textAlign}`)}
                 onClick={() => handleOptionClick(option)}
               >
                 <span className="text-md-regular text-text-primary">{option.label}</span>
