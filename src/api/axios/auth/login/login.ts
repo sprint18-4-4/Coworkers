@@ -1,5 +1,5 @@
 import { instance } from "@/lib";
-import { User } from "@/types";
+import { AuthToken, User } from "@/types";
 import { AxiosError } from "axios";
 
 export type LoginRequest = {
@@ -7,9 +7,7 @@ export type LoginRequest = {
   password: string;
 };
 
-export type LoginResponse = {
-  accessToken: string;
-  refreshToken: string;
+export type LoginResponse = AuthToken & {
   user: User;
 };
 

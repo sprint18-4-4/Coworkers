@@ -17,7 +17,10 @@ const LoginForm = () => {
   const { mutate: login, isPending } = usePostLogin();
 
   const handleSubmit = (e: FormEvent) => {
+    console.log("🔥 handleSubmit 실행됨!"); // ✅ 추가
     e.preventDefault();
+
+    console.log("로그인 데이터:", { email, password }); // ✅ 추가
 
     login({ email, password });
   };
