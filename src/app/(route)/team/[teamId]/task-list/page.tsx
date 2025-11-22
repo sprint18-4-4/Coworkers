@@ -8,6 +8,7 @@ import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 import { DetailPage } from "./_detail/_components";
 import { TASK_GROUP_MOCK_DATA } from "@/MOCK_DATA";
 
+// TODO(지권): 목업 데이터 변경
 const data = TASK_GROUP_MOCK_DATA;
 
 const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {

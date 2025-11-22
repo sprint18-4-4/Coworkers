@@ -7,15 +7,18 @@ import { TODO_STYLES } from "../../_constants";
 import { useRouter } from "next/navigation";
 import { addDays, format } from "date-fns";
 import { TaskListData } from "@/types";
+import TaskPdfDownloadButton from "@/features/TaskPdfDownloadButton";
 
 interface TodoSectionHeaderProps {
+  data: TaskListData;
   selectedDate: Date;
   onClickMoveWeek: (direction: "prev" | "next") => void;
 }
 
-const TodoSectionHeader = ({ selectedDate, onClickMoveWeek }: TodoSectionHeaderProps) => {
+const TodoSectionHeader = ({ data, selectedDate, onClickMoveWeek }: TodoSectionHeaderProps) => {
   const monthLabel = format(selectedDate, "yyyy년 M월");
   const monthDateTime = format(selectedDate, "yyyy-MM");
+  console.log("data:", data);
 
   return (
     <header className="flex items-center justify-between">
@@ -36,6 +39,7 @@ const TodoSectionHeader = ({ selectedDate, onClickMoveWeek }: TodoSectionHeaderP
         <button aria-label="달력 열기" className="size-6 rounded-full bg-background-secondary flex-center">
           <Icon name="calendar" className={TODO_STYLES.arrowBase} />
         </button>
+        <TaskPdfDownloadButton data={data} />
       </div>
     </header>
   );
@@ -70,7 +74,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate }: TodoSectio
         "pc:px-[42px] pc:max-w-[819px] pc:flex-1",
       )}
     >
-      <TodoSectionHeader selectedDate={selectedDate} onClickMoveWeek={handleMoveWeek} />
+      <TodoSectionHeader data={data} selectedDate={selectedDate} onClickMoveWeek={handleMoveWeek} />
 
       <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
 
