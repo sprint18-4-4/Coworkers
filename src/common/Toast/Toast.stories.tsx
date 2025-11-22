@@ -1,20 +1,18 @@
-import Toaster from "@/lib/toaster";
 import { toastKit } from "@/utils";
+import Toaster from "@/lib/toaster";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const BUTTON_STYLE = "px-4 py-2 rounded-md border border-gray-300";
 
 const ToastDemo = () => {
-  const { success, error, loading, showToast } = toastKit();
+  const { success, error, loading } = toastKit();
 
   const handleLoadingToast = async () => {
     const id = loading("처리 중이에요.");
 
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    success("완료됐어요.", { id }); // 같은 id로 교체
-    // 실패 케이스라면
-    // error("실패했어요.", { id });
+    success("완료됐어요.", { id });
   };
 
   return (
@@ -28,22 +26,20 @@ const ToastDemo = () => {
       <button onClick={handleLoadingToast} className={BUTTON_STYLE}>
         로딩 토스트
       </button>
-      <button onClick={() => showToast({ variant: "success", message: "커스텀 호출이에요." })} className={BUTTON_STYLE}>
-        showToast 직접 호출
-      </button>
     </div>
   );
 };
 
 const meta: Meta<typeof ToastDemo> = {
-  title: "Hooks/useToast",
+  title: "Utils/toastKit",
   component: ToastDemo,
+  tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <>
+      <div className="h-[50vh]">
         <Story />
         <Toaster />
-      </>
+      </div>
     ),
   ],
 };

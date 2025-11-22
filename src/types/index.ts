@@ -7,3 +7,4 @@ export type { FormValues, FormErrors, ValidationResult, ValidationFunction, Vali
 export type { TaskListItemType } from "./TaskListItemType";
 export type { Day, DateNumber } from "./DateType";
 export type * from "./DetailPage/DetailDataType";
+export type { ToastVariant, AppToastOptions } from "./ToastType";

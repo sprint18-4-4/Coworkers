@@ -1,38 +1,39 @@
 import { toast } from "react-hot-toast";
 
-export type ToastVariant = "success" | "error" | "loading";
-
-export interface AppToastOptions {
-  variant?: ToastVariant;
-  message: string;
-}
+/**
+ * @author jikwon
+ * @description 토스트 유틸 함수
+ * @returns { success, error, loading }
+ *
+ * @example
+ * const { success, error, loading } = toastKit();
+ *
+ * // 성공
+ * success("성공적으로 저장되었어요.");
+ *
+ * // 실패
+ * error("에러가 발생했어요.");
+ *
+ * // 로딩
+ * const id = loading("처리 중이에요.");
+ *
+ * if (성공 로직) {
+ *   success("완료됐어요.", { id });
+ * } else {
+ *   error("에러가 발생했어요.", { id });
+ * }
+ */
 
 export const toastKit = () => {
-  const showToast = ({ variant = "success", message }: AppToastOptions) => {
-    switch (variant) {
-      case "success":
-        toast.success(message);
-        break;
-      case "error":
-        toast.error(message);
-        break;
-      case "loading":
-        return toast.loading(message);
-    }
-  };
-
   const success = (message: string, options?: { id?: string }) =>
     options?.id ? toast.success(message, { id: options.id }) : toast.success(message);
 
   const error = (message: string, options?: { id?: string }) =>
     options?.id ? toast.error(message, { id: options.id }) : toast.error(message);
 
-  const loading = (message: string) => {
-    return showToast({ variant: "loading", message }) as string;
-  };
+  const loading = (message: string) => toast.loading(message);
 
   return {
-    showToast,
     success,
     error,
     loading,
