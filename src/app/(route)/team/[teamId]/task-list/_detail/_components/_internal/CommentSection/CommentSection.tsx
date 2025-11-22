@@ -1,8 +1,12 @@
 import { cn } from "@/utils";
 import { CommentItem, InputReply, Profile } from "@/common";
 import { COMMENT_MOCK_DATA } from "@/MOCK_DATA";
+import { useState } from "react";
 
 const CommentSection = () => {
+  const [value, setValue] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   return (
     <>
       <section className="space-y-4">
@@ -12,7 +16,7 @@ const CommentSection = () => {
         </div>
         <form aria-label="댓글 작성" onSubmit={() => {}} className="flex items-center gap-3 w-full">
           <Profile src={""} />
-          <InputReply />
+          <InputReply value={value} onChange={setValue} isSubmitting={isSubmitting} />
         </form>
       </section>
 
