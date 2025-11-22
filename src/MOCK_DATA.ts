@@ -1,4 +1,4 @@
-import { DateNumber, Day, TaskListItemType } from "./types";
+import { DateNumber, Day, TaskGroupItem, TaskListItemType } from "./types";
 
 export const USER_MOCK_DATA = {
   teamId: "1",
@@ -148,3 +148,106 @@ export const COMMENT_MOCK_DATA = {
   updatedAt: "2024-07-29",
   user: { id: 1, nickname: "안해나", image: "" },
 };
+
+export const TASK_GROUP_MOCK_DATA: TaskGroupItem[] = [
+  {
+    doneBy: {
+      user: {
+        image: "/TEST_IMG/image-1.jpg",
+        nickname: "string",
+        id: 1,
+      },
+    },
+    writer: {
+      image: "/TEST_IMG/image-1.jpg",
+      nickname: "string",
+      id: 1,
+    },
+    displayIndex: 0,
+    commentCount: 0,
+    deletedAt: "2025-11-21T22:50:39.165Z",
+    recurringId: 0,
+    frequency: "DAILY",
+    updatedAt: "2025-11-21T22:50:39.165Z",
+    doneAt: "2025-11-21T22:50:39.165Z",
+    date: "2025-11-21T22:50:39.165Z",
+    description: "법인 설립 비용 안내 드리기",
+    name: "법인 설립 비용 안내 드리기",
+    id: 1,
+  },
+  {
+    doneBy: {
+      user: {
+        image: "/TEST_IMG/image-1.jpg",
+        nickname: "string",
+        id: 2,
+      },
+    },
+    writer: {
+      image: "/TEST_IMG/image-1.jpg",
+      nickname: "string",
+      id: 2,
+    },
+    displayIndex: 1,
+    commentCount: 1,
+    deletedAt: "2025-11-21T22:50:39.165Z",
+    recurringId: 0,
+    frequency: "WEEKLY",
+    updatedAt: "2025-11-21T22:50:39.165Z",
+    doneAt: "2025-11-21T22:50:39.165Z",
+    date: "2025-11-22T22:50:39.165Z",
+    description: "법인 설립 비용 혹은 등기 비용 안내 드리기",
+    name: "법인 설립 비용 혹은 등기 비용 안내 드리기",
+    id: 2,
+  },
+  {
+    doneBy: {
+      user: {
+        image: "/TEST_IMG/image-1.jpg",
+        nickname: "string",
+        id: 3,
+      },
+    },
+    writer: {
+      image: "/TEST_IMG/image-1.jpg",
+      nickname: "string",
+      id: 3,
+    },
+    displayIndex: 2,
+    commentCount: 2,
+    deletedAt: "2025-11-21T22:50:39.165Z",
+    recurringId: 0,
+    frequency: "MONTHLY",
+    updatedAt: "2025-11-21T22:50:39.165Z",
+    doneAt: "2025-11-21T22:50:39.165Z",
+    date: "2025-11-23T22:50:39.165Z",
+    description: "법인 설립 비용 혹은 등기 비용 혹은 기타 비용 안내 드리기",
+    name: "법인 설립 비용 혹은 등기 비용 혹은 기타 비용 안내 드리기",
+    id: 3,
+  },
+  {
+    doneBy: {
+      user: {
+        image: "/TEST_IMG/image-1.jpg",
+        nickname: "string",
+        id: 4,
+      },
+    },
+    writer: {
+      image: "/TEST_IMG/image-1.jpg",
+      nickname: "string",
+      id: 4,
+    },
+    displayIndex: 3,
+    commentCount: 2,
+    deletedAt: "2025-11-21T22:50:39.165Z",
+    recurringId: 0,
+    frequency: "ONCE",
+    updatedAt: "2025-11-21T22:50:39.165Z",
+    doneAt: "2025-11-21T22:50:39.165Z",
+    date: "2025-11-24T22:50:39.165Z",
+    description: "법인 설립 비용 혹은 등기 비용 혹은 기타 비용 혹은 기타 비용 안내 드리기",
+    name: "법인 설립 비용 혹은 등기 비용 혹은 기타 비용 혹은 기타 비용 안내 드리기",
+    id: 4,
+  },
+];

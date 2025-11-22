@@ -1,11 +1,14 @@
 "use client";
 
 import { cn } from "@/utils";
-import { Suspense, use } from "react";
+import { Suspense, use, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TodoSection, TodoHeader } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 import { DetailPage } from "./_detail/_components";
+import { TASK_GROUP_MOCK_DATA } from "@/MOCK_DATA";
+
+const data = TASK_GROUP_MOCK_DATA;
 
 const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
   const { teamId } = use(params);
@@ -13,11 +16,26 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("task-id");
 
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const dateParam = searchParams.get("date");
+    if (!dateParam) return new Date();
+    return new Date(dateParam);
+  });
+
   const onClickFloatingButton = () => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("w", "true");
 
     router.push(`/team/${teamId}/task-list?${params.toString()}`);
+  };
+
+  const onClickDateItem = (date: Date) => {
+    setSelectedDate(date);
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("date", date.toISOString());
+
+    router.replace(`/team/${teamId}/task-list?${params.toString()}`);
   };
 
   return (
@@ -28,7 +46,7 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
           <TodoHeader />
-          <TodoSection teamId={teamId} />
+          <TodoSection data={data} teamId={teamId} onClickDateItem={onClickDateItem} selectedDate={selectedDate} />
         </div>
       </PageLayout>
 

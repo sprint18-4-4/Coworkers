@@ -3,24 +3,33 @@
 import { cn } from "@/utils";
 import { DateItem, Icon } from "@/common";
 import { TaskListItem } from "@/features";
-import { LIST_DATE_MOCK_DATA, MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
 import { TODO_STYLES } from "../../_constants";
 import { useRouter } from "next/navigation";
+import { addDays, format } from "date-fns";
+import { TaskListData } from "@/types";
 
-const TodoSectionHeader = () => {
+interface TodoSectionHeaderProps {
+  selectedDate: Date;
+  onClickMoveWeek: (direction: "prev" | "next") => void;
+}
+
+const TodoSectionHeader = ({ selectedDate, onClickMoveWeek }: TodoSectionHeaderProps) => {
+  const monthLabel = format(selectedDate, "yyyy년 M월");
+  const monthDateTime = format(selectedDate, "yyyy-MM");
+
   return (
     <header className="flex items-center justify-between">
       <h3 className="text-2lg-bold text-text-primary">법인 등기</h3>
 
       <div className="flex items-center gap-2">
-        <time dateTime={"2025-05"} className="text-sm-medium text-text-primary">
-          2025년 5월
+        <time dateTime={monthDateTime} className="text-sm-medium text-text-primary">
+          {monthLabel}
         </time>
         <div className="flex items-center gap-1">
-          <button aria-label="이전" className={TODO_STYLES.buttonBase}>
+          <button aria-label="이전 주" className={TODO_STYLES.buttonBase} onClick={() => onClickMoveWeek("prev")}>
             <Icon name="leftArrow" className={TODO_STYLES.arrowBase} />
           </button>
-          <button aria-label="다음" className={TODO_STYLES.buttonBase}>
+          <button aria-label="다음 주" className={TODO_STYLES.buttonBase} onClick={() => onClickMoveWeek("next")}>
             <Icon name="rightArrow" className={TODO_STYLES.arrowBase} />
           </button>
         </div>
@@ -32,8 +41,23 @@ const TodoSectionHeader = () => {
   );
 };
 
-const TodoSection = ({ teamId }: { teamId: string }) => {
+type WeekDirection = "prev" | "next";
+
+interface TodoSectionProps {
+  data: TaskListData;
+  teamId: string;
+  onClickDateItem: (date: Date) => void;
+  selectedDate: Date;
+}
+
+const TodoSection = ({ data, teamId, onClickDateItem, selectedDate }: TodoSectionProps) => {
   const router = useRouter();
+
+  const handleMoveWeek = (direction: WeekDirection) => {
+    const diff = direction === "prev" ? -7 : 7;
+    const newDate = addDays(selectedDate, diff);
+    onClickDateItem(newDate);
+  };
 
   const onClickTaskListItem = (id: string) => {
     router.push(`/team/${teamId}/task-list?task-id=${id}`, { scroll: false });
@@ -46,16 +70,14 @@ const TodoSection = ({ teamId }: { teamId: string }) => {
         "pc:px-[42px] pc:max-w-[819px] pc:flex-1",
       )}
     >
-      <TodoSectionHeader />
+      <TodoSectionHeader selectedDate={selectedDate} onClickMoveWeek={handleMoveWeek} />
 
       <div className={cn("flex items-center gap-1 mt-6", "tablet:justify-center tablet:gap-3")}>
-        {LIST_DATE_MOCK_DATA.map((day) => {
-          return <DateItem key={day.day} day={day.day} date={day.date} />;
-        })}
+        <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
       </div>
 
       <ul className="mt-[37px] flex flex-col gap-3">
-        {MY_HISTORY_ITEM_MOCK_DATA.map((item) => (
+        {data.map((item) => (
           <TaskListItem key={item.id} item={item} onOpenDetail={() => onClickTaskListItem(item.id.toString())} />
         ))}
       </ul>
