@@ -67,16 +67,12 @@ const Select = <T,>({ value, options, onChange, className, textAlign = "left" }:
       </button>
 
       {isOpen && (
-        <ul className="absolute left-0 top-full mt-1 w-full bg-background-primary border rounded-xl shadow-md z-10">
+        <ul className="absolute left-0 top-full mt-1 w-full bg-background-primary border rounded-xl shadow-md z-10 overflow-hidden">
           {options.map((option) => (
             <li key={option.label}>
               <button
                 aria-label="선택 메뉴"
-                className={cn(
-                  "w-full px-3 py-2 hover:bg-icon-inverse",
-                  option.value === value && "bg-gray-100 font-semibold",
-                  `text-${textAlign}`,
-                )}
+                className={cn("w-full px-3 py-2 hover:bg-state-200 transition", `text-${textAlign}`)}
                 onClick={() => handleSelect(option)}
               >
                 <span className="text-md-regular text-text-primary">{option.label}</span>
