@@ -53,7 +53,7 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
 
       <FloatingButton
         iconName="plus"
-        className="absolute bottom-2 right-2"
+        className="fixed bottom-2 right-2"
         iconClassName="size-6 tablet:size-6"
         onClick={onClickFloatingButton}
       />
