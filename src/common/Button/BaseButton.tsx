@@ -61,8 +61,8 @@ const BaseButton = ({ children, variant = "solid", size = "large", className, da
         variant.includes("outlined") && size === "medium" && "bg-background-inverse",
         danger && BASE_BUTTON_DANGER_STYLE,
         className,
-        { ...rest },
       )}
+      {...rest}
     >
       {children}
     </button>
