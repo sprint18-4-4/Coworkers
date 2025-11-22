@@ -3,7 +3,7 @@
 import { cn } from "@/utils";
 import { TaskListData } from "@/types";
 import { DateItem, Icon } from "@/common";
-import { TaskListItem } from "@/features";
+import { EmptyHistory, TaskListItem } from "@/features";
 import { addDays, format } from "date-fns";
 import { useRouter } from "next/navigation";
 import { TODO_STYLES } from "../../_constants";
@@ -77,8 +77,20 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate }: TodoSectio
 
       <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
 
+      {data?.length === 0 ||
+        (!data && (
+          <EmptyHistory
+            ariaLabel="할 일이 없습니다."
+            text={
+              <span>
+                아직 완료된 작업이 없어요. <br /> 하나씩 완료해가며 히스토리를 만들어보세요!
+              </span>
+            }
+          />
+        ))}
+
       <ul className="mt-[37px] flex flex-col gap-3">
-        {data.map((item) => (
+        {data?.map((item) => (
           <TaskListItem key={item.id} item={item} onOpenDetail={() => onClickTaskListItem(item.id.toString())} />
         ))}
       </ul>

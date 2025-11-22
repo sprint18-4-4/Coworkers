@@ -27,7 +27,7 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("w", "true");
 
-    router.push(`/team/${teamId}/task-list?${params.toString()}`);
+    router.push(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
   };
 
   const onClickDateItem = (date: Date) => {
@@ -36,7 +36,7 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("date", date.toISOString());
 
-    router.replace(`/team/${teamId}/task-list?${params.toString()}`);
+    router.replace(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
   };
 
   return (
@@ -65,7 +65,7 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
           onClose={() => {
             const params = new URLSearchParams(searchParams.toString());
             params.delete("w");
-            router.push(`/team/${teamId}/task-list?${params.toString()}`);
+            router.push(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
           }}
         />
       )}
