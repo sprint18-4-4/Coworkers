@@ -1,12 +1,6 @@
-import { Frequency } from "@/types";
+import { Frequency, TaskUser } from "@/types";
 
-export interface TaskUser {
-  id: number;
-  nickname: string;
-  image: string;
-}
-
-export interface TaskDoneBy {
+interface TaskDoneBy {
   user: TaskUser;
 }
 

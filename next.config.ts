@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    esmExternals: "loose",
+  },
+
   webpack(config) {
     // @ts-expect-error - Next.js rule type is too complex
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"));
