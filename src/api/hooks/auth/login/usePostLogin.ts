@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { setAuthCookies, tokenStorage } from "@/utils";
 import { loginApi } from "@/api/axios/auth/login/login";
 
-const useLogin = () => {
+const usePostLogin = () => {
   return useMutation({
     mutationFn: loginApi,
     onSuccess: async (data) => {
@@ -19,4 +19,4 @@ const useLogin = () => {
   });
 };
 
-export default useLogin;
+export default usePostLogin;

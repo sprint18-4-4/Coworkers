@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { Icon } from "@/common";
 import { Input, InputPassword, BaseButton } from "@/common";
-import { useLogin } from "@/api/hooks";
+import { usePostLogin } from "@/api/hooks";
 
 const LoginForm = () => {
   // TODO(김원선): 회원가입 커스텀 훅 공통 훅으로 리팩토링 시 변경
@@ -14,7 +14,7 @@ const LoginForm = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { mutate: login, isPending } = useLogin();
+  const { mutate: login, isPending } = usePostLogin();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
