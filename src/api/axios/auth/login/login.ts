@@ -11,7 +11,7 @@ export type LoginResponse = AuthToken & {
   user: User;
 };
 
-export const loginApi = async (credentials: LoginRequest): Promise<LoginResponse> => {
+export const postLogin = async (credentials: LoginRequest): Promise<LoginResponse> => {
   try {
     const { data } = await instance.post<LoginResponse>("/auth/signIn", credentials);
     return data;

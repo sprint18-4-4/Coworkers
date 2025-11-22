@@ -14,12 +14,12 @@ const LoginForm = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { mutate: login, isPending } = usePostLogin();
+  const { mutate: postLogin, isPending } = usePostLogin();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    login({ email, password });
+    postLogin({ email, password });
   };
 
   return (

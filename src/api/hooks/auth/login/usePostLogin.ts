@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { setAuthCookies, tokenStorage } from "@/utils";
-import { loginApi } from "@/api/axios/auth/login/login";
+import { postLogin } from "@/api/axios/auth/login/login";
 
 const usePostLogin = () => {
   return useMutation({
-    mutationFn: loginApi,
+    mutationFn: postLogin,
     onSuccess: async (data) => {
       await setAuthCookies({
         accessToken: data.accessToken,
