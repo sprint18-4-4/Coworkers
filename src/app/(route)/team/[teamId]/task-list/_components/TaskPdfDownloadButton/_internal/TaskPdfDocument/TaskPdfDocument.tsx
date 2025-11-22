@@ -58,7 +58,7 @@ interface TaskPdfDocumentProps {
   data: TaskListData;
 }
 
-export const TaskPdfDocument = ({ data }: TaskPdfDocumentProps) => {
+const TaskPdfDocument = ({ data }: TaskPdfDocumentProps) => {
   const date = format(new Date(), "yyyy년 M월 d일");
 
   return (
@@ -90,3 +90,5 @@ export const TaskPdfDocument = ({ data }: TaskPdfDocumentProps) => {
     </Document>
   );
 };
+
+export default TaskPdfDocument;

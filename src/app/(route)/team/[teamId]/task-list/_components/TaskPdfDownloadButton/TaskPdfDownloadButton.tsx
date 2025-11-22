@@ -1,9 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { format } from "date-fns";
 import { TaskListData } from "@/types";
-import { TaskPdfDocument } from "./TaskPdfDocument";
+import { format } from "date-fns";
+import { TaskPdfDocument } from "./_internal";
 
 const PDFViewer = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink), {
   ssr: false,
