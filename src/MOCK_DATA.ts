@@ -160,7 +160,7 @@ export const TASK_GROUP_MOCK_DATA: TaskGroupItem[] = [
     },
     writer: {
       image: "/TEST_IMG/image-1.jpg",
-      nickname: "string",
+      nickname: "짱구",
       id: 1,
     },
     displayIndex: 0,
@@ -185,7 +185,7 @@ export const TASK_GROUP_MOCK_DATA: TaskGroupItem[] = [
     },
     writer: {
       image: "/TEST_IMG/image-1.jpg",
-      nickname: "string",
+      nickname: "맹구",
       id: 2,
     },
     displayIndex: 1,
@@ -210,7 +210,7 @@ export const TASK_GROUP_MOCK_DATA: TaskGroupItem[] = [
     },
     writer: {
       image: "/TEST_IMG/image-1.jpg",
-      nickname: "string",
+      nickname: "철수",
       id: 3,
     },
     displayIndex: 2,
@@ -235,7 +235,7 @@ export const TASK_GROUP_MOCK_DATA: TaskGroupItem[] = [
     },
     writer: {
       image: "/TEST_IMG/image-1.jpg",
-      nickname: "string",
+      nickname: "유리",
       id: 4,
     },
     displayIndex: 3,

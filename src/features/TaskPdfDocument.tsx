@@ -3,6 +3,7 @@
 import { TaskGroupItem, TaskListData } from "@/types";
 import { getFrequencyLabel } from "@/utils";
 import { Document, Page, Text, View, StyleSheet, Font } from "@react-pdf/renderer";
+import { format } from "date-fns";
 
 Font.register({
   family: "NotoSansKR",
@@ -53,7 +54,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TaskPdfDocument = ({ data }: { data: TaskListData }) => {
+interface TaskPdfDocumentProps {
+  data: TaskListData;
+}
+
+export const TaskPdfDocument = ({ data }: TaskPdfDocumentProps) => {
+  const date = format(new Date(), "yyyy년 M월 d일");
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -62,8 +69,7 @@ export const TaskPdfDocument = ({ data }: { data: TaskListData }) => {
 
         {/* 상단 메타 정보 */}
         <View style={styles.metaRow}>
-          {/* TODO(지권): 기준 날짜 변경 */}
-          <Text style={styles.metaText}>기준 날짜: 2025년 11월 22일</Text>
+          <Text style={styles.metaText}>날짜: {date}</Text>
           <Text style={styles.metaText}>총 작업 개수: {data?.length}개</Text>
         </View>
 
@@ -74,7 +80,7 @@ export const TaskPdfDocument = ({ data }: { data: TaskListData }) => {
         {data?.map((task: TaskGroupItem) => (
           <View key={task.id} style={styles.taskItem}>
             <Text style={styles.taskTitle}>{task.name}</Text>
-            <Text style={styles.taskMeta}>날짜: {task.date}</Text>
+            <Text style={styles.taskMeta}>날짜: {date}</Text>
             <Text style={styles.taskMeta}>생성자: {task.writer.nickname}</Text>
             <Text style={styles.taskMeta}>작업 반복: {getFrequencyLabel(task.frequency)}</Text>
             {task.description && <Text style={styles.taskDescription}>상세 설명: {task.description}</Text>}

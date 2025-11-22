@@ -1,12 +1,12 @@
 "use client";
 
 import { cn } from "@/utils";
+import { TaskListData } from "@/types";
 import { DateItem, Icon } from "@/common";
 import { TaskListItem } from "@/features";
-import { TODO_STYLES } from "../../_constants";
-import { useRouter } from "next/navigation";
 import { addDays, format } from "date-fns";
-import { TaskListData } from "@/types";
+import { useRouter } from "next/navigation";
+import { TODO_STYLES } from "../../_constants";
 import TaskPdfDownloadButton from "@/features/TaskPdfDownloadButton";
 
 interface TodoSectionHeaderProps {
@@ -18,7 +18,6 @@ interface TodoSectionHeaderProps {
 const TodoSectionHeader = ({ data, selectedDate, onClickMoveWeek }: TodoSectionHeaderProps) => {
   const monthLabel = format(selectedDate, "yyyy년 M월");
   const monthDateTime = format(selectedDate, "yyyy-MM");
-  console.log("data:", data);
 
   return (
     <header className="flex items-center justify-between">
