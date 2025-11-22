@@ -13,7 +13,7 @@ import dayjs from "dayjs";
  * ```
  */
 
-export const formatToKoreanDate = (isoString: string) => {
+export const formatToKoreanDate = (isoString: string | Date) => {
   if (!isoString) return "";
   return dayjs(isoString).format("YYYY년 M월 D일");
 };
