@@ -20,10 +20,17 @@ const Sidebar = ({ user }: { user: User }) => {
     setIsOpen(!prev);
   };
 
+  const options = [
+    { label: "마이 히스토리", action: () => {} },
+    { label: "계정 설정", action: () => {} },
+    { label: "팀 참여", action: () => {} },
+    { label: "로그아웃", action: () => {} },
+  ];
+
   return (
     <>
-      <SidebarTablet user={user} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} />
-      <SidebarMobile user={user} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} />
+      <SidebarTablet user={user} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} options={options} />
+      <SidebarMobile user={user} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} options={options} />
     </>
   );
 };
