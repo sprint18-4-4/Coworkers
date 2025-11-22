@@ -1,3 +1,9 @@
+export const TIME_STYLES = {
+  periodBaseButton:
+    "w-[78px] h-[40px] px-[10px] py-2 rounded-xl border border-border-primary bg-background-primary text-text-default",
+  timeBaseButton: "w-full min-h-[34px] text-lg-regular text-text-default text-start pl-4 pr-2 py-2",
+} as const;
+
 export const TIME_PERIOD_LIST = [
   { label: "오전", value: "am" },
   { label: "오후", value: "pm" },
