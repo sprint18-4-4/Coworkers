@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import TodoSection from "./TodoSection";
 import { TASK_GROUP_MOCK_DATA } from "@/MOCK_DATA";
 
