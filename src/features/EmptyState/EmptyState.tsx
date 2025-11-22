@@ -1,12 +1,12 @@
 import { cn } from "@/utils";
 import { ReactNode } from "react";
 
-interface EmptyHistoryProps {
+interface EmptyStateProps {
   ariaLabel: string;
   text: ReactNode;
 }
 
-const EmptyHistory = ({ ariaLabel, text }: EmptyHistoryProps) => {
+const EmptyState = ({ ariaLabel, text }: EmptyStateProps) => {
   return (
     <div
       role="status"
@@ -22,4 +22,4 @@ const EmptyHistory = ({ ariaLabel, text }: EmptyHistoryProps) => {
   );
 };
 
-export default EmptyHistory;
+export default EmptyState;

@@ -3,7 +3,7 @@
 import { cn } from "@/utils";
 import { DateValue, TaskListData } from "@/types";
 import { DateItem, DatePicker, Icon } from "@/common";
-import { EmptyHistory, TaskListItem } from "@/features";
+import { EmptyState, TaskListItem } from "@/features";
 import { addDays, format } from "date-fns";
 import { useRouter } from "next/navigation";
 import { TODO_STYLES } from "../../_constants";
@@ -110,7 +110,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate }: TodoSectio
 
       {/* TODO(지권): API 연결 후 isError 변경 */}
       {(data?.length === 0 || !data) && (
-        <EmptyHistory
+        <EmptyState
           ariaLabel="할 일이 없습니다."
           text={
             <span>
