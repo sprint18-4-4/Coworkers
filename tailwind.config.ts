@@ -64,6 +64,7 @@ const config: Config = {
         },
         state: {
           200: "#e2e8f0",
+          300: "#CBD5E1",
           400: "#94A3B8",
         },
       },

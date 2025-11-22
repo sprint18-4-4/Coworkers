@@ -4,14 +4,14 @@ import Link from "next/link";
 import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
 import AddTeamButton from "../AddTeamButton/AddTeamButton";
 import SidebarLink from "../SidebarLink/SidebarLink";
-import { SidebarProps } from "../../_types";
-import { Icon } from "@/common";
+import { SidebarDropdownProps } from "../../_types";
+import { Dropdown, Icon } from "@/common";
 
-const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
+const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDropdownProps) => {
   return (
     <aside
       className={cn(
-        "flex-col sticky top-0 h-[100vh] border-r border-background-tertiary",
+        "flex-col sticky top-0 h-[100vh] border-r border-background-tertiary z-[999]",
         isOpen ? "w-[270px]" : "w-[72px]",
         "hidden tablet:flex pc:flex",
       )}
@@ -27,13 +27,13 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
           onClick={() => handleOpenDropdown(isOpen)}
           className={cn(
             "ml-auto rounded-full bg-background-primary",
-            isOpen ? "size-7" : "p-1 ml-[5px] border border-background-tertiary",
+            isOpen ? "size-7" : "p-1 -mx-1.5 border border-background-tertiary",
           )}
         >
           {isOpen ? (
             <Icon name="leftFold" className="size-6 tablet:size-6" />
           ) : (
-            <Icon name="rightFold" className="size-6 tablet:size-6" />
+            <Icon name="rightFold" className="size-6 tablet:size-6 text-slate-300" />
           )}
         </button>
       </header>
@@ -42,13 +42,17 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
         <section className="w-full flex-1 min-h-0 flex flex-col items-center justify-start gap-3">
           {user && (
             <>
-              <div className={cn("w-full flex flex-col gap-2", isOpen && "pb-3")}>
-                <SidebarDropdown isOpen={isOpen} />
+              {user.memberships.length > 0 && (
+                <>
+                  <div className={cn("w-full flex flex-col gap-2", isOpen && "pb-3")}>
+                    <SidebarDropdown isOpen={isOpen} membership={user.memberships} />
 
-                {isOpen && <AddTeamButton />}
-              </div>
+                    {isOpen && <AddTeamButton />}
+                  </div>
 
-              <hr className={cn("w-full text-background-tertiary", !isOpen && "hidden")} />
+                  <hr className={cn("w-full text-background-tertiary", !isOpen && "hidden")} />
+                </>
+              )}
 
               <SidebarLink title="자유게시판" isOpen={isOpen} />
             </>
@@ -61,22 +65,28 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown }: SidebarProps) => {
             !isOpen && "flex-center",
           )}
         >
-          <Image
-            src={user?.image || "/TEST_IMG/image-1.jpg"}
-            alt={`${user?.nickname} 이미지`}
-            width={40}
-            height={40}
-            className="size-10 rounded-xl"
-          />
-          {isOpen &&
-            (user ? (
-              <div className="flex flex-col items-start gap-[2px]">
-                <span className="text-text-primary text-lg-medium">{user.nickname}</span>
-                <span className="text-slate-400 text-md-medium">{user.memberships[0].group.name}</span>
+          <Dropdown
+            options={options}
+            placement="top-left"
+            image={
+              <div className="flex items-center gap-3">
+                <Image
+                  src={user?.image || "/TEST_IMG/image-1.jpg"}
+                  alt={`${user?.nickname} 이미지`}
+                  width={40}
+                  height={40}
+                  className="size-10 rounded-xl"
+                />
+                {isOpen && user && (
+                  <div className="flex flex-col items-start gap-[2px]">
+                    <span className="text-text-primary text-lg-medium">{user.nickname}</span>
+                    <span className="text-slate-400 text-md-medium">{user.memberships[0].group.name}</span>
+                  </div>
+                )}
               </div>
-            ) : (
-              <Link href="/login">로그인</Link>
-            ))}
+            }
+          />
+          {isOpen && !user && <Link href="/login">로그인</Link>}
         </footer>
       </nav>
     </aside>

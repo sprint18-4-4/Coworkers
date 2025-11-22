@@ -5,3 +5,7 @@ export interface SidebarProps {
   isOpen: boolean;
   handleOpenDropdown: (prev: boolean) => void;
 }
+
+export interface SidebarDropdownProps extends SidebarProps {
+  options: { label: string; action: () => void }[];
+}

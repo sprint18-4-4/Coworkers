@@ -29,7 +29,7 @@ function DatePicker({ value, onChange }: DatePickerProps) {
   return (
     <div
       aria-label="날짜 선택"
-      className="w-full min-h-[258px] p-4 bg-white rounded-2xl border border-interaction-hover"
+      className="w-full min-h-[258px] flex-center p-4 bg-white rounded-2xl border border-interaction-hover"
     >
       <Calendar
         locale="ko-KR"
