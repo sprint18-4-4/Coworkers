@@ -1,15 +1,12 @@
 import { Frequency } from "../FrequencyType";
+import { TaskUser } from "../TaskUser";
 
-export interface TaskUser {
-  image: string;
-  nickname: string;
-  id: number;
+interface TaskDoneBy {
+  user: TaskUser;
 }
 
 export interface TaskGroupItem {
-  doneBy: {
-    user: TaskUser;
-  };
+  doneBy: TaskDoneBy;
   writer: TaskUser;
   displayIndex: number;
   commentCount: number;

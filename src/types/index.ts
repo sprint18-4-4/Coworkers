@@ -6,4 +6,6 @@ export type { CommentUser, CommentData } from "./CommentType";
 export type { FormValues, FormErrors, ValidationResult, ValidationFunction, ValidationRules } from "./AuthType";
 export type { TaskListItemType } from "./TaskListItemType";
 export type { Day, DateNumber } from "./DateType";
-export type * from "./taskList/TaskListData";
+export type { TaskUser } from "./TaskUser";
+export type { TaskGroupItem, TaskListData } from "./taskList/TaskListData";
+export type { DetailDataItem } from "./DetailPage/DetailDataType";
