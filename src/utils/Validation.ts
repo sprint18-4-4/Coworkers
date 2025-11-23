@@ -5,11 +5,11 @@ export const PW_REGX = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
 export const validateEmail = (email: string): ValidationResult => {
   if (!email.trim()) {
-    return { isValid: false, ErrorMessage: "이메일을 입력해주세요." };
+    return { isValid: false, ErrorMessage: "이메일운 필수 입력입니다." };
   }
 
   if (!EMAIL_REGX.test(email)) {
-    return { isValid: false, ErrorMessage: "올바른 이메일 형식이 아닙니다." };
+    return { isValid: false, ErrorMessage: "이메일 형식으로 작성해 주세요." };
   }
 
   return { isValid: true };
@@ -17,7 +17,7 @@ export const validateEmail = (email: string): ValidationResult => {
 
 export const validatePasswordForLogin = (password: string): ValidationResult => {
   if (!password.trim()) {
-    return { isValid: false, ErrorMessage: "비밀번호를 입력해주세요." };
+    return { isValid: false, ErrorMessage: "비밀번호는 필수 입력입니다." };
   }
 
   return { isValid: true };
@@ -25,7 +25,7 @@ export const validatePasswordForLogin = (password: string): ValidationResult => 
 
 export const validatePassword = (password: string): ValidationResult => {
   if (!password.trim()) {
-    return { isValid: false, ErrorMessage: "비밀번호를 입력해주세요." };
+    return { isValid: false, ErrorMessage: "비밀번호는 필수 입력입니다." };
   }
 
   if (password.length < 8) {
@@ -33,7 +33,7 @@ export const validatePassword = (password: string): ValidationResult => {
   }
 
   if (!PW_REGX.test(password)) {
-    return { isValid: false, ErrorMessage: "비밀번호는 영문자, 숫자, 특수문자를 포함해야 합니다." };
+    return { isValid: false, ErrorMessage: "비밀번호는 영문, 숫자, 특수문자로만 가능합니다." };
   }
 
   return { isValid: true };
@@ -41,7 +41,7 @@ export const validatePassword = (password: string): ValidationResult => {
 
 export const validatePasswordConfirm = (password: string, passwordConfirm: string): ValidationResult => {
   if (!passwordConfirm.trim()) {
-    return { isValid: false, ErrorMessage: "비밀번호를 입력해주세요." };
+    return { isValid: false, ErrorMessage: "비밀번호 확인을 입력해주세요." };
   }
 
   if (password !== passwordConfirm) {
@@ -53,7 +53,7 @@ export const validatePasswordConfirm = (password: string, passwordConfirm: strin
 
 export const validateName = (name: string): ValidationResult => {
   if (!name.trim()) {
-    return { isValid: false, ErrorMessage: "이름을 입력해주세요." };
+    return { isValid: false, ErrorMessage: "이름은 필수 입력입니다." };
   }
 
   if (name.trim().length < 2) {
