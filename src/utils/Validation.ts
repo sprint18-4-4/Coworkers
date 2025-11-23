@@ -5,7 +5,7 @@ export const PW_REGX = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
 export const validateEmail = (email: string): ValidationResult => {
   if (!email.trim()) {
-    return { isValid: false, ErrorMessage: "이메일운 필수 입력입니다." };
+    return { isValid: false, ErrorMessage: "이메일은 필수 입력입니다." };
   }
 
   if (!EMAIL_REGX.test(email)) {
