@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { Icon } from "@/common";
 import { Input, InputPassword, BaseButton } from "@/common";
 import { usePostLogin } from "@/api/hooks";
@@ -40,7 +41,17 @@ const LoginForm = () => {
       if (isRemembered) {
         setEmail(values.email);
       }
-      postLogin({ email: values.email, password: values.password });
+      postLogin(
+        { email: values.email, password: values.password },
+        {
+          onSuccess: () => {
+            toast.success("로그인되었습니다.");
+          },
+          onError: () => {
+            toast.error("이메일 혹은 비밀번호를 확인해주세요.");
+          },
+        },
+      );
     },
   });
 
