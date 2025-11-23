@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { cn } from "@/utils";
-import Icon from "@/common/Icon/Icon";
 import { ProfileProps } from "./_type/types";
-import { PROFILE_SIZE, PROFILE_IMAGE_SIZE, PROFILE_ICON_SIZE } from "./PROFILE_SIZE_STYLES";
+import { PROFILE_SIZE, PROFILE_IMAGE_SIZE, PROFILE_ICON_SIZE, DEFAULT_ICON_SIZE } from "./PROFILE_SIZE_STYLES";
+import IcUser from "@/assets/icon/ic-user.svg?url";
 import useProfileImage from "./_hook/useProfileImage";
 
 /**
@@ -31,7 +31,14 @@ const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
           onError={handleError}
         />
       ) : (
-        <Icon name="user" className={PROFILE_ICON_SIZE[size]} />
+        <Image
+          src={IcUser}
+          alt="기본 프로필"
+          width={DEFAULT_ICON_SIZE[size]}
+          height={DEFAULT_ICON_SIZE[size]}
+          quality={85}
+          className={PROFILE_ICON_SIZE[size]}
+        />
       )}
     </div>
   );
