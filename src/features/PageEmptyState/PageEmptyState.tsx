@@ -9,7 +9,7 @@ interface PageEmptyStateProps {
 
 const PageEmptyState = ({ title, children }: PageEmptyStateProps) => {
   return (
-    <div className={cn("w-full max-w-[660px] flex-col-center gap-[47px]")}>
+    <div className="w-full max-w-[660px] flex-col-center gap-[47px]">
       <div
         className={cn(
           "flex-col-center gap-6 text-center text-md-medium text-text-default",
