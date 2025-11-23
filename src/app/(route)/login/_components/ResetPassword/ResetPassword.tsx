@@ -23,7 +23,7 @@ const ResetPassword = ({ isOpen, onClose }: ResetPasswordModalProps) => {
   });
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} className="max-w-[384px]">
+    <Modal isOpen={isOpen} onClose={onClose} className="w-full tablet:max-w-[384px] absolute bottom-0">
       <Modal.Body className="flex-col-center gap-4">
         <div className="flex-col-center gap-2">
           <h2 className="text-lg-medium text-text-primary">비밀번호 재설정</h2>
