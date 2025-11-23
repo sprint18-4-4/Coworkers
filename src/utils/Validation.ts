@@ -1,7 +1,7 @@
 import { ValidationResult } from "@/types";
 
 export const EMAIL_REGX = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-export const PW_REGX = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/;
+export const PW_REGX = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
 export const validateEmail = (email: string): ValidationResult => {
   if (!email.trim()) {
@@ -33,7 +33,7 @@ export const validatePassword = (password: string): ValidationResult => {
   }
 
   if (!PW_REGX.test(password)) {
-    return { isValid: false, ErrorMessage: "비밀번호는 영문자와 숫자를 포함해야 합니다." };
+    return { isValid: false, ErrorMessage: "비밀번호는 영문자, 숫자, 특수문자를 포함해야 합니다." };
   }
 
   return { isValid: true };
@@ -58,6 +58,10 @@ export const validateName = (name: string): ValidationResult => {
 
   if (name.trim().length < 2) {
     return { isValid: false, ErrorMessage: "이름은 최소 2자 이상이어야 합니다." };
+  }
+
+  if (name.trim().length > 20) {
+    return { isValid: false, ErrorMessage: "이름은 최대 20자까지 가능합니다." };
   }
 
   return { isValid: true };
