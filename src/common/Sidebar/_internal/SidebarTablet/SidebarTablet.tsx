@@ -78,7 +78,7 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
                     height={40}
                     className="size-10 rounded-xl"
                   />
-                  {isOpen && user && (
+                  {isOpen && (
                     <div className="flex flex-col items-start gap-[2px]">
                       <span className="text-text-primary text-lg-medium">{user.nickname}</span>
                       <span className="text-slate-400 text-md-medium">
@@ -90,7 +90,7 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
               }
             />
           ) : (
-            isOpen && !user && <Link href="/login">로그인</Link>
+            !user && <Link href="/login">로그인</Link>
           )}
         </footer>
       </nav>
