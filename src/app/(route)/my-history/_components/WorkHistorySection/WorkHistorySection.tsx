@@ -1,10 +1,11 @@
 import { cn } from "@/utils";
 import { Chip, Icon } from "@/common";
 import { MONTH_NAV_BUTTON } from "../../_constants";
-import { MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
 import ScheduleDaySection from "../ScheduleDaySection/ScheduleDaySection";
+import { TaskListItemType } from "@/types/TaskListItemType";
+import { EmptyState } from "@/features";
 
-const WorkHistorySection = () => {
+const WorkHistorySection = ({ data }: { data: TaskListItemType[] }) => {
   return (
     <article
       className={cn(
@@ -24,17 +25,23 @@ const WorkHistorySection = () => {
         </button>
       </header>
 
-      <nav aria-label="업무 카테고리" className="flex items-start gap-1 text-nowrap overflow-x-auto pc:hidden">
-        {Array.from({ length: 3 }, (_, i) => (
-          <Chip key={i} title="법인 등기" count={3} />
-        ))}
-      </nav>
+      {data.length === 0 && <EmptyState ariaLabel="업무 기록 없음" text="완료한 업무 기록이 없습니다." />}
 
-      <div className="w-full flex flex-col gap-12">
-        {Array.from({ length: 3 }, (_, i) => (
-          <ScheduleDaySection key={i} items={MY_HISTORY_ITEM_MOCK_DATA} />
-        ))}
-      </div>
+      {data.length > 0 && (
+        <>
+          <nav aria-label="업무 카테고리" className="flex items-start gap-1 text-nowrap overflow-x-auto pc:hidden">
+            {Array.from({ length: 3 }, (_, i) => (
+              <Chip key={i} title="법인 등기" count={3} />
+            ))}
+          </nav>
+
+          <div className="w-full flex flex-col gap-12">
+            {Array.from({ length: 3 }, (_, i) => (
+              <ScheduleDaySection key={i} data={data} />
+            ))}
+          </div>
+        </>
+      )}
     </article>
   );
 };
