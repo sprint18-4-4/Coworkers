@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import QueryProviders from "../providers";
 import { Sidebar } from "@/common";
+import ToasterContainer from "@/lib/toaster";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -25,6 +26,7 @@ export default function RootLayout({
         <QueryProviders>
           <Sidebar />
           <main className="flex-1 min-w-0 bg-background-secondary">{children}</main>
+          <ToasterContainer />
         </QueryProviders>
       </body>
     </html>

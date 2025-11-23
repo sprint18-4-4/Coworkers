@@ -15,7 +15,7 @@ const commentData = TASK_DETAIL_COMMENT_MOCK_DATA;
 const CommentSection = ({ id, data }: CommentSectionProps) => {
   const [value, setValue] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     // TODO(지권): 실제 댓글 API 호출
     e.preventDefault();
