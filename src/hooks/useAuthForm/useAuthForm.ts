@@ -1,106 +1,98 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
 import useFormValidation from "./useFormValidation";
-import { FormValues, FormErrors, ValidationRules } from "@/types";
+import { FormValues, ValidationRules } from "@/types";
 
 type AuthValidationRules = ValidationRules;
 
 interface UseAuthFormOptions {
   initialValues: FormValues;
   validationRules?: AuthValidationRules;
-  onSubmit: (values: FormValues) => Promise<void> | void;
+  onSubmit: (values: FormValues) => Promise<void>;
 }
 
-interface UseAuthFormReturn {
-  formData: FormValues;
-  errors: FormErrors;
-  isSubmitting: boolean;
-  isButtonEnabled: boolean;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
-  validateField: (fieldName: string) => void;
-}
-
-const useAuthForm = (options: UseAuthFormOptions): UseAuthFormReturn => {
-  const { initialValues, validationRules, onSubmit } = options;
-
+const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOptions) => {
   const [formData, setFormData] = useState<FormValues>(initialValues);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    errors,
-    validateField: baseValidateField,
-    validateForm,
-    clearError,
-  } = useFormValidation(validationRules ?? {});
+  const { errors, validateForm, validateField, clearError } = useFormValidation(validationRules);
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
 
-  const isFormValid = (): boolean => {
-    const hasEmptyField = Object.values(formData).some((value) => value.trim() === "");
-    if (hasEmptyField) return false;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
 
-    if (!validationRules) return true;
+      if (errors[name]) clearError(name);
+    },
+    [errors, clearError],
+  );
 
-    for (const fieldName of Object.keys(validationRules)) {
-      const validator = validationRules[fieldName];
-      if (!validator) continue;
+  const handleBlur = useCallback(
+    (name: string) => {
+      validateField(name, formData[name] ?? "", formData);
+    },
+    [formData, validateField],
+  );
 
-      const value = formData[fieldName] ?? "";
-      const result = validator(value, formData);
-
-      if (!result.isValid) return false;
-    }
-    return true;
-  };
-
-  const isButtonEnabled = isFormValid() && !isSubmitting;
+  const register = useCallback(
+    (name: string) => {
+      return {
+        name,
+        value: formData[name] ?? "",
+        onChange: handleChange,
+        onBlur: () => handleBlur(name),
+      };
+    },
+    [formData, handleChange, handleBlur],
+  );
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const isValid = validateForm(formData);
-    if (!isValid) {
-      return;
-    }
+    if (!isValid) return;
 
-    setIsSubmitting(true);
+    setIsLoading(true);
     try {
       await onSubmit(formData);
-      resetForm();
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const isFormValid = useMemo(() => {
+    const hasEmpty = Object.values(formData).some((val) => !val || val.trim() === "");
+    if (hasEmpty) return false;
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const hasError = Object.keys(errors).length > 0;
+    if (hasError) return false;
 
-    if (errors[name]) {
-      clearError(name);
+    if (validationRules) {
+      const allRulesPassed = Object.keys(validationRules).every((key) => {
+        const value = formData[key] ?? "";
+        const rule = validationRules[key];
+
+        const result = rule(value, formData);
+        return result.isValid;
+      });
+
+      if (!allRulesPassed) return false;
     }
-  };
 
-  const resetForm = () => {
-    setFormData(initialValues);
-  };
-
-  const validateField = (fieldName: string) => {
-    const value = formData[fieldName] ?? "";
-    baseValidateField(fieldName, value, formData);
-  };
+    return true;
+  }, [formData, errors, validationRules]);
 
   return {
-    formData,
+    register,
     errors,
-    isSubmitting,
-    isButtonEnabled,
-    handleChange,
     handleSubmit,
-    validateField,
+    meta: {
+      isLoading,
+      isValid: isFormValid,
+    },
   };
 };
 
