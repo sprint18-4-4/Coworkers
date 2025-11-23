@@ -1,11 +1,11 @@
 import { Dropdown, Icon, Todo } from "@/common";
-import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import type { TaskListItemType } from "@/types";
+import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 
 interface TaskListItemProps {
   item: TaskListItemType;
   onOpenDetail?: () => void;
-  onToggleTodo: (id: number, next: boolean) => void;
+  onToggleTodo?: (id: number, next: boolean) => void;
 }
 
 const TaskListItem = ({ item, onOpenDetail, onToggleTodo }: TaskListItemProps) => {

@@ -1,13 +1,12 @@
 "use client";
 
+import { useGetHistory } from "@/api/hooks";
 import { PageHeaderBar, PageLayout } from "@/common";
 import { MyWorkHistory, WorkHistorySection } from "./_components";
 import { MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
-import { useGetHistory } from "@/api/hooks";
 
 const MyHistoryPage = () => {
   const { data: historyData } = useGetHistory();
-  console.warn("historyData:", historyData);
 
   return (
     <PageLayout ariaLabel="나의 히스토리">
