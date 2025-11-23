@@ -65,28 +65,33 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
             !isOpen && "flex-center",
           )}
         >
-          <Dropdown
-            options={options}
-            placement="top-left"
-            image={
-              <div className="flex items-center gap-3">
-                <Image
-                  src={user?.image || "/TEST_IMG/image-1.jpg"}
-                  alt={`${user?.nickname} 이미지`}
-                  width={40}
-                  height={40}
-                  className="size-10 rounded-xl"
-                />
-                {isOpen && user && (
-                  <div className="flex flex-col items-start gap-[2px]">
-                    <span className="text-text-primary text-lg-medium">{user.nickname}</span>
-                    <span className="text-slate-400 text-md-medium">{user.memberships[0].group.name}</span>
-                  </div>
-                )}
-              </div>
-            }
-          />
-          {isOpen && !user && <Link href="/login">로그인</Link>}
+          {user ? (
+            <Dropdown
+              options={options}
+              placement="top-left"
+              image={
+                <div className="flex items-center gap-3">
+                  <Image
+                    src={user?.image || "/TEST_IMG/image-1.jpg"}
+                    alt={`${user?.nickname} 이미지`}
+                    width={40}
+                    height={40}
+                    className="size-10 rounded-xl"
+                  />
+                  {isOpen && user && (
+                    <div className="flex flex-col items-start gap-[2px]">
+                      <span className="text-text-primary text-lg-medium">{user.nickname}</span>
+                      <span className="text-slate-400 text-md-medium">
+                        {user.memberships?.[0]?.group?.name ?? "소속없음"}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              }
+            />
+          ) : (
+            isOpen && !user && <Link href="/login">로그인</Link>
+          )}
         </footer>
       </nav>
     </aside>

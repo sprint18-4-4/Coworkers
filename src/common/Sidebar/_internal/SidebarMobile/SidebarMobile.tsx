@@ -26,13 +26,13 @@ const SidebarMobile = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
             {!user && <span>COWORKERS</span>}
           </Link>
         </div>
-        {user && (
+        {user ? (
           <Dropdown
             options={options}
             placement="bottom-right"
             image={
               <Image
-                src={user.image}
+                src={user.image ? user.image : "/TEST_IMG/image-1.jpg"}
                 alt={`${user.nickname} 이미지`}
                 width={28}
                 height={28}
@@ -40,6 +40,10 @@ const SidebarMobile = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
               />
             }
           />
+        ) : (
+          <Link href="/login" className="text-sm font-medium">
+            로그인
+          </Link>
         )}
       </nav>
 
