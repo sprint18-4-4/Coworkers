@@ -6,4 +6,7 @@ export type { CommentUser, CommentData } from "./CommentType";
 export type * from "./AuthType";
 export type { TaskListItemType } from "./TaskListItemType";
 export type { Day, DateNumber } from "./DateType";
-export type * from "./DetailPage/DetailDataType";
+export type { TaskUser } from "./TaskUser";
+export type { TaskGroupItem, TaskListData } from "./taskList/TaskListData";
+export type { DetailDataItem } from "./DetailPage/DetailDataType";
+export type { ToastVariant, AppToastOptions } from "./ToastType";
