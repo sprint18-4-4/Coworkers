@@ -1,15 +1,11 @@
 "use server";
 
 import { cookies } from "next/headers";
-
-type TokenPair = {
-  accessToken: string;
-  refreshToken: string;
-};
+import { AuthToken } from "@/types";
 
 const isProd = process.env.NODE_ENV === "production";
 
-export const setAuthCookies = async ({ accessToken, refreshToken }: TokenPair) => {
+export const setAuthCookies = async ({ accessToken, refreshToken }: AuthToken) => {
   const cookieStore = await cookies();
 
   cookieStore.set("refreshToken", refreshToken, {
