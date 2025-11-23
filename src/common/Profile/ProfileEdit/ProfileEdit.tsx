@@ -1,8 +1,11 @@
+"use client";
+
 import { ChangeEvent } from "react";
 import Image from "next/image";
 import { cn } from "@/utils";
 import Icon from "@/common/Icon/Icon";
 import { ProfileEditProps } from "../_type/types";
+import useImageError from "../_hook/useImageError";
 import {
   SIZE_CLASSES,
   IMAGE_SIZE_VALUES,
@@ -22,6 +25,8 @@ import {
  */
 
 const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileEditProps) => {
+  const { hasError, handleError } = useImageError(src);
+
   const validateImageFile = (file: File): boolean => {
     if (!file.type.startsWith("image/")) {
       return false;
@@ -56,7 +61,7 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
           SIZE_CLASSES[size],
         )}
       >
-        {src ? (
+        {src && !hasError ? (
           <Image
             src={src}
             alt={alt}
@@ -64,12 +69,12 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
             height={IMAGE_SIZE_VALUES[size]}
             quality={85}
             className="w-full h-full object-cover"
+            onError={handleError}
           />
         ) : (
           <Icon name="user" className={PROFILE_EDIT_ICON_SIZE[size]} />
         )}
       </div>
-      {/* TODO(김원선): 써클 버튼 컴포넌트 구현시 버튼 변경 */}
       <div
         className={cn(
           "absolute -bottom-[5px] -right-[5px] bg-background-tertiary border-[2px] border-background-primary rounded-full p-1 flex-center",
