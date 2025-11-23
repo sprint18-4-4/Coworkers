@@ -1,7 +1,14 @@
-import { Meta } from "@storybook/nextjs";
-import { StoryObj } from "@storybook/nextjs";
+import { Meta, StoryObj } from "@storybook/nextjs";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Sidebar from "./Sidebar";
-import { USER_MOCK_DATA } from "@/MOCK_DATA";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 const meta: Meta<typeof Sidebar> = {
   title: "Common/Sidebar/Sidebar",
@@ -13,20 +20,20 @@ const meta: Meta<typeof Sidebar> = {
       defaultViewport: "responsive",
     },
   },
-  args: {
-    user: USER_MOCK_DATA,
-  },
-  argTypes: {
-    user: {
-      control: "object",
-      description: "사용자 정보",
-    },
-  },
+  decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
+    ),
+  ],
 };
 
 export default meta;
 
-export const Default = {
+type Story = StoryObj<typeof Sidebar>;
+
+export const Default: Story = {
   parameters: {
     viewport: {
       defaultViewport: "responsive",

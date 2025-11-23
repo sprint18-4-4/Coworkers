@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { SidebarMobile, SidebarTablet } from "./_internal";
-import { User } from "@/types";
+import { useGetUser } from "@/api/hooks";
+import { useLogout } from "@/hooks/";
 
 /**
  * @author jikwon
@@ -13,8 +14,12 @@ import { User } from "@/types";
  * ```
  */
 
-const Sidebar = ({ user }: { user: User }) => {
+const Sidebar = () => {
+  const { data: user } = useGetUser();
+
   const [isOpen, setIsOpen] = useState(false);
+
+  const { logout } = useLogout();
 
   const handleOpenDropdown = (prev: boolean) => {
     setIsOpen(!prev);
@@ -24,13 +29,13 @@ const Sidebar = ({ user }: { user: User }) => {
     { label: "마이 히스토리", action: () => {} },
     { label: "계정 설정", action: () => {} },
     { label: "팀 참여", action: () => {} },
-    { label: "로그아웃", action: () => {} },
+    { label: "로그아웃", action: logout },
   ];
 
   return (
     <>
-      <SidebarTablet user={user} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} options={options} />
-      <SidebarMobile user={user} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} options={options} />
+      <SidebarTablet user={user || null} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} options={options} />
+      <SidebarMobile user={user || null} isOpen={isOpen} handleOpenDropdown={handleOpenDropdown} options={options} />
     </>
   );
 };
