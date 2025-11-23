@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import useFormValidation from "./useFormValidation";
 import { FormValues, ValidationRules } from "@/types";
 
@@ -16,38 +16,29 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
 
   const { errors, validateForm, validateField, clearError } = useFormValidation(validationRules);
 
-  const handleChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
-      if (errors[name]) clearError(name);
-    },
-    [errors, clearError],
-  );
+    if (errors[name]) clearError(name);
+  };
 
-  const handleBlur = useCallback(
-    (name: string) => {
-      validateField(name, formData[name] ?? "", formData);
-    },
-    [formData, validateField],
-  );
+  const handleBlur = (name: string) => {
+    validateField(name, formData[name] ?? "", formData);
+  };
 
-  const register = useCallback(
-    (name: string) => {
-      return {
-        name,
-        value: formData[name] ?? "",
-        onChange: handleChange,
-        onBlur: () => handleBlur(name),
-      };
-    },
-    [formData, handleChange, handleBlur],
-  );
+  const register = (name: string) => {
+    return {
+      name,
+      value: formData[name] ?? "",
+      onChange: handleChange,
+      onBlur: () => handleBlur(name),
+    };
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,7 +54,7 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
     }
   };
 
-  const isFormValid = useMemo(() => {
+  const isFormValid = () => {
     const hasEmpty = Object.values(formData).some((val) => !val || val.trim() === "");
     if (hasEmpty) return false;
 
@@ -83,7 +74,7 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
     }
 
     return true;
-  }, [formData, errors, validationRules]);
+  };
 
   return {
     register,
