@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import CommentSection from "./CommentSection";
-import { COMMENT_MOCK_DATA } from "@/MOCK_DATA";
+import { TASK_DETAIL_MOCK_DATA } from "@/MOCK_DATA";
 
 const meta: Meta<typeof CommentSection> = {
   title: "Page/ListDetail/CommentSection",
@@ -23,6 +23,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    comment: COMMENT_MOCK_DATA,
+    id: "1",
+    data: TASK_DETAIL_MOCK_DATA,
   },
 };
