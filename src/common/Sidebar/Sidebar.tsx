@@ -15,10 +15,9 @@ import { useLogout } from "@/hooks/";
  */
 
 const Sidebar = () => {
-  const { data: user } = useGetUser();
-
   const [isOpen, setIsOpen] = useState(false);
 
+  const { data: user } = useGetUser();
   const { logout } = useLogout();
 
   const handleOpenDropdown = (prev: boolean) => {
