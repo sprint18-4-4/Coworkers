@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className="flex flex-col tablet:flex-row pc:flex-row">
         <QueryProviders>
           <Sidebar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 min-w-0 bg-background-secondary">{children}</main>
         </QueryProviders>
       </body>
     </html>

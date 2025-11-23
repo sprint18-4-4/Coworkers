@@ -28,7 +28,7 @@ const PageLayout = ({ children, ariaLabel }: PageLayoutProps) => {
     <div
       aria-label={ariaLabel}
       className={cn(
-        "min-h-[calc(100vh-52px)] px-4 pt-[17px] flex flex-col gap-[25px] bg-background-secondary",
+        "min-h-[calc(100vh-52px)] px-4 pt-[17px] flex flex-col gap-[25px]",
         "tablet:min-h-[100vh] tablet:px-[26px] tablet:pt-[69px]",
         "pc:mx-0 pc:pl-[91px] pc:pt-[90px] pc:gap-12",
       )}
