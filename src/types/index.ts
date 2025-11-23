@@ -6,3 +6,4 @@ export type { CommentUser, CommentData } from "./CommentType";
 export type * from "./AuthType";
 export type { TaskListItemType } from "./TaskListItemType";
 export type { Day, DateNumber } from "./DateType";
+export type * from "./DetailPage/DetailDataType";
