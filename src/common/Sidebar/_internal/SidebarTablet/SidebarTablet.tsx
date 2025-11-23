@@ -11,7 +11,7 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
   return (
     <aside
       className={cn(
-        "flex-col sticky top-0 h-[100vh] border-r border-background-tertiary z-[999]",
+        "flex-col sticky top-0 h-[100vh] border-r border-background-tertiary z-[10]",
         isOpen ? "w-[270px]" : "w-[72px]",
         "hidden tablet:flex pc:flex",
       )}
