@@ -18,7 +18,7 @@ const TaskListItem = ({ item, onOpenDetail, onToggleTodo }: TaskListItemProps) =
     <li
       className={cn(
         "flex flex-col items-start rounded-lg gap-[10px]",
-        item.doneAt !== null ? "border border-border-primary" : "bg-background-secondary",
+        item.doneAt === null ? "border border-border-primary" : "bg-background-secondary",
         onOpenDetail && "cursor-pointer",
       )}
       style={{ padding: "12px 14px" }}
