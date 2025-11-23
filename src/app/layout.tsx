@@ -4,6 +4,7 @@ import "./globals.css";
 import QueryProviders from "../providers";
 import { Sidebar } from "@/common";
 import { USER_MOCK_DATA } from "@/MOCK_DATA";
+import ToasterContainer from "@/lib/toaster";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -25,7 +26,8 @@ export default function RootLayout({
       <body className="flex flex-col tablet:flex-row pc:flex-row">
         <QueryProviders>
           <Sidebar user={USER_MOCK_DATA} />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 min-w-0 bg-background-secondary">{children}</main>
+          <ToasterContainer />
         </QueryProviders>
       </body>
     </html>
