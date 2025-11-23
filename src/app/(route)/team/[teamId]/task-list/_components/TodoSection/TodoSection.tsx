@@ -30,43 +30,36 @@ const TodoSectionHeader = ({ data, selectedDate, onClickMoveWeek, onClickCalenda
   };
 
   return (
-    <>
-      <header className="flex items-center justify-between">
-        <h3 className="text-2lg-bold text-text-primary">법인 등기</h3>
+    <header className="flex items-center justify-between relative">
+      <h3 className="text-2lg-bold text-text-primary">법인 등기</h3>
 
-        <div className="flex items-center gap-2">
-          <time dateTime={monthDateTime} className="text-sm-medium text-text-primary">
-            {monthLabel}
-          </time>
-          <div className="flex items-center gap-1">
-            <button aria-label="이전 주" className={TODO_STYLES.buttonBase} onClick={() => onClickMoveWeek("prev")}>
-              <Icon name="leftArrow" className={TODO_STYLES.arrowBase} />
-            </button>
-            <button
-              aria-label="다음 주"
-              className={cn(TODO_STYLES.buttonBase, "relative")}
-              onClick={() => onClickMoveWeek("next")}
-            >
-              <Icon name="rightArrow" className={TODO_STYLES.arrowBase} />
-            </button>
-          </div>
-          <button
-            aria-label="달력 열기"
-            className="size-6 rounded-full bg-background-secondary flex-center"
-            onClick={() => setIsOpenCalendar((prev) => !prev)}
-          >
-            <Icon name="calendar" className={TODO_STYLES.arrowBase} />
+      <div className="flex items-center gap-2">
+        <time dateTime={monthDateTime} className="text-sm-medium text-text-primary">
+          {monthLabel}
+        </time>
+        <div className="flex items-center gap-1">
+          <button aria-label="이전 주" className={TODO_STYLES.buttonBase} onClick={() => onClickMoveWeek("prev")}>
+            <Icon name="leftArrow" className={TODO_STYLES.arrowBase} />
           </button>
-          <TaskPdfDownloadButton data={data} />
+          <button aria-label="다음 주" className={TODO_STYLES.buttonBase} onClick={() => onClickMoveWeek("next")}>
+            <Icon name="rightArrow" className={TODO_STYLES.arrowBase} />
+          </button>
         </div>
-      </header>
-
+        <button
+          aria-label="달력 열기"
+          className="size-6 rounded-full bg-background-secondary flex-center"
+          onClick={() => setIsOpenCalendar((prev) => !prev)}
+        >
+          <Icon name="calendar" className={TODO_STYLES.arrowBase} />
+        </button>
+        <TaskPdfDownloadButton data={data} />
+      </div>
       {isOpenCalendar && (
-        <div className={cn("absolute left-[10%] z-50 w-[300px]", "tablet:left-[40%]", "pc:left-[60%]")}>
+        <div className="absolute top-full right-0 mt-2 z-50 w-[300px]">
           <DatePicker value={selectedDate} onChange={handleDateSelect} />
         </div>
       )}
-    </>
+    </header>
   );
 };
 
