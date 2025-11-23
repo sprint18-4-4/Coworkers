@@ -1,75 +1,20 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import useFormValidation from "./useFormValidation";
-import { FormValues, FormErrors, ValidationRules } from "@/types";
+import { FormValues, ValidationRules } from "@/types";
 
 type AuthValidationRules = ValidationRules;
 
 interface UseAuthFormOptions {
   initialValues: FormValues;
   validationRules?: AuthValidationRules;
-  onSubmit: (values: FormValues) => Promise<void> | void;
+  onSubmit: (values: FormValues) => Promise<void>;
 }
 
-interface UseAuthFormReturn {
-  formData: FormValues;
-  errors: FormErrors;
-  isSubmitting: boolean;
-  isButtonEnabled: boolean;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
-  validateField: (fieldName: string) => void;
-}
-
-const useAuthForm = (options: UseAuthFormOptions): UseAuthFormReturn => {
-  const { initialValues, validationRules, onSubmit } = options;
-
+const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOptions) => {
   const [formData, setFormData] = useState<FormValues>(initialValues);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    errors,
-    validateField: baseValidateField,
-    validateForm,
-    clearError,
-  } = useFormValidation(validationRules ?? {});
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const isFormValid = (): boolean => {
-    const hasEmptyField = Object.values(formData).some((value) => value.trim() === "");
-    if (hasEmptyField) return false;
-
-    if (!validationRules) return true;
-
-    for (const fieldName of Object.keys(validationRules)) {
-      const validator = validationRules[fieldName];
-      if (!validator) continue;
-
-      const value = formData[fieldName] ?? "";
-      const result = validator(value, formData);
-
-      if (!result.isValid) return false;
-    }
-    return true;
-  };
-
-  const isButtonEnabled = isFormValid() && !isSubmitting;
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const isValid = validateForm(formData);
-    if (!isValid) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    try {
-      await onSubmit(formData);
-      resetForm();
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { errors, validateForm, validateField, clearError } = useFormValidation(validationRules);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -79,28 +24,66 @@ const useAuthForm = (options: UseAuthFormOptions): UseAuthFormReturn => {
       [name]: value,
     }));
 
-    if (errors[name]) {
-      clearError(name);
+    if (errors[name]) clearError(name);
+  };
+
+  const handleBlur = (name: string) => {
+    validateField(name, formData[name] ?? "", formData);
+  };
+
+  const register = (name: string) => {
+    return {
+      name,
+      value: formData[name] ?? "",
+      onChange: handleChange,
+      onBlur: () => handleBlur(name),
+    };
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const isValid = validateForm(formData);
+    if (!isValid) return;
+
+    setIsLoading(true);
+    try {
+      await onSubmit(formData);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const resetForm = () => {
-    setFormData(initialValues);
-  };
+  const isFormValid = () => {
+    const hasEmpty = Object.values(formData).some((val) => !val || val.trim() === "");
+    if (hasEmpty) return false;
 
-  const validateField = (fieldName: string) => {
-    const value = formData[fieldName] ?? "";
-    baseValidateField(fieldName, value, formData);
+    const hasError = Object.keys(errors).length > 0;
+    if (hasError) return false;
+
+    if (validationRules) {
+      const allRulesPassed = Object.keys(validationRules).every((key) => {
+        const value = formData[key] ?? "";
+        const rule = validationRules[key];
+
+        const result = rule(value, formData);
+        return result.isValid;
+      });
+
+      if (!allRulesPassed) return false;
+    }
+
+    return true;
   };
 
   return {
-    formData,
+    register,
     errors,
-    isSubmitting,
-    isButtonEnabled,
-    handleChange,
     handleSubmit,
-    validateField,
+    meta: {
+      isLoading,
+      isValid: isFormValid,
+    },
   };
 };
 

@@ -1,6 +1,6 @@
-import Icon from "@/common/Icon/Icon";
 import Profile from "../Profile";
 import { ProfileItemType } from "../_type/types";
+import Dropdown from "@/common/Dropdown/Dropdown";
 
 /**
  * @author KimWonSeon
@@ -13,7 +13,8 @@ import { ProfileItemType } from "../_type/types";
  *  src="/profile.jpg"
  *  name="사용자 이름"
  *  groupName="사용자 그룹"
- *  onClick={() => openProfileModal()}
+ *  dropdownOptions={[
+ *  { label: "로그아웃", action: () => Logout()}
  *  />
  *
  * @example
@@ -23,7 +24,9 @@ import { ProfileItemType } from "../_type/types";
  *  src="/profile.jpg"
  *  name="팀원 사용자 이름"
  *  email="user@example.com"
- *  onClick={() => openMemberModal()}
+ *  dropdownOptions={[
+ *  { label: "멤버 삭제", action: () => delete() },
+ *  ]}
  * />
  */
 
@@ -31,16 +34,23 @@ const ProfileItem = (props: ProfileItemType) => {
   const { src, name, alt = `${name}의 프로필`, type } = props;
 
   if (type === "myProfile") {
-    return (
-      <button onClick={props.onClick} className="flex items-center gap-3" type="button">
+    const triggerContent = (
+      <div className="flex items-center gap-3">
         <Profile src={src} alt={alt} size="lg" />
         <div className="flex flex-col text-left gap-[2px]">
           <p className="text-lg-medium text-text-primary">{name}</p>
           <p className="text-md-medium text-slate-400">{props.groupName}</p>
         </div>
-      </button>
+      </div>
+    );
+
+    return (
+      <div className="w-full">
+        <Dropdown image={triggerContent} options={props.dropdownOptions || []} />
+      </div>
     );
   }
+
   return (
     <div className="w-full flex items-center gap-3">
       <Profile src={src} alt={alt} size="md" />
@@ -48,10 +58,13 @@ const ProfileItem = (props: ProfileItemType) => {
         <p className="text-sm-semibold text-text-primary">{name}</p>
         <p className="text-xs-regular text-text-secondary">{props.email}</p>
       </div>
-      {/* TODO: 케밥 메뉴 컴포넌트는 PR이 할쳐졌을 때 공용으로 쓸 수 있게 수정 */}
-      <button className="w-4" type="button" onClick={props.onClick} aria-label="메뉴 열기">
-        <Icon name="kebab" className="size-4 tablet:size-4" />
-      </button>
+      <Dropdown
+        iconName="kebab"
+        iconClassName="size-4 tablet:size-4"
+        options={props.dropdownOptions || []}
+        placement="bottom-right"
+        aria-label="메뉴 열기"
+      />
     </div>
   );
 };

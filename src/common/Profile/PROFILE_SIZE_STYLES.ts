@@ -17,6 +17,12 @@ export const PROFILE_ICON_SIZE = {
   lg: "size-[33px] tablet:size-[33px]",
 } as const;
 
+export const DEFAULT_ICON_SIZE = {
+  sm: 20,
+  md: 24,
+  lg: 33,
+} as const;
+
 // 프로필 이미지 수정 컴포넌트
 
 export const SIZE_CLASSES = {
