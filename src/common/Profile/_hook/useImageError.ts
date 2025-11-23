@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const useProfileImage = (src: string | null) => {
+const useImageError = (src: string | null) => {
   const [hasError, setHasError] = useState(false);
   const [prevSrc, setPrevSrc] = useState(src);
 
@@ -18,4 +18,4 @@ const useProfileImage = (src: string | null) => {
   return { hasError, handleError };
 };
 
-export default useProfileImage;
+export default useImageError;

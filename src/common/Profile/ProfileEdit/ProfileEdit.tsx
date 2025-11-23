@@ -5,7 +5,7 @@ import Image from "next/image";
 import { cn } from "@/utils";
 import Icon from "@/common/Icon/Icon";
 import { ProfileEditProps } from "../_type/types";
-import useProfileImage from "../_hook/useProfileImage";
+import useImageError from "../_hook/useImageError";
 import {
   SIZE_CLASSES,
   IMAGE_SIZE_VALUES,
@@ -25,7 +25,7 @@ import {
  */
 
 const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileEditProps) => {
-  const { hasError, handleError } = useProfileImage(src);
+  const { hasError, handleError } = useImageError(src);
 
   const validateImageFile = (file: File): boolean => {
     if (!file.type.startsWith("image/")) {

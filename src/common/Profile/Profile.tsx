@@ -5,7 +5,7 @@ import { cn } from "@/utils";
 import { ProfileProps } from "./_type/types";
 import { PROFILE_SIZE, PROFILE_IMAGE_SIZE, PROFILE_ICON_SIZE, DEFAULT_ICON_SIZE } from "./PROFILE_SIZE_STYLES";
 import IcUser from "@/assets/icon/ic-user.svg?url";
-import useProfileImage from "./_hook/useProfileImage";
+import useImageError from "./_hook/useImageError";
 
 /**
  * @author KimWonSeon
@@ -17,7 +17,7 @@ import useProfileImage from "./_hook/useProfileImage";
  */
 
 const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
-  const { hasError, handleError } = useProfileImage(src);
+  const { hasError, handleError } = useImageError(src);
   return (
     <div className={cn("overflow-hidden bg-background-tertiary flex-center flex-shrink-0", PROFILE_SIZE[size])}>
       {src && !hasError ? (
