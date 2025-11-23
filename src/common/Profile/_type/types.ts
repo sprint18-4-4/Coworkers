@@ -1,3 +1,5 @@
+import { DropdownOption } from "@/common/Dropdown/_types/types";
+
 export interface BaseProfileProps {
   src: string | null;
   alt?: string;
@@ -26,11 +28,13 @@ export interface ProfileItemProps extends BaseProfileProps {
 export interface MyProfileType extends ProfileItemProps {
   type: "myProfile";
   groupName: string;
+  dropdownOptions?: DropdownOption[];
 }
 
 export interface MemberItemType extends ProfileItemProps {
   type: "memberItem";
   email: string;
+  dropdownOptions?: DropdownOption[];
 }
 
 export type ProfileItemType = MyProfileType | MemberItemType;
