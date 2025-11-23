@@ -11,7 +11,7 @@ const useGetUser = () => {
     queryFn: () => getUser(),
     enabled: isLogined,
     staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 30,
+    gcTime: 1000 * 60 * 60 * 24,
     retry: 0,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
