@@ -5,9 +5,10 @@ import type { TaskListItemType } from "@/types";
 interface TaskListItemProps {
   item: TaskListItemType;
   onOpenDetail?: () => void;
+  onToggleTodo: (id: number, next: boolean) => void;
 }
 
-const TaskListItem = ({ item, onOpenDetail }: TaskListItemProps) => {
+const TaskListItem = ({ item, onOpenDetail, onToggleTodo }: TaskListItemProps) => {
   const options = [
     { label: "수정하기", action: () => {} },
     { label: "삭제하기", action: () => {} },
@@ -16,7 +17,8 @@ const TaskListItem = ({ item, onOpenDetail }: TaskListItemProps) => {
   return (
     <li
       className={cn(
-        "flex flex-col items-start rounded-lg gap-[10px] bg-background-secondary",
+        "flex flex-col items-start rounded-lg gap-[10px]",
+        item.doneAt !== null ? "border border-border-primary" : "bg-background-secondary",
         onOpenDetail && "cursor-pointer",
       )}
       style={{ padding: "12px 14px" }}
@@ -28,8 +30,21 @@ const TaskListItem = ({ item, onOpenDetail }: TaskListItemProps) => {
       })}
     >
       <div className="w-full flex items-center justify-between">
-        <div className="flex-1 flex items-center gap-3">
-          <Todo title={item?.name} id={item?.id.toString()} completed={false} onChangeCompleted={() => {}} />
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="flex-1 flex items-center gap-3"
+        >
+          <Todo
+            title={item.name}
+            id={item.id}
+            completed={item.doneAt !== null}
+            type="task"
+            onChangeCompleted={(_, next) => {
+              onToggleTodo?.(item.id, next);
+            }}
+          />
           <div className="flex items-center gap-[2px] text-xs-regular">
             <Icon name="comment" className="size-4 tablet:size-4" />
             <span>{item?.commentCount}</span>
