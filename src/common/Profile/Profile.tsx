@@ -18,8 +18,17 @@ import useImageError from "./_hook/useImageError";
 
 const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
   const { hasError, handleError } = useImageError(src);
+
+  const hasImage = src && !hasError;
+
   return (
-    <div className={cn("overflow-hidden bg-background-tertiary flex-center flex-shrink-0", PROFILE_SIZE[size])}>
+    <div
+      className={cn(
+        "overflow-hidden border border-background-tertiary bg-background-tertiary flex-center flex-shrink-0",
+        PROFILE_SIZE[size],
+        hasImage ? "bg-transparent" : "bg-background-tertiary",
+      )}
+    >
       {src && !hasError ? (
         <Image
           src={src}
