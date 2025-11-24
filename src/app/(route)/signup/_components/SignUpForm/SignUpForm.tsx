@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Input, InputPassword, BaseButton } from "@/common";
 import { useAuthForm } from "@/hooks/";
 import { validateEmail, validateName, validatePassword, validatePasswordConfirm } from "@/utils";
@@ -26,7 +27,7 @@ const SignUpForm = () => {
   });
 
   return (
-    <form onSubmit={handleSubmit} className="min-w-[300px] w-full mt-8 mb-10 gap-10 flex flex-col">
+    <form onSubmit={handleSubmit} className="min-w-[300px] w-full mt-8 mb-10 flex flex-col">
       <div className="flex-col-center gap-6">
         <Input label="이름" type="text" placeholder="이름을 입력해주세요." {...register("name")} error={errors.name} />
         <Input
@@ -49,7 +50,10 @@ const SignUpForm = () => {
           error={errors.passwordConfirm}
         />
       </div>
-      <div className="text-lg-semibold">
+      <Link href="/login" className="mt-3 text-brand-primary text-md-medium tablet:text-lg-medium text-right">
+        이미 계정이 있으신가요?
+      </Link>
+      <div className="text-lg-semibold mt-10">
         <BaseButton variant="solid" size="large" type="submit" disabled={meta.isLoading || !meta.isValid}>
           회원가입
         </BaseButton>
