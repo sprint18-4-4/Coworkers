@@ -1,3 +1,5 @@
+"use client";
+
 import { RefObject, useEffect } from "react";
 
 const useDropdownClose = (ref: RefObject<HTMLElement | null>, onClose: () => void, isOpen: boolean) => {

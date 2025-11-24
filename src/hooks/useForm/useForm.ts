@@ -1,3 +1,5 @@
+"use client";
+
 import { ChangeEvent, FormEvent, useState } from "react";
 import useFormValidation from "./useFormValidation";
 import { FormValues, ValidationRules } from "@/types";
