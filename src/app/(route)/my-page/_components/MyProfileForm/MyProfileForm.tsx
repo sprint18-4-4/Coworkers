@@ -2,7 +2,7 @@
 
 import { ProfileEdit, Input } from "@/common";
 import { useDevice } from "@/hooks";
-import { PwInputSection } from "..";
+import PwInputSection from "../PwInputSection/PwInputSection";
 
 const MyProfileForm = () => {
   const device = useDevice();
