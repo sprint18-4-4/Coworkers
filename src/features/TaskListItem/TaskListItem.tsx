@@ -6,6 +6,7 @@ import type { TaskListItemType } from "@/types";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import EditModal from "./_internal/EditModal/EditModal";
 import DeleteModal from "./_internal/DeleteModal/DeleteModal";
+import useDeleteHistory from "@/api/hooks/my-history/useDeleteHistory";
 
 interface TaskListItemProps {
   item: TaskListItemType;
@@ -16,6 +17,8 @@ interface TaskListItemProps {
 const TaskListItem = ({ item, onOpenDetail, onToggleTodo }: TaskListItemProps) => {
   const [isEditModal, setIsEditModal] = useState(false);
   const [isDeleteModal, setIsDeleteModal] = useState(false);
+
+  const { mutate: deleteHistory } = useDeleteHistory();
 
   const options = [
     {
@@ -33,7 +36,14 @@ const TaskListItem = ({ item, onOpenDetail, onToggleTodo }: TaskListItemProps) =
   };
 
   const handleDelete = () => {
+    console.log("Deleting task:", item);
+    console.log("Task ID:", item.id);
     // TODO: 삭제 로직
+    deleteHistory({
+      groupId: 3449,
+      taskListId: 4800,
+      taskId: item.id,
+    });
     setIsDeleteModal(false);
   };
 

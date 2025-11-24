@@ -7,6 +7,7 @@ import { MY_HISTORY_ITEM_MOCK_DATA } from "@/MOCK_DATA";
 
 const MyHistoryPage = () => {
   const { data: historyData } = useGetHistory();
+  console.log("data: ", historyData);
 
   return (
     <PageLayout ariaLabel="나의 히스토리">
