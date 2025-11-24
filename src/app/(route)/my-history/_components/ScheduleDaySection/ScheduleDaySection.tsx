@@ -3,7 +3,6 @@ import { TaskListItem } from "@/features";
 import { TaskListItemType } from "@/types";
 
 const ScheduleDaySection = ({ data }: { data: TaskListItemType[] }) => {
-  console.warn("data:", data);
   return (
     <>
       <div className="flex-center gap-5">
