@@ -9,11 +9,22 @@ import { MODAL_STYLES, REPEAT_OPTIONS } from "./_constants";
 
 type OpenPicker = "date" | "time" | null;
 
-const MakeTodoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+interface MakeTodoModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  groupId: string;
+  taskListId: string;
+}
+
+const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalProps) => {
   const [order, setOrder] = useState("ONCE");
   const [openPicker, setOpenPicker] = useState<OpenPicker>(null);
 
-  const { formData, setFormData, isFormValid, onSubmit, onChangeDate, onChangeTime } = useTodoForm(onClose);
+  const { formData, setFormData, isFormValid, onSubmit, onChangeDate, onChangeTime } = useTodoForm({
+    onClose,
+    groupId,
+    taskListId,
+  });
 
   return (
     <form onSubmit={onSubmit}>

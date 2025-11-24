@@ -1,7 +1,14 @@
-import { DateValue, HalfHour } from "@/types";
+import usePostRecurring from "@/api/hooks/task-list/usePostRecurring";
+import { DateValue, Frequency, HalfHour } from "@/types";
 import { FormEvent, useState } from "react";
 
-export const useTodoForm = (onClose: () => void) => {
+interface UseTodoFormProps {
+  onClose: () => void;
+  groupId: string;
+  taskListId: string;
+}
+
+export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) => {
   const [formData, setFormData] = useState({
     title: "",
     startDate: new Date(),
@@ -9,8 +16,20 @@ export const useTodoForm = (onClose: () => void) => {
       period: "am" as "am" | "pm",
       value: "01:30" as HalfHour,
     },
-    order: "ONCE",
+    frequencyType: "ONCE" as Frequency,
     todoMemo: "",
+  });
+
+  const { mutate } = usePostRecurring({
+    groupId,
+    taskListId,
+    formData: {
+      name: formData.title,
+      description: formData.todoMemo,
+      startDate: formData.startDate.toISOString(),
+      frequencyType: formData.frequencyType,
+      monthDay: formData.startDate.getDate(),
+    },
   });
 
   const isFormValid =
@@ -18,12 +37,11 @@ export const useTodoForm = (onClose: () => void) => {
     formData.todoMemo.trim().length > 0 &&
     formData.startDate !== null &&
     formData.startTime.value !== null &&
-    formData.order !== "";
+    formData.frequencyType;
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(formData);
-    // TODO(지권): 할 일 만들기 함수 추가
+    mutate();
     onClose();
   };
 

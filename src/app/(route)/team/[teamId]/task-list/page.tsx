@@ -87,6 +87,8 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
             params.delete("w");
             router.push(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
           }}
+          groupId={teamId}
+          taskListId={selectedId || ""}
         />
       )}
     </div>
