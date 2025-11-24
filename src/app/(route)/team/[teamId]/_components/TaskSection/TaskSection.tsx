@@ -1,3 +1,5 @@
+"use client";
+
 import { TaskColumn } from "./_internal";
 
 const TaskSection = () => {

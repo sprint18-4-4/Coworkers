@@ -1,3 +1,5 @@
+"use client";
+
 import { Dropdown, ProgressBar } from "@/common";
 
 const ProgressWidget = () => {
