@@ -1,11 +1,15 @@
 import { cn } from "@/utils";
 import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
+import { GroupResponse, TaskList } from "@/types/Group/GroupData";
 
-const TodoItem = () => {
+const TodoItem = ({ data }: { data: TaskList }) => {
   const options = [
     { label: "수정하기", action: () => {} },
     { label: "삭제하기", action: () => {} },
   ];
+
+  // console.log(data);
+  // console.log(data?.tasks?.length);
 
   return (
     <li
@@ -16,22 +20,26 @@ const TodoItem = () => {
       )}
     >
       <div className="flex items-center gap-2">
-        <span className="text-sm-semibold text-text-primary text-nowrap">법인 등기</span>
-        <ProgressBadge current={3} total={5} />
+        <span className="text-sm-semibold text-text-primary text-nowrap">{data?.name}</span>
+        {/* TODO(지권): current 수정 필요 */}
+        <ProgressBadge current={3} total={data?.tasks?.length} />
       </div>
       <Dropdown iconName="kebab" options={options} iconClassName="tablet:size-6 text-slate-300" />
     </li>
   );
 };
 
-const TodoHeader = () => {
+const TodoHeader = ({ data }: { data: GroupResponse }) => {
+  // console.log("todoHeader", data?.taskLists);
   return (
     <aside className={cn("flex flex-col items-start gap-2", "pc:w-[270px] pc:gap-6")}>
       <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
 
       <section className={cn("flex items-center justify-between gap-12 w-full", "pc:flex-col pc:gap-11")}>
         <ul className="pc:w-full pc:flex pc:flex-col pc:gap-1">
-          <TodoItem />
+          {data?.taskLists?.map((item) => (
+            <TodoItem key={item.id} data={item} />
+          ))}
         </ul>
 
         <BaseButton

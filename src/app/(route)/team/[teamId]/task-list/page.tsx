@@ -7,15 +7,30 @@ import { TodoSection, TodoHeader, MakeTodoModal } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 import { DetailPage } from "./_detail/_components";
 import { TASK_GROUP_MOCK_DATA } from "@/MOCK_DATA";
+import useGetTaskList from "@/api/hooks/task-list/useGetTaskList";
+import useGetGroup from "@/api/hooks/group/useGetGroup";
 
 // TODO(지권): 목업 데이터 변경
 const data = TASK_GROUP_MOCK_DATA;
 
-const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
+const TaskListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
   const { teamId } = use(params);
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("task-id");
+
+  // 왼쪽
+  const { data: group } = useGetGroup({ groupId: teamId });
+  // console.log("group:", group);
+
+  // 오른쪽
+  const { data: taskList } = useGetTaskList({
+    groupId: teamId,
+    taskListId: String(selectedId),
+    date: searchParams.get("date") || null,
+  });
+  // console.warn("teamId, selectedId", teamId, selectedId);
+  // console.warn("taskList:", taskList);
 
   const [selectedDate, setSelectedDate] = useState(() => {
     const dateParam = searchParams.get("date");
@@ -39,14 +54,19 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
     router.replace(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
   };
 
+  // if (!selectedId) {
+  //   router.replace("/team");
+  //   return null;
+  // }
+
   return (
     <div className={cn(selectedId && "pc:flex")}>
       <PageLayout ariaLabel="목록 페이지">
         <h1 className="sr-only">목록 페이지</h1>
-        <PageHeaderBar title="경영관리팀" />
+        <PageHeaderBar title={group?.name} />
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
-          <TodoHeader />
+          <TodoHeader data={group} />
           <TodoSection data={data} teamId={teamId} onClickDateItem={onClickDateItem} selectedDate={selectedDate} />
         </div>
       </PageLayout>
@@ -77,7 +97,7 @@ const Page = ({ params }: { params: Promise<{ teamId: string }> }) => {
   return (
     // TODO(지권): 로딩 화면 추가 필요
     <Suspense fallback={""}>
-      <ListPage params={params} />
+      <TaskListPage params={params} />
     </Suspense>
   );
 };
