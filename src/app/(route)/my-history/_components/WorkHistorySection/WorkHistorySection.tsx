@@ -1,8 +1,7 @@
 import { cn } from "@/utils";
 import { Chip } from "@/common";
-import { EmptyState } from "@/features";
+import { EmptyState, TaskListItem } from "@/features";
 import { TaskListItemType } from "@/types/TaskListItemType";
-import ScheduleDaySection from "../ScheduleDaySection/ScheduleDaySection";
 
 const WorkHistorySection = ({ data }: { data: TaskListItemType[] }) => {
   return (
@@ -22,9 +21,13 @@ const WorkHistorySection = ({ data }: { data: TaskListItemType[] }) => {
             ))}
           </nav>
 
-          <div className="w-full flex flex-col gap-12">
-            <ScheduleDaySection data={data} />
-          </div>
+          <section>
+            <ul className="flex flex-col gap-3">
+              {data.map((item) => (
+                <TaskListItem key={item.id} item={item} />
+              ))}
+            </ul>
+          </section>
         </>
       )}
     </article>
