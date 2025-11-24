@@ -1,3 +1,5 @@
+"use client";
+
 import { ProfileEdit, Input, BaseButton } from "@/common";
 
 const CreateTeamForm = () => {
