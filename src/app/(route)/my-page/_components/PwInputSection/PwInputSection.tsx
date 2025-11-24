@@ -4,11 +4,11 @@ import { useState } from "react";
 import { Input, BaseButton, Modal } from "@/common";
 
 const PasswordInputSection = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isChangePwOpen, setIsChangePwOpen] = useState(false);
 
   const handleChangePassword = () => {
     // TODO(김원선): 비밀번호 재설정 API 연동
-    setIsOpen(false);
+    setIsChangePwOpen(false);
   };
 
   return (
@@ -20,14 +20,20 @@ const PasswordInputSection = () => {
           defaultValue={"123123"}
           disabled
           addonAfter={
-            <BaseButton type="button" variant="solid" size="small" className="px-3" onClick={() => setIsOpen(true)}>
+            <BaseButton
+              type="button"
+              variant="solid"
+              size="small"
+              className="px-3"
+              onClick={() => setIsChangePwOpen(true)}
+            >
               변경하기
             </BaseButton>
           }
         />
       </div>
 
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className="max-w-[420px]">
+      <Modal isOpen={isChangePwOpen} onClose={() => setIsChangePwOpen(false)} className="max-w-[420px]">
         <Modal.Body className="flex flex-col items-center gap-6 py-4">
           <h2 className="text-lg-medium text-text-primary">비밀번호 변경</h2>
 
@@ -38,7 +44,12 @@ const PasswordInputSection = () => {
         </Modal.Body>
 
         <Modal.Footer className="flex gap-3">
-          <BaseButton variant="outlinedSecondary" size="large" className="flex-1" onClick={() => setIsOpen(false)}>
+          <BaseButton
+            variant="outlinedSecondary"
+            size="large"
+            className="flex-1"
+            onClick={() => setIsChangePwOpen(false)}
+          >
             닫기
           </BaseButton>
           <BaseButton
