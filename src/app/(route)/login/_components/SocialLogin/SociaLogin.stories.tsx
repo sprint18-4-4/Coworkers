@@ -14,9 +14,5 @@ export default meta;
 type Story = StoryObj<typeof SocialLogin>;
 
 export const Default: Story = {
-  render: () => (
-    <div>
-      <SocialLogin />
-    </div>
-  ),
+  render: () => <SocialLogin />,
 };

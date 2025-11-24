@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
 import { Icon } from "@/common";
 import { Input, InputPassword, BaseButton } from "@/common";
 import { usePostLogin } from "@/api/hooks";
 import { useAuthForm } from "@/hooks";
 import { ValidationRules } from "@/types";
-import { validateEmail, validatePasswordForLogin } from "@/utils";
+import { toastKit, validateEmail, validatePasswordForLogin } from "@/utils";
 import { useEmailStore } from "@/stores";
 import ResetPassword from "../ResetPassword/ResetPassword";
 
@@ -34,6 +33,8 @@ const LoginForm = () => {
 
   const { email, isRemembered, setEmail, toggleRemember } = useEmailStore();
 
+  const { success, error } = toastKit();
+
   const { register, errors, handleSubmit, meta, setValue } = useAuthForm({
     initialValues: { email: "", password: "" },
     validationRules: loginRules,
@@ -45,10 +46,10 @@ const LoginForm = () => {
         { email: values.email, password: values.password },
         {
           onSuccess: () => {
-            toast.success("로그인되었습니다.");
+            success("로그인되었습니다.");
           },
           onError: () => {
-            toast.error("이메일 혹은 비밀번호를 확인해주세요.");
+            error("이메일 혹은 비밀번호를 확인해주세요.");
           },
         },
       );

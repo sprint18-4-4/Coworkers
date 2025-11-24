@@ -20,9 +20,7 @@ const meta: Meta<typeof LoginForm> = {
   decorators: [
     (Story) => (
       <QueryClientProvider client={queryClient}>
-        <div className="w-[400px] border p-6 rounded-2xl bg-white shadow-sm">
-          <Story />
-        </div>
+        <Story />
         <Toaster position="bottom-center" />
       </QueryClientProvider>
     ),
