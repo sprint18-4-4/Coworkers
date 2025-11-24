@@ -6,29 +6,17 @@ import type { TaskListItemType } from "@/types";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import EditModal from "./_internal/EditModal/EditModal";
 import DeleteModal from "./_internal/DeleteModal/DeleteModal";
-import useDeleteHistory from "@/api/hooks/my-history/useDeleteHistory";
 
 interface TaskListItemProps {
   item: TaskListItemType;
   onOpenDetail?: () => void;
   onToggleTodo?: (id: number, next: boolean) => void;
+  options?: Array<{ label: string; action: () => void }>;
 }
 
-const TaskListItem = ({ item, onOpenDetail, onToggleTodo }: TaskListItemProps) => {
+const TaskListItem = ({ item, onOpenDetail, onToggleTodo, options }: TaskListItemProps) => {
   const [isEditModal, setIsEditModal] = useState(false);
   const [isDeleteModal, setIsDeleteModal] = useState(false);
-
-  const { mutate: deleteHistory } = useDeleteHistory();
-
-  const options = [
-    {
-      label: "수정하기",
-      action: () => {
-        setIsEditModal(true);
-      },
-    },
-    { label: "삭제하기", action: () => setIsDeleteModal(true) },
-  ];
 
   const handleEdit = () => {
     // TODO: 수정 로직
@@ -36,14 +24,7 @@ const TaskListItem = ({ item, onOpenDetail, onToggleTodo }: TaskListItemProps) =
   };
 
   const handleDelete = () => {
-    console.log("Deleting task:", item);
-    console.log("Task ID:", item.id);
     // TODO: 삭제 로직
-    deleteHistory({
-      groupId: 3449,
-      taskListId: 4800,
-      taskId: item.id,
-    });
     setIsDeleteModal(false);
   };
 
@@ -84,13 +65,15 @@ const TaskListItem = ({ item, onOpenDetail, onToggleTodo }: TaskListItemProps) =
               <span>{item?.commentCount}</span>
             </div>
           </div>
-          <div
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            <Dropdown iconName="kebab" options={options} iconClassName="size-4 tablet:size-4" />
-          </div>
+          {options && (
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <Dropdown iconName="kebab" options={options} iconClassName="size-4 tablet:size-4" />
+            </div>
+          )}
         </div>
         <div className="h-[14px] flex items-center gap-2 text-xs-regular text-text-default">
           <time dateTime={item?.date} className="flex items-center gap-[6px]">
