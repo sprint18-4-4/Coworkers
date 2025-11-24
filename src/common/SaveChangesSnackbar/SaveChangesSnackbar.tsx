@@ -1,6 +1,5 @@
 import Icon from "@/common/Icon/Icon";
 import BaseButton from "@/common/Button/BaseButton";
-import { cn } from "@/utils";
 
 interface UnsavedSnackbarProps {
   title: string;
@@ -11,10 +10,7 @@ interface UnsavedSnackbarProps {
 
 const SaveChangesSnackbar = ({ title, onSave, buttonText, formId }: UnsavedSnackbarProps) => {
   return (
-    <div
-      role="status"
-      className={cn("w-full min-w-[343px] max-w-[868px] bg-brand-primary p-3 rounded-lg flex items-center")}
-    >
+    <div role="status" className="w-full min-w-[343px] max-w-[868px] bg-brand-primary p-3 rounded-lg flex items-center">
       <span className="flex items-center gap-2 flex-grow text-md-semibold text-text-inverse tablet:text-lg-semibold">
         <Icon name="alert" className="hidden tablet:block tablet:size-6" />
         {title}
