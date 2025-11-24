@@ -9,7 +9,7 @@ import { usePostLogin } from "@/api/hooks";
 import { useAuthForm } from "@/hooks";
 import { ValidationRules } from "@/types";
 import { validateEmail, validatePasswordForLogin } from "@/utils";
-import { useEmailStore } from "../../_hooks";
+import { useEmailStore } from "@/stores";
 import ResetPassword from "../ResetPassword/ResetPassword";
 
 const loginRules: ValidationRules = {
