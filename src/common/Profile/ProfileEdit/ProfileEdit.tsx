@@ -27,6 +27,8 @@ import {
 const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileEditProps) => {
   const { hasError, handleError } = useImageError(src);
 
+  const hasImage = src && !hasError;
+
   const validateImageFile = (file: File): boolean => {
     if (!file.type.startsWith("image/")) {
       return false;
@@ -59,6 +61,7 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
         className={cn(
           " border-[2px] border-background-tertiary bg-background-tertiary overflow-hidden flex-center",
           SIZE_CLASSES[size],
+          hasImage ? "bg-transparent" : "bg-background-tertiary",
         )}
       >
         {src && !hasError ? (
