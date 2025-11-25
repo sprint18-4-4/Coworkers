@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Input, InputPassword, BaseButton } from "@/common";
-import { useForm } from "@/hooks/";
+import { useForm } from "@/hooks";
 import { validateEmail, validateName, validatePassword, validatePasswordConfirm } from "@/utils";
 
 const INITIAL_VALUES = {
