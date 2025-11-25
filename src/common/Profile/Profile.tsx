@@ -29,7 +29,7 @@ const Profile = ({ src, alt = "프로필", size = "lg" }: ProfileProps) => {
         hasImage ? "bg-transparent" : "bg-background-tertiary",
       )}
     >
-      {src && !hasError ? (
+      {hasImage ? (
         <Image
           src={src}
           alt={alt}
