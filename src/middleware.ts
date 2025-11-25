@@ -10,21 +10,19 @@ export async function middleware(req: NextRequest) {
 
   // 소속팀 없는 페이지 -> 유저정보 검사 -> 리다이렉트
   if (token && req.nextUrl.pathname === "/team") {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
-        headers: { Authorization: `Bearer ${token}` },
-        cache: "no-store",
-      });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store",
+    });
 
-      if (res.ok) {
-        const data = await res.json();
-        const groupId = data.memberships?.[0]?.groupId;
+    if (res.ok) {
+      const data = await res.json();
+      const groupId = data.memberships?.[0]?.groupId;
 
-        if (groupId) {
-          return NextResponse.redirect(new URL(`/team/${groupId}`, req.url));
-        }
+      if (groupId) {
+        return NextResponse.redirect(new URL(`/team/${groupId}`, req.url));
       }
-    } catch {}
+    }
   }
 
   return NextResponse.next();
