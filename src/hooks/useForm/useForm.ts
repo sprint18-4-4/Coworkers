@@ -14,7 +14,7 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
   const [formData, setFormData] = useState<FormValues>(initialValues);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { errors, validateForm, validateField, clearError } = useFormValidation(validationRules);
+  const { errors, validateForm, validateField, clearError, clearAllErrors } = useFormValidation(validationRules);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -61,6 +61,11 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
     }
   };
 
+  const reset = () => {
+    setFormData(initialValues);
+    clearAllErrors();
+  };
+
   const hasEmpty = Object.values(formData).some((val) => !val || val.trim() === "");
 
   const hasError = Object.keys(errors).length > 0;
@@ -87,6 +92,7 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
     errors,
     handleSubmit,
     setValue,
+    reset,
     meta: {
       isLoading,
       isValid: isFormValid,

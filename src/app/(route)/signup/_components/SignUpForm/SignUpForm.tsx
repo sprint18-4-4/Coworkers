@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Input, InputPassword, BaseButton } from "@/common";
-import { useAuthForm } from "@/hooks/";
+import { useForm } from "@/hooks/";
 import { validateEmail, validateName, validatePassword, validatePasswordConfirm } from "@/utils";
 
 const INITIAL_VALUES = {
@@ -13,7 +13,7 @@ const INITIAL_VALUES = {
 };
 
 const SignUpForm = () => {
-  const { register, errors, handleSubmit, meta } = useAuthForm({
+  const { register, errors, handleSubmit, meta } = useForm({
     initialValues: INITIAL_VALUES,
     validationRules: {
       name: validateName,

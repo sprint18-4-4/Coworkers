@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/common";
 import { Input, InputPassword, BaseButton } from "@/common";
 import { usePostLogin } from "@/api/hooks";
-import { useAuthForm } from "@/hooks";
+import { useForm } from "@/hooks";
 import { ValidationRules } from "@/types";
 import { toastKit, validateEmail, validatePasswordForLogin } from "@/utils";
 import { useEmailStore } from "@/stores";
@@ -35,7 +35,7 @@ const LoginForm = () => {
 
   const { success, error } = toastKit();
 
-  const { register, errors, handleSubmit, meta, setValue } = useAuthForm({
+  const { register, errors, handleSubmit, meta, setValue } = useForm({
     initialValues: { email: "", password: "" },
     validationRules: loginRules,
     onSubmit: async (values) => {

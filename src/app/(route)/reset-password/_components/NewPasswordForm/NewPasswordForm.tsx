@@ -1,18 +1,18 @@
 "use client";
 
-import { useAuthForm } from "@/hooks";
+import { useForm } from "@/hooks";
 import { InputPassword, BaseButton } from "@/common";
 import { validatePassword, validatePasswordConfirm } from "@/utils";
 
 const NewPasswordForm = () => {
-  const { register, errors, handleSubmit, meta } = useAuthForm({
+  const { register, errors, handleSubmit, meta } = useForm({
     initialValues: { password: "", passwordConfirm: "" },
     validationRules: {
       password: validatePassword,
       passwordConfirm: (value, formData) => validatePasswordConfirm(formData?.password ?? "", value),
     },
     onSubmit: async (values) => {
-      // TODO(김원선): 회원가입 API 연동
+      // TODO(김원선): 비밀번호 재설정 API 연동
     },
   });
 

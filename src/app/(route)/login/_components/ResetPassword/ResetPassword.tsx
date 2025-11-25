@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { toastKit } from "@/utils";
 import { Modal, Input, BaseButton } from "@/common";
-import { useAuthForm } from "@/hooks";
+import { useForm } from "@/hooks";
 import { validateEmail } from "@/utils";
 import { usePostResetPw } from "@/api/hooks";
 
@@ -18,6 +18,8 @@ const ResetPassword = ({ isOpen, onClose }: ResetPasswordModalProps) => {
 
   const { mutate, isPending } = usePostResetPw({
     onSuccess: () => {
+      reset();
+      setErrorMessage("");
       onClose();
       success("이메일이 전송되었습니다.");
     },
@@ -26,7 +28,7 @@ const ResetPassword = ({ isOpen, onClose }: ResetPasswordModalProps) => {
     },
   });
 
-  const { register, errors, handleSubmit, meta } = useAuthForm({
+  const { register, errors, handleSubmit, meta, reset } = useForm({
     initialValues: { email: "" },
     validationRules: {
       email: (value) => validateEmail(value),
@@ -42,10 +44,14 @@ const ResetPassword = ({ isOpen, onClose }: ResetPasswordModalProps) => {
     },
   });
 
-  if (!isOpen) return null;
+  const handleClose = () => {
+    reset();
+    setErrorMessage("");
+    onClose();
+  };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <Modal.Body className="flex-col-center gap-4">
         <div className="flex-col-center gap-2">
           <h2 className="text-lg-medium text-text-primary">비밀번호 재설정</h2>
@@ -61,7 +67,7 @@ const ResetPassword = ({ isOpen, onClose }: ResetPasswordModalProps) => {
         </form>
       </Modal.Body>
       <Modal.Footer className="flex gap-3">
-        <BaseButton type="button" variant="outlinedPrimary" size="large" onClick={onClose} className="flex-1">
+        <BaseButton type="button" variant="outlinedPrimary" size="large" onClick={handleClose} className="flex-1">
           닫기
         </BaseButton>
         <BaseButton

@@ -6,6 +6,7 @@ interface UseFormValidationReturn {
   validateField: (name: string, value: string, formData?: FormValues) => boolean;
   validateForm: (formData: FormValues) => boolean;
   clearError: (name: string) => void;
+  clearAllErrors: () => void;
 }
 
 const useFormValidation = (validationRules: ValidationRules = {}): UseFormValidationReturn => {
@@ -61,11 +62,16 @@ const useFormValidation = (validationRules: ValidationRules = {}): UseFormValida
     });
   };
 
+  const clearAllErrors = () => {
+    setErrors({});
+  };
+
   return {
     errors,
     validateField,
     validateForm,
     clearError,
+    clearAllErrors,
   };
 };
 
