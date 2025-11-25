@@ -36,4 +36,5 @@ export interface Task {
   name: string;
   tasks: Task[];
   updatedAt: string;
+  doneAt?: string | null;
 }

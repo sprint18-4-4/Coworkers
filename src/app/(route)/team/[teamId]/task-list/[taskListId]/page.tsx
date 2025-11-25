@@ -14,7 +14,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("task-id");
 
-  const { data: group } = useGetGroup({ groupId: teamId });
+  const { data: group, isLoading: isLoadingGroup } = useGetGroup({ groupId: teamId });
 
   const { data: taskList } = useGetTaskList({
     groupId: teamId,
@@ -51,7 +51,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
         <PageHeaderBar title={group?.name} />
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
-          <TodoHeader data={group} groupId={teamId} />
+          <TodoHeader data={group} isLoading={isLoadingGroup} groupId={teamId} />
           <TodoSection
             data={taskList ?? []}
             teamId={teamId}

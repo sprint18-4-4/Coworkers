@@ -11,6 +11,9 @@ const TodoItem = ({ data }: { data: TaskList }) => {
     { label: "삭제하기", action: () => {} },
   ];
 
+  const totalCount = data.tasks?.length ?? 0;
+  const doneCount = data.tasks?.filter((task) => task.doneAt !== null).length ?? 0;
+
   return (
     <li
       className={cn(
@@ -21,8 +24,7 @@ const TodoItem = ({ data }: { data: TaskList }) => {
     >
       <Link href={`/team/${data?.groupId}/task-list/${data?.id}`} className="flex items-center gap-2 flex-1 min-w-0">
         <span className="text-sm-semibold text-text-primary text-nowrap">{data?.name}</span>
-        {/* TODO(지권): current 변경 필요 */}
-        <ProgressBadge current={3} total={data?.tasks?.length} />
+        <ProgressBadge current={doneCount} total={totalCount} />
       </Link>
 
       <Dropdown iconName="kebab" options={options} iconClassName="tablet:size-6 text-slate-300" />
@@ -30,7 +32,13 @@ const TodoItem = ({ data }: { data: TaskList }) => {
   );
 };
 
-const TodoHeader = ({ data, groupId }: { data: GroupResponse; groupId: string }) => {
+interface TodoHeaderProps {
+  data: GroupResponse;
+  groupId: string;
+  isLoading: boolean;
+}
+
+const TodoHeader = ({ data, groupId, isLoading }: TodoHeaderProps) => {
   const [isAddTodoModalOpen, setIsAddTodoModalOpen] = useState(false);
 
   return (
@@ -39,11 +47,20 @@ const TodoHeader = ({ data, groupId }: { data: GroupResponse; groupId: string })
         <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
 
         <section className={cn("flex items-center justify-between gap-12 w-full", "pc:flex-col pc:gap-11")}>
-          <ul className="pc:space-y-1 pc:w-full pc:max-h-[300px] pc:overflow-y-scroll hide-scrollbar">
-            {data?.taskLists?.map((item) => (
-              <TodoItem key={item.id} data={item} />
-            ))}
-          </ul>
+          <div className="pc:max-h-[300px] pc:w-full pc:overflow-y-scroll hide-scrollbar">
+            {/* TODO(지권): 로딩 화면 개선 필요 */}
+            {isLoading && <p className="h-[300px] bg-white rounded-xl p-4">로딩 중...</p>}
+
+            {!isLoading && data?.taskLists?.length > 0 && (
+              <ul className="pc:space-y-1">
+                {data?.taskLists?.map((item) => (
+                  <TodoItem key={item.id} data={item} />
+                ))}
+              </ul>
+            )}
+
+            {!isLoading && !data?.taskLists?.length && <p>할 일 목록이 없습니다.</p>}
+          </div>
 
           <BaseButton
             size="large"
