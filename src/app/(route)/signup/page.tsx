@@ -1,7 +1,7 @@
 import { cn } from "@/utils";
 import { SignUpForm, SocialSignUp } from "./_components";
 
-const page = () => {
+const SignUpPage = () => {
   return (
     <div className={cn("w-full h-[calc(100vh-52px)] bg-background-secondary flex-center", "tablet:h-svh")}>
       <div
@@ -19,4 +19,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignUpPage;

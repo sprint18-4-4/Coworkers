@@ -1,7 +1,7 @@
 import { cn } from "@/utils";
 import NewPasswordForm from "./_components/NewPasswordForm/NewPasswordForm";
 
-const page = () => {
+const ResetPasswordPage = () => {
   return (
     <section className={cn("w-full h-[calc(100svh-52px)] bg-background-secondary flex-center", "tablet:h-svh")}>
       <div
@@ -19,4 +19,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ResetPasswordPage;
