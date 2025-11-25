@@ -28,7 +28,8 @@ export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) 
       description: formData.todoMemo,
       startDate: formData.startDate.toISOString(),
       frequencyType: formData.frequencyType,
-      monthDay: formData.startDate.getDate(),
+      // TODO(지권): monthDay 테스트 필요
+      // monthDay: formData.startDate.getDate(),
     },
   });
 

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cn } from "@/utils";
 import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
 import { GroupResponse, TaskList } from "@/types/Group/GroupData";
@@ -8,29 +9,26 @@ const TodoItem = ({ data }: { data: TaskList }) => {
     { label: "삭제하기", action: () => {} },
   ];
 
-  // console.log(data);
-  // console.log(data?.tasks?.length);
-
   return (
     <li
       className={cn(
-        "flex items-center gap-[25px] max-w-[180px] h-[44px] pl-4 pr-3 rounded-xl",
-        "bg-background-primary border border-border-primary",
-        "pc:w-full pc:max-w-full pc:h-[54px] pc:justify-between",
+        "flex items-center justify-between gap-[25px] max-w-[180px] h-[44px] pl-4 pr-3 rounded-xl",
+        "bg-background-primary border border-border-primary transition-colors duration-200",
+        "pc:w-full pc:max-w-full pc:h-[54px]",
       )}
     >
-      <div className="flex items-center gap-2">
+      <Link href={`/team/${data?.groupId}/task-list/${data?.id}`} className="flex items-center gap-2 flex-1 min-w-0">
         <span className="text-sm-semibold text-text-primary text-nowrap">{data?.name}</span>
-        {/* TODO(지권): current 수정 필요 */}
+        {/* TODO(지권): current 변경 필요 */}
         <ProgressBadge current={3} total={data?.tasks?.length} />
-      </div>
+      </Link>
+
       <Dropdown iconName="kebab" options={options} iconClassName="tablet:size-6 text-slate-300" />
     </li>
   );
 };
 
 const TodoHeader = ({ data }: { data: GroupResponse }) => {
-  // console.log("todoHeader", data?.taskLists);
   return (
     <aside className={cn("flex flex-col items-start gap-2", "pc:w-[270px] pc:gap-6")}>
       <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>

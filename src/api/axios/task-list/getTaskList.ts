@@ -7,8 +7,9 @@ export interface GetTaskListResponse {
 }
 
 const getTaskList = async ({ groupId, taskListId, date }: GetTaskListResponse) => {
-  const response = await instance.get(`/groups/${groupId}/task-lists/${taskListId}/tasks?date=${date}`);
-
+  const response = await instance.get(`/groups/${groupId}/task-lists/${taskListId}/tasks`, {
+    params: date ? { date } : undefined,
+  });
   return response.data;
 };
 

@@ -7,6 +7,7 @@ const useGetTaskList = ({ groupId, taskListId, date }: GetTaskListResponse) => {
     queryFn: () => getTaskList({ groupId, taskListId, date }),
     staleTime: 1000 * 60 * 10,
     gcTime: 1000 * 60 * 60 * 24,
+    enabled: !!taskListId,
   });
 };
 

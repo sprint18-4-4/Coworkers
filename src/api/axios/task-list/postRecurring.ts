@@ -9,7 +9,8 @@ export interface PostRecurringResponse {
     description: string;
     startDate: string;
     frequencyType: Frequency;
-    monthDay: number;
+    // TODO(지권): monthDay 테스트 필요
+    // monthDay: number;
   };
 }
 
