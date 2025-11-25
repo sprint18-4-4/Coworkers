@@ -5,7 +5,7 @@ import { toastKit } from "@/utils";
 import { Modal, Input, BaseButton } from "@/common";
 import { useForm } from "@/hooks";
 import { validateEmail } from "@/utils";
-import { usePostResetPw } from "@/api/hooks";
+import { usePostResetPassword } from "@/api/hooks";
 
 interface ResetPasswordModalProps {
   isOpen: boolean;
@@ -16,7 +16,7 @@ const ResetPassword = ({ isOpen, onClose }: ResetPasswordModalProps) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const { success } = toastKit();
 
-  const { mutate, isPending } = usePostResetPw({
+  const { mutate, isPending } = usePostResetPassword({
     onSuccess: () => {
       reset();
       setErrorMessage("");
