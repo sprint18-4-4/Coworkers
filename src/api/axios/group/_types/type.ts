@@ -33,3 +33,11 @@ export interface GetGroupsResponse {
     },
   ];
 }
+
+export interface DeleteGroupRequest {
+  id: number;
+}
+
+export interface DeleteGroupResponse {
+  message?: string;
+}
