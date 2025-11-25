@@ -2,7 +2,8 @@ import Link from "next/link";
 import { cn } from "@/utils";
 import { BaseButton, Dropdown, Icon, Input, Modal, ProgressBadge } from "@/common";
 import { GroupResponse, TaskList } from "@/types";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import { usePostTodo } from "@/api/hooks";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
   const options = [
@@ -29,8 +30,16 @@ const TodoItem = ({ data }: { data: TaskList }) => {
   );
 };
 
-const TodoHeader = ({ data }: { data: GroupResponse }) => {
+const TodoHeader = ({ data, groupId }: { data: GroupResponse; groupId: string }) => {
   const [isAddTodoModalOpen, setIsAddTodoModalOpen] = useState(false);
+  const [todoName, setTodoName] = useState("");
+  const { mutate, isPending } = usePostTodo({ groupId, name: todoName });
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    mutate();
+    setIsAddTodoModalOpen(false);
+  };
 
   return (
     <>
@@ -64,9 +73,13 @@ const TodoHeader = ({ data }: { data: GroupResponse }) => {
       >
         <Modal.CloseIcon onClose={() => setIsAddTodoModalOpen(false)} />
         <h2 className="text-lg-medium text-text-primary">할 일 목록</h2>
-        <form action="" className="flex-col-center gap-4 w-[280px]">
-          <Input placeholder="목록 명을 입력해주세요." className="w-full" />
-          <BaseButton size="large" variant="solid">
+        <form onSubmit={onSubmit} className="flex-col-center gap-4 w-[280px]">
+          <Input
+            placeholder="목록 명을 입력해주세요."
+            className="w-full"
+            onChange={(e) => setTodoName(e.target.value)}
+          />
+          <BaseButton type="submit" size="large" variant="solid" disabled={todoName.trim() === "" || isPending}>
             만들기
           </BaseButton>
         </form>

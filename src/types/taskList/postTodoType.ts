@@ -1,8 +1,6 @@
 export interface PostTodoRequest {
   groupId: string;
-  formData: {
-    name: string;
-  };
+  name: string;
 }
 
 export interface PostTodoResponse {
