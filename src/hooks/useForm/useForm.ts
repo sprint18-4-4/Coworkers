@@ -6,13 +6,13 @@ import { FormValues, ValidationRules } from "@/types";
 
 type AuthValidationRules = ValidationRules;
 
-interface UseAuthFormOptions {
+interface UseFormOptions {
   initialValues: FormValues;
   validationRules?: AuthValidationRules;
   onSubmit: (values: FormValues) => Promise<void>;
 }
 
-const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOptions) => {
+const useForm = ({ initialValues, validationRules, onSubmit }: UseFormOptions) => {
   const [formData, setFormData] = useState<FormValues>(initialValues);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -102,4 +102,4 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
   };
 };
 
-export default useAuthForm;
+export default useForm;
