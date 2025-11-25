@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/utils";
 import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
-import { GroupResponse, TaskList } from "@/types/Group/GroupData";
+import { GroupResponse, TaskList } from "@/types";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
   const options = [

@@ -5,6 +5,8 @@ interface UseGetGroupParams {
   groupId: string;
 }
 
+// TODO(지권): 상인님 PR 머지 후 제거될 파일
+
 const useGetGroup = ({ groupId }: UseGetGroupParams) => {
   return useQuery({
     queryKey: ["group-info", groupId],

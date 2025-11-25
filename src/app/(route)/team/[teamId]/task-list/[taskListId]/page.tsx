@@ -52,7 +52,12 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
           <TodoHeader data={group} />
-          <TodoSection data={taskList} teamId={teamId} onClickDateItem={onClickDateItem} selectedDate={selectedDate} />
+          <TodoSection
+            data={taskList ?? []}
+            teamId={teamId}
+            onClickDateItem={onClickDateItem}
+            selectedDate={selectedDate}
+          />
         </div>
       </PageLayout>
 

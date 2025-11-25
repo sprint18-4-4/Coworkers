@@ -12,3 +12,11 @@ export interface PostTaskRequest {
     // monthDay: number;
   };
 }
+
+export interface PostTaskResponse {
+  name: string;
+  description: string;
+  startDate: string;
+  frequencyType: Frequency;
+  monthDay: number;
+}
