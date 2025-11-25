@@ -14,7 +14,7 @@ export interface PostRecurringResponse {
 }
 
 const postRecurring = async ({ groupId, taskListId, formData }: PostRecurringResponse) => {
-  const response = await instance.post(`/groups/${groupId}/task-lists${taskListId}/tasks`, formData);
+  const response = await instance.post(`/groups/${groupId}/task-lists/${taskListId}/tasks`, formData);
 
   return response.data;
 };

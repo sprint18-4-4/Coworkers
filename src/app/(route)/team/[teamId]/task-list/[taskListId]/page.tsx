@@ -13,8 +13,8 @@ import useGetGroup from "@/api/hooks/group/useGetGroup";
 // TODO(지권): 목업 데이터 변경
 const data = TASK_GROUP_MOCK_DATA;
 
-const TaskListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
-  const { teamId } = use(params);
+const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId: string }> }) => {
+  const { teamId, taskListId } = use(params);
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("task-id");
@@ -42,7 +42,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("w", "true");
 
-    router.push(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
+    router.push(`/team/${teamId}/task-list/${taskListId}?${params.toString()}`, { scroll: false });
   };
 
   const onClickDateItem = (date: Date) => {
@@ -51,7 +51,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("date", date.toISOString());
 
-    router.replace(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
+    router.replace(`/team/${teamId}/task-list/${taskListId}?${params.toString()}`, { scroll: false });
   };
 
   // if (!selectedId) {
@@ -85,17 +85,17 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
           onClose={() => {
             const params = new URLSearchParams(searchParams.toString());
             params.delete("w");
-            router.push(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
+            router.push(`/team/${teamId}/task-list/${taskListId}?${params.toString()}`, { scroll: false });
           }}
           groupId={teamId}
-          taskListId={selectedId || ""}
+          taskListId={taskListId}
         />
       )}
     </div>
   );
 };
 
-const Page = ({ params }: { params: Promise<{ teamId: string }> }) => {
+const Page = ({ params }: { params: Promise<{ teamId: string; taskListId: string }> }) => {
   return (
     // TODO(지권): 로딩 화면 추가 필요
     <Suspense fallback={""}>
