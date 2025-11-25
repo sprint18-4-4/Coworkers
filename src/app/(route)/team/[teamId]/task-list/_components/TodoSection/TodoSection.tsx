@@ -1,14 +1,14 @@
 "use client";
 
 import { cn } from "@/utils";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { addDays, format } from "date-fns";
 import { DateValue, TaskListData } from "@/types";
 import { DateItem, DatePicker, Icon } from "@/common";
 import { EmptyState, TaskListItem } from "@/features";
-import { addDays, format } from "date-fns";
-import { useRouter } from "next/navigation";
 import { TODO_STYLES } from "../../_constants";
 import TaskPdfDownloadButton from "../TaskPdfDownloadButton/TaskPdfDownloadButton";
-import { useState } from "react";
 
 interface TodoSectionHeaderProps {
   data: TaskListData;
@@ -85,6 +85,11 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate }: TodoSectio
     router.push(`/team/${teamId}/task-list?task-id=${id}`, { scroll: false });
   };
 
+  const onToggleTodo = (id: number, next: boolean) => {
+    // TODO(지권): 추후 API 변경 및 로직 분리
+    console.warn("토글 선택 - API 호출 예정", { id, next });
+  };
+
   return (
     <section
       className={cn(
@@ -115,7 +120,12 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate }: TodoSectio
 
       <ul className="mt-[37px] flex flex-col gap-3">
         {data?.map((item) => (
-          <TaskListItem key={item.id} item={item} onOpenDetail={() => onClickTaskListItem(item.id.toString())} />
+          <TaskListItem
+            key={item.id}
+            item={item}
+            onOpenDetail={() => onClickTaskListItem(item.id.toString())}
+            onToggleTodo={onToggleTodo}
+          />
         ))}
       </ul>
     </section>
