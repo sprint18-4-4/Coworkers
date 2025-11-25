@@ -1,3 +1,5 @@
+"use client";
+
 import { toastKit, tokenStorage } from "@/utils";
 import { clearAuthCookies } from "@/utils/setAuthCookies";
 import { useQueryClient } from "@tanstack/react-query";
