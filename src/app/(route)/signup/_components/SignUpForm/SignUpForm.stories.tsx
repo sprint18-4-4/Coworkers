@@ -6,6 +6,9 @@ const meta: Meta<typeof SignUpForm> = {
   component: SignUpForm,
   parameters: {
     layout: "centered",
+    nextjs: {
+      appDirectory: true,
+    },
   },
   tags: ["autodocs"],
   argTypes: {
