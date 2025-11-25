@@ -19,10 +19,12 @@ import { ReactNode } from "react";
 
 interface CenteredCardLayoutProps {
   children: ReactNode;
+  title?: string;
+  titleClassName?: string;
   className?: string;
 }
 
-const CenteredCardLayout = ({ children, className }: CenteredCardLayoutProps) => {
+const CenteredCardLayout = ({ children, className, title, titleClassName }: CenteredCardLayoutProps) => {
   return (
     <section className={cn("w-full h-[calc(100svh-52px)] flex-center", "tablet:h-svh")}>
       <div
@@ -33,6 +35,7 @@ const CenteredCardLayout = ({ children, className }: CenteredCardLayoutProps) =>
           className,
         )}
       >
+        <h2 className={cn("text-xl-bold text-text-primary tablet:text-2xl-bold", titleClassName)}>{title}</h2>
         {children}
       </div>
     </section>
