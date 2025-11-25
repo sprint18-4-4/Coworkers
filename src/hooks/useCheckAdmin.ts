@@ -1,7 +1,16 @@
-import { Membership } from "@/types";
+import { useGetUser } from "@/api/hooks";
+import { useParams } from "next/navigation";
 
-const useCheckAdmin = (teamId: number, memberships: Membership[]) => {
-  const currentGroup = memberships.find((group) => group.groupId === teamId);
+const useCheckAdmin = () => {
+  const { teamId } = useParams();
+  const { data: userInfo } = useGetUser();
+
+  if (!userInfo) {
+    return false;
+  }
+
+  const { memberships } = userInfo;
+  const currentGroup = memberships.find((group) => group.groupId === Number(teamId));
 
   if (!currentGroup) {
     return false;

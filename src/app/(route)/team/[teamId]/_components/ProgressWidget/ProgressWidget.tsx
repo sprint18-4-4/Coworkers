@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetGroups, useGetUser } from "@/api/hooks";
+import { useGetGroups } from "@/api/hooks";
 import { Dropdown, ProgressBar } from "@/common";
 import { useParams, useRouter } from "next/navigation";
 import { useCheckAdmin } from "@/hooks";
@@ -10,9 +10,8 @@ const ProgressWidget = () => {
   const router = useRouter();
   const id = Number(teamId);
   const { data: groups } = useGetGroups({ id });
-  const { data: userInfo } = useGetUser();
 
-  const isAdmin = useCheckAdmin(id, userInfo?.memberships ?? []);
+  const isAdmin = useCheckAdmin();
 
   const handleEditTeamClick = () => {
     router.push(`/team/${id}/edit`);
