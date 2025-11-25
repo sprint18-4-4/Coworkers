@@ -5,12 +5,14 @@ import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
 import { GroupResponse, TaskList } from "@/types";
 import TaskListCreateModal from "../TaskListCreateModal/TaskListCreateModal";
 import { useDeleteTodo } from "@/api/hooks";
+import TaskItemEditModal from "../TaskItemEditModal/TaskItemEditModal";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { mutate: deleteTodo } = useDeleteTodo({ groupId: String(data.groupId), id: String(data.id) });
 
   const options = [
-    { label: "수정하기", action: () => {} },
+    { label: "수정하기", action: () => setIsEditModalOpen(true) },
     { label: "삭제하기", action: () => deleteTodo() },
   ];
 
@@ -18,22 +20,25 @@ const TodoItem = ({ data }: { data: TaskList }) => {
   const doneCount = data.tasks?.filter((task) => task.doneAt !== null).length ?? 0;
 
   return (
-    <li
-      className={cn(
-        "flex items-center justify-between gap-[25px] max-w-[180px] h-[44px] pl-4 pr-3 rounded-xl",
-        "bg-background-primary border border-border-primary transition-colors duration-200",
-        "pc:w-full pc:max-w-full pc:h-[54px]",
-      )}
-    >
-      <Link href={`/team/${data?.groupId}/task-list/${data?.id}`} className="flex items-center gap-2 flex-1 min-w-0">
-        <span className="text-sm-semibold text-text-primary text-nowrap overflow-hidden text-ellipsis">
-          {data?.name}
-        </span>
-        <ProgressBadge current={doneCount} total={totalCount} />
-      </Link>
+    <>
+      <li
+        className={cn(
+          "flex items-center justify-between gap-[25px] max-w-[180px] h-[44px] pl-4 pr-3 rounded-xl",
+          "bg-background-primary border border-border-primary transition-colors duration-200",
+          "pc:w-full pc:max-w-full pc:h-[54px]",
+        )}
+      >
+        <Link href={`/team/${data?.groupId}/task-list/${data?.id}`} className="flex items-center gap-2 flex-1 min-w-0">
+          <span className="text-sm-semibold text-text-primary text-nowrap overflow-hidden text-ellipsis">
+            {data?.name}
+          </span>
+          <ProgressBadge current={doneCount} total={totalCount} />
+        </Link>
 
-      <Dropdown iconName="kebab" options={options} iconClassName="tablet:size-6 text-slate-300" />
-    </li>
+        <Dropdown iconName="kebab" options={options} iconClassName="tablet:size-6 text-slate-300" />
+      </li>
+      {isEditModalOpen && <TaskItemEditModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />}
+    </>
   );
 };
 
