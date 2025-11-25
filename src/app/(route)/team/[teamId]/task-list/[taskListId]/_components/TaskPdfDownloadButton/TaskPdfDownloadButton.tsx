@@ -32,7 +32,7 @@ const TaskPdfDownloadButton = ({ data }: TaskPdfDownloadButtonProps) => {
     >
       {({ loading, error }) => {
         if (error) {
-          errorToast("PDF 생성 오류");
+          errorToast("PDF 생성에 실패하였습니다.");
         }
         return (
           <button
