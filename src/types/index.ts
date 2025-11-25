@@ -12,3 +12,5 @@ export type { DetailDataItem } from "./DetailPage/DetailDataType";
 export type { ToastVariant, AppToastOptions } from "./ToastType";
 export type { PostTaskRequest, PostTaskResponse } from "./taskList/PostTask";
 export type { GroupResponse, TaskList } from "./Group/GroupData";
+export type { MyHistoryItem, MyHistoryResponse } from "./MyHistory/HistoryType";
+export type { ApiErrorResponse } from "./ApiType";

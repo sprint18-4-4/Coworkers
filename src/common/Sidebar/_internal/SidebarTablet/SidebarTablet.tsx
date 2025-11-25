@@ -1,11 +1,10 @@
-import Image from "next/image";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
+import { SidebarDropdownProps } from "../../_types";
+import { Dropdown, Icon, Profile } from "@/common";
 import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
 import AddTeamButton from "../AddTeamButton/AddTeamButton";
 import SidebarLink from "../SidebarLink/SidebarLink";
-import { SidebarDropdownProps } from "../../_types";
-import { Dropdown, Icon } from "@/common";
 
 const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDropdownProps) => {
   return (
@@ -71,13 +70,7 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
               placement="top-left"
               image={
                 <div className="flex items-center gap-3">
-                  <Image
-                    src={user?.image || "/TEST_IMG/image-1.jpg"}
-                    alt={`${user?.nickname} 이미지`}
-                    width={40}
-                    height={40}
-                    className="size-10 rounded-xl"
-                  />
+                  <Profile src={user?.image} alt={user?.nickname} size="lg" />
                   {isOpen && (
                     <div className="flex flex-col items-start gap-[2px]">
                       <span className="text-text-primary text-lg-medium truncate max-w-[120px]">{user.nickname}</span>
@@ -91,9 +84,7 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
             />
           ) : (
             <div className="flex items-center gap-3">
-              {isOpen && (
-                <Image src="/TEST_IMG/image-1.jpg" alt="" width={40} height={40} className="size-10 rounded-xl" />
-              )}
+              {isOpen && <Profile src="" alt="" size="lg" />}
               <Link href="/login">로그인</Link>
             </div>
           )}

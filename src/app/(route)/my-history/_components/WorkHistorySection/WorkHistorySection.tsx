@@ -1,8 +1,8 @@
 import { cn } from "@/utils";
-import { TaskListItemType } from "@/types";
 import { EmptyState, TaskListItem } from "@/features";
+import { MyHistoryResponse } from "@/types";
 
-const WorkHistorySection = ({ data }: { data: TaskListItemType[] }) => {
+const WorkHistorySection = ({ data }: { data: MyHistoryResponse }) => {
   return (
     <article
       className={cn(
@@ -11,11 +11,11 @@ const WorkHistorySection = ({ data }: { data: TaskListItemType[] }) => {
       )}
     >
       {/* TODO(지권): 에러, 로딩 상태 처리 필요 */}
-      {data?.length === 0 && <EmptyState ariaLabel="업무 기록 없음" text="완료한 업무 기록이 없습니다." />}
-      {data?.length > 0 && (
+      {data?.tasksDone?.length === 0 && <EmptyState ariaLabel="업무 기록 없음" text="완료한 업무 기록이 없습니다." />}
+      {data?.tasksDone?.length > 0 && (
         <section>
           <ul className="flex flex-col gap-3">
-            {data.map((item) => (
+            {data.tasksDone.map((item) => (
               <TaskListItem key={item.id} item={item} />
             ))}
           </ul>
