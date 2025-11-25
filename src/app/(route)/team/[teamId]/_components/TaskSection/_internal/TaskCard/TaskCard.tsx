@@ -25,7 +25,7 @@ const Tasks = () => {
     <ul className="flex flex-col gap-2">
       <li>
         <Todo
-          id="0"
+          id={0}
           title="법인 설립 안내 드리기"
           completed={completed}
           onChangeCompleted={(_, next) => setCompleted(next)}
@@ -33,7 +33,7 @@ const Tasks = () => {
       </li>
       <li>
         <Todo
-          id="1"
+          id={1}
           title="법인 설립 안내 드리기"
           completed={completed}
           onChangeCompleted={(_, next) => setCompleted(next)}
@@ -41,7 +41,7 @@ const Tasks = () => {
       </li>
       <li>
         <Todo
-          id="2"
+          id={2}
           title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex cupiditate, accusamus, voluptates enim in nesciunt nam, alias neque odio architecto non maxime ullam? Cupiditate molestiae impedit ipsum placeat maiores debitis."
           completed={completed}
           onChangeCompleted={(_, next) => setCompleted(next)}

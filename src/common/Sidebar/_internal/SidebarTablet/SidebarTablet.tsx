@@ -80,8 +80,8 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
                   />
                   {isOpen && (
                     <div className="flex flex-col items-start gap-[2px]">
-                      <span className="text-text-primary text-lg-medium">{user.nickname}</span>
-                      <span className="text-slate-400 text-md-medium">
+                      <span className="text-text-primary text-lg-medium truncate max-w-[120px]">{user.nickname}</span>
+                      <span className="text-slate-400 text-md-medium truncate max-w-[120px]">
                         {user.memberships?.[0]?.group?.name ?? "소속없음"}
                       </span>
                     </div>
@@ -90,7 +90,12 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
               }
             />
           ) : (
-            !user && <Link href="/login">로그인</Link>
+            <div className="flex items-center gap-3">
+              {isOpen && (
+                <Image src="/TEST_IMG/image-1.jpg" alt="" width={40} height={40} className="size-10 rounded-xl" />
+              )}
+              <Link href="/login">로그인</Link>
+            </div>
           )}
         </footer>
       </nav>

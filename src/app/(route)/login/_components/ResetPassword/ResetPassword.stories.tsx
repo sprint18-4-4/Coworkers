@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ResetPassword from "./ResetPassword";
+
+const queryClient = new QueryClient();
 
 const meta: Meta<typeof ResetPassword> = {
   title: "Page/Login/ResetPassword",
@@ -8,6 +11,13 @@ const meta: Meta<typeof ResetPassword> = {
   parameters: {
     layout: "centered",
   },
+  decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
+    ),
+  ],
   argTypes: {
     isOpen: {
       control: "boolean",

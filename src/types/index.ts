@@ -11,3 +11,4 @@ export type { TaskGroupItem, TaskListData } from "./taskList/TaskListData";
 export type { DetailDataItem } from "./DetailPage/DetailDataType";
 export type { ToastVariant, AppToastOptions } from "./ToastType";
 export type { GetGroupsRequest, GetGroupsResponse } from "./GroupType";
+export type { ApiErrorResponse } from "./ApiType";

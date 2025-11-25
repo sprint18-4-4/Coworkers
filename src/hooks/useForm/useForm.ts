@@ -1,20 +1,22 @@
+"use client";
+
 import { ChangeEvent, FormEvent, useState } from "react";
 import useFormValidation from "./useFormValidation";
 import { FormValues, ValidationRules } from "@/types";
 
 type AuthValidationRules = ValidationRules;
 
-interface UseAuthFormOptions {
+interface UseFormOptions {
   initialValues: FormValues;
   validationRules?: AuthValidationRules;
   onSubmit: (values: FormValues) => Promise<void>;
 }
 
-const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOptions) => {
+const useForm = ({ initialValues, validationRules, onSubmit }: UseFormOptions) => {
   const [formData, setFormData] = useState<FormValues>(initialValues);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { errors, validateForm, validateField, clearError } = useFormValidation(validationRules);
+  const { errors, validateForm, validateField, clearError, clearAllErrors } = useFormValidation(validationRules);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -61,6 +63,11 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
     }
   };
 
+  const reset = () => {
+    setFormData(initialValues);
+    clearAllErrors();
+  };
+
   const hasEmpty = Object.values(formData).some((val) => !val || val.trim() === "");
 
   const hasError = Object.keys(errors).length > 0;
@@ -87,6 +94,7 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
     errors,
     handleSubmit,
     setValue,
+    reset,
     meta: {
       isLoading,
       isValid: isFormValid,
@@ -94,4 +102,4 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
   };
 };
 
-export default useAuthForm;
+export default useForm;
