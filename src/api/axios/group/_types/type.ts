@@ -1,6 +1,5 @@
-import { UserRole } from "./UserType";
+import { UserRole } from "@/types";
 
-// 리뷰: 직관적으로 바로 보여주는게 좋을까? vs 외부에서 만들어놓은 member, task 등 타입들 불러오는게 좋을까?
 export interface GetGroupsRequest {
   id: number;
 }

@@ -1,5 +1,5 @@
 import { instance } from "@/lib";
-import { GetGroupsRequest, GetGroupsResponse } from "@/types";
+import { GetGroupsRequest, GetGroupsResponse } from "../_types/type";
 
 const getGroups = async ({ id }: GetGroupsRequest): Promise<GetGroupsResponse> => {
   const { data } = await instance.get<GetGroupsResponse>(`/groups/${id}`);
