@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { getHistory } from "@/api/axios";
+import { useQuery } from "@tanstack/react-query";
 
 const useGetHistory = () => {
   return useQuery({

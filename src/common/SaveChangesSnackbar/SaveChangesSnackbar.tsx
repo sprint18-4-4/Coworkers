@@ -5,19 +5,19 @@ interface UnsavedSnackbarProps {
   title: string;
   onSave: () => void;
   buttonText?: string;
+  formId?: string;
 }
 
-const SaveChangesSnackbar = ({ title, onSave, buttonText }: UnsavedSnackbarProps) => {
+const SaveChangesSnackbar = ({ title, onSave, buttonText, formId }: UnsavedSnackbarProps) => {
   return (
-    <div
-      role="status"
-      className="max-w-[868px] min-w-[343px] min-h-[49px] max-h-[57px] bg-brand-primary p-3 rounded-lg flex items-center gap-2.5"
-    >
+    <div role="status" className="w-full min-w-[343px] max-w-[868px] bg-brand-primary p-3 rounded-lg flex items-center">
       <span className="flex items-center gap-2 flex-grow text-md-semibold text-text-inverse tablet:text-lg-semibold">
         <Icon name="alert" className="hidden tablet:block tablet:size-6" />
         {title}
       </span>
       <BaseButton
+        type="submit"
+        form={formId}
         variant="solid"
         size="small"
         onClick={onSave}
