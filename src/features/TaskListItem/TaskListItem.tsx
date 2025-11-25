@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { Dropdown, Icon, Todo } from "@/common";
-import type { TaskListItemType } from "@/types";
+import type { MyHistoryItem, TaskListItemType } from "@/types";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import EditModal from "./_internal/EditModal/EditModal";
 import DeleteModal from "./_internal/DeleteModal/DeleteModal";
 
 interface TaskListItemProps {
-  item: TaskListItemType;
+  item: TaskListItemType | MyHistoryItem;
   onOpenDetail?: () => void;
   onToggleTodo?: (id: number, next: boolean) => void;
   options?: Array<{ label: string; action: () => void }>;
@@ -60,10 +60,12 @@ const TaskListItem = ({ item, onOpenDetail, onToggleTodo, options }: TaskListIte
                 onToggleTodo?.(item.id, next);
               }}
             />
-            <div className="flex items-center gap-[2px] text-xs-regular">
-              <Icon name="comment" className="size-4 tablet:size-4" />
-              <span>{item?.commentCount}</span>
-            </div>
+            {"commentCount" in item && (
+              <div className="flex items-center gap-[2px] text-xs-regular">
+                <Icon name="comment" className="size-4 tablet:size-4" />
+                <span>{item.commentCount}</span>
+              </div>
+            )}
           </div>
           {options && (
             <div
