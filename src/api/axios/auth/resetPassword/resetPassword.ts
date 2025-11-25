@@ -1,5 +1,6 @@
+import axios from "axios";
 import { instance } from "@/lib";
-import { AxiosError } from "axios";
+import { ApiErrorResponse } from "@/types";
 
 type ResetPasswordRequest = {
   email: string;
@@ -15,7 +16,7 @@ const postResetPassword = async (request: ResetPasswordRequest): Promise<ResetPa
     const { data } = await instance.post<ResetPasswordResponse>("user/send-reset-password-email", request);
     return data;
   } catch (error) {
-    if (error instanceof AxiosError) {
+    if (axios.isAxiosError<ApiErrorResponse>(error)) {
       const status = error.response?.status;
       const serverMessage = error.response?.data?.message;
 
