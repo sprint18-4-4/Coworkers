@@ -1,9 +1,9 @@
+import { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/utils";
-import { BaseButton, Dropdown, Icon, Input, Modal, ProgressBadge } from "@/common";
+import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
 import { GroupResponse, TaskList } from "@/types";
-import { FormEvent, useState } from "react";
-import { usePostTodo } from "@/api/hooks";
+import TaskListCreateModal from "../TaskListCreateModal/TaskListCreateModal";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
   const options = [
@@ -32,14 +32,6 @@ const TodoItem = ({ data }: { data: TaskList }) => {
 
 const TodoHeader = ({ data, groupId }: { data: GroupResponse; groupId: string }) => {
   const [isAddTodoModalOpen, setIsAddTodoModalOpen] = useState(false);
-  const [todoName, setTodoName] = useState("");
-  const { mutate, isPending } = usePostTodo({ groupId, name: todoName });
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    mutate();
-    setIsAddTodoModalOpen(false);
-  };
 
   return (
     <>
@@ -47,7 +39,7 @@ const TodoHeader = ({ data, groupId }: { data: GroupResponse; groupId: string })
         <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
 
         <section className={cn("flex items-center justify-between gap-12 w-full", "pc:flex-col pc:gap-11")}>
-          <ul className="pc:w-full pc:flex pc:flex-col pc:gap-1">
+          <ul className="pc:space-y-1 pc:w-full pc:max-h-[300px] pc:overflow-y-scroll hide-scrollbar">
             {data?.taskLists?.map((item) => (
               <TodoItem key={item.id} data={item} />
             ))}
@@ -66,24 +58,7 @@ const TodoHeader = ({ data, groupId }: { data: GroupResponse; groupId: string })
         </section>
       </aside>
 
-      <Modal
-        isOpen={isAddTodoModalOpen}
-        onClose={() => setIsAddTodoModalOpen(false)}
-        className="flex-col-center gap-4 px-4 py-8"
-      >
-        <Modal.CloseIcon onClose={() => setIsAddTodoModalOpen(false)} />
-        <h2 className="text-lg-medium text-text-primary">할 일 목록</h2>
-        <form onSubmit={onSubmit} className="flex-col-center gap-4 w-[280px]">
-          <Input
-            placeholder="목록 명을 입력해주세요."
-            className="w-full"
-            onChange={(e) => setTodoName(e.target.value)}
-          />
-          <BaseButton type="submit" size="large" variant="solid" disabled={todoName.trim() === "" || isPending}>
-            만들기
-          </BaseButton>
-        </form>
-      </Modal>
+      <TaskListCreateModal isOpen={isAddTodoModalOpen} onClose={() => setIsAddTodoModalOpen(false)} groupId={groupId} />
     </>
   );
 };
