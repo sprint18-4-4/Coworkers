@@ -1,6 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import TodoHeader from "./TodoHeader";
 import { TaskList } from "@/types/Group/GroupData";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const meta: Meta<typeof TodoHeader> = {
   title: "Page/List/TodoHeader",
@@ -8,6 +11,13 @@ const meta: Meta<typeof TodoHeader> = {
     layout: "centered",
   },
   component: TodoHeader,
+  decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
+    ),
+  ],
 };
 
 export default meta;
