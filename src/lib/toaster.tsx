@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 const ToasterContainer = () => {
   return (
     <Toaster
-      position="bottom-right"
+      position="bottom-center"
       toastOptions={{
         duration: 2000,
       }}
