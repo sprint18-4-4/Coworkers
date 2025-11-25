@@ -1,29 +1,30 @@
 "use client";
 
 import { useGetGroups } from "@/api/hooks";
-import { Dropdown, ProgressBar } from "@/common";
+import { BaseButton, Dropdown, Icon, Modal, ProgressBar } from "@/common";
 import { useParams, useRouter } from "next/navigation";
 import { useCheckAdmin } from "@/hooks";
+import { useState } from "react";
 
 const ProgressWidget = () => {
   const { teamId } = useParams();
   const router = useRouter();
   const id = Number(teamId);
+
   const { data: groups } = useGetGroups({ id });
+
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
   const isAdmin = useCheckAdmin();
 
-  const handleEditTeamClick = () => {
-    router.push(`/team/${id}/edit`);
-  };
-
-  // 시안에 없는 것 같아서 조금 더 고민
-  const handleDeleteTeamClick = () => {};
-
   const DropdownOptions = [
-    { label: "수정하기", action: () => handleEditTeamClick() },
-    { label: "삭제하기", action: () => handleDeleteTeamClick() },
+    { label: "수정하기", action: () => router.push(`/team/${id}/edit`) },
+    { label: "삭제하기", action: () => setIsOpenDeleteModal(true) },
   ];
+
+  const handleTeamDelete = () => {
+    setIsOpenDeleteModal(false);
+  };
 
   return (
     <section className="relative rounded-[20px] bg-background-primary px-[26px] py-[32px] -mx-[26px] -mt-[17px] tablet:mt-0 tablet:mx-0">
@@ -53,6 +54,23 @@ const ProgressWidget = () => {
         <div className="absolute right-[26px] top-[32px] pc:bottom-[30px] pc:top-auto leading-none">
           <Dropdown iconName="setting" placement="bottom-right" options={DropdownOptions} />
         </div>
+      )}
+
+      {isOpenDeleteModal && (
+        <Modal isOpen={isOpenDeleteModal} onClose={() => setIsOpenDeleteModal(false)}>
+          <Modal.Body className="flex-col-center gap-4">
+            <Icon name="alert" className="text-status-danger" />
+            <p className="text-lg-medium pb-4">정말로 팀을 삭제하시겠습니까?</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <BaseButton variant="outlinedSecondary" size="large" onClick={() => setIsOpenDeleteModal(false)}>
+              취소하기
+            </BaseButton>
+            <BaseButton variant="outlinedPrimary" size="large" danger onClick={handleTeamDelete}>
+              삭제하기
+            </BaseButton>
+          </Modal.Footer>
+        </Modal>
       )}
     </section>
   );
