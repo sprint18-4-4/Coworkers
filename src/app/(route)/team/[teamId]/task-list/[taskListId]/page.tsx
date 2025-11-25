@@ -6,8 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { TodoSection, TodoHeader, MakeTodoModal } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 import { DetailPage } from "./_detail/_components";
-import useGetTaskList from "@/api/hooks/task-list/useGetTaskList";
-import useGetGroup from "@/api/hooks/group/useGetGroup";
+import { useGetGroup, useGetTaskList } from "@/api/hooks";
 
 const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId: string }> }) => {
   const { teamId, taskListId } = use(params);

@@ -1,12 +1,7 @@
 import { instance } from "@/lib";
+import { GetTaskListRequest } from "@/types";
 
-export interface GetTaskListResponse {
-  groupId: string;
-  taskListId: string;
-  date?: string | null;
-}
-
-const getTaskList = async ({ groupId, taskListId, date }: GetTaskListResponse) => {
+const getTaskList = async ({ groupId, taskListId, date }: GetTaskListRequest) => {
   const response = await instance.get(`/groups/${groupId}/task-lists/${taskListId}/tasks`, {
     params: date ? { date } : undefined,
   });

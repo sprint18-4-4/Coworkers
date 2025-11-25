@@ -1,7 +1,7 @@
 import { instance } from "@/lib";
 import { Frequency } from "@/types";
 
-export interface PostRecurringResponse {
+export interface PostTaskRequest {
   groupId: string;
   taskListId: string;
   formData: {
@@ -14,10 +14,10 @@ export interface PostRecurringResponse {
   };
 }
 
-const postRecurring = async ({ groupId, taskListId, formData }: PostRecurringResponse) => {
+const postTask = async ({ groupId, taskListId, formData }: PostTaskRequest) => {
   const response = await instance.post(`/groups/${groupId}/task-lists/${taskListId}/tasks`, formData);
 
   return response.data;
 };
 
-export default postRecurring;
+export default postTask;

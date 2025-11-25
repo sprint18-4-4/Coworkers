@@ -1,4 +1,4 @@
-import getGroup from "@/api/axios/group/getGroup";
+import { getGroup } from "@/api/axios";
 import { useQuery } from "@tanstack/react-query";
 
 interface UseGetGroupParams {
@@ -11,6 +11,7 @@ const useGetGroup = ({ groupId }: UseGetGroupParams) => {
     queryFn: () => getGroup({ groupId }),
     staleTime: 1000 * 60 * 10,
     gcTime: 1000 * 60 * 60 * 24,
+    enabled: !!groupId,
   });
 };
 
