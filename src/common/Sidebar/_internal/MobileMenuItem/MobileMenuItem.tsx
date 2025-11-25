@@ -9,11 +9,11 @@ interface MobileMenuItemProps {
 }
 
 const MobileMenuItem = ({ membership, isOpen }: MobileMenuItemProps) => {
-  const isActive = useIsActivePath(`/${membership.groupId}`);
+  const isActive = useIsActivePath(`/team/${membership.groupId}`);
 
   return (
     <Link
-      href={`/${membership.groupId}`}
+      href={`/team/${membership.groupId}`}
       className={cn(
         "w-full min-h-[52px] p-4 flex gap-3 items-center rounded-xl",
         "text-text-primary bg-background-primary hover:bg-gray-200 transition-colors",
