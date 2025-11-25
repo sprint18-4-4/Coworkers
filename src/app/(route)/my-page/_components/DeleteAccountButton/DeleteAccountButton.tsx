@@ -1,23 +1,23 @@
 import { Icon, Modal, BaseButton } from "@/common";
 import { useState } from "react";
 
-const SecessionButton = () => {
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+const DeleteAccountButton = () => {
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  const handleDelete = () => {
-    setIsDeleteOpen(false);
+  const handleDeleteAccount = () => {
+    setDeleteModalOpen(false);
   };
 
   return (
     <>
       <div className="w-full flex items-start">
-        <button className="text-status-danger flex items-center gap-2" onClick={() => setIsDeleteOpen(true)}>
+        <button className="text-status-danger flex items-center gap-2" onClick={() => setDeleteModalOpen(true)}>
           <Icon name="secession" className="size-6 tablet:size-6" />
           <span className="text-md-medium tablet:text-lg-medium">회원 탈퇴하기</span>
         </button>
       </div>
 
-      <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)} className="max-w-[400px]">
+      <Modal isOpen={deleteModalOpen} onClose={() => setDeleteModalOpen(false)} className="max-w-[400px]">
         <Modal.Body className="flex flex-col items-center gap-6 text-center py-4">
           <div className="flex-col-center gap-2">
             <Icon name="alert" className="size-6 tablet:size-6 mb-2 text-status-danger" />
@@ -34,11 +34,11 @@ const SecessionButton = () => {
             variant="outlinedSecondary"
             size="large"
             className="flex-1"
-            onClick={() => setIsDeleteOpen(false)}
+            onClick={() => setDeleteModalOpen(false)}
           >
             취소
           </BaseButton>
-          <BaseButton variant="solid" size="large" danger className="flex-1" onClick={handleDelete}>
+          <BaseButton variant="solid" size="large" danger className="flex-1" onClick={handleDeleteAccount}>
             탈퇴하기
           </BaseButton>
         </Modal.Footer>
@@ -47,4 +47,4 @@ const SecessionButton = () => {
   );
 };
 
-export default SecessionButton;
+export default DeleteAccountButton;

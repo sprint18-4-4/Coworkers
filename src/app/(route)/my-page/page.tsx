@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/utils";
-import { MyProfileForm, SecessionButton } from "./_components";
+import { MyProfileForm, DeleteAccountButton } from "./_components";
 // import { SaveChangesSnackbar } from "@/common";
 
 const MyPage = () => {
@@ -21,7 +21,7 @@ const MyPage = () => {
         >
           <h2 className="w-full text-left text-xl-bold text-text-primary tablet:text-2xl-bold">계정 설정</h2>
           <MyProfileForm />
-          <SecessionButton />
+          <DeleteAccountButton />
         </div>
         {/* TODO(김원선): 기능과 API 연결시 구현 */}
         {/* <SaveChangesSnackbar

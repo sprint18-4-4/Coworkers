@@ -4,11 +4,11 @@ import { useState } from "react";
 import { Input, BaseButton, Modal } from "@/common";
 
 const PasswordInputSection = () => {
-  const [isChangePwOpen, setIsChangePwOpen] = useState(false);
+  const [changePasswordOpen, setChangePasswordOpen] = useState(false);
 
   const handleChangePassword = () => {
     // TODO(김원선): 비밀번호 재설정 API 연동
-    setIsChangePwOpen(false);
+    setChangePasswordOpen(false);
   };
 
   return (
@@ -25,7 +25,7 @@ const PasswordInputSection = () => {
               variant="solid"
               size="small"
               className="px-3"
-              onClick={() => setIsChangePwOpen(true)}
+              onClick={() => setChangePasswordOpen(true)}
             >
               변경하기
             </BaseButton>
@@ -33,7 +33,7 @@ const PasswordInputSection = () => {
         />
       </div>
 
-      <Modal isOpen={isChangePwOpen} onClose={() => setIsChangePwOpen(false)} className="max-w-[420px]">
+      <Modal isOpen={changePasswordOpen} onClose={() => setChangePasswordOpen(false)} className="max-w-[420px]">
         <Modal.Body className="flex flex-col items-center gap-6 py-4">
           <h2 className="text-lg-medium text-text-primary">비밀번호 변경</h2>
 
@@ -48,7 +48,7 @@ const PasswordInputSection = () => {
             variant="outlinedSecondary"
             size="large"
             className="flex-1"
-            onClick={() => setIsChangePwOpen(false)}
+            onClick={() => setChangePasswordOpen(false)}
           >
             닫기
           </BaseButton>

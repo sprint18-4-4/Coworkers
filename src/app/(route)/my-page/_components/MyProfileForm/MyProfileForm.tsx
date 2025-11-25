@@ -2,7 +2,7 @@
 
 import { ProfileEdit, Input } from "@/common";
 import { useDevice } from "@/hooks";
-import PwInputSection from "../PwInputSection/PwInputSection";
+import PasswordInputSection from "../PasswordInputSection/PasswordInputSection";
 
 const MyProfileForm = () => {
   const { isMobile } = useDevice();
@@ -14,7 +14,7 @@ const MyProfileForm = () => {
       <ProfileEdit src={null} onChange={() => {}} size={profileSize} />
       <Input label="이름" type="text" defaultValue="아무개" placeholder="이름을 입력해주세요." />
       <Input label="이메일" type="email" defaultValue={"text@example.com"} disabled />
-      <PwInputSection />
+      <PasswordInputSection />
     </form>
   );
 };

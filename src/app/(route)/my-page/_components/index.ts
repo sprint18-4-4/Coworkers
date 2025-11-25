@@ -1,3 +1,3 @@
 export { default as MyProfileForm } from "./MyProfileForm/MyProfileForm";
-export { default as SecessionButton } from "./SecessionButton/SecessionButton";
-export { default as PwInputSection } from "./PwInputSection/PwInputSection";
+export { default as DeleteAccountButton } from "./DeleteAccountButton/DeleteAccountButton";
+export { default as PasswordInputSection } from "./PasswordInputSection/PasswordInputSection";
