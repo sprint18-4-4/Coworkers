@@ -23,12 +23,12 @@ export interface GetGroupsResponse {
   ];
   taskLists: [
     {
-      displayIndex: 0;
-      groupId: 0;
+      displayIndex: number;
+      groupId: number;
       updatedAt: string;
       createdAt: string;
       name: string;
-      id: 0;
+      id: number;
       tasks: string[];
     },
   ];
