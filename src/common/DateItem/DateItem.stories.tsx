@@ -9,7 +9,7 @@ const meta: Meta<typeof DateItem> = {
   args: {
     selectedDate: new Date(),
     onClick: (date: Date) => {
-      console.log(format(date, "yyyy-MM-dd"));
+      console.warn(format(date, "yyyy-MM-dd"));
     },
   },
   parameters: {

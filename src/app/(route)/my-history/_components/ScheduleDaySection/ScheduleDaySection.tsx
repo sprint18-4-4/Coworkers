@@ -2,12 +2,7 @@ import { cn } from "@/utils";
 import { TaskListItem } from "@/features";
 import { TaskListItemType } from "@/types";
 
-const ScheduleDaySection = ({ items }: { items: TaskListItemType[] }) => {
-  const onToggleTodo = (id: number, next: boolean) => {
-    // TODO(지권): 추후 API 변경 및 로직 분리
-    console.warn("토글 선택 - API 호출 예정", { id, next });
-  };
-
+const ScheduleDaySection = ({ data }: { data: TaskListItemType[] }) => {
   return (
     <>
       <div className="flex-center gap-5">
@@ -18,11 +13,10 @@ const ScheduleDaySection = ({ items }: { items: TaskListItemType[] }) => {
         <hr aria-hidden="true" className="flex-1 h-[1px] bg-border-primary" />
       </div>
 
-      <section className="flex flex-col gap-[13px]">
-        <h2 className="text-lg-bold text-text-primary">법인 등기</h2>
+      <section>
         <ul className="flex flex-col gap-3">
-          {items.map((item) => (
-            <TaskListItem key={item.id} item={item} onToggleTodo={onToggleTodo} />
+          {data.map((item) => (
+            <TaskListItem key={item.id} item={item} />
           ))}
         </ul>
       </section>

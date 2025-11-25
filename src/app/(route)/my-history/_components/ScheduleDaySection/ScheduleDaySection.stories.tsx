@@ -16,6 +16,6 @@ type Story = StoryObj<typeof ScheduleDaySection>;
 
 export const Default: Story = {
   args: {
-    items: MY_HISTORY_ITEM_MOCK_DATA,
+    data: MY_HISTORY_ITEM_MOCK_DATA,
   },
 };
