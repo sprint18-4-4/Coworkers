@@ -4,11 +4,14 @@ import { cn } from "@/utils";
 import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
 import { GroupResponse, TaskList } from "@/types";
 import TaskListCreateModal from "../TaskListCreateModal/TaskListCreateModal";
+import { useDeleteTodo } from "@/api/hooks";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
+  const { mutate: deleteTodo } = useDeleteTodo({ groupId: String(data.groupId), id: String(data.id) });
+
   const options = [
     { label: "수정하기", action: () => {} },
-    { label: "삭제하기", action: () => {} },
+    { label: "삭제하기", action: () => deleteTodo() },
   ];
 
   const totalCount = data.tasks?.length ?? 0;
@@ -23,7 +26,9 @@ const TodoItem = ({ data }: { data: TaskList }) => {
       )}
     >
       <Link href={`/team/${data?.groupId}/task-list/${data?.id}`} className="flex items-center gap-2 flex-1 min-w-0">
-        <span className="text-sm-semibold text-text-primary text-nowrap">{data?.name}</span>
+        <span className="text-sm-semibold text-text-primary text-nowrap overflow-hidden text-ellipsis">
+          {data?.name}
+        </span>
         <ProgressBadge current={doneCount} total={totalCount} />
       </Link>
 
