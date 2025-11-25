@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { cn } from "@/utils";
-import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
+import { BaseButton, Dropdown, Icon, Input, Modal, ProgressBadge } from "@/common";
 import { GroupResponse, TaskList } from "@/types";
+import { useState } from "react";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
   const options = [
@@ -29,28 +30,48 @@ const TodoItem = ({ data }: { data: TaskList }) => {
 };
 
 const TodoHeader = ({ data }: { data: GroupResponse }) => {
+  const [isAddTodoModalOpen, setIsAddTodoModalOpen] = useState(false);
+
   return (
-    <aside className={cn("flex flex-col items-start gap-2", "pc:w-[270px] pc:gap-6")}>
-      <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
+    <>
+      <aside className={cn("flex flex-col items-start gap-2", "pc:w-[270px] pc:gap-6")}>
+        <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
 
-      <section className={cn("flex items-center justify-between gap-12 w-full", "pc:flex-col pc:gap-11")}>
-        <ul className="pc:w-full pc:flex pc:flex-col pc:gap-1">
-          {data?.taskLists?.map((item) => (
-            <TodoItem key={item.id} data={item} />
-          ))}
-        </ul>
+        <section className={cn("flex items-center justify-between gap-12 w-full", "pc:flex-col pc:gap-11")}>
+          <ul className="pc:w-full pc:flex pc:flex-col pc:gap-1">
+            {data?.taskLists?.map((item) => (
+              <TodoItem key={item.id} data={item} />
+            ))}
+          </ul>
 
-        <BaseButton
-          size="large"
-          variant="outlinedPrimary"
-          aria-label="할 일 추가"
-          className="w-[112px] h-10 px-4 text-nowrap rounded-[40px] bg-background-primary"
-        >
-          <Icon name="plus" className="size-5 tablet:size-5" />
-          <span className="text-lg-semibold">할 일 추가</span>
-        </BaseButton>
-      </section>
-    </aside>
+          <BaseButton
+            size="large"
+            variant="outlinedPrimary"
+            aria-label="할 일 추가"
+            onClick={() => setIsAddTodoModalOpen(true)}
+            className="w-[112px] h-10 px-4 text-nowrap rounded-[40px] bg-background-primary"
+          >
+            <Icon name="plus" className="size-5 tablet:size-5" />
+            <span className="text-lg-semibold">할 일 추가</span>
+          </BaseButton>
+        </section>
+      </aside>
+
+      <Modal
+        isOpen={isAddTodoModalOpen}
+        onClose={() => setIsAddTodoModalOpen(false)}
+        className="flex-col-center gap-4 px-4 py-8"
+      >
+        <Modal.CloseIcon onClose={() => setIsAddTodoModalOpen(false)} />
+        <h2 className="text-lg-medium text-text-primary">할 일 목록</h2>
+        <form action="" className="flex-col-center gap-4 w-[280px]">
+          <Input placeholder="목록 명을 입력해주세요." className="w-full" />
+          <BaseButton size="large" variant="solid">
+            만들기
+          </BaseButton>
+        </form>
+      </Modal>
+    </>
   );
 };
 
