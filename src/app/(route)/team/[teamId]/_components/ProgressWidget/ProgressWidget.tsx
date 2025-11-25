@@ -2,20 +2,29 @@
 
 import { useGetGroups, useGetUser } from "@/api/hooks";
 import { Dropdown, ProgressBar } from "@/common";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useCheckAdmin } from "@/hooks";
 
 const ProgressWidget = () => {
   const { teamId } = useParams();
+  const router = useRouter();
   const id = Number(teamId);
-  const { data: groups, isPending: isPendingGroups } = useGetGroups({ id });
-  const { data: userInfo, isPending: isPendingUser } = useGetUser();
+  const { data: groups } = useGetGroups({ id });
+  const { data: userInfo } = useGetUser();
 
   const isAdmin = useCheckAdmin(id, userInfo?.memberships ?? []);
   console.log(groups, userInfo, isAdmin);
+
+  const handleEditTeamClick = () => {
+    router.push(`/team/${id}/edit`);
+  };
+
+  // 시안에 없는 것 같아서 조금 더 고민
+  const handleDeleteTeamClick = () => {};
+
   const DropdownOptions = [
-    { label: "수정하기", action: () => {} },
-    { label: "삭제하기", action: () => {} },
+    { label: "수정하기", action: () => handleEditTeamClick() },
+    { label: "삭제하기", action: () => handleDeleteTeamClick() },
   ];
 
   return (
