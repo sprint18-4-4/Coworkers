@@ -14,3 +14,4 @@ export type { PostTaskRequest, PostTaskResponse } from "./taskList/PostTask";
 export type { GroupResponse, TaskList } from "./Group/GroupData";
 export type { MyHistoryItem, MyHistoryResponse } from "./MyHistory/HistoryType";
 export type { ApiErrorResponse } from "./ApiType";
+export type { PostTodoRequest, PostTodoResponse } from "./taskList/postTodoType";
