@@ -4,9 +4,9 @@ import { useDevice } from "@/hooks";
 import { ProfileEdit, Input, BaseButton } from "@/common";
 
 const CreateTeamForm = () => {
-  const device = useDevice();
+  const { isMobile } = useDevice();
 
-  const profileSize = device.isMobile ? "md" : "lg";
+  const profileSize = isMobile ? "md" : "lg";
 
   return (
     <form className="w-full flex-col-center gap-10">
