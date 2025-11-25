@@ -3,7 +3,7 @@
 export const BASE_BUTTON_BASE_STYLE = "w-full flex-center gap-1";
 
 export const BASE_BUTTON_DANGER_STYLE =
-  "bg-status-danger text-text-inverse hover:text-none hover:bg-status-danger active:text-none active:bg-status-danger disabled:bg-status-danger disabled:text-text-inverse";
+  "bg-status-danger text-text-inverse hover:text-none hover:bg-status-danger active:text-none active:bg-status-danger disabled:bg-status-danger disabled:text-text-inverse disabled:bg-text-disabled";
 
 export const BASE_BUTTON_STYLE_BY_SIZE = {
   large: "h-12 rounded-xl text-lg-semibold",

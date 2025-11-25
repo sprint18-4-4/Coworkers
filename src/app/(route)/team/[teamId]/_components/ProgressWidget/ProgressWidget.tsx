@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetGroups } from "@/api/hooks";
+import { useDeleteGroup, useGetGroups } from "@/api/hooks";
 import { BaseButton, Dropdown, Icon, Modal, ProgressBar } from "@/common";
 import { useParams, useRouter } from "next/navigation";
 import { useCheckAdmin } from "@/hooks";
@@ -12,6 +12,7 @@ const ProgressWidget = () => {
   const id = Number(teamId);
 
   const { data: groups } = useGetGroups({ id });
+  const { mutate: deleteGroup, isPending } = useDeleteGroup();
 
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
@@ -23,7 +24,12 @@ const ProgressWidget = () => {
   ];
 
   const handleTeamDelete = () => {
-    setIsOpenDeleteModal(false);
+    deleteGroup(
+      { id },
+      {
+        onSettled: () => setIsOpenDeleteModal(false),
+      },
+    );
   };
 
   return (
@@ -66,7 +72,7 @@ const ProgressWidget = () => {
             <BaseButton variant="outlinedSecondary" size="large" onClick={() => setIsOpenDeleteModal(false)}>
               취소하기
             </BaseButton>
-            <BaseButton variant="outlinedPrimary" size="large" danger onClick={handleTeamDelete}>
+            <BaseButton variant="outlinedPrimary" size="large" danger onClick={handleTeamDelete} disabled={isPending}>
               삭제하기
             </BaseButton>
           </Modal.Footer>
