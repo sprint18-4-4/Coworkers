@@ -7,3 +7,4 @@ export { default as getTaskList } from "./task-list/getTaskList";
 export { default as postTask } from "./task-list/postTask";
 export { default as postTodo } from "./task-list/postTodo";
 export { default as deleteTodo } from "./task-list/deleteTodo";
+export { default as patchTodo } from "./task-list/patchTodo";

@@ -13,6 +13,8 @@ const TaskListCreateModal = ({ isOpen, onClose, groupId }: TaskListCreateModalPr
   const { mutate, isPending } = usePostTodo({ groupId, name: todoName });
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    if (!todoName || todoName.trim() === "") return;
+
     e.preventDefault();
     mutate();
     setTodoName("");

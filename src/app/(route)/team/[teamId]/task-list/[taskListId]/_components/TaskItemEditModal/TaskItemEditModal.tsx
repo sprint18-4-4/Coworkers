@@ -1,17 +1,31 @@
 import { FormEvent, useState } from "react";
 import { BaseButton, Input, Modal } from "@/common";
+import { usePatchTodo } from "@/api/hooks";
 
 interface EditTodoModalProps {
   isOpen: boolean;
   onClose: () => void;
+  TodoItem: {
+    groupId: string;
+    id: string;
+  };
 }
 
-const TaskItemEditModal = ({ isOpen, onClose }: EditTodoModalProps) => {
+const TaskItemEditModal = ({ isOpen, onClose, TodoItem }: EditTodoModalProps) => {
   const [todoName, setTodoName] = useState("");
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const { mutate, isPending } = usePatchTodo({
+    groupId: String(TodoItem?.groupId),
+    id: String(TodoItem?.id),
+    name: todoName,
+  });
 
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    if (!todoName || todoName.trim() === "") return;
+
+    e.preventDefault();
+    mutate();
+    setTodoName("");
     onClose();
   };
 
@@ -22,12 +36,12 @@ const TaskItemEditModal = ({ isOpen, onClose }: EditTodoModalProps) => {
       <form onSubmit={onSubmit} className="flex-col-center gap-4 w-[280px]">
         <Input
           autoFocus
-          placeholder="목록 명을 입력해주세요."
+          placeholder="수정할 이름을 입력해주세요."
           className="w-full"
           maxLength={30}
           onChange={(e) => setTodoName(e.target.value)}
         />
-        <BaseButton type="submit" size="large" variant="solid">
+        <BaseButton type="submit" size="large" variant="solid" disabled={todoName.trim() === "" || isPending}>
           수정하기
         </BaseButton>
       </form>

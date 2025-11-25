@@ -37,7 +37,13 @@ const TodoItem = ({ data }: { data: TaskList }) => {
 
         <Dropdown iconName="kebab" options={options} iconClassName="tablet:size-6 text-slate-300" />
       </li>
-      {isEditModalOpen && <TaskItemEditModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />}
+      {isEditModalOpen && (
+        <TaskItemEditModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          TodoItem={{ groupId: String(data.groupId), id: String(data.id) }}
+        />
+      )}
     </>
   );
 };
