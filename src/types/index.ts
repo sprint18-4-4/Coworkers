@@ -10,3 +10,4 @@ export type { TaskUser } from "./TaskUser";
 export type { TaskGroupItem, TaskListData } from "./taskList/TaskListData";
 export type { DetailDataItem } from "./DetailPage/DetailDataType";
 export type { ToastVariant, AppToastOptions } from "./ToastType";
+export type { ApiErrorResponse } from "./ApiType";
