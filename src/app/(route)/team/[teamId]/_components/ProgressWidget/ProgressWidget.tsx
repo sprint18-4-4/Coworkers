@@ -13,7 +13,6 @@ const ProgressWidget = () => {
   const { data: userInfo } = useGetUser();
 
   const isAdmin = useCheckAdmin(id, userInfo?.memberships ?? []);
-  console.log(groups, userInfo, isAdmin);
 
   const handleEditTeamClick = () => {
     router.push(`/team/${id}/edit`);
