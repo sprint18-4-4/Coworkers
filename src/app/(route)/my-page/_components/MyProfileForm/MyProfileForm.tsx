@@ -5,9 +5,9 @@ import { useDevice } from "@/hooks";
 import PwInputSection from "../PwInputSection/PwInputSection";
 
 const MyProfileForm = () => {
-  const device = useDevice();
+  const { isMobile } = useDevice();
 
-  const profileSize = device.isMobile ? "md" : "lg";
+  const profileSize = isMobile ? "md" : "lg";
 
   return (
     <form id="profileForm" className="w-full flex-col-center gap-6">
