@@ -1,12 +1,6 @@
 import { Frequency } from "../FrequencyType";
 import { TaskUser } from "../TaskUser";
 
-export interface GetTaskListRequest {
-  groupId: string;
-  taskListId: string;
-  date?: string | null;
-}
-
 interface TaskDoneBy {
   user: TaskUser;
 }
