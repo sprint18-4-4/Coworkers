@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { cn } from "@/utils";
 import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
-import { GroupResponse, TaskList } from "@/types";
+import { TaskList } from "@/types";
+import { GetGroupsResponse } from "@/api/axios/group/_types/type";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
   const options = [
@@ -28,7 +29,7 @@ const TodoItem = ({ data }: { data: TaskList }) => {
   );
 };
 
-const TodoHeader = ({ data }: { data: GroupResponse }) => {
+const TodoHeader = ({ data }: { data: GetGroupsResponse | undefined }) => {
   return (
     <aside className={cn("flex flex-col items-start gap-2", "pc:w-[270px] pc:gap-6")}>
       <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
