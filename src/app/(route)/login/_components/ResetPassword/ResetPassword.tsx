@@ -1,6 +1,11 @@
+"use client";
+
+import { useState } from "react";
+import { toastKit } from "@/utils";
 import { Modal, Input, BaseButton } from "@/common";
 import { useAuthForm } from "@/hooks";
 import { validateEmail } from "@/utils";
+import { usePostResetPw } from "@/api/hooks";
 
 interface ResetPasswordModalProps {
   isOpen: boolean;
@@ -8,7 +13,18 @@ interface ResetPasswordModalProps {
 }
 
 const ResetPassword = ({ isOpen, onClose }: ResetPasswordModalProps) => {
-  const isPending = false;
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const { success } = toastKit();
+
+  const { mutate, isPending } = usePostResetPw({
+    onSuccess: () => {
+      onClose();
+      success("이메일이 전송되었습니다.");
+    },
+    onError: (message) => {
+      setErrorMessage(message);
+    },
+  });
 
   const { register, errors, handleSubmit, meta } = useAuthForm({
     initialValues: { email: "" },
@@ -16,11 +32,17 @@ const ResetPassword = ({ isOpen, onClose }: ResetPasswordModalProps) => {
       email: (value) => validateEmail(value),
     },
     onSubmit: async (values) => {
-      // TODO(김원선): 비밀번호 재설정 API 연동
-      alert(`${values.email}로 재설정 링크를 보냈습니다.`);
-      onClose();
+      setErrorMessage("");
+      const redirectUrl = `${window.location.origin}`;
+
+      mutate({
+        email: values.email,
+        redirectUrl,
+      });
     },
   });
+
+  if (!isOpen) return null;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -30,7 +52,12 @@ const ResetPassword = ({ isOpen, onClose }: ResetPasswordModalProps) => {
           <p className="text-md-medium text-text-disabled">비밀번호 재설정 링크를 보내드립니다.</p>
         </div>
         <form id="reset-password-form" onSubmit={handleSubmit} className="w-full">
-          <Input type="email" placeholder="이메일을 입력해주세요." {...register("email")} error={errors.email} />
+          <Input
+            type="email"
+            placeholder="이메일을 입력해주세요."
+            {...register("email")}
+            error={errors.email || errorMessage}
+          />
         </form>
       </Modal.Body>
       <Modal.Footer className="flex gap-3">
