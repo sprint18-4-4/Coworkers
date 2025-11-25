@@ -57,6 +57,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
             teamId={teamId}
             onClickDateItem={onClickDateItem}
             selectedDate={selectedDate}
+            taskListId={taskListId}
           />
         </div>
       </PageLayout>

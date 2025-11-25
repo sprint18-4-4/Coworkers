@@ -70,9 +70,10 @@ interface TodoSectionProps {
   teamId: string;
   onClickDateItem: (date: Date) => void;
   selectedDate: Date;
+  taskListId: string;
 }
 
-const TodoSection = ({ data, teamId, onClickDateItem, selectedDate }: TodoSectionProps) => {
+const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId }: TodoSectionProps) => {
   const router = useRouter();
 
   const handleMoveWeek = (direction: WeekDirection) => {
@@ -82,7 +83,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate }: TodoSectio
   };
 
   const onClickTaskListItem = (id: string) => {
-    router.push(`/team/${teamId}/task-list?task-id=${id}`, { scroll: false });
+    router.push(`/team/${teamId}/task-list/${taskListId}?task-id=${id}`, { scroll: false });
   };
 
   const onToggleTodo = (id: number, next: boolean) => {
