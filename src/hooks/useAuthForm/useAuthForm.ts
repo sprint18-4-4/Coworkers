@@ -31,6 +31,13 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
     validateField(name, formData[name] ?? "", formData);
   };
 
+  const setValue = (name: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const register = (name: string) => {
     return {
       name,
@@ -54,32 +61,32 @@ const useAuthForm = ({ initialValues, validationRules, onSubmit }: UseAuthFormOp
     }
   };
 
-  const isFormValid = () => {
-    const hasEmpty = Object.values(formData).some((val) => !val || val.trim() === "");
-    if (hasEmpty) return false;
+  const hasEmpty = Object.values(formData).some((val) => !val || val.trim() === "");
 
-    const hasError = Object.keys(errors).length > 0;
-    if (hasError) return false;
+  const hasError = Object.keys(errors).length > 0;
 
-    if (validationRules) {
-      const allRulesPassed = Object.keys(validationRules).every((key) => {
-        const value = formData[key] ?? "";
-        const rule = validationRules[key];
+  let isFormValid = true;
 
-        const result = rule(value, formData);
-        return result.isValid;
-      });
+  if (hasEmpty || hasError) {
+    isFormValid = false;
+  } else if (validationRules) {
+    const allRulesPassed = Object.keys(validationRules).every((key) => {
+      const value = formData[key] ?? "";
+      const rule = validationRules[key];
+      const result = rule(value, formData);
+      return result.isValid;
+    });
 
-      if (!allRulesPassed) return false;
+    if (!allRulesPassed) {
+      isFormValid = false;
     }
-
-    return true;
-  };
+  }
 
   return {
     register,
     errors,
     handleSubmit,
+    setValue,
     meta: {
       isLoading,
       isValid: isFormValid,
