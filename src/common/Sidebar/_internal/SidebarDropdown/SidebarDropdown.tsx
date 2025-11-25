@@ -5,11 +5,11 @@ import { cn } from "@/utils/cn";
 import Link from "next/link";
 
 const DropdownItem = ({ title, id, isOpen }: { title: string; id: string; isOpen: boolean }) => {
-  const isActive = useIsActivePath(`/${id}`);
+  const isActive = useIsActivePath(`/team/${id}`);
 
   return (
     <Link
-      href={`/${id}`}
+      href={`/team/${id}`}
       className={cn(
         "h-[52px] rounded-xl p-4 flex items-center gap-3 bg-primary",
         isOpen ? "w-full" : "w-[52px]",

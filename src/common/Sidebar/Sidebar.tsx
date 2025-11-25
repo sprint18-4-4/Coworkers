@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SidebarMobile, SidebarTablet } from "./_internal";
 import { useGetUser } from "@/api/hooks";
 import { useLogout } from "@/hooks/";
+import { useRouter } from "next/navigation";
 
 /**
  * @author jikwon
@@ -15,10 +16,10 @@ import { useLogout } from "@/hooks/";
  */
 
 const Sidebar = () => {
-  const { data: user } = useGetUser();
-
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
+  const { data: user } = useGetUser();
   const { logout } = useLogout();
 
   const handleOpenDropdown = (prev: boolean) => {
@@ -26,9 +27,9 @@ const Sidebar = () => {
   };
 
   const options = [
-    { label: "마이 히스토리", action: () => {} },
-    { label: "계정 설정", action: () => {} },
-    { label: "팀 참여", action: () => {} },
+    { label: "마이 히스토리", action: () => router.push("/my-history") },
+    { label: "계정 설정", action: () => router.push("/my-page") },
+    { label: "팀 참여", action: () => router.push("/team-join") },
     { label: "로그아웃", action: logout },
   ];
 

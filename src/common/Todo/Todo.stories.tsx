@@ -19,7 +19,7 @@ const TodoWithState = () => {
 
   return (
     <Todo
-      id="todo-1"
+      id={1}
       title="법인 설립 안내 드리기"
       completed={completed}
       onChangeCompleted={(_, next) => {
