@@ -64,7 +64,7 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
           hasImage ? "bg-transparent" : "bg-background-tertiary",
         )}
       >
-        {src && !hasError ? (
+        {hasImage ? (
           <Image
             src={src}
             alt={alt}
