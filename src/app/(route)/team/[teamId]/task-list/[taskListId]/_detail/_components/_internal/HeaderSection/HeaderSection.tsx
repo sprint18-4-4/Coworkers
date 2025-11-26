@@ -1,18 +1,21 @@
-import { BaseButton, Dropdown, Icon, Input, Modal, Profile } from "@/common";
+import { FormEvent, useState } from "react";
+import { Dropdown, Icon, Profile } from "@/common";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import { HEADER_STYLES } from "./HEADER_STYLES";
+import EditDataModal from "../EditDataModal/EditDataModal";
 import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types/type";
 import { usePatchTaskListDetail } from "@/api/hooks";
-import { FormEvent, useState } from "react";
 
 interface HeaderSectionProps {
   data: GetTaskListDetailResponse;
-  id: string;
-  teamId: string;
-  taskListId: string;
+  taskPath: {
+    id: string;
+    teamId: string;
+    taskListId: string;
+  };
 }
 
-const HeaderSection = ({ data, id, teamId, taskListId }: HeaderSectionProps) => {
+const HeaderSection = ({ data, taskPath }: HeaderSectionProps) => {
   const [isEditModal, setIsEditModal] = useState(false);
   const [form, setForm] = useState({
     name: data.name,
@@ -25,19 +28,18 @@ const HeaderSection = ({ data, id, teamId, taskListId }: HeaderSectionProps) => 
   ];
 
   const { mutate: patchTaskListDetailMutate } = usePatchTaskListDetail();
-  console.log(data);
+
   const handleEdit = (e: FormEvent<HTMLFormElement>) => {
+    if (!form.name.trim() || !form.description.trim()) return;
     e.preventDefault();
 
     patchTaskListDetailMutate({
-      groupId: teamId,
-      taskListId: taskListId,
-      taskId: id,
+      groupId: taskPath.teamId,
+      taskListId: taskPath.taskListId,
+      taskId: taskPath.id,
       body: {
         name: form.name,
         description: form.description,
-        // done 상태를 유지하려면 기존 값 같이 보내야 함
-        done: data.doneAt !== null,
       },
     });
 
@@ -81,39 +83,13 @@ const HeaderSection = ({ data, id, teamId, taskListId }: HeaderSectionProps) => 
       </header>
 
       {isEditModal && (
-        <Modal isOpen={isEditModal} onClose={() => setIsEditModal(false)}>
-          <h3 className="text-lg-bold mb-4">할 일 수정</h3>
-          <form onSubmit={handleEdit} className="w-full">
-            <div className="w-full flex-col-center gap-2">
-              <Input
-                autoFocus
-                maxLength={30}
-                placeholder="제목을 입력하세요"
-                defaultValue={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-              />
-              <Input
-                maxLength={30}
-                placeholder="설명을 입력하세요"
-                defaultValue={form.description}
-                onChange={(e) => setForm({ ...form, description: e.target.value })}
-              />
-            </div>
-            <div className="w-full flex gap-2 mt-6">
-              <BaseButton variant="outlinedSecondary" size="large" onClick={() => setIsEditModal(false)}>
-                취소
-              </BaseButton>
-              <BaseButton
-                type="submit"
-                variant="solid"
-                size="large"
-                disabled={!form.name.trim() || !form.description.trim()}
-              >
-                저장
-              </BaseButton>
-            </div>
-          </form>
-        </Modal>
+        <EditDataModal
+          isEditModal={isEditModal}
+          setIsEditModal={setIsEditModal}
+          form={form}
+          setForm={setForm}
+          handleEdit={handleEdit}
+        />
       )}
     </>
   );
