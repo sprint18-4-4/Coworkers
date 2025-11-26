@@ -1,35 +1,49 @@
 "use client";
 
 import Link from "next/link";
-import { Input, InputPassword, BaseButton } from "@/common";
 import { useForm } from "@/hooks";
+import { usePostSignup } from "@/api/hooks";
+import { Input, InputPassword, BaseButton } from "@/common";
 import { validateEmail, validateName, validatePassword, validatePasswordConfirm } from "@/utils";
 
 const INITIAL_VALUES = {
-  name: "",
   email: "",
+  nickname: "",
   password: "",
-  passwordConfirm: "",
+  passwordConfirmation: "",
 };
 
 const SignUpForm = () => {
+  const { mutate: postSignup } = usePostSignup();
   const { register, errors, handleSubmit, meta } = useForm({
     initialValues: INITIAL_VALUES,
     validationRules: {
-      name: validateName,
       email: validateEmail,
+      nickname: validateName,
       password: validatePassword,
-      passwordConfirm: (value, formData) => validatePasswordConfirm(formData?.password ?? "", value),
+      passwordConfirmation: (value, formData) => validatePasswordConfirm(formData?.password ?? "", value),
     },
     onSubmit: async (values) => {
-      // TODO(김원선): 회원가입 API 연동
+      const { email, nickname, password, passwordConfirmation } = values;
+      postSignup({
+        email,
+        nickname,
+        password,
+        passwordConfirmation,
+      });
     },
   });
 
   return (
-    <form onSubmit={handleSubmit} className="min-w-[300px] w-full mt-8 mb-10 flex flex-col">
+    <form onSubmit={handleSubmit} className="w-full mt-8 mb-10 flex flex-col">
       <div className="flex-col-center gap-6">
-        <Input label="이름" type="text" placeholder="이름을 입력해주세요." {...register("name")} error={errors.name} />
+        <Input
+          label="이름"
+          type="text"
+          placeholder="이름을 입력해주세요."
+          {...register("nickname")}
+          error={errors.nickname}
+        />
         <Input
           label="이메일"
           type="email"
@@ -46,15 +60,15 @@ const SignUpForm = () => {
         <InputPassword
           label="비밀번호 확인"
           placeholder="비밀번호를 다시 한 번 입력해주세요."
-          {...register("passwordConfirm")}
-          error={errors.passwordConfirm}
+          {...register("passwordConfirmation")}
+          error={errors.passwordConfirmation}
         />
       </div>
-      <Link href="/login" className="mt-3 text-brand-primary text-md-medium tablet:text-lg-medium text-right">
+      <Link href="/login" className="w-fit ml-auto mt-3 text-brand-primary text-md-medium tablet:text-lg-medium">
         이미 계정이 있으신가요?
       </Link>
       <div className="text-lg-semibold mt-10">
-        <BaseButton variant="solid" size="large" type="submit" disabled={meta.isLoading || !meta.isValid}>
+        <BaseButton variant="solid" size="large" type="submit" disabled={!meta.isValid || meta.isLoading}>
           회원가입
         </BaseButton>
       </div>
