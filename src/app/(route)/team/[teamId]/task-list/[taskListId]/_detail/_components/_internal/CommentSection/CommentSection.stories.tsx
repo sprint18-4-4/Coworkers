@@ -23,7 +23,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    id: "1",
     data: TASK_DETAIL_MOCK_DATA,
   },
 };
