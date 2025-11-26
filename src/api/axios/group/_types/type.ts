@@ -29,8 +29,8 @@ export interface PatchGroupRequest {
     id: number;
   };
   body: {
-    image: string;
-    name: string;
+    image?: string | null;
+    name?: string;
   };
 }
 

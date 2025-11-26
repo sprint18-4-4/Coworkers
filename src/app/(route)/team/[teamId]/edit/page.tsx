@@ -1,7 +1,7 @@
 import { CenteredCardLayout } from "@/app/(route)/_components";
 import EditTeamForm from "./_components/EditTeamForm/EditTeamForm";
 
-const page = () => {
+const TeamEditPage = () => {
   return (
     <CenteredCardLayout
       title="팀 수정하기"
@@ -13,4 +13,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default TeamEditPage;
