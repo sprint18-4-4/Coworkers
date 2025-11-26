@@ -10,7 +10,7 @@ const ResetPasswordPage = () => {
           "mx-4 px-[22px] rounded-[20px]",
           "bg-background-primary flex-col-center",
           "w-full min-w-[343px] max-w-[550px] min-h-[473px]",
-          "tablet:mx-[61px] tablet:px-[45px]]",
+          "tablet:mx-[61px] tablet:px-[45px]",
         )}
       >
         <h1 className="text-xl-bold text-text-primary tablet:text-2xl-bold">비밀번호 재설정</h1>
