@@ -14,10 +14,11 @@ const usePatchTaskListDetail = () => {
     onSuccess: (_data, variables) => {
       if (!variables) return;
       const { groupId, taskListId, taskId } = variables;
+      console.log({ groupId, taskListId, taskId });
 
       success("할 일 수정 성공");
       queryClient.invalidateQueries({
-        queryKey: ["task-list", groupId, taskListId, taskId],
+        queryKey: ["task-list-detail", groupId, taskListId, taskId],
       });
     },
 
