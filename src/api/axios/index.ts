@@ -17,3 +17,4 @@ export { default as postSignup } from "./auth/signup/signup";
 export { default as postCreateTeam } from "./team-creation/postCreateTeam";
 export { default as postImageUpload } from "./image/postImageUpload";
 export { default as deleteComment } from "./task-list-detail/deleteComment";
+export { default as patchComment } from "./task-list-detail/patchComment";
