@@ -1,10 +1,10 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Dropdown, Icon, Profile } from "@/common";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import { HEADER_STYLES } from "./HEADER_STYLES";
 import EditDataModal from "../EditDataModal/EditDataModal";
 import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types/type";
-import { usePatchTaskListDetail } from "@/api/hooks";
+import { useDetailDataMutations } from "../../../_hooks";
 
 interface HeaderSectionProps {
   data: GetTaskListDetailResponse;
@@ -24,28 +24,13 @@ const HeaderSection = ({ data, isDone, taskPath }: HeaderSectionProps) => {
   });
 
   const options = [
-    { value: "edit", label: "수정", action: () => setIsEditModal(true) },
-    { value: "delete", label: "삭제", action: () => {} },
+    { value: "edit", label: "수정하기", action: () => setIsEditModal(true) },
+    { value: "delete", label: "삭제하기", action: () => {} },
   ];
 
-  const { mutate: patchTaskListDetailMutate } = usePatchTaskListDetail();
-
-  const handleEdit = (e: FormEvent<HTMLFormElement>) => {
-    if (!form.name.trim() || !form.description.trim()) return;
-    e.preventDefault();
-
-    patchTaskListDetailMutate({
-      groupId: taskPath.teamId,
-      taskListId: taskPath.taskListId,
-      taskId: taskPath.id,
-      body: {
-        name: form.name,
-        description: form.description,
-      },
-    });
-
-    setIsEditModal(false);
-  };
+  const { submitDetailEdit } = useDetailDataMutations({
+    taskPath,
+  });
 
   return (
     <>
@@ -104,7 +89,7 @@ const HeaderSection = ({ data, isDone, taskPath }: HeaderSectionProps) => {
           setIsEditModal={setIsEditModal}
           form={form}
           setForm={setForm}
-          handleEdit={handleEdit}
+          handleEdit={(e) => submitDetailEdit(e, form, setIsEditModal)}
         />
       )}
     </>

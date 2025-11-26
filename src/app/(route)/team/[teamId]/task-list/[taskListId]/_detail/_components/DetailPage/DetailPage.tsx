@@ -5,7 +5,7 @@ import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
 import { CommentSection, ContentSection, HeaderSection } from "../_internal";
 import useGetTaskListDetail from "@/api/hooks/task-list-detail/useGetTaskListDetail";
-import { usePatchTaskListDetail } from "@/api/hooks";
+import { useDetailDataMutations } from "../../_hooks";
 
 interface DetailPageProps {
   id: string;
@@ -27,20 +27,8 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
   });
 
   const isDone = taskDetail?.doneAt !== null;
-  const { mutate: toggleDoneMutate } = usePatchTaskListDetail();
 
-  const handleToChangeDoneState = () => {
-    if (!taskDetail) return;
-
-    toggleDoneMutate({
-      groupId: teamId,
-      taskListId,
-      taskId: id,
-      body: {
-        done: !isDone,
-      },
-    });
-  };
+  const { toggleDone } = useDetailDataMutations({ taskPath: { teamId, taskListId, id } });
 
   // TODO(지권): 에러, 로딩 상태 처리 추가 필요
   if (isPending) return <div>로딩중</div>;
@@ -83,7 +71,7 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
         size="large"
         aria-label={isDone ? "완료 상태 취소하기" : "완료 상태로 변경하기"}
         variant={isDone ? "outlinedPrimary" : "solid"}
-        onClick={handleToChangeDoneState}
+        onClick={() => toggleDone(isDone)}
         className={cn(
           "fixed bottom-4 right-4 z-[999] max-w-[132px] h-[40px] rounded-[40px]",
           isDone && "bg-background-inverse",
