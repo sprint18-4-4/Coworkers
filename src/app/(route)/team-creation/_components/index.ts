@@ -1,1 +1,1 @@
-export { default as CreateTeamForm } from "./CreateTeamForm/CreateTeamForm";
+export { default as TeamCreateForm } from "./TeamCreateForm/TeamCreateForm";
