@@ -63,11 +63,9 @@ const SignUpForm = () => {
           error={errors.passwordConfirmation}
         />
       </div>
-      <div className="flex justify-end">
-        <Link href="/login" className="mt-3 text-brand-primary text-md-medium tablet:text-lg-medium">
-          이미 계정이 있으신가요?
-        </Link>
-      </div>
+      <Link href="/login" className="w-fit ml-auto mt-3 text-brand-primary text-md-medium tablet:text-lg-medium">
+        이미 계정이 있으신가요?
+      </Link>
       <div className="text-lg-semibold mt-10">
         <BaseButton variant="solid" size="large" type="submit" disabled={!meta.isValid || meta.isLoading}>
           회원가입
