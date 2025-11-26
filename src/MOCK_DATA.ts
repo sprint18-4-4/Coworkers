@@ -1,4 +1,5 @@
-import { DateNumber, Day, TaskGroupItem, DetailDataItem, TaskListItemType } from "./types";
+import { GetTaskListDetailResponse } from "./api/axios/task-list-detail/_types/type";
+import { DateNumber, Day, TaskGroupItem, TaskListItemType } from "./types";
 
 export const USER_MOCK_DATA = {
   teamId: "1",
@@ -149,7 +150,7 @@ export const COMMENT_MOCK_DATA = {
   user: { id: 1, nickname: "안해나", image: "" },
 };
 
-export const TASK_DETAIL_MOCK_DATA: DetailDataItem = {
+export const TASK_DETAIL_MOCK_DATA: GetTaskListDetailResponse = {
   id: 0,
   name: "회의록 정리하기",
   description: "팀 회의에서 나온 내용을 정리하는 작업입니다.",
@@ -176,6 +177,21 @@ export const TASK_DETAIL_MOCK_DATA: DetailDataItem = {
     id: 2,
     nickname: "철수",
     image: "/TEST_IMG/image-1.jpg",
+  },
+
+  recurring: {
+    id: 0,
+    name: "회의록 정리하기",
+    description: "팀 회의에서 나온 내용을 정리하는 작업입니다.",
+    createdAt: "2025-11-21T20:27:10.529Z",
+    updatedAt: "2025-11-21T20:27:10.529Z",
+    startDate: "2025-11-21T20:27:10.529Z",
+    frequencyType: "DAILY",
+    weekDays: [],
+    monthDay: null,
+    taskListId: 0,
+    groupId: 0,
+    writerId: 0,
   },
 };
 

@@ -4,21 +4,30 @@ import { cn } from "@/utils";
 import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
 import { CommentSection, ContentSection, HeaderSection } from "../_internal";
-import { TASK_DETAIL_MOCK_DATA } from "@/MOCK_DATA";
+import useGetTaskListDetail from "@/api/hooks/task-list-detail/useGetTaskListDetail";
 
 interface DetailPageProps {
   id: string;
+  teamId: string;
+  taskListId: string;
 }
 
-// TODO(지권): 실제 상세 데이터로 변경
-const data = TASK_DETAIL_MOCK_DATA;
-
-const DetailPage = ({ id }: DetailPageProps) => {
+const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
   const router = useRouter();
 
   const onClickClose = () => {
     router.back();
   };
+
+  const { data: taskDetail, isPending } = useGetTaskListDetail({
+    groupId: teamId,
+    taskListId: String(taskListId),
+    taskId: id,
+  });
+
+  // TODO(지권): 에러, 로딩 상태 처리 추가 필요
+  if (isPending) return <div>로딩중</div>;
+  if (!taskDetail) return <div>데이터 없음</div>;
 
   return (
     <>
@@ -29,20 +38,20 @@ const DetailPage = ({ id }: DetailPageProps) => {
           "w-full min-h-[calc(100vh-52px)] flex flex-col px-4 py-3 space-y-6 bg-background-primary",
           "fixed inset-x-0 inset-y-10 z-[999] shadow-lg",
           "tablet:px-7 tablet:py-10 tablet:inset-x-[150px] tablet:inset-y-0",
-          "pc:static pc:min-w-[200px] pc:p-10",
+          "pc:static pc:min-w-[200px] pc:p-10 pc:max-h-[calc(100vh)] pc:overflow-y-auto",
         )}
       >
         <button aria-label="닫기" onClick={onClickClose}>
           <Icon name="x" className="size-6 tablet-6" />
         </button>
 
-        <HeaderSection data={data} />
+        <HeaderSection data={taskDetail} />
 
         <hr />
 
-        <ContentSection content={data.description} />
+        <ContentSection content={taskDetail?.description ?? ""} />
 
-        <CommentSection id={id} data={data} />
+        <CommentSection data={taskDetail} />
       </article>
 
       <BaseButton

@@ -1,5 +1,5 @@
 interface ContentSectionProps {
-  content: string;
+  content: string | null;
 }
 
 const ContentSection = ({ content }: ContentSectionProps) => {
