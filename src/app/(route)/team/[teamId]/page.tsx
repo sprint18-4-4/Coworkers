@@ -1,7 +1,7 @@
 import { PageLayout } from "@/common";
 import { MemberWidget, ProgressWidget, TaskSection } from "./_components";
 
-const TeamDetailPage = () => {
+const TeamDetailPage = async () => {
   return (
     <PageLayout ariaLabel="팀 페이지">
       <div className="w-full max-w-[1120px] relative">
