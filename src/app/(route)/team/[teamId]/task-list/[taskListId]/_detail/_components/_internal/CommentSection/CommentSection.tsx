@@ -1,7 +1,7 @@
 import { cn } from "@/utils";
 import { CommentItem, InputReply, Profile } from "@/common";
 import { FormEvent, useState } from "react";
-import { useGetTaskListComment, usePostTaskListComment } from "@/api/hooks";
+import { useDeleteComment, useGetTaskListComment, usePostTaskListComment } from "@/api/hooks";
 import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types/type";
 import { useQueryClient } from "@tanstack/react-query";
 import { UserResponse } from "@/types";
@@ -23,6 +23,8 @@ const CommentSection = ({ data }: CommentSectionProps) => {
     taskListId: String(data.recurring.taskListId),
     taskId: String(data.id),
   });
+
+  const { mutate: deleteComment } = useDeleteComment();
 
   const trimmedCommentValue = commentValue.trim();
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -52,7 +54,12 @@ const CommentSection = ({ data }: CommentSectionProps) => {
 
       <ul aria-label="댓글 목록" className="mt-1">
         {commentData?.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} showKebab={myComment} onDelete={() => {}} />
+          <CommentItem
+            key={comment.id}
+            comment={comment}
+            showKebab={myComment}
+            onDelete={() => deleteComment({ taskId: String(data.id), commentId: String(comment.id) })}
+          />
         ))}
       </ul>
     </>

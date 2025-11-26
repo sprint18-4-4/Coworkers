@@ -72,3 +72,10 @@ export interface GetTaskListCommentResponse {
   content: string;
   id: number;
 }
+
+// DELETE TaskListComment
+
+export interface DeleteTaskListCommentRequest {
+  taskId: string;
+  commentId: string;
+}
