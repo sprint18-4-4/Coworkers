@@ -24,11 +24,12 @@ const SignUpForm = () => {
       passwordConfirmation: (value, formData) => validatePasswordConfirm(formData?.password ?? "", value),
     },
     onSubmit: async (values) => {
+      const { email, nickname, password, passwordConfirmation } = values;
       postSignup({
-        email: values.email,
-        nickname: values.nickname,
-        password: values.password,
-        passwordConfirmation: values.passwordConfirmation,
+        email,
+        nickname,
+        password,
+        passwordConfirmation,
       });
     },
   });
