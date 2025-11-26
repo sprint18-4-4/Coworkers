@@ -23,14 +23,14 @@ const HeaderSection = ({ data, isDone, taskPath }: HeaderSectionProps) => {
     description: data.description || "",
   });
 
-  const options = [
-    { value: "edit", label: "수정하기", action: () => setIsEditModal(true) },
-    { value: "delete", label: "삭제하기", action: () => {} },
-  ];
-
-  const { submitDetailEdit } = useDetailDataMutations({
+  const { submitDetailEdit, detailDelete } = useDetailDataMutations({
     taskPath,
   });
+
+  const options = [
+    { value: "edit", label: "수정하기", action: () => setIsEditModal(true) },
+    { value: "delete", label: "삭제하기", action: () => detailDelete() },
+  ];
 
   return (
     <>

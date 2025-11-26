@@ -68,6 +68,14 @@ export interface PatchTaskListDetailResponse {
   id: number;
 }
 
+// DELETE TaskListDetail
+
+export interface DeleteTaskListDetailRequest {
+  groupId: string;
+  taskListId: string;
+  taskId: string;
+}
+
 // POST TaskListComment
 
 export interface PostTaskListCommentRequest {

@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { usePatchTaskListDetail } from "@/api/hooks";
+import { useDeleteTaskListDetail, usePatchTaskListDetail } from "@/api/hooks";
 
 interface UseDetailDataMutationsProps {
   taskPath: {
@@ -11,6 +11,7 @@ interface UseDetailDataMutationsProps {
 
 const useDetailDataMutations = ({ taskPath }: UseDetailDataMutationsProps) => {
   const { mutate: patchTaskListDetailMutate } = usePatchTaskListDetail();
+  const { mutate: deleteTaskListDetailMutate } = useDeleteTaskListDetail();
 
   const submitDetailEdit = (
     e: FormEvent<HTMLFormElement>,
@@ -45,9 +46,18 @@ const useDetailDataMutations = ({ taskPath }: UseDetailDataMutationsProps) => {
     });
   };
 
+  const detailDelete = () => {
+    deleteTaskListDetailMutate({
+      groupId: taskPath.teamId,
+      taskListId: taskPath.taskListId,
+      taskId: taskPath.id,
+    });
+  };
+
   return {
     submitDetailEdit,
     toggleDone,
+    detailDelete,
   };
 };
 
