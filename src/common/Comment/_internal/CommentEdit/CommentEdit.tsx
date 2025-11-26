@@ -14,14 +14,15 @@ import { CommentEditProps } from "../../_types";
  * @param className - 컨테이너 추가 className
  */
 
-const CommentEdit = ({ initialComment, onClose, className }: CommentEditProps) => {
+const CommentEdit = ({ initialComment, onClose, className, onSubmit }: CommentEditProps) => {
   const [comment, setComment] = useState(initialComment);
   const { ref: textareaRef } = useAutoHeight(48, 200);
 
-  // TODO(김원선): 댓글 수정 API 연동 시 내부 로직으로 API 연동
   const handleSave = () => {
     const trimmedContent = comment.trim();
     if (!trimmedContent) return;
+
+    onSubmit(trimmedContent);
 
     onClose();
   };

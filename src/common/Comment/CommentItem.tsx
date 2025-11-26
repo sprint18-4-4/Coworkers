@@ -32,7 +32,7 @@ import Profile from "@/common/Profile/Profile";
  * />
  */
 
-const CommentItem = ({ comment, showKebab = false, className, onDelete }: CommentProps) => {
+const CommentItem = ({ comment, showKebab = false, className, onDelete, onUpdate }: CommentProps) => {
   const { user, content, createdAt } = comment;
   const [isEditing, setIsEditing] = useState(false);
 
@@ -61,7 +61,14 @@ const CommentItem = ({ comment, showKebab = false, className, onDelete }: Commen
           <div className="mb-1">
             <span className="text-lg-bold text-text-primary">{user.nickname}</span>
           </div>
-          <CommentEdit initialComment={content} onClose={() => setIsEditing(false)} />
+          <CommentEdit
+            initialComment={content}
+            onSubmit={(newContent) => {
+              onUpdate(comment.id, newContent);
+              setIsEditing(false);
+            }}
+            onClose={() => setIsEditing(false)}
+          />
         </div>
       </li>
     );
