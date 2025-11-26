@@ -1,17 +1,8 @@
-export interface GroupResponse {
-  createdAt: string;
-  id: number;
-  image: string;
-  members: GroupMember[];
-  name: string;
-  taskLists: TaskList[];
-  teamId: string;
-  updatedAt: string;
-}
+import { UserRole } from "../UserType";
 
 export interface GroupMember {
   groupId: number;
-  role: "ADMIN" | "MEMBER" | string;
+  role: UserRole;
   userEmail: string;
   userId: number;
   userImage: string | null;

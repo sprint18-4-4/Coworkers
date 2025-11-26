@@ -47,7 +47,7 @@ const CommentSection = ({ data }: CommentSectionProps) => {
 
       <ul aria-label="댓글 목록" className="mt-1">
         {commentData?.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
+          <CommentItem key={comment.id} comment={comment} onDelete={() => {}} />
         ))}
       </ul>
     </>

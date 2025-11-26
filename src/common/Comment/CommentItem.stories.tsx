@@ -82,7 +82,7 @@ export const EditMode: Story = {
               </div>
             </div>
           ) : (
-            <CommentItem comment={mockComment} showKebab={true} />
+            <CommentItem comment={mockComment} showKebab={true} onDelete={() => {}} />
           )}
         </div>
       );
@@ -95,8 +95,8 @@ export const EditMode: Story = {
 export const ListComments: Story = {
   render: () => (
     <div>
-      <CommentItem comment={mockComment} showKebab={true} />
-      <CommentItem comment={longComment} showKebab={true} />
+      <CommentItem comment={mockComment} showKebab={true} onDelete={() => {}} />
+      <CommentItem comment={longComment} showKebab={true} onDelete={() => {}} />
     </div>
   ),
 };

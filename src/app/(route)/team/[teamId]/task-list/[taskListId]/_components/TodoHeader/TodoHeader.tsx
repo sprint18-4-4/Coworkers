@@ -2,10 +2,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/utils";
 import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
-import { GroupResponse, TaskList } from "@/types";
 import TaskListCreateModal from "../TaskListCreateModal/TaskListCreateModal";
 import { useDeleteTodo } from "@/api/hooks";
 import TaskItemEditModal from "../TaskItemEditModal/TaskItemEditModal";
+import { TaskList } from "@/types";
+import { GetGroupsResponse } from "@/api/axios/group/_types/type";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -49,7 +50,7 @@ const TodoItem = ({ data }: { data: TaskList }) => {
 };
 
 interface TodoHeaderProps {
-  data: GroupResponse;
+  data: GetGroupsResponse | undefined;
   groupId: string;
   isLoading: boolean;
 }
@@ -67,9 +68,9 @@ const TodoHeader = ({ data, groupId, isLoading }: TodoHeaderProps) => {
             {/* TODO(지권): 로딩 화면 개선 필요 */}
             {isLoading && <p className="h-[300px] bg-white rounded-xl p-4">로딩 중...</p>}
 
-            {!isLoading && data?.taskLists?.length > 0 && (
+            {!isLoading && data?.taskLists?.length && (
               <ul className="pc:space-y-1">
-                {data?.taskLists?.map((item) => (
+                {data.taskLists.map((item) => (
                   <TodoItem key={item.id} data={item} />
                 ))}
               </ul>
