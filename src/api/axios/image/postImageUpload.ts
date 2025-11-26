@@ -1,20 +1,17 @@
-import { AxiosError } from "axios";
+import axios from "axios";
 import { instance } from "@/lib";
+import { ApiErrorResponse } from "@/types";
 
 const postImageUpload = async (file: File): Promise<string> => {
   try {
     const formData = new FormData();
     formData.append("image", file);
 
-    const response = await instance.post("/images/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await instance.post("/images/upload", formData, {});
 
     return response.data.url;
   } catch (err) {
-    if (err instanceof AxiosError) {
+    if (axios.isAxiosError<ApiErrorResponse>(err)) {
       const status = err.response?.status;
 
       if (status === 413) {
