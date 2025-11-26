@@ -1,12 +1,8 @@
 import { instance } from "@/lib";
+import { CreateTeamRequest, CreateTeamResponse } from "./_type/types";
 
-interface CreateTeamParams {
-  name: string;
-  image: string;
-}
-
-const postCreateTeam = async ({ name, image }: CreateTeamParams) => {
-  const response = await instance.post(`/groups`, {
+const postCreateTeam = async ({ name, image }: CreateTeamRequest): Promise<CreateTeamResponse> => {
+  const response = await instance.post<CreateTeamResponse>(`/groups`, {
     name,
     image,
   });

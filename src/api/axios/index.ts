@@ -5,3 +5,5 @@ export { default as postResetPassword } from "./auth/resetPassword/resetPassword
 export { default as getHistory } from "./my-history/getHistory";
 export { default as getTaskList } from "./task-list/getTaskList";
 export { default as postTask } from "./task-list/postTask";
+export { default as postCreateTeam } from "./team-creation/postCreateTeam";
+export { default as postImageUpload } from "./image/postImageUpload";
