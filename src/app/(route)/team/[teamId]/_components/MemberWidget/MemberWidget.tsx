@@ -1,3 +1,5 @@
+"use client";
+
 import { FloatingButton, Icon, ProfileItem } from "@/common";
 import { useState } from "react";
 
