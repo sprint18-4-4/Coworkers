@@ -1,11 +1,10 @@
-import Image from "next/image";
-import { Dropdown, Icon } from "@/common";
+import { Dropdown, Icon, Profile } from "@/common";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import { HEADER_STYLES } from "./HEADER_STYLES";
-import { DetailDataItem } from "@/types";
+import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types/type";
 
 interface HeaderSectionProps {
-  data: DetailDataItem;
+  data: GetTaskListDetailResponse;
 }
 
 const HeaderSection = ({ data }: HeaderSectionProps) => {
@@ -29,13 +28,7 @@ const HeaderSection = ({ data }: HeaderSectionProps) => {
 
       <div className="flex flex-col items-start gap-3">
         <div className="flex items-center gap-3">
-          <Image
-            src={data.writer.image}
-            alt={`${data.writer.nickname}의 프로필`}
-            width={24}
-            height={24}
-            className="rounded-lg"
-          />
+          <Profile src={data.writer.image} alt={data.writer.nickname} size="md" />
           <span className="text-md-medium text-text-primary">{data.writer.nickname}</span>
         </div>
         <div className="flex flex-col gap-2">
