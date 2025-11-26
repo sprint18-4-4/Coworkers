@@ -1,3 +1,4 @@
+import { Group } from "@/types";
 import { GroupMember, TaskList } from "@/types/Group/GroupData";
 
 export interface GetGroupsRequest {
@@ -24,15 +25,13 @@ export interface DeleteGroupResponse {
 }
 
 export interface PatchGroupRequest {
-  image: string;
-  name: string;
+  param: {
+    id: number;
+  };
+  body: {
+    image: string;
+    name: string;
+  };
 }
 
-export interface PatchGroupResponse {
-  id: number;
-  name: string;
-  image: string | null;
-  createdAt: "2025-11-26T08:52:30+09:00";
-  updatedAt: "2025-11-26T09:12:03+09:00";
-  teamId: "18-4";
-}
+export type PatchGroupResponse = Group;
