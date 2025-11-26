@@ -25,6 +25,24 @@ export async function middleware(req: NextRequest) {
     }
   }
 
+  // 존재하지 않는 groupID URL에 입력시
+  if (token && req.nextUrl.pathname.startsWith("/team/")) {
+    const teamId = req.nextUrl.pathname.split("/")[2];
+
+    if (!teamId) {
+      return NextResponse.next();
+    }
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/groups/${teamId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      return NextResponse.redirect(new URL("/team", req.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
