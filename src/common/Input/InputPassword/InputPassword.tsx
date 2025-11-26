@@ -19,6 +19,7 @@ const InputPassword = ({ label, error, ...props }: PasswordInputProps) => {
       addonAfter={
         <button
           type="button"
+          tabIndex={-1}
           onClick={() => setShowPassword((prev) => !prev)}
           aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
           className="h-full flex items-center justify-center"
