@@ -19,6 +19,10 @@ const meta: Meta<typeof CommentItem> = {
       </div>
     ),
   ],
+  args: {
+    onDelete: (id) => alert(`삭제 요청됨! ID: ${id}`),
+    onUpdate: (id, content) => alert(`수정 요청됨! ID: ${id}, 내용: ${content}`),
+  },
 };
 
 type Story = StoryObj<typeof meta>;
@@ -63,40 +67,32 @@ export const WithKebab: Story = {
   },
 };
 
-export const EditMode: Story = {
+export const InteractiveTest: Story = {
   render: () => {
-    const CommentWithEdit = () => {
-      const [isEditing, setIsEditing] = useState(true);
-      return (
-        <div className="max-w-2xl">
-          {isEditing ? (
-            <div className="w-full py-2.5 px-5 flex gap-4 bg-icon-inverse tablet:px-7 pc:py-4 pc:px-10">
-              <div className="flex-shrink-0">
-                <Profile src={mockComment.user.image} alt={`${mockComment.user.nickname} 프로필`} size="md" />
-              </div>
-              <div className="flex-grow">
-                <div className="mb-1">
-                  <span className="text-lg-bold text-text-primary">{mockComment.user.nickname}</span>
-                </div>
-                <CommentEdit initialComment={mockComment.content} onClose={() => setIsEditing(false)} />
-              </div>
-            </div>
-          ) : (
-            <CommentItem comment={mockComment} showKebab={true} onDelete={() => {}} />
-          )}
-        </div>
-      );
+    const CommentWithState = () => {
+      const [data, setData] = useState(mockComment);
+
+      const handleUpdate = (id: number, newContent: string) => {
+        setData((prev) => ({ ...prev, content: newContent }));
+        alert("수정 완료! (데이터가 업데이트 되었습니다)");
+      };
+
+      const handleDelete = (id: number) => {
+        alert(`삭제되었습니다. ID: ${id}`);
+      };
+
+      return <CommentItem comment={data} showKebab={true} onUpdate={handleUpdate} onDelete={handleDelete} />;
     };
 
-    return <CommentWithEdit />;
+    return <CommentWithState />;
   },
 };
 
 export const ListComments: Story = {
   render: () => (
-    <div>
-      <CommentItem comment={mockComment} showKebab={true} onDelete={() => {}} />
-      <CommentItem comment={longComment} showKebab={true} onDelete={() => {}} />
+    <div className="flex flex-col">
+      <CommentItem comment={mockComment} showKebab={true} onUpdate={() => {}} onDelete={() => {}} />
+      <CommentItem comment={longComment} showKebab={true} onUpdate={() => {}} onDelete={() => {}} />
     </div>
   ),
 };
