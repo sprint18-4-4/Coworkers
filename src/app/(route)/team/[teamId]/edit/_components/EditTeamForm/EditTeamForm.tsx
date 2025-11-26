@@ -53,6 +53,7 @@ const EditTeamForm = () => {
         <BaseButton type="submit" variant="solid" size="large" className="w-full">
           수정하기
         </BaseButton>
+        {/* TODO(상인): 추후 as prop */}
         <Link href={`/team/${teamId}`} className="w-full">
           <BaseButton type="button" variant="outlinedSecondary" size="large" className="w-full">
             돌아가기
