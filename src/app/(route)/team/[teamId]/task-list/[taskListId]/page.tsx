@@ -69,7 +69,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
         onClick={onClickFloatingButton}
       />
 
-      {selectedId && <DetailPage id={selectedId} />}
+      {selectedId && <DetailPage teamId={teamId} taskListId={taskListId} id={selectedId} />}
       {searchParams.get("w") && (
         <MakeTodoModal
           isOpen={!!searchParams.get("w")}

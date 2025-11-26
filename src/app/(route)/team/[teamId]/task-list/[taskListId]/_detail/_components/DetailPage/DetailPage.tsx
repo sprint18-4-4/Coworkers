@@ -4,21 +4,30 @@ import { cn } from "@/utils";
 import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
 import { CommentSection, ContentSection, HeaderSection } from "../_internal";
-import { TASK_DETAIL_MOCK_DATA } from "@/MOCK_DATA";
+import useGetTaskListDetail from "@/api/hooks/task-list-detail/useGetTaskListDetail";
 
 interface DetailPageProps {
   id: string;
+  teamId: string;
+  taskListId: string;
 }
 
-// TODO(지권): 실제 상세 데이터로 변경
-const data = TASK_DETAIL_MOCK_DATA;
-
-const DetailPage = ({ id }: DetailPageProps) => {
+const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
   const router = useRouter();
 
   const onClickClose = () => {
     router.back();
   };
+
+  const { data: taskDetail, isPending } = useGetTaskListDetail({
+    groupId: teamId,
+    taskListId: String(taskListId),
+    taskId: id,
+  });
+
+  // TODO(지권): 에러, 로딩 상태 처리 추가 필요
+  if (isPending) return <div>로딩중</div>;
+  if (!taskDetail) return <div>데이터 없음</div>;
 
   return (
     <>
@@ -36,13 +45,13 @@ const DetailPage = ({ id }: DetailPageProps) => {
           <Icon name="x" className="size-6 tablet-6" />
         </button>
 
-        <HeaderSection data={data} />
+        <HeaderSection data={taskDetail} />
 
         <hr />
 
-        <ContentSection content={data.description} />
+        <ContentSection content={taskDetail?.description ?? ""} />
 
-        <CommentSection id={id} data={data} />
+        <CommentSection id={id} data={taskDetail} />
       </article>
 
       <BaseButton

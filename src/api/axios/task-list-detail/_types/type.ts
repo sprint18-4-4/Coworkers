@@ -1,3 +1,5 @@
+import { DoneBy, Frequency, TaskUser } from "@/types";
+
 export interface GetTaskListDetailRequest {
   groupId: string;
   taskListId: string;
@@ -13,19 +15,9 @@ export interface GetTaskListDetailResponse {
   updatedAt: string;
   deletedAt: string | null;
   recurringId: number;
-  frequency: "ONCE" | "DAILY" | "WEEKLY" | "MONTHLY";
+  frequency: Frequency;
   displayIndex: number;
   commentCount: number;
   writer: TaskUser;
   doneBy: DoneBy;
-}
-
-export interface TaskUser {
-  id: number;
-  nickname: string;
-  image: string | null;
-}
-
-export interface DoneBy {
-  user: TaskUser | null;
 }
