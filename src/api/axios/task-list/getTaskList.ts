@@ -1,8 +1,8 @@
 import { instance } from "@/lib";
-import { GetTaskListRequest, TaskListData } from "@/types";
+import { GetTaskListRequest, GetTaskListResponse } from "./_types/type";
 
-const getTaskList = async ({ groupId, taskListId, date }: GetTaskListRequest): Promise<TaskListData> => {
-  const response = await instance.get(`/groups/${groupId}/task-lists/${taskListId}/tasks`, {
+const getTaskList = async ({ groupId, taskListId, date }: GetTaskListRequest): Promise<GetTaskListResponse> => {
+  const response = await instance.get<GetTaskListResponse>(`/groups/${groupId}/task-lists/${taskListId}/tasks`, {
     params: date ? { date } : undefined,
   });
 

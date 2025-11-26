@@ -20,7 +20,7 @@ export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) 
     todoMemo: "",
   });
 
-  const { mutate } = usePostTask({
+  const { mutate: postTask } = usePostTask({
     groupId,
     taskListId,
     formData: {
@@ -42,7 +42,7 @@ export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) 
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutate();
+    postTask();
     onClose();
   };
 
