@@ -5,6 +5,8 @@ export { default as useGetHistory } from "./my-history/useGetHistory";
 export { default as useGetTaskList } from "./task-list/useGetTaskList";
 export { default as usePostTask } from "./task-list/usePostTask";
 export { default as usePostResetPassword } from "./auth/ResetPassword/usePostResetPassword";
+export { default as useDeleteGroup } from "./group/useDeleteGroup";
+export { default as usePatchGroup } from "./group/usePatchGroup";
 export { default as usePostTodo } from "./task-list/usePostTodo";
 export { default as useDeleteTodo } from "./task-list/useDeleteTodo";
 export { default as usePatchTodo } from "./task-list/usePatchTodo";
