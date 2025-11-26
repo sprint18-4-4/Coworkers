@@ -11,6 +11,7 @@ import {
   IMAGE_SIZE_VALUES,
   EDIT_ICON_SIZE,
   EDIT_BUTTON_SIZE,
+  ICON_SIZE_BY_TYPE,
   PROFILE_EDIT_ICON_SIZE,
 } from "../PROFILE_SIZE_STYLES";
 
@@ -24,10 +25,17 @@ import {
  * @param onChange - 유효한 파일이 선택되었을 때 호출되는 콜백 함수
  */
 
-const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileEditProps) => {
+const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange, iconType = "user" }: ProfileEditProps) => {
   const { hasError, handleError } = useImageError(src);
 
   const hasImage = src && !hasError;
+
+  const getIconSize = () => {
+    if (iconType in ICON_SIZE_BY_TYPE) {
+      return ICON_SIZE_BY_TYPE[iconType as keyof typeof ICON_SIZE_BY_TYPE][size];
+    }
+    return PROFILE_EDIT_ICON_SIZE[size]; // fallback
+  };
 
   const validateImageFile = (file: File): boolean => {
     if (!file.type.startsWith("image/")) {
@@ -75,7 +83,7 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
             onError={handleError}
           />
         ) : (
-          <Icon name="user" className={PROFILE_EDIT_ICON_SIZE[size]} />
+          <Icon name={iconType} className={getIconSize()} />
         )}
       </div>
       <div
@@ -84,7 +92,7 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange }: ProfileE
           EDIT_BUTTON_SIZE[size],
         )}
       >
-        <Icon name="smallPencil" className={EDIT_ICON_SIZE[size]} />
+        <Icon name="smallPencil" className={cn("text-icon-primary", EDIT_ICON_SIZE[size])} />
       </div>
       <input
         type="file"
