@@ -8,7 +8,7 @@ import useTeamCreation from "../../_hooks/useTeamCreation";
 const TeamCreateForm = () => {
   const { isMobile } = useDevice();
   const profileSize = isMobile ? "md" : "lg";
-  const { errorMessage, preview, handleNameChange, handleImageChange, handleSubmit } = useTeamCreation();
+  const { name, errorMessage, preview, handleNameChange, handleImageChange, handleSubmit } = useTeamCreation();
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -23,6 +23,7 @@ const TeamCreateForm = () => {
           label="팀 이름"
           type="text"
           placeholder="팀 이름을 입력해주세요."
+          value={name}
           onChange={(e) => handleNameChange(e.target.value)}
           error={errorMessage}
         />

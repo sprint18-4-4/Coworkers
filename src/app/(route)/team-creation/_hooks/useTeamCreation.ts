@@ -8,6 +8,7 @@ import { useImageUpload } from "@/hooks";
 import { resolveTeamImageUrl } from "../_util/resolveTeamImage";
 
 interface UseCreateTeamFlowReturn {
+  name: string;
   errorMessage: string;
   preview: string;
   file: File | null;
@@ -58,6 +59,7 @@ const useTeamCreation = (): UseCreateTeamFlowReturn => {
   };
 
   return {
+    name,
     errorMessage,
     preview,
     file,
