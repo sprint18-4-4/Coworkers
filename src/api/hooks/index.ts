@@ -8,3 +8,4 @@ export { default as usePostResetPassword } from "./auth/ResetPassword/usePostRes
 export { default as usePostTodo } from "./task-list/usePostTodo";
 export { default as useDeleteTodo } from "./task-list/useDeleteTodo";
 export { default as usePatchTodo } from "./task-list/usePatchTodo";
+export { default as usePostTaskListComment } from "./task-list-detail/usePostTaskListComment";
