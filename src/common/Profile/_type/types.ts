@@ -16,6 +16,7 @@ export interface ProfileProps extends BaseProfileProps {
 export interface ProfileEditProps extends BaseProfileProps {
   size?: "md" | "lg";
   onChange: (file: File) => void;
+  iconType: "user" | "imgUpload";
 }
 
 // 프로필 아이템 Type

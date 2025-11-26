@@ -38,6 +38,17 @@ export const IMAGE_SIZE_VALUES = {
 export const PROFILE_EDIT_ICON_SIZE = {
   md: "size-12 tablet:size-12",
   lg: "size-20 tablet:size-20",
+};
+
+export const ICON_SIZE_BY_TYPE = {
+  user: {
+    md: "size-12 tablet:size-12",
+    lg: "size-20 tablet:size-20",
+  },
+  imgUpload: {
+    md: "size-6 tablet:size-6",
+    lg: "size-9 tablet:size-9",
+  },
 } as const;
 
 export const EDIT_BUTTON_SIZE = {
