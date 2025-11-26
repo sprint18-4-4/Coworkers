@@ -64,6 +64,7 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
 
         <HeaderSection
           data={taskDetail}
+          isDone={isDone}
           taskPath={{
             id,
             teamId,

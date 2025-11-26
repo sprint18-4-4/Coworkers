@@ -8,6 +8,7 @@ import { usePatchTaskListDetail } from "@/api/hooks";
 
 interface HeaderSectionProps {
   data: GetTaskListDetailResponse;
+  isDone: boolean;
   taskPath: {
     id: string;
     teamId: string;
@@ -15,7 +16,7 @@ interface HeaderSectionProps {
   };
 }
 
-const HeaderSection = ({ data, taskPath }: HeaderSectionProps) => {
+const HeaderSection = ({ data, isDone, taskPath }: HeaderSectionProps) => {
   const [isEditModal, setIsEditModal] = useState(false);
   const [form, setForm] = useState({
     name: data.name,
@@ -50,7 +51,22 @@ const HeaderSection = ({ data, taskPath }: HeaderSectionProps) => {
     <>
       <header className="flex flex-col gap-4 mt-5">
         <div className="flex items-start justify-between">
-          <h2 className={cn("text-xl-bold w-full break-words", "tablet:text-2xl-bold")}>{data.name}</h2>
+          <div className="flex items-center gap-3">
+            <h2
+              className={cn(
+                "text-xl-bold w-full break-words",
+                "tablet:text-2xl-bold",
+                isDone && "line-through text-text-default",
+              )}
+            >
+              {data.name}
+            </h2>
+            {isDone && (
+              <div className="px-[10px] py-[6px] rounded-lg bg-brand-secondary text-lg-bold text-brand-primary text-nowrap">
+                완료
+              </div>
+            )}
+          </div>
           <Dropdown
             iconName="kebab"
             iconClassName="size-6 tablet:size-6"
