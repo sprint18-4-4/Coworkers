@@ -3,15 +3,20 @@ import { CommentItem, InputReply, Profile } from "@/common";
 import { FormEvent, useState } from "react";
 import { useGetTaskListComment, usePostTaskListComment } from "@/api/hooks";
 import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types/type";
+import { useQueryClient } from "@tanstack/react-query";
+import { UserResponse } from "@/types";
 
 interface CommentSectionProps {
   data: GetTaskListDetailResponse;
 }
 
 const CommentSection = ({ data }: CommentSectionProps) => {
+  const queryClient = useQueryClient();
   const [commentValue, setCommentValue] = useState("");
 
   const { data: commentData } = useGetTaskListComment({ taskId: String(data.id) });
+  const myData = queryClient.getQueryData<UserResponse>(["user"]);
+  const myComment = myData?.id === data.writer.id;
 
   const { mutate: postComment, isPending } = usePostTaskListComment({
     groupId: String(data.recurring.groupId),
@@ -47,7 +52,7 @@ const CommentSection = ({ data }: CommentSectionProps) => {
 
       <ul aria-label="댓글 목록" className="mt-1">
         {commentData?.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
+          <CommentItem key={comment.id} comment={comment} showKebab={myComment} />
         ))}
       </ul>
     </>
