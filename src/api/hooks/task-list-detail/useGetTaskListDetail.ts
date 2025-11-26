@@ -11,5 +11,4 @@ const useGetTaskListDetail = ({ groupId, taskListId, taskId }: GetTaskListDetail
     enabled: !!taskId,
   });
 };
-
 export default useGetTaskListDetail;
