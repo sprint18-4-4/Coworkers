@@ -1,16 +1,5 @@
 import { instance } from "@/lib";
-import { AuthToken, User } from "@/types";
-
-type SignUpRequest = {
-  email: string;
-  nickname: string;
-  password: string;
-  passwordConfirmation: string;
-};
-
-type SignUpResponse = AuthToken & {
-  user: User;
-};
+import { SignUpResponse, SignUpRequest } from "./_types/type";
 
 const postSignup = async (credentials: SignUpRequest): Promise<SignUpResponse> => {
   const { data } = await instance.post<SignUpResponse>("/auth/signUp", credentials);
