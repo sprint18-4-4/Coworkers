@@ -1,35 +1,16 @@
-import { UserRole } from "@/types";
+import { GroupMember, TaskList } from "@/types/Group/GroupData";
 
 export interface GetGroupsRequest {
   id: number;
 }
 
 export interface GetGroupsResponse {
+  createdAt: string;
+  id: number;
+  image: string;
+  members: GroupMember[];
+  name: string;
+  taskLists: TaskList[];
   teamId: string;
   updatedAt: string;
-  createdAt: string;
-  image: string;
-  name: string;
-  id: number;
-  members: [
-    {
-      role: UserRole;
-      userImage: string;
-      userEmail: string;
-      userName: string;
-      groupId: number;
-      userId: number;
-    },
-  ];
-  taskLists: [
-    {
-      displayIndex: number;
-      groupId: number;
-      updatedAt: string;
-      createdAt: string;
-      name: string;
-      id: number;
-      tasks: string[];
-    },
-  ];
 }

@@ -106,28 +106,30 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate }: TodoSectio
 
       <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
 
-      {/* TODO(지권): API 연결 후 isError 변경 */}
-      {(data?.length === 0 || !data) && (
-        <EmptyState
-          ariaLabel="할 일이 없습니다."
-          text={
-            <span>
-              아직 완료된 작업이 없어요. <br /> 하나씩 완료해가며 히스토리를 만들어보세요!
-            </span>
-          }
-        />
-      )}
-
-      <ul className="mt-[37px] flex flex-col gap-3">
-        {data?.map((item) => (
-          <TaskListItem
-            key={item.id}
-            item={item}
-            onOpenDetail={() => onClickTaskListItem(item.id.toString())}
-            onToggleTodo={onToggleTodo}
+      <div className="mt-[37px] min-h-[250px]">
+        {/* TODO(지권): 로딩, 에러 추가 예정 */}
+        {(data?.length === 0 || !data) && (
+          <EmptyState
+            ariaLabel="할 일이 없습니다."
+            text={
+              <span>
+                현재 할 일이 없습니다. <br /> 새 할 일을 추가해보세요.
+              </span>
+            }
           />
-        ))}
-      </ul>
+        )}
+
+        <ul className="flex flex-col gap-3">
+          {data?.map((item) => (
+            <TaskListItem
+              key={item.id}
+              item={item}
+              onOpenDetail={() => onClickTaskListItem(item.id.toString())}
+              onToggleTodo={onToggleTodo}
+            />
+          ))}
+        </ul>
+      </div>
     </section>
   );
 };

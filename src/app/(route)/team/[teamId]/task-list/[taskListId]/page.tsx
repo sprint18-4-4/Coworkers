@@ -6,16 +6,21 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { TodoSection, TodoHeader, MakeTodoModal } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 import { DetailPage } from "./_detail/_components";
-import { TASK_GROUP_MOCK_DATA } from "@/MOCK_DATA";
+import { useGetGroups, useGetTaskList } from "@/api/hooks";
 
-// TODO(지권): 목업 데이터 변경
-const data = TASK_GROUP_MOCK_DATA;
-
-const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
-  const { teamId } = use(params);
+const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId: string }> }) => {
+  const { teamId, taskListId } = use(params);
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("task-id");
+
+  const { data: groups } = useGetGroups({ id: Number(teamId) });
+
+  const { data: taskList } = useGetTaskList({
+    groupId: teamId,
+    taskListId: String(taskListId),
+    ...(searchParams.get("date") && { date: searchParams.get("date") }),
+  });
 
   const [selectedDate, setSelectedDate] = useState(() => {
     const dateParam = searchParams.get("date");
@@ -27,7 +32,7 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("w", "true");
 
-    router.push(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
+    router.push(`/team/${teamId}/task-list/${taskListId}?${params.toString()}`, { scroll: false });
   };
 
   const onClickDateItem = (date: Date) => {
@@ -36,18 +41,23 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("date", date.toISOString());
 
-    router.replace(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
+    router.replace(`/team/${teamId}/task-list/${taskListId}?${params.toString()}`, { scroll: false });
   };
 
   return (
     <div className={cn(selectedId && "pc:flex")}>
       <PageLayout ariaLabel="목록 페이지">
         <h1 className="sr-only">목록 페이지</h1>
-        <PageHeaderBar title="경영관리팀" />
+        <PageHeaderBar title={groups?.name} />
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
-          <TodoHeader />
-          <TodoSection data={data} teamId={teamId} onClickDateItem={onClickDateItem} selectedDate={selectedDate} />
+          <TodoHeader data={groups} />
+          <TodoSection
+            data={taskList ?? []}
+            teamId={teamId}
+            onClickDateItem={onClickDateItem}
+            selectedDate={selectedDate}
+          />
         </div>
       </PageLayout>
 
@@ -65,19 +75,21 @@ const ListPage = ({ params }: { params: Promise<{ teamId: string }> }) => {
           onClose={() => {
             const params = new URLSearchParams(searchParams.toString());
             params.delete("w");
-            router.push(`/team/${teamId}/task-list?${params.toString()}`, { scroll: false });
+            router.push(`/team/${teamId}/task-list/${taskListId}?${params.toString()}`, { scroll: false });
           }}
+          groupId={teamId}
+          taskListId={taskListId}
         />
       )}
     </div>
   );
 };
 
-const Page = ({ params }: { params: Promise<{ teamId: string }> }) => {
+const Page = ({ params }: { params: Promise<{ teamId: string; taskListId: string }> }) => {
   return (
     // TODO(지권): 로딩 화면 추가 필요
     <Suspense fallback={""}>
-      <ListPage params={params} />
+      <TaskListPage params={params} />
     </Suspense>
   );
 };
