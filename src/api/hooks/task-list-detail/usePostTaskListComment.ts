@@ -1,14 +1,19 @@
 import { postTaskListComment } from "@/api/axios";
-import { PostTaskListCommentRequest } from "@/api/axios/task-list-detail/_types/type";
 import { toastKit } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const usePostTaskListComment = ({ groupId, taskListId, taskId, content }: PostTaskListCommentRequest) => {
+interface UsePostTaskListCommentParams {
+  groupId: string;
+  taskListId: string;
+  taskId: string;
+}
+
+const usePostTaskListComment = ({ groupId, taskListId, taskId }: UsePostTaskListCommentParams) => {
   const { success, error } = toastKit();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () => postTaskListComment({ groupId, taskListId, taskId, content }),
+    mutationFn: (content: string) => postTaskListComment({ groupId, taskListId, taskId, content }),
 
     onSuccess: () => {
       success("댓글 추가 성공");

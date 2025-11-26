@@ -17,14 +17,19 @@ const CommentSection = ({ data }: CommentSectionProps) => {
     groupId: String(data.recurring.groupId),
     taskListId: String(data.recurring.taskListId),
     taskId: String(data.id),
-    content: commentValue,
   });
 
+  const trimmedCommentValue = commentValue.trim();
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    if (!commentValue.trim()) return;
-
     e.preventDefault();
-    postComment();
+
+    if (!trimmedCommentValue) return;
+
+    postComment(trimmedCommentValue, {
+      onSuccess: () => {
+        setCommentValue("");
+      },
+    });
   };
 
   return (
