@@ -25,6 +25,8 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
     taskId: id,
   });
 
+  // const isDone = taskDetail?.doneAt !== null;
+
   // TODO(지권): 에러, 로딩 상태 처리 추가 필요
   if (isPending) return <div>로딩중</div>;
   if (!taskDetail) return <div>데이터 없음</div>;
@@ -45,7 +47,7 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
           <Icon name="x" className="size-6 tablet-6" />
         </button>
 
-        <HeaderSection data={taskDetail} />
+        <HeaderSection data={taskDetail} id={id} teamId={teamId} taskListId={taskListId} />
 
         <hr />
 
