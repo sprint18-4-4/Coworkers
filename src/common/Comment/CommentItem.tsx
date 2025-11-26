@@ -4,10 +4,8 @@ import { useState } from "react";
 import { cn, formatTime } from "@/utils";
 import Dropdown from "../Dropdown/Dropdown";
 import { CommentProps } from "./_types/type";
-import KebabMenu from "./_internal/KebabMenu/KebabMenu";
 import CommentEdit from "./_internal/CommentEdit/CommentEdit";
 import Profile from "@/common/Profile/Profile";
-import { ClassNames } from "storybook/theming";
 
 /**
  * @author KimWonSeon
