@@ -66,3 +66,34 @@ export const validateName = (name: string): ValidationResult => {
 
   return { isValid: true };
 };
+
+interface Membership {
+  group: {
+    name: string;
+  };
+}
+
+export const validateTeamName = (
+  name: string,
+  existingMemberships?: Membership[],
+): { isValid: boolean; error: string } => {
+  const trimmedName = name.trim();
+
+  if (!trimmedName) {
+    return {
+      isValid: false,
+      error: "팀 이름을 입력해주세요.",
+    };
+  }
+
+  const isDuplicate = existingMemberships?.some((membership) => membership.group.name === trimmedName);
+
+  if (isDuplicate) {
+    return {
+      isValid: false,
+      error: "이미 존재하는 팀 이름입니다.",
+    };
+  }
+
+  return { isValid: true, error: "" };
+};

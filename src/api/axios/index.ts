@@ -14,3 +14,5 @@ export { default as getTaskListDetail } from "./task-list-detail/getTaskListDeta
 export { default as postTaskListComment } from "./task-list-detail/postTaskListComment";
 export { default as getTaskListComment } from "./task-list-detail/getTaskListComment";
 export { default as postSignup } from "./auth/signup/signup";
+export { default as postCreateTeam } from "./team-creation/postCreateTeam";
+export { default as postImageUpload } from "./image/postImageUpload";

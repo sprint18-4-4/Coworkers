@@ -13,3 +13,4 @@ export { default as usePatchTodo } from "./task-list/usePatchTodo";
 export { default as usePostTaskListComment } from "./task-list-detail/usePostTaskListComment";
 export { default as useGetTaskListComment } from "./task-list-detail/useGetTaskListComment";
 export { default as usePostSignup } from "./auth/signup/usePostSignup";
+export { default as usePostCreateTeam } from "./team-creation/usePostCreateTeam";
