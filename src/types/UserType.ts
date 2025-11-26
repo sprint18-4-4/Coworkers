@@ -34,5 +34,3 @@ export interface User {
 }
 
 export type UserRole = "ADMIN" | "MEMBER";
-
-export type UserResponse = User;
