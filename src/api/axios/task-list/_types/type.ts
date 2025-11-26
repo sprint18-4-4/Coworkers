@@ -1,4 +1,12 @@
-import { Frequency } from "../FrequencyType";
+import { Frequency, TaskGroupItem } from "@/types";
+
+export interface GetTaskListRequest {
+  groupId: string;
+  taskListId: string;
+  date?: string | null;
+}
+
+export type GetTaskListResponse = TaskGroupItem[];
 
 export interface PostTaskRequest {
   groupId: string;

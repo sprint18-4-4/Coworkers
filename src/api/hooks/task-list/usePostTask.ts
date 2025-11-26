@@ -1,7 +1,7 @@
 import { postTask } from "@/api/axios";
-import { PostTaskRequest } from "@/types";
-import { toastKit } from "@/utils";
 import { useMutation } from "@tanstack/react-query";
+import { toastKit } from "@/utils";
+import { PostTaskRequest } from "@/api/axios/task-list/_types/type";
 
 const usePostRecurring = ({ groupId, taskListId, formData }: PostTaskRequest) => {
   const { success, error } = toastKit();

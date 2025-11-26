@@ -1,13 +1,16 @@
+export { default as getGroups } from "./group/getGroups/getGroups";
 export { default as postLogin } from "./auth/login/login";
 export { default as getUser } from "./user/getUser/getUser";
 export { default as postResetPassword } from "./auth/resetPassword/resetPassword";
 export { default as getHistory } from "./my-history/getHistory";
-export { default as getGroup } from "./group/getGroup";
+export { default as deleteGroup } from "./group/deleteGroup/deleteGroup";
 export { default as getTaskList } from "./task-list/getTaskList";
 export { default as postTask } from "./task-list/postTask";
+export { default as patchGroup } from "./group/patchGroup/patchGroup";
 export { default as postTodo } from "./task-list/postTodo";
 export { default as deleteTodo } from "./task-list/deleteTodo";
 export { default as patchTodo } from "./task-list/patchTodo";
 export { default as getTaskListDetail } from "./task-list-detail/getTaskListDetail";
 export { default as postTaskListComment } from "./task-list-detail/postTaskListComment";
 export { default as getTaskListComment } from "./task-list-detail/getTaskListComment";
+export { default as postSignup } from "./auth/signup/signup";
