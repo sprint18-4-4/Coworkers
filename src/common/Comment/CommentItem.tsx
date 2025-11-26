@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { cn, formatTime } from "@/utils";
+import Dropdown from "../Dropdown/Dropdown";
 import { CommentProps } from "./_types/type";
 import KebabMenu from "./_internal/KebabMenu/KebabMenu";
 import CommentEdit from "./_internal/CommentEdit/CommentEdit";
 import Profile from "@/common/Profile/Profile";
+import { ClassNames } from "storybook/theming";
 
 /**
  * @author KimWonSeon
@@ -32,9 +34,24 @@ import Profile from "@/common/Profile/Profile";
  * />
  */
 
-const CommentItem = ({ comment, showKebab = false, className }: CommentProps) => {
+const CommentItem = ({ comment, showKebab = false, className, onDelete }: CommentProps) => {
   const { user, content, createdAt } = comment;
   const [isEditing, setIsEditing] = useState(false);
+
+  const dropdownOptions = [
+    {
+      label: "수정하기",
+      action: () => {
+        setIsEditing(true);
+      },
+    },
+    {
+      label: "삭제하기",
+      action: () => {
+        onDelete(comment.id);
+      },
+    },
+  ];
 
   if (isEditing) {
     return (
@@ -61,7 +78,7 @@ const CommentItem = ({ comment, showKebab = false, className }: CommentProps) =>
       <div className="flex-1 flex flex-col gap-1 min-w-0">
         <div className="flex items-center">
           <span className="text-lg-bold text-text-primary flex-grow">{user.nickname}</span>
-          {showKebab && <KebabMenu commentId={comment.id} onEdit={() => setIsEditing(true)} />}
+          {showKebab && <Dropdown iconName="kebab" options={dropdownOptions} placement="bottom-right" />}
         </div>
         <p className="text-md-regular text-text-primary whitespace-pre-wrap break-words">{content}</p>
         <span className="text-md-medium text-interaction-inactive">{formatTime(createdAt)}</span>

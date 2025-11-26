@@ -11,7 +11,7 @@ const LoginContent = () => {
     <div className="w-full h-screen flex flex-col justify-center items-center gap-4 bg-background-primary">
       {isLoading ? (
         <>
-          <div className="animate-spin size-10 border-4 border-blue-500 border-t-transparent rounded-full" />
+          <div className="animate-spin size-10 border-4 border-brand-primary border-t-transparent rounded-full" />
           <p className="text-text-default text-lg-medium animate-pulse">카카오 로그인 중입니다...</p>
         </>
       ) : (
