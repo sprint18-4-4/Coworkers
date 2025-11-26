@@ -49,6 +49,7 @@ const CommentSection = ({ data }: CommentSectionProps) => {
             comment={comment}
             showKebab={myComment}
             onDelete={() => deleteComment({ taskId: String(data.id), commentId: String(comment.id) })}
+            onUpdate={() => {}}
           />
         ))}
       </ul>

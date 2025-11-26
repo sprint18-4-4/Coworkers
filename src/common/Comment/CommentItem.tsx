@@ -32,7 +32,7 @@ import Profile from "@/common/Profile/Profile";
  * />
  */
 
-const CommentItem = ({ comment, showKebab = false, className, onDelete }: CommentProps) => {
+const CommentItem = ({ comment, showKebab = false, className, onDelete, onUpdate }: CommentProps) => {
   const { user, content, createdAt } = comment;
   const [isEditing, setIsEditing] = useState(false);
 
@@ -61,7 +61,14 @@ const CommentItem = ({ comment, showKebab = false, className, onDelete }: Commen
           <div className="mb-1">
             <span className="text-lg-bold text-text-primary">{user.nickname}</span>
           </div>
-          <CommentEdit initialComment={content} onClose={() => setIsEditing(false)} />
+          <CommentEdit
+            initialComment={content}
+            onSubmit={(newContent) => {
+              onUpdate(comment.id, newContent);
+              setIsEditing(false);
+            }}
+            onClose={() => setIsEditing(false)}
+          />
         </div>
       </li>
     );
@@ -74,9 +81,16 @@ const CommentItem = ({ comment, showKebab = false, className, onDelete }: Commen
       </div>
 
       <div className="flex-1 flex flex-col gap-1 min-w-0">
-        <div className="flex items-center">
+        <div className="flex items-start">
           <span className="text-lg-bold text-text-primary flex-grow">{user.nickname}</span>
-          {showKebab && <Dropdown iconName="kebab" options={dropdownOptions} placement="bottom-right" />}
+          {showKebab && (
+            <Dropdown
+              iconName="kebab"
+              options={dropdownOptions}
+              placement="bottom-right"
+              iconClassName="size-4 tablet:size-4"
+            />
+          )}
         </div>
         <p className="text-md-regular text-text-primary whitespace-pre-wrap break-words">{content}</p>
         <span className="text-md-medium text-interaction-inactive">{formatTime(createdAt)}</span>
