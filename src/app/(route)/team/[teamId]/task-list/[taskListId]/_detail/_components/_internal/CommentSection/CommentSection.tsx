@@ -1,19 +1,17 @@
 import { cn } from "@/utils";
 import { CommentItem, InputReply, Profile } from "@/common";
-import { TASK_DETAIL_COMMENT_MOCK_DATA } from "@/MOCK_DATA";
 import { FormEvent, useState } from "react";
-import { usePostTaskListComment } from "@/api/hooks";
+import { useGetTaskListComment, usePostTaskListComment } from "@/api/hooks";
 import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types/type";
 
 interface CommentSectionProps {
   data: GetTaskListDetailResponse;
 }
 
-// TODO(지권): 실제 댓글 데이터로 변경
-const commentData = TASK_DETAIL_COMMENT_MOCK_DATA;
-
 const CommentSection = ({ data }: CommentSectionProps) => {
   const [commentValue, setCommentValue] = useState("");
+
+  const { data: commentData } = useGetTaskListComment({ taskId: String(data.id) });
 
   const { mutate: postComment, isPending } = usePostTaskListComment({
     groupId: String(data.recurring.groupId),
@@ -27,7 +25,6 @@ const CommentSection = ({ data }: CommentSectionProps) => {
 
     e.preventDefault();
     postComment();
-    setCommentValue("");
   };
 
   return (
@@ -44,7 +41,7 @@ const CommentSection = ({ data }: CommentSectionProps) => {
       </section>
 
       <ul aria-label="댓글 목록" className="mt-1">
-        {commentData.map((comment) => (
+        {commentData?.map((comment) => (
           <CommentItem key={comment.id} comment={comment} />
         ))}
       </ul>

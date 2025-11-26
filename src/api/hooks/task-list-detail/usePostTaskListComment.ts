@@ -13,6 +13,7 @@ const usePostTaskListComment = ({ groupId, taskListId, taskId, content }: PostTa
     onSuccess: () => {
       success("댓글 추가 성공");
       queryClient.invalidateQueries({ queryKey: ["task-list", groupId, taskListId, taskId] });
+      queryClient.invalidateQueries({ queryKey: ["task-list-comment", taskId] });
     },
 
     onError: () => {

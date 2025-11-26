@@ -10,3 +10,4 @@ export { default as deleteTodo } from "./task-list/deleteTodo";
 export { default as patchTodo } from "./task-list/patchTodo";
 export { default as getTaskListDetail } from "./task-list-detail/getTaskListDetail";
 export { default as postTaskListComment } from "./task-list-detail/postTaskListComment";
+export { default as getTaskListComment } from "./task-list-detail/getTaskListComment";

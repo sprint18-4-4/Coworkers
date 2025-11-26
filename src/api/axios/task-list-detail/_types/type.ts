@@ -1,5 +1,7 @@
 import { DoneBy, Frequency, TaskUser } from "@/types";
 
+// GET TaskListDetail
+
 export interface GetTaskListDetailRequest {
   groupId: string;
   taskListId: string;
@@ -38,6 +40,8 @@ export interface GetTaskListDetailResponse {
   recurring: Recurring;
 }
 
+// POST TaskListComment
+
 export interface PostTaskListCommentRequest {
   groupId: string;
   taskListId: string;
@@ -51,4 +55,20 @@ export interface PostTaskListCommentResponse {
   createdAt: string;
   updatedAt: string;
   user: TaskUser;
+}
+
+// GET TaskListComment
+
+export interface GetTaskListCommentRequest {
+  taskId: string;
+}
+
+export interface GetTaskListCommentResponse {
+  user: TaskUser;
+  userId: number;
+  taskId: number;
+  updatedAt: string;
+  createdAt: string;
+  content: string;
+  id: number;
 }
