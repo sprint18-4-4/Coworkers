@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { useDeleteComment, usePostTaskListComment } from "@/api/hooks";
+import { useDeleteComment, usePatchComment, usePostTaskListComment } from "@/api/hooks";
 
 interface Comment {
   commentValue: string;
@@ -34,11 +34,21 @@ const useDetailCommentMutations = ({ groupId, taskListId, taskId, comment }: Use
   };
 
   const { mutate: deleteComment } = useDeleteComment();
+  const { mutate: updateComment } = usePatchComment();
+
+  const handleUpdateComment = (commentId: string, newContent: string) => {
+    updateComment({
+      taskId: String(taskId),
+      commentId: String(commentId),
+      content: newContent,
+    });
+  };
 
   return {
     postComment,
     postCommentPending,
     deleteComment,
+    handleUpdateComment,
     handleSubmitComment,
   };
 };

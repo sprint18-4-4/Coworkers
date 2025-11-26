@@ -19,7 +19,7 @@ const CommentSection = ({ data }: CommentSectionProps) => {
   const myData = queryClient.getQueryData<UserResponse>(["user"]);
   const myComment = myData?.id === data.writer.id;
 
-  const { postCommentPending, deleteComment, handleSubmitComment } = useDetailCommentMutations({
+  const { postCommentPending, deleteComment, handleUpdateComment, handleSubmitComment } = useDetailCommentMutations({
     groupId: String(data.recurring.groupId),
     taskListId: String(data.recurring.taskListId),
     taskId: String(data.id),
@@ -49,7 +49,7 @@ const CommentSection = ({ data }: CommentSectionProps) => {
             comment={comment}
             showKebab={myComment}
             onDelete={() => deleteComment({ taskId: String(data.id), commentId: String(comment.id) })}
-            onUpdate={() => {}}
+            onUpdate={(commentId, newContent) => handleUpdateComment(String(commentId), newContent)}
           />
         ))}
       </ul>

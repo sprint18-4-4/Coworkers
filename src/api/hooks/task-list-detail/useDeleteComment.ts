@@ -10,10 +10,13 @@ const useDeleteComment = () => {
   return useMutation({
     mutationFn: ({ taskId, commentId }: DeleteTaskListCommentRequest) => deleteComment({ taskId, commentId }),
 
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
+      if (!variables) return;
+      const { taskId } = variables;
+
       success("댓글 삭제 성공");
       queryClient.invalidateQueries({
-        queryKey: ["task-list-comment"],
+        queryKey: ["task-list-comment", taskId],
       });
     },
 
