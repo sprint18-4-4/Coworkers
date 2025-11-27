@@ -9,6 +9,7 @@ import { DateItem, DatePicker, Icon } from "@/common";
 import { EmptyState, TaskListItem } from "@/features";
 import { TODO_STYLES } from "../../_constants";
 import TaskPdfDownloadButton from "../TaskPdfDownloadButton/TaskPdfDownloadButton";
+import useTaskListMutations from "../../_hooks/useListDataMutations";
 
 interface TodoSectionHeaderProps {
   data: TaskListData;
@@ -84,6 +85,8 @@ interface TodoSectionProps {
 const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, sectionName }: TodoSectionProps) => {
   const router = useRouter();
 
+  const { toggleTaskDone } = useTaskListMutations({ teamId, taskListId });
+
   const handleMoveWeek = (direction: WeekDirection) => {
     const diff = direction === "prev" ? -7 : 7;
     const newDate = addDays(selectedDate, diff);
@@ -92,11 +95,6 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
 
   const onClickTaskListItem = (id: string) => {
     router.push(`/team/${teamId}/task-list/${taskListId}?task-id=${id}`, { scroll: false });
-  };
-
-  const onToggleTodo = (id: number, next: boolean) => {
-    // TODO(지권): 추후 API 변경 및 로직 분리
-    console.warn("토글 선택 - API 호출 예정", { id, next });
   };
 
   const options = [
@@ -135,15 +133,19 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
         )}
 
         <ul className="flex flex-col gap-3">
-          {data?.map((item) => (
-            <TaskListItem
-              key={item.id}
-              item={item}
-              onOpenDetail={() => onClickTaskListItem(item.id.toString())}
-              onToggleTodo={onToggleTodo}
-              options={options}
-            />
-          ))}
+          {data?.map((item) => {
+            const isDone = item.doneAt !== null;
+
+            return (
+              <TaskListItem
+                key={item.id}
+                item={item}
+                onOpenDetail={() => onClickTaskListItem(item.id.toString())}
+                onToggleTodo={() => toggleTaskDone(item.id.toString(), isDone)}
+                options={options}
+              />
+            );
+          })}
         </ul>
       </div>
     </section>
