@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { DateValue, Frequency, HalfHour } from "@/types";
-import { usePostTask } from "@/api/hooks";
+import { usePostRecurring } from "@/api/hooks";
 
 interface UseTodoFormProps {
   onClose: () => void;
@@ -24,7 +24,7 @@ export const useTodoForm = ({ onClose, groupId, taskListId, repeatConfig }: UseT
     todoMemo: "",
   });
 
-  const { mutate: postTask } = usePostTask();
+  const { mutate: postRecurring } = usePostRecurring();
 
   const isFormValid =
     formData.title.trim().length > 0 &&
@@ -41,7 +41,7 @@ export const useTodoForm = ({ onClose, groupId, taskListId, repeatConfig }: UseT
     e.preventDefault();
     if (!isFormValid) return;
 
-    postTask({
+    postRecurring({
       groupId,
       taskListId,
       formData: {
