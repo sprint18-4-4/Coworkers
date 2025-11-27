@@ -1,28 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { Frequency } from "@/types";
 import { useTodoForm } from "./_hooks";
 import { cn, formatToKoreanDate } from "@/utils";
 import { BaseButton, DatePicker, Input, InputBox, Modal, Select, Time } from "@/common";
-import { AnimatedCollapse } from "./_internal";
-import { MODAL_STYLES, REPEAT_OPTIONS, DATE_OPTIONS } from "./_constants";
-import { Frequency } from "@/types";
-
-const RepeatOptionItem = ({ label, selected, onClick }: { label: string; selected: boolean; onClick: () => void }) => {
-  return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "flex-1 py-3 rounded-xl text-md-medium border transition-colors",
-        selected
-          ? "border-brand-primary bg-brand-primary text-white hover:bg-brand-primary/80"
-          : "border-border-primary bg-background-primary text-text-default hover:bg-gray-200",
-      )}
-    >
-      {label}
-    </button>
-  );
-};
+import { AnimatedCollapse, RepeatMonthlySelect, RepeatWeeklySelect } from "./_internal";
+import { MODAL_STYLES, REPEAT_OPTIONS } from "./_constants";
 
 type OpenPicker = "date" | "time" | null;
 
@@ -43,9 +27,11 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
     onClose,
     groupId,
     taskListId,
-    order,
-    weekDays,
-    monthDay,
+    repeatConfig: {
+      order,
+      weekDays,
+      monthDay,
+    },
   });
 
   return (
@@ -110,39 +96,8 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
                   }
                 }}
               />
-              {order === "WEEKLY" && (
-                <div className="flex gap-1 mt-2">
-                  {DATE_OPTIONS.map((option) => (
-                    <RepeatOptionItem
-                      key={option.value}
-                      label={option.label}
-                      selected={weekDays.includes(option.value)}
-                      onClick={() =>
-                        setWeekDays((prev) =>
-                          prev.includes(option.value)
-                            ? prev.filter((d) => d !== option.value)
-                            : [...prev, option.value].sort((a, b) => a - b),
-                        )
-                      }
-                    />
-                  ))}
-                </div>
-              )}
-              {order === "MONTHLY" && (
-                <Input
-                  placeholder="1~31 사이 날짜를 입력해주세요."
-                  value={monthDay ? String(monthDay) : ""}
-                  onChange={(e) => {
-                    const value = Number(e.target.value);
-                    if (Number.isNaN(value)) {
-                      setMonthDay(null);
-                      return;
-                    }
-                    if (value < 1 || value > 31) return;
-                    setMonthDay(value);
-                  }}
-                />
-              )}
+              {order === "WEEKLY" && <RepeatWeeklySelect weekDays={weekDays} setWeekDays={setWeekDays} />}
+              {order === "MONTHLY" && <RepeatMonthlySelect monthDay={monthDay} setMonthDay={setMonthDay} />}
             </div>
 
             <InputBox

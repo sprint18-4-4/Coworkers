@@ -6,12 +6,14 @@ interface UseTodoFormProps {
   onClose: () => void;
   groupId: string;
   taskListId: string;
-  order: Frequency;
-  weekDays: number[];
-  monthDay: number | null;
+  repeatConfig: {
+    order: Frequency;
+    weekDays: number[];
+    monthDay: number | null;
+  };
 }
 
-export const useTodoForm = ({ onClose, groupId, taskListId, order, weekDays, monthDay }: UseTodoFormProps) => {
+export const useTodoForm = ({ onClose, groupId, taskListId, repeatConfig }: UseTodoFormProps) => {
   const [formData, setFormData] = useState({
     title: "",
     startDate: new Date(),
@@ -29,7 +31,11 @@ export const useTodoForm = ({ onClose, groupId, taskListId, order, weekDays, mon
     formData.todoMemo.trim().length > 0 &&
     formData.startDate !== null &&
     formData.startTime.value !== null &&
-    (order === "WEEKLY" ? weekDays.length > 0 : order === "MONTHLY" ? monthDay !== null : true);
+    (repeatConfig.order === "WEEKLY"
+      ? repeatConfig.weekDays.length > 0
+      : repeatConfig.order === "MONTHLY"
+        ? repeatConfig.monthDay !== null
+        : true);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,9 +48,9 @@ export const useTodoForm = ({ onClose, groupId, taskListId, order, weekDays, mon
         name: formData.title.trim(),
         description: formData.todoMemo.trim(),
         startDate: formData.startDate.toISOString(),
-        frequencyType: order,
-        ...(order === "WEEKLY" ? { weekDays } : {}),
-        ...(order === "MONTHLY" ? { monthDay } : {}),
+        frequencyType: repeatConfig.order,
+        ...(repeatConfig.order === "WEEKLY" ? { weekDays: repeatConfig.weekDays } : {}),
+        ...(repeatConfig.order === "MONTHLY" ? { monthDay: repeatConfig.monthDay } : {}),
       },
     });
 
