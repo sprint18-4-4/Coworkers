@@ -36,7 +36,7 @@ const HeaderSection = ({ data, isDone, taskPath }: HeaderSectionProps) => {
     <>
       <header className="flex flex-col gap-4 mt-5">
         <div className="flex items-start justify-between">
-          <div className="flex items-center gap-3">
+          <div className="w-full flex items-center gap-3">
             <h2
               className={cn(
                 "text-xl-bold w-full break-words",
