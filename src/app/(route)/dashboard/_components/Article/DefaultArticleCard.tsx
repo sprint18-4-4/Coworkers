@@ -1,10 +1,10 @@
+import Link from "next/link";
 import { useGetArticle } from "@/api/hooks";
+import { Icon } from "@/common";
 import ArticleTitle from "./_internal/ArticleTitle";
 import ArticleContent from "./_internal/ArticleContent";
 import ArticleWriter from "./_internal/ArticleWriter";
 import ArticleLike from "./_internal/ArticleLike";
-import { Icon } from "@/common";
-import Link from "next/link";
 
 const DefaultArticleCard = ({ articleId }: { articleId: number }) => {
   const { data: article } = useGetArticle({ articleId });

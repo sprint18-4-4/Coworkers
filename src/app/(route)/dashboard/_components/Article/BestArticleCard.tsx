@@ -1,12 +1,12 @@
+import Link from "next/link";
+import Image from "next/image";
 import { useGetArticle } from "@/api/hooks";
+import { Icon } from "@/common";
 import ArticleBestBadge from "./_internal/ArticleBestBadge";
 import ArticleTitle from "./_internal/ArticleTitle";
 import ArticleContent from "./_internal/ArticleContent";
-import Image from "next/image";
 import ArticleWriter from "./_internal/ArticleWriter";
 import ArticleLike from "./_internal/ArticleLike";
-import { Icon } from "@/common";
-import Link from "next/link";
 
 const BestArticleCard = ({ articleId }: { articleId: number }) => {
   const { data: article } = useGetArticle({ articleId });
