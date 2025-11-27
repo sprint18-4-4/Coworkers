@@ -10,6 +10,7 @@ import { EmptyState, TaskListItem } from "@/features";
 import { TODO_STYLES } from "../../_constants";
 import TaskPdfDownloadButton from "../TaskPdfDownloadButton/TaskPdfDownloadButton";
 import useTaskListMutations from "../../_hooks/useListDataMutations";
+import EditDataModal from "../../_detail/_components/_internal/EditDataModal/EditDataModal";
 
 interface TodoSectionHeaderProps {
   data: TaskListData;
@@ -84,8 +85,28 @@ interface TodoSectionProps {
 
 const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, sectionName }: TodoSectionProps) => {
   const router = useRouter();
+  const [isEditModal, setIsEditModal] = useState(false);
+  const [editingTask, setEditingTask] = useState<{ id: number; name: string; description?: string } | null>(null);
+  const [editForm, setEditForm] = useState({ name: "", description: "" });
 
-  const { toggleTaskDone } = useTaskListMutations({ teamId, taskListId });
+  const { toggleTaskDone, deleteTask, updateTask } = useTaskListMutations({ teamId, taskListId });
+
+  const handleOpenEditModal = (task: { id: number; name: string; description?: string }) => {
+    setEditingTask(task);
+    setEditForm({
+      name: task.name,
+      description: task.description || "",
+    });
+    setIsEditModal(true);
+  };
+
+  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!editingTask) return;
+
+    updateTask(String(editingTask.id), editForm.name, editForm.description);
+    setIsEditModal(false);
+  };
 
   const handleMoveWeek = (direction: WeekDirection) => {
     const diff = direction === "prev" ? -7 : 7;
@@ -97,58 +118,70 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
     router.push(`/team/${teamId}/task-list/${taskListId}?task-id=${id}`, { scroll: false });
   };
 
-  const options = [
-    { label: "수정하기", action: () => console.warn("할 일 수정하기") },
-    { label: "삭제하기", action: () => console.warn("할 일 삭제하기") },
+  const options = (task: { id: number; name: string; description?: string }) => [
+    { label: "수정하기", action: () => handleOpenEditModal(task) },
+    { label: "삭제하기", action: () => deleteTask(String(task.id)) },
   ];
 
   return (
-    <section
-      className={cn(
-        "bg-background-primary px-[17px] py-[38px] mt-[22px] rounded-[20px]",
-        "pc:px-[42px] pc:max-w-[819px] pc:flex-1",
-      )}
-    >
-      <TodoSectionHeader
-        data={data}
-        selectedDate={selectedDate}
-        onClickMoveWeek={handleMoveWeek}
-        onClickCalendar={onClickDateItem}
-        sectionName={sectionName}
-      />
-
-      <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
-
-      <div className="mt-[37px] min-h-[250px]">
-        {/* TODO(지권): 로딩, 에러 추가 예정 */}
-        {(data?.length === 0 || !data) && (
-          <EmptyState
-            ariaLabel="할 일이 없습니다."
-            text={
-              <span>
-                현재 할 일이 없습니다. <br /> 새 할 일을 추가해보세요.
-              </span>
-            }
-          />
+    <>
+      <section
+        className={cn(
+          "bg-background-primary px-[17px] py-[38px] mt-[22px] rounded-[20px]",
+          "pc:px-[42px] pc:max-w-[819px] pc:flex-1",
         )}
+      >
+        <TodoSectionHeader
+          data={data}
+          selectedDate={selectedDate}
+          onClickMoveWeek={handleMoveWeek}
+          onClickCalendar={onClickDateItem}
+          sectionName={sectionName}
+        />
 
-        <ul className="flex flex-col gap-3">
-          {data?.map((item) => {
-            const isDone = item.doneAt !== null;
+        <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
 
-            return (
-              <TaskListItem
-                key={item.id}
-                item={item}
-                onOpenDetail={() => onClickTaskListItem(item.id.toString())}
-                onToggleTodo={() => toggleTaskDone(item.id.toString(), isDone)}
-                options={options}
-              />
-            );
-          })}
-        </ul>
-      </div>
-    </section>
+        <div className="mt-[37px] min-h-[250px]">
+          {/* TODO(지권): 로딩, 에러 추가 예정 */}
+          {(data?.length === 0 || !data) && (
+            <EmptyState
+              ariaLabel="할 일이 없습니다."
+              text={
+                <span>
+                  현재 할 일이 없습니다. <br /> 새 할 일을 추가해보세요.
+                </span>
+              }
+            />
+          )}
+
+          <ul className="flex flex-col gap-3">
+            {data?.map((item) => {
+              const isDone = item.doneAt !== null;
+
+              return (
+                <TaskListItem
+                  key={item.id}
+                  item={item}
+                  onOpenDetail={() => onClickTaskListItem(item.id.toString())}
+                  onToggleTodo={() => toggleTaskDone(String(item.id), isDone)}
+                  options={options(item)}
+                />
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
+      {isEditModal && (
+        <EditDataModal
+          isEditModal={isEditModal}
+          setIsEditModal={setIsEditModal}
+          form={editForm}
+          setForm={setEditForm}
+          handleEdit={handleEdit}
+        />
+      )}
+    </>
   );
 };
 
