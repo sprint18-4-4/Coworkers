@@ -6,6 +6,7 @@ const useGetArticles = (params: GetArticlesRequest) => {
   return useQuery({
     queryKey: ["articles", params],
     queryFn: () => getArticles(params),
+    placeholderData: (prev) => prev,
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 60 * 24,
     retry: 1,

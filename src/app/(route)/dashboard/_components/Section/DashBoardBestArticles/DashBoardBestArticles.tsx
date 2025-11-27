@@ -2,12 +2,21 @@
 import { useGetArticles } from "@/api/hooks";
 import BestArticleCard from "../../Article/BestArticleCard";
 import { useDevice } from "@/hooks";
+import { useState } from "react";
+import Pagination from "./_internal/Pagination";
 
 const DashBoardBestArticles = () => {
   const { isMobile, isTablet } = useDevice();
+  const [page, setPage] = useState(1);
   const pageSize = isMobile ? 1 : isTablet ? 2 : 3;
 
-  const { data: articles } = useGetArticles({ pageSize, orderBy: "recent" });
+  const { data: articles } = useGetArticles({ page, pageSize, orderBy: "recent" });
+
+  if (!articles) {
+    return null;
+  }
+
+  const totalPages = Math.ceil(articles?.totalCount / pageSize);
 
   return (
     <section className="gap-5 -mx-[26px] px-1 pc:-mx-0 pc:px-8 py-10 mt-10 bg-background-secondary pc:rounded-[20px]">
@@ -21,6 +30,13 @@ const DashBoardBestArticles = () => {
           ))}
         </ul>
       </div>
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        maxDots={5}
+        onPrev={() => setPage((prev) => (prev === 1 ? totalPages : prev - 1))}
+        onNext={() => setPage((prev) => (prev === totalPages ? 1 : prev + 1))}
+      />
     </section>
   );
 };
