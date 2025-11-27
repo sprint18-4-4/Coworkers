@@ -8,7 +8,9 @@ const MyPage = () => {
   const { data: userData, isLoading, isError } = useGetUser();
 
   // TODO(김원선): 스피너 생기면 적용
-  if (isLoading) return;
+  if (isLoading) {
+    return <span>로딩 중...</span>;
+  }
 
   if (isError || !userData) {
     return NotFound();
