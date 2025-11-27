@@ -1,7 +1,7 @@
 import { PageLayout } from "@/common";
-import DashBoardHeader from "./_components/DashBoardHeader/page";
-import DashBoardBestPosts from "./_components/DashBoardBestPosts/page";
-import DashBoardAllPosts from "./_components/DashBoardAllPosts/page";
+import DashBoardHeader from "./_components/Section/DashBoardHeader/DashBoardHeader";
+import DashBoardBestPosts from "./_components/Section/DashBoardBestPosts/DashBoardBestPosts";
+import DashBoardAllPosts from "./_components/Section/DashBoardAllPosts/DashBoardAllPosts";
 
 const Dashboard = () => {
   return (
