@@ -18,7 +18,7 @@ const usePatchUserProfile = (options?: UsePatchUserProfileOptions) => {
     onSuccess: () => {
       success("프로필이 성공적으로 변경되었습니다.");
 
-      queryClient.invalidateQueries({ queryKey: ["user", "profile"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
 
       options?.onSuccess?.();
     },
