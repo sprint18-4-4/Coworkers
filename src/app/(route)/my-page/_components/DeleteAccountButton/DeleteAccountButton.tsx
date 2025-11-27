@@ -1,17 +1,28 @@
+import { useDeleteUser } from "@/api/hooks";
 import { Icon, Modal, BaseButton } from "@/common";
 import { useState } from "react";
 
 const DeleteAccountButton = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
+  const { mutate: deleteAccount, isPending } = useDeleteUser({
+    onSuccess: () => {
+      setDeleteModalOpen(false);
+    },
+  });
+
   const handleDeleteAccount = () => {
-    setDeleteModalOpen(false);
+    deleteAccount();
   };
 
   return (
     <>
       <div className="w-full flex items-start">
-        <button className="text-status-danger flex items-center gap-2" onClick={() => setDeleteModalOpen(true)}>
+        <button
+          type="button"
+          className="text-status-danger flex items-center gap-2"
+          onClick={() => setDeleteModalOpen(true)}
+        >
           <Icon name="secession" className="size-6 tablet:size-6" />
           <span className="text-md-medium tablet:text-lg-medium">회원 탈퇴하기</span>
         </button>
@@ -35,11 +46,19 @@ const DeleteAccountButton = () => {
             size="large"
             className="flex-1"
             onClick={() => setDeleteModalOpen(false)}
+            disabled={isPending}
           >
             취소
           </BaseButton>
-          <BaseButton variant="solid" size="large" danger className="flex-1" onClick={handleDeleteAccount}>
-            탈퇴하기
+          <BaseButton
+            variant="solid"
+            size="large"
+            danger
+            className="flex-1"
+            onClick={handleDeleteAccount}
+            disabled={isPending}
+          >
+            {isPending ? "탈퇴 중..." : "탈퇴하기"}
           </BaseButton>
         </Modal.Footer>
       </Modal>
