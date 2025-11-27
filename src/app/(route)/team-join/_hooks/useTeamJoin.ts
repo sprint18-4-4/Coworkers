@@ -18,7 +18,7 @@ const useTeamJoin = (): UseTeamJoinReturn => {
 
   const { error } = toastKit();
 
-  const { data: user, isLoading: isLoadingUser } = useGetUser();
+  const { data: user, isPending: isLoadingUser } = useGetUser();
 
   const { mutateAsync, isPending } = usePostTeamJoin();
 
