@@ -1,5 +1,11 @@
+import ArticleBestBadge from "./_internal/ArticleBestBadge";
+
 const BestArticleCard = () => {
-  return <div>BestArticleCard</div>;
+  return (
+    <article>
+      <ArticleBestBadge />
+    </article>
+  );
 };
 
 export default BestArticleCard;
