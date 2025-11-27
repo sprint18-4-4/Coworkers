@@ -5,14 +5,12 @@ import { Icon, Modal, BaseButton } from "@/common";
 const DeleteAccountButton = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  const { mutate: deleteAccount, isPending } = useDeleteUser({
-    onSuccess: () => {
-      setDeleteModalOpen(false);
-    },
-  });
+  const { mutate: deleteAccount, isPending } = useDeleteUser();
 
-  const handleDeleteAccount = () => {
-    deleteAccount();
+  const handleDeleteAccount = async () => {
+    await deleteAccount();
+
+    setDeleteModalOpen(false);
   };
 
   return (
