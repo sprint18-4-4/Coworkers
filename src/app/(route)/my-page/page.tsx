@@ -11,7 +11,7 @@ const MyPage = () => {
   if (isLoading) return;
 
   if (isError || !userData) {
-    NotFound();
+    return NotFound();
   }
 
   return <MyPageContainer userData={userData} />;
