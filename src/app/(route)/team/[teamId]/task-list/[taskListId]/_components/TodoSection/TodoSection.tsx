@@ -9,15 +9,25 @@ import { DateItem, DatePicker, Icon } from "@/common";
 import { EmptyState, TaskListItem } from "@/features";
 import { TODO_STYLES } from "../../_constants";
 import TaskPdfDownloadButton from "../TaskPdfDownloadButton/TaskPdfDownloadButton";
+import useTaskListMutations from "../../_hooks/useListDataMutations";
+import EditDataModal from "../../_detail/_components/_internal/EditDataModal/EditDataModal";
+// TODO(지권): EditDataModal 네이밍 및 위치 변경 필요
 
 interface TodoSectionHeaderProps {
   data: TaskListData;
   selectedDate: Date;
   onClickMoveWeek: (direction: "prev" | "next") => void;
   onClickCalendar: (date: Date) => void;
+  sectionName: string;
 }
 
-const TodoSectionHeader = ({ data, selectedDate, onClickMoveWeek, onClickCalendar }: TodoSectionHeaderProps) => {
+const TodoSectionHeader = ({
+  data,
+  selectedDate,
+  onClickMoveWeek,
+  onClickCalendar,
+  sectionName,
+}: TodoSectionHeaderProps) => {
   const monthLabel = format(selectedDate, "yyyy년 M월");
   const monthDateTime = format(selectedDate, "yyyy-MM");
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
@@ -31,7 +41,7 @@ const TodoSectionHeader = ({ data, selectedDate, onClickMoveWeek, onClickCalenda
 
   return (
     <header className="flex items-center justify-between relative">
-      <h3 className="text-2lg-bold text-text-primary">법인 등기</h3>
+      <h3 className="text-2lg-bold text-text-primary">{sectionName || "로딩중..."}</h3>
 
       <div className="flex items-center gap-2">
         <time dateTime={monthDateTime} className="text-sm-medium text-text-primary">
@@ -71,10 +81,33 @@ interface TodoSectionProps {
   onClickDateItem: (date: Date) => void;
   selectedDate: Date;
   taskListId: string;
+  sectionName: string;
 }
 
-const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId }: TodoSectionProps) => {
+const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, sectionName }: TodoSectionProps) => {
   const router = useRouter();
+  const [isEditModal, setIsEditModal] = useState(false);
+  const [editingTask, setEditingTask] = useState<{ id: number; name: string; description?: string } | null>(null);
+  const [editForm, setEditForm] = useState({ name: "", description: "" });
+
+  const { toggleTaskDone, deleteTask, updateTask } = useTaskListMutations({ teamId, taskListId });
+
+  const handleOpenEditModal = (task: { id: number; name: string; description?: string }) => {
+    setEditingTask(task);
+    setEditForm({
+      name: task.name,
+      description: task.description || "",
+    });
+    setIsEditModal(true);
+  };
+
+  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!editingTask) return;
+
+    updateTask(String(editingTask.id), editForm.name, editForm.description);
+    setIsEditModal(false);
+  };
 
   const handleMoveWeek = (direction: WeekDirection) => {
     const diff = direction === "prev" ? -7 : 7;
@@ -86,52 +119,70 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId }
     router.push(`/team/${teamId}/task-list/${taskListId}?task-id=${id}`, { scroll: false });
   };
 
-  const onToggleTodo = (id: number, next: boolean) => {
-    // TODO(지권): 추후 API 변경 및 로직 분리
-    console.warn("토글 선택 - API 호출 예정", { id, next });
-  };
+  const options = (task: { id: number; name: string; description?: string }) => [
+    { label: "수정하기", action: () => handleOpenEditModal(task) },
+    { label: "삭제하기", action: () => deleteTask(String(task.id)) },
+  ];
 
   return (
-    <section
-      className={cn(
-        "bg-background-primary px-[17px] py-[38px] mt-[22px] rounded-[20px]",
-        "pc:px-[42px] pc:max-w-[819px] pc:flex-1",
-      )}
-    >
-      <TodoSectionHeader
-        data={data}
-        selectedDate={selectedDate}
-        onClickMoveWeek={handleMoveWeek}
-        onClickCalendar={onClickDateItem}
-      />
-
-      <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
-
-      <div className="mt-[37px] min-h-[250px]">
-        {/* TODO(지권): 로딩, 에러 추가 예정 */}
-        {(data?.length === 0 || !data) && (
-          <EmptyState
-            ariaLabel="할 일이 없습니다."
-            text={
-              <span>
-                현재 할 일이 없습니다. <br /> 새 할 일을 추가해보세요.
-              </span>
-            }
-          />
+    <>
+      <section
+        className={cn(
+          "bg-background-primary px-[17px] py-[38px] mt-[22px] rounded-[20px]",
+          "pc:px-[42px] pc:max-w-[819px] pc:flex-1",
         )}
+      >
+        <TodoSectionHeader
+          data={data}
+          selectedDate={selectedDate}
+          onClickMoveWeek={handleMoveWeek}
+          onClickCalendar={onClickDateItem}
+          sectionName={sectionName}
+        />
 
-        <ul className="flex flex-col gap-3">
-          {data?.map((item) => (
-            <TaskListItem
-              key={item.id}
-              item={item}
-              onOpenDetail={() => onClickTaskListItem(item.id.toString())}
-              onToggleTodo={onToggleTodo}
+        <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
+
+        <div className="mt-[37px] min-h-[250px]">
+          {/* TODO(지권): 로딩, 에러 추가 예정 */}
+          {(data?.length === 0 || !data) && (
+            <EmptyState
+              ariaLabel="할 일이 없습니다."
+              text={
+                <span>
+                  현재 할 일이 없습니다. <br /> 새 할 일을 추가해보세요.
+                </span>
+              }
             />
-          ))}
-        </ul>
-      </div>
-    </section>
+          )}
+
+          <ul className="flex flex-col gap-3">
+            {data?.map((item) => {
+              const isDone = item.doneAt !== null;
+
+              return (
+                <TaskListItem
+                  key={item.id}
+                  item={item}
+                  onOpenDetail={() => onClickTaskListItem(item.id.toString())}
+                  onToggleTodo={() => toggleTaskDone(String(item.id), isDone)}
+                  options={options(item)}
+                />
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
+      {isEditModal && (
+        <EditDataModal
+          isEditModal={isEditModal}
+          setIsEditModal={setIsEditModal}
+          form={editForm}
+          setForm={setEditForm}
+          handleEdit={handleEdit}
+        />
+      )}
+    </>
   );
 };
 

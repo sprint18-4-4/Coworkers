@@ -44,6 +44,10 @@ export const validatePasswordConfirm = (password: string, passwordConfirm: strin
     return { isValid: false, ErrorMessage: "비밀번호 확인을 입력해주세요." };
   }
 
+  if (!password) {
+    return { isValid: false, ErrorMessage: "먼저 비밀번호를 입력해주세요." };
+  }
+
   if (password !== passwordConfirm) {
     return { isValid: false, ErrorMessage: "비밀번호가 일치하지 않습니다." };
   }
