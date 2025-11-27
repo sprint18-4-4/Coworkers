@@ -17,3 +17,4 @@ export { default as usePostCreateTeam } from "./team-creation/usePostCreateTeam"
 export { default as useDeleteComment } from "./task-list-detail/useDeleteComment";
 export { default as usePatchComment } from "./task-list-detail/usePatchComment";
 export { default as usePostTeamJoin } from "./team-join/usePostTeamJoin";
+export { default as usePatchResetPassword } from "./auth/ResetPassword/usePatchResetPassword";
