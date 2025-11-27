@@ -20,3 +20,6 @@ export { default as usePatchTaskListDetail } from "./task-list-detail/usePatchTa
 export { default as useDeleteTaskListDetail } from "./task-list-detail/useDeleteTaskListDetail";
 export { default as usePostTeamJoin } from "./team-join/usePostTeamJoin";
 export { default as usePatchResetPassword } from "./auth/ResetPassword/usePatchResetPassword";
+export { default as usePatchUserProfile } from "./user/usePatchUserProfile";
+export { default as usePatchUserPassword } from "./user/usePatchUserPassword";
+export { default as useDeleteUser } from "./user/useDeleteUser";

@@ -22,3 +22,6 @@ export { default as patchTaskListDetail } from "./task-list-detail/patchTaskList
 export { default as deleteTaskListDetail } from "./task-list-detail/deleteTaskListDetail";
 export { default as postTeamJoin } from "./team-join/postTeamJoin";
 export { default as patchResetPassword } from "./auth/resetPassword/patchResetPassword";
+export { default as patchUserProfile } from "./user/patchUser/patchUserProfile";
+export { default as patchUserPassword } from "./user/patchUserPassword/patchUserPassword";
+export { default as deleteUser } from "./user/deleteUser/deleteUser";
