@@ -1,5 +1,5 @@
 import { instance } from "@/lib";
-import { GetTaskListDetailRequest, GetTaskListDetailResponse } from "./_types/type";
+import { GetTaskListDetailRequest, GetTaskListDetailResponse } from "./_type";
 
 const getTaskListDetail = async ({
   groupId,
