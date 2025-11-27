@@ -22,7 +22,6 @@ const DashBoardAllArticles = () => {
         <Select value={orderBy} options={options} onChange={setOrderBy} />
       </div>
 
-      {/* 카드 */}
       <ul className="mt-10 grid grid-cols-1 pc:grid-cols-2 gap-4">
         {articles?.list.map((article) => (
           <li key={article.id}>

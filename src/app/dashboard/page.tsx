@@ -2,7 +2,7 @@ import { FloatingButton, PageLayout } from "@/common";
 import { DashBoardHeader, DashBoardBestArticles, DashBoardAllArticles } from "../(route)/dashboard/_components";
 import Link from "next/link";
 
-const Dashboard = () => {
+const DashboardPage = () => {
   return (
     <PageLayout>
       <section className="max-w-[1120px]">
@@ -17,4 +17,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPage;

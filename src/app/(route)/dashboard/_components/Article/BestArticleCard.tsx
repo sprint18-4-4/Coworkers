@@ -24,7 +24,6 @@ const BestArticleCard = ({ articleId }: { articleId: number }) => {
             <ArticleTitle title={article?.title} />
             <ArticleContent content={article?.content} />
           </div>
-          {/* 정상적이지 않은 URL, 혹은 null 값으로 왔을 때 왔을 때 에러처리 */}
           {/* {article.image && <Image src={article.image} alt="게시글 이미지" width={60} height={60} />} */}
         </div>
 
