@@ -6,3 +6,4 @@ export { default as useGetTaskList } from "./task-list/useGetTaskList";
 export { default as usePostTask } from "./task-list/usePostTask";
 export { default as usePostResetPassword } from "./auth/ResetPassword/usePostResetPassword";
 export { default as useGetArticles } from "./article/useGetArticles";
+export { default as useGetArticle } from "./article/useGetArticle";

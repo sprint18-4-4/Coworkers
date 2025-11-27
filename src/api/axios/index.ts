@@ -6,3 +6,4 @@ export { default as getHistory } from "./my-history/getHistory";
 export { default as getTaskList } from "./task-list/getTaskList";
 export { default as postTask } from "./task-list/postTask";
 export { default as getArticles } from "./article/getArticles/getArticles";
+export { default as getArticle } from "./article/getArticle/getArticle";
