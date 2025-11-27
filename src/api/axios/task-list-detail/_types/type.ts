@@ -40,6 +40,42 @@ export interface GetTaskListDetailResponse {
   recurring: Recurring;
 }
 
+// PATCH TaskListDetail
+
+export interface PatchTaskListDetailRequest {
+  groupId: string;
+  taskListId: string;
+  taskId: string;
+  body: {
+    name?: string;
+    description?: string;
+    done?: boolean;
+  };
+}
+
+export interface PatchTaskListDetailResponse {
+  displayIndex: number;
+  writerId: number;
+  userId: number;
+  deletedAt: string;
+  frequency: Frequency;
+  description: string;
+  name: string;
+  recurringId: number;
+  doneAt: string;
+  date: string;
+  updatedAt: string;
+  id: number;
+}
+
+// DELETE TaskListDetail
+
+export interface DeleteTaskListDetailRequest {
+  groupId: string;
+  taskListId: string;
+  taskId: string;
+}
+
 // POST TaskListComment
 
 export interface PostTaskListCommentRequest {

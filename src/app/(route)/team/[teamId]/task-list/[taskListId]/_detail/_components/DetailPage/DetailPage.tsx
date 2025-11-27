@@ -5,6 +5,7 @@ import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
 import { CommentSection, ContentSection, HeaderSection } from "../_internal";
 import useGetTaskListDetail from "@/api/hooks/task-list-detail/useGetTaskListDetail";
+import { useDetailDataMutations } from "../../_hooks";
 
 interface DetailPageProps {
   id: string;
@@ -24,6 +25,10 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
     taskListId: String(taskListId),
     taskId: id,
   });
+
+  const isDone = taskDetail?.doneAt !== null;
+
+  const { toggleDone } = useDetailDataMutations({ taskPath: { teamId, taskListId, id } });
 
   // TODO(지권): 에러, 로딩 상태 처리 추가 필요
   if (isPending) return <div>로딩중</div>;
@@ -45,7 +50,15 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
           <Icon name="x" className="size-6 tablet-6" />
         </button>
 
-        <HeaderSection data={taskDetail} />
+        <HeaderSection
+          data={taskDetail}
+          isDone={isDone}
+          taskPath={{
+            id,
+            teamId,
+            taskListId,
+          }}
+        />
 
         <hr />
 
@@ -55,13 +68,17 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
       </article>
 
       <BaseButton
-        aria-label="완료 상태 취소하기"
-        variant="outlinedPrimary"
         size="large"
-        className="fixed bottom-4 right-4 z-[999] max-w-[132px] h-[40px] rounded-[40px] bg-background-inverse"
+        aria-label={isDone ? "완료 상태 취소하기" : "완료 상태로 변경하기"}
+        variant={isDone ? "outlinedPrimary" : "solid"}
+        onClick={() => toggleDone(isDone)}
+        className={cn(
+          "fixed bottom-4 right-4 z-[999] max-w-[132px] h-[40px] rounded-[40px]",
+          isDone && "bg-background-inverse",
+        )}
       >
         <Icon name="check" className="size-4 tablet:size-4" />
-        완료 취소하기
+        {isDone ? "완료 취소하기" : "완료하기"}
       </BaseButton>
     </>
   );
