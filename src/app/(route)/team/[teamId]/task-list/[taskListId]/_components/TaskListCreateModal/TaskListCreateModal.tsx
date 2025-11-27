@@ -10,13 +10,13 @@ interface TaskListCreateModalProps {
 
 const TaskListCreateModal = ({ isOpen, onClose, groupId }: TaskListCreateModalProps) => {
   const [todoName, setTodoName] = useState("");
-  const { mutate, isPending } = usePostTodo();
+  const { mutate: postTodo, isPending } = usePostTodo();
 
   const handleCreateTodo = (e: FormEvent<HTMLFormElement>) => {
     if (!todoName || todoName.trim() === "") return;
 
     e.preventDefault();
-    mutate({ groupId, name: todoName });
+    postTodo({ groupId, name: todoName });
     setTodoName("");
     onClose();
   };
