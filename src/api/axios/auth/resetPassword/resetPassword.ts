@@ -5,7 +5,7 @@ import { ResetPasswordRequest, ResetPasswordResponse } from "./_types/type";
 
 const postResetPassword = async (request: ResetPasswordRequest): Promise<ResetPasswordResponse> => {
   try {
-    const { data } = await instance.post<ResetPasswordResponse>("user/send-reset-password-email", request);
+    const { data } = await instance.post<ResetPasswordResponse>("/user/send-reset-password-email", request);
     return data;
   } catch (error) {
     if (axios.isAxiosError<ApiErrorResponse>(error)) {

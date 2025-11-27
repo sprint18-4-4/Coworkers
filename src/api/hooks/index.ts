@@ -14,6 +14,12 @@ export { default as usePostTaskListComment } from "./task-list-detail/usePostTas
 export { default as useGetTaskListComment } from "./task-list-detail/useGetTaskListComment";
 export { default as usePostSignup } from "./auth/signup/usePostSignup";
 export { default as usePostCreateTeam } from "./team-creation/usePostCreateTeam";
+export { default as useDeleteComment } from "./task-list-detail/useDeleteComment";
+export { default as usePatchComment } from "./task-list-detail/usePatchComment";
+export { default as usePatchTaskListDetail } from "./task-list-detail/usePatchTaskListDetail";
+export { default as useDeleteTaskListDetail } from "./task-list-detail/useDeleteTaskListDetail";
+export { default as usePostTeamJoin } from "./team-join/usePostTeamJoin";
+export { default as usePatchResetPassword } from "./auth/ResetPassword/usePatchResetPassword";
 export { default as usePatchUserProfile } from "./user/usePatchUserProfile";
 export { default as usePatchUserPassword } from "./user/usePatchUserPassword";
 export { default as useDeleteUser } from "./user/useDeleteUser";
