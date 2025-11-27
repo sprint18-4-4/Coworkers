@@ -20,18 +20,7 @@ export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) 
     todoMemo: "",
   });
 
-  const { mutate: postTask } = usePostTask({
-    groupId,
-    taskListId,
-    formData: {
-      name: formData.title,
-      description: formData.todoMemo,
-      startDate: formData.startDate.toISOString(),
-      frequencyType: formData.frequencyType,
-      // TODO(지권): monthDay 테스트 필요
-      // monthDay: formData.startDate.getDate(),
-    },
-  });
+  const { mutate: postTask } = usePostTask();
 
   const isFormValid =
     formData.title.trim().length > 0 &&
@@ -41,8 +30,21 @@ export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) 
     formData.frequencyType;
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    if (!isFormValid) return;
+
     e.preventDefault();
-    postTask();
+    postTask({
+      groupId,
+      taskListId,
+      formData: {
+        name: formData.title.trim(),
+        description: formData.todoMemo.trim(),
+        startDate: formData.startDate.toISOString(),
+        frequencyType: formData.frequencyType,
+        // TODO(지권): monthDay 테스트 필요
+        // monthDay: formData.startDate.getDate(),
+      },
+    });
     onClose();
   };
 

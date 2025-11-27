@@ -21,12 +21,21 @@ interface CenteredCardLayoutProps {
   children: ReactNode;
   title?: string;
   titleClassName?: string;
+  sectionClassName?: string;
   className?: string;
+  bottomContent?: ReactNode;
 }
 
-const CenteredCardLayout = ({ children, className, title, titleClassName }: CenteredCardLayoutProps) => {
+const CenteredCardLayout = ({
+  children,
+  className,
+  sectionClassName,
+  title,
+  titleClassName,
+  bottomContent,
+}: CenteredCardLayoutProps) => {
   return (
-    <section className={cn("w-full h-[calc(100svh-52px)] flex-center", "tablet:h-svh")}>
+    <section className={cn("w-full h-[calc(100svh-52px)] flex-center", sectionClassName)}>
       <div
         className={cn(
           "mx-4 px-[22px] rounded-[20px]",
@@ -38,6 +47,7 @@ const CenteredCardLayout = ({ children, className, title, titleClassName }: Cent
         <h2 className={cn("text-xl-bold text-text-primary tablet:text-2xl-bold", titleClassName)}>{title}</h2>
         {children}
       </div>
+      {bottomContent && <>{bottomContent}</>}
     </section>
   );
 };

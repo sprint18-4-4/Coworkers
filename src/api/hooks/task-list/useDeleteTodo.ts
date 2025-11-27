@@ -3,17 +3,20 @@ import { DeleteTodoRequest } from "@/types";
 import { toastKit } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const useDeleteTodo = ({ groupId, id }: DeleteTodoRequest) => {
+const useDeleteTodo = () => {
   const { success, error } = toastKit();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () => deleteTodo({ groupId, id }),
+    mutationFn: ({ groupId, id }: DeleteTodoRequest) => deleteTodo({ groupId, id }),
 
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
+      const { groupId } = variables;
+
       success("할 일 삭제 성공");
       queryClient.invalidateQueries({
-        queryKey: ["group-info", groupId],
+        // TODO(지권): groupId 네이밍 변경
+        queryKey: ["groups", Number(groupId)],
       });
     },
 

@@ -14,17 +14,17 @@ interface EditTodoModalProps {
 const TaskItemEditModal = ({ isOpen, onClose, TodoItem }: EditTodoModalProps) => {
   const [todoName, setTodoName] = useState("");
 
-  const { mutate, isPending } = usePatchTodo({
-    groupId: String(TodoItem?.groupId),
-    id: String(TodoItem?.id),
-    name: todoName,
-  });
+  const { mutate: patchTodo, isPending } = usePatchTodo();
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleUpdateTodo = (e: FormEvent<HTMLFormElement>) => {
     if (!todoName || todoName.trim() === "") return;
 
     e.preventDefault();
-    mutate();
+    patchTodo({
+      groupId: String(TodoItem?.groupId),
+      id: String(TodoItem?.id),
+      name: todoName,
+    });
     setTodoName("");
     onClose();
   };
@@ -33,7 +33,7 @@ const TaskItemEditModal = ({ isOpen, onClose, TodoItem }: EditTodoModalProps) =>
     <Modal isOpen={isOpen} onClose={onClose} className="flex-col-center gap-4 px-4 py-8">
       <Modal.CloseIcon onClose={onClose} />
       <h2 className="text-lg-medium text-text-primary">할 일 수정</h2>
-      <form onSubmit={onSubmit} className="flex-col-center gap-4 w-[280px]">
+      <form onSubmit={handleUpdateTodo} className="flex-col-center gap-4 w-[280px]">
         <Input
           autoFocus
           placeholder="수정할 이름을 입력해주세요."

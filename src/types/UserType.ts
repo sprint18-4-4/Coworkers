@@ -33,11 +33,6 @@ export interface User {
   memberships: Membership[];
 }
 
-/**
- * @author KimWonSeon
- * @description 유저 관련 리스톤스 타입 정의
- */
-
 export type UserRole = "ADMIN" | "MEMBER";
 
 export type UserResponse = User;
