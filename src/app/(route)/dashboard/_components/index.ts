@@ -1,3 +1,3 @@
 export { default as DashBoardHeader } from "./Section/DashBoardHeader/DashBoardHeader";
-export { default as DashBoardBestPosts } from "./Section/DashBoardBestPosts/DashBoardBestPosts";
-export { default as DashBoardAllPosts } from "./Section/DashBoardAllPosts/DashBoardAllPosts";
+export { default as DashBoardBestArticles } from "./Section/DashBoardBestArticles/DashBoardBestArticles";
+export { default as DashBoardAllArticles } from "./Section/DashBoardAllArticles/DashBoardAllArticles";
