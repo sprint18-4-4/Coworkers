@@ -12,8 +12,9 @@ const usePatchTodo = ({ groupId, id, name }: PatchTodoRequest) => {
 
     onSuccess: () => {
       success("할 일 수정 성공");
+      // TODO(지권): groupId 네이밍 변경
       queryClient.invalidateQueries({
-        queryKey: ["group-info", groupId],
+        queryKey: ["groups", Number(groupId)],
       });
     },
 

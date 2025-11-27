@@ -13,7 +13,8 @@ const useDeleteTodo = ({ groupId, id }: DeleteTodoRequest) => {
     onSuccess: () => {
       success("할 일 삭제 성공");
       queryClient.invalidateQueries({
-        queryKey: ["group-info", groupId],
+        // TODO(지권): groupId 네이밍 변경
+        queryKey: ["groups", Number(groupId)],
       });
     },
 
