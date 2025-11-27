@@ -15,9 +15,16 @@ interface TodoSectionHeaderProps {
   selectedDate: Date;
   onClickMoveWeek: (direction: "prev" | "next") => void;
   onClickCalendar: (date: Date) => void;
+  sectionName: string;
 }
 
-const TodoSectionHeader = ({ data, selectedDate, onClickMoveWeek, onClickCalendar }: TodoSectionHeaderProps) => {
+const TodoSectionHeader = ({
+  data,
+  selectedDate,
+  onClickMoveWeek,
+  onClickCalendar,
+  sectionName,
+}: TodoSectionHeaderProps) => {
   const monthLabel = format(selectedDate, "yyyy년 M월");
   const monthDateTime = format(selectedDate, "yyyy-MM");
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
@@ -31,7 +38,7 @@ const TodoSectionHeader = ({ data, selectedDate, onClickMoveWeek, onClickCalenda
 
   return (
     <header className="flex items-center justify-between relative">
-      <h3 className="text-2lg-bold text-text-primary">법인 등기</h3>
+      <h3 className="text-2lg-bold text-text-primary">{sectionName || "로딩중..."}</h3>
 
       <div className="flex items-center gap-2">
         <time dateTime={monthDateTime} className="text-sm-medium text-text-primary">
@@ -71,9 +78,10 @@ interface TodoSectionProps {
   onClickDateItem: (date: Date) => void;
   selectedDate: Date;
   taskListId: string;
+  sectionName: string;
 }
 
-const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId }: TodoSectionProps) => {
+const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, sectionName }: TodoSectionProps) => {
   const router = useRouter();
 
   const handleMoveWeek = (direction: WeekDirection) => {
@@ -108,6 +116,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId }
         selectedDate={selectedDate}
         onClickMoveWeek={handleMoveWeek}
         onClickCalendar={onClickDateItem}
+        sectionName={sectionName}
       />
 
       <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
