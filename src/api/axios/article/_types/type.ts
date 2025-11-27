@@ -1,24 +1,19 @@
+import { ArticleDetail, ArticleListItem } from "@/types/ArticleType";
+
 export interface GetArticlesRequest {
   page?: number;
   pageSize?: number;
   orderBy?: "recent" | "like";
-  keyword?: "string";
+  keyword?: string;
 }
 
 export interface GetArticlesResponse {
   totalCount: number;
-  list: [
-    {
-      updatedAt: string;
-      createdAt: string;
-      likeCount: number;
-      writer: {
-        nickname: string;
-        id: number;
-      };
-      image: string;
-      title: string;
-      id: number;
-    },
-  ];
+  list: ArticleListItem[];
 }
+
+export interface GetArticleRequest {
+  articleId: number;
+}
+
+export type GetArticleResponse = ArticleDetail;

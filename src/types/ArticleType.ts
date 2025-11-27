@@ -1,4 +1,4 @@
-export interface Article {
+interface ArticleBase {
   updatedAt: string;
   createdAt: string;
   likeCount: number;
@@ -9,4 +9,12 @@ export interface Article {
   image: string;
   title: string;
   id: number;
+}
+
+export type ArticleListItem = ArticleBase;
+
+export interface ArticleDetail extends ArticleBase {
+  content: string;
+  commentCount: number;
+  isLiked: boolean;
 }
