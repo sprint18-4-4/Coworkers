@@ -1,7 +1,5 @@
 import { PageLayout } from "@/common";
-import DashBoardHeader from "./_components/Section/DashBoardHeader/DashBoardHeader";
-import DashBoardBestArticles from "./_components/Section/DashBoardBestArticles/DashBoardBestArticles";
-import DashBoardAllArticles from "./_components/Section/DashBoardAllArticles/DashBoardAllArticles";
+import { DashBoardHeader, DashBoardBestArticles, DashBoardAllArticles } from "./_components";
 
 const Dashboard = () => {
   return (
