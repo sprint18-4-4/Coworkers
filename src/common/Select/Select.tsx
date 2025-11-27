@@ -25,7 +25,7 @@ import { useDropdownClose } from "@/hooks";
  * ```
  */
 
-interface DropdownProps<T> {
+interface SelectProps<T> {
   value: T;
   options: SelectOption<T>[];
   onChange: (value: T) => void;
@@ -33,7 +33,7 @@ interface DropdownProps<T> {
   textAlign?: "left" | "center";
 }
 
-const Select = <T,>({ value, options, onChange, className, textAlign = "left" }: DropdownProps<T>) => {
+const Select = <T,>({ value, options, onChange, className, textAlign = "left" }: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement | null>(null);
 
