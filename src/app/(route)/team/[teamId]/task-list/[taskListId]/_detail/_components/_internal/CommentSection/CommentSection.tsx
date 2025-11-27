@@ -1,25 +1,35 @@
 import { cn } from "@/utils";
-import { DetailDataItem } from "@/types";
 import { CommentItem, InputReply, Profile } from "@/common";
-import { TASK_DETAIL_COMMENT_MOCK_DATA } from "@/MOCK_DATA";
 import { FormEvent, useState } from "react";
+import { useGetTaskListComment, usePostTaskListComment } from "@/api/hooks";
+import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types/type";
 
 interface CommentSectionProps {
-  id: string;
-  data: DetailDataItem;
+  data: GetTaskListDetailResponse;
 }
 
-// TODO(지권): 실제 댓글 데이터로 변경
-const commentData = TASK_DETAIL_COMMENT_MOCK_DATA;
+const CommentSection = ({ data }: CommentSectionProps) => {
+  const [commentValue, setCommentValue] = useState("");
 
-const CommentSection = ({ id, data }: CommentSectionProps) => {
-  const [value, setValue] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { data: commentData } = useGetTaskListComment({ taskId: String(data.id) });
 
+  const { mutate: postComment, isPending } = usePostTaskListComment({
+    groupId: String(data.recurring.groupId),
+    taskListId: String(data.recurring.taskListId),
+    taskId: String(data.id),
+  });
+
+  const trimmedCommentValue = commentValue.trim();
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    // TODO(지권): 실제 댓글 API 호출
     e.preventDefault();
-    // console.log("submit", id);
+
+    if (!trimmedCommentValue) return;
+
+    postComment(trimmedCommentValue, {
+      onSuccess: () => {
+        setCommentValue("");
+      },
+    });
   };
 
   return (
@@ -31,13 +41,13 @@ const CommentSection = ({ id, data }: CommentSectionProps) => {
         </div>
         <form aria-label="댓글 작성" onSubmit={onSubmit} className="flex items-center gap-3 w-full">
           <Profile src={data.writer.image} />
-          <InputReply value={value} onChange={setValue} isSubmitting={isSubmitting} />
+          <InputReply value={commentValue} onChange={setCommentValue} isSubmitting={isPending} />
         </form>
       </section>
 
       <ul aria-label="댓글 목록" className="mt-1">
-        {commentData.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
+        {commentData?.map((comment) => (
+          <CommentItem key={comment.id} comment={comment} onDelete={() => {}} onUpdate={() => {}} />
         ))}
       </ul>
     </>

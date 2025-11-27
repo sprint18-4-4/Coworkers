@@ -1,15 +1,7 @@
 import axios from "axios";
 import { instance } from "@/lib";
 import { ApiErrorResponse } from "@/types";
-
-type ResetPasswordRequest = {
-  email: string;
-  redirectUrl: string;
-};
-
-type ResetPasswordResponse = {
-  message: string;
-};
+import { ResetPasswordRequest, ResetPasswordResponse } from "./_types/type";
 
 const postResetPassword = async (request: ResetPasswordRequest): Promise<ResetPasswordResponse> => {
   try {

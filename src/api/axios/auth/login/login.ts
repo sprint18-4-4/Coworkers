@@ -1,15 +1,7 @@
 import axios from "axios";
 import { instance } from "@/lib";
-import { ApiErrorResponse, AuthToken, User } from "@/types";
-
-export type LoginRequest = {
-  email: string;
-  password: string;
-};
-
-export type LoginResponse = AuthToken & {
-  user: User;
-};
+import { ApiErrorResponse } from "@/types";
+import { LoginResponse, LoginRequest } from "./_types/type";
 
 const postLogin = async (credentials: LoginRequest): Promise<LoginResponse> => {
   try {

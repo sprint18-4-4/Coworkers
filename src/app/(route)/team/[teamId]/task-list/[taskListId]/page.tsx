@@ -14,7 +14,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("task-id");
 
-  const { data: groups } = useGetGroups({ id: Number(teamId) });
+  const { data: groups, isLoading: isLoadingGroup } = useGetGroups({ id: Number(teamId) });
 
   const { data: taskList } = useGetTaskList({
     groupId: teamId,
@@ -51,12 +51,13 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
         <PageHeaderBar title={groups?.name} />
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
-          <TodoHeader data={groups} />
+          <TodoHeader data={groups} isLoading={isLoadingGroup} groupId={teamId} />
           <TodoSection
             data={taskList ?? []}
             teamId={teamId}
             onClickDateItem={onClickDateItem}
             selectedDate={selectedDate}
+            taskListId={taskListId}
           />
         </div>
       </PageLayout>
@@ -68,7 +69,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
         onClick={onClickFloatingButton}
       />
 
-      {selectedId && <DetailPage id={selectedId} />}
+      {selectedId && <DetailPage teamId={teamId} taskListId={taskListId} id={selectedId} />}
       {searchParams.get("w") && (
         <MakeTodoModal
           isOpen={!!searchParams.get("w")}

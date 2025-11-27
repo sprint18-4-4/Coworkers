@@ -1,5 +1,5 @@
 import { CenteredCardLayout } from "../_components";
-import { CreateTeamForm } from "./_components/";
+import { TeamCreateForm } from "./_components/";
 
 const TeamCreatePage = () => {
   return (
@@ -8,7 +8,7 @@ const TeamCreatePage = () => {
       title="팀 생성하기"
       titleClassName="w-full text-left"
     >
-      <CreateTeamForm />
+      <TeamCreateForm />
     </CenteredCardLayout>
   );
 };
