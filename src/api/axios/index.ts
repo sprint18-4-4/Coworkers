@@ -6,6 +6,8 @@ export { default as getHistory } from "./my-history/getHistory";
 export { default as deleteGroup } from "./group/deleteGroup/deleteGroup";
 export { default as getTaskList } from "./task-list/getTaskList";
 export { default as postRecurring } from "./task-list/postRecurring";
+export { default as getArticles } from "./article/getArticles/getArticles";
+export { default as getArticle } from "./article/getArticle/getArticle";
 export { default as patchGroup } from "./group/patchGroup/patchGroup";
 export { default as postTodo } from "./task-list/postTodo";
 export { default as deleteTodo } from "./task-list/deleteTodo";
