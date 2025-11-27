@@ -1,6 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import TodoSection from "./TodoSection";
 import { TASK_GROUP_MOCK_DATA } from "@/MOCK_DATA";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const meta: Meta<typeof TodoSection> = {
   title: "Page/List/TodoSection",
@@ -27,6 +30,13 @@ const meta: Meta<typeof TodoSection> = {
     sectionName: "할 일 목록",
     onClickDateItem: () => {},
   },
+  decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
+    ),
+  ],
 };
 
 export default meta;
