@@ -1,5 +1,5 @@
 import { FloatingButton, PageLayout } from "@/common";
-import { DashBoardHeader, DashBoardBestArticles, DashBoardAllArticles } from "./_components";
+import { DashBoardHeader, DashBoardBestArticles, DashBoardAllArticles } from "../(route)/dashboard/_components";
 import Link from "next/link";
 
 const Dashboard = () => {
