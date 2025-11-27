@@ -1,5 +1,6 @@
-import { PageLayout } from "@/common";
+import { FloatingButton, PageLayout } from "@/common";
 import { DashBoardHeader, DashBoardBestArticles, DashBoardAllArticles } from "./_components";
+import Link from "next/link";
 
 const Dashboard = () => {
   return (
@@ -8,6 +9,9 @@ const Dashboard = () => {
         <DashBoardHeader />
         <DashBoardBestArticles />
         <DashBoardAllArticles />
+        <Link href="/dashboard/write" className="block">
+          <FloatingButton iconName="pencil" className="fixed right-0 bottom-0" />
+        </Link>
       </section>
     </PageLayout>
   );
