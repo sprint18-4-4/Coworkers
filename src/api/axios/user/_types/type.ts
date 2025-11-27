@@ -1,9 +1,3 @@
-import { User } from "@/types";
-
-// 유저 정보 조회
-
-export type UserResponse = User;
-
 // 프로필 업데이트
 
 export type PatchUserProfileRequest = {
