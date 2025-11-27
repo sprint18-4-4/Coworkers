@@ -91,6 +91,11 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId }
     console.warn("토글 선택 - API 호출 예정", { id, next });
   };
 
+  const options = [
+    { label: "수정하기", action: () => console.warn("할 일 수정하기") },
+    { label: "삭제하기", action: () => console.warn("할 일 삭제하기") },
+  ];
+
   return (
     <section
       className={cn(
@@ -127,6 +132,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId }
               item={item}
               onOpenDetail={() => onClickTaskListItem(item.id.toString())}
               onToggleTodo={onToggleTodo}
+              options={options}
             />
           ))}
         </ul>
