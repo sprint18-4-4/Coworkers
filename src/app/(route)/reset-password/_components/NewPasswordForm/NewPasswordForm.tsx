@@ -1,10 +1,18 @@
 "use client";
 
-import { useForm } from "@/hooks";
+import { useSearchParams } from "next/navigation";
 import { InputPassword, BaseButton } from "@/common";
-import { validatePassword, validatePasswordConfirm } from "@/utils";
+import { toastKit, validatePassword, validatePasswordConfirm } from "@/utils";
+import { usePatchResetPassword } from "@/api/hooks";
+import { useForm } from "@/hooks";
 
 const NewPasswordForm = () => {
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+  const { error } = toastKit();
+
+  const { mutate } = usePatchResetPassword();
+
   const { register, errors, handleSubmit, meta } = useForm({
     initialValues: { password: "", passwordConfirm: "" },
     validationRules: {
@@ -12,7 +20,16 @@ const NewPasswordForm = () => {
       passwordConfirm: (value, formData) => validatePasswordConfirm(formData?.password ?? "", value),
     },
     onSubmit: async (values) => {
-      // TODO(김원선): 비밀번호 재설정 API 연동
+      if (!token) {
+        error("유효하지 않은 접근입니다.");
+        return;
+      }
+
+      mutate({
+        password: values.password,
+        passwordConfirmation: values.passwordConfirm,
+        token,
+      });
     },
   });
 
