@@ -72,3 +72,26 @@ export interface GetTaskListCommentResponse {
   content: string;
   id: number;
 }
+
+// DELETE TaskListComment
+
+export interface DeleteTaskListCommentRequest {
+  taskId: string;
+  commentId: string;
+}
+
+// PATCH TaskListComment
+
+export interface PatchCommentRequest {
+  taskId: string;
+  commentId: string;
+  content: string;
+}
+
+export interface PatchCommentResponse {
+  content: string;
+  updatedAt: string;
+  createdAt: string;
+  id: number;
+  user: TaskUser;
+}
