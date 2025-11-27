@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { UserData } from "../_types/type";
 import { usePatchUserProfile } from "@/api/hooks";
 import { useImageUpload } from "@/hooks";
@@ -47,11 +47,10 @@ const useMyProfileSettings = (initialData: UserData): UseMyProfileSettingsReturn
 
   const isSaving = isUploading || isUpdating;
 
-  const hasChanges = useMemo(() => {
-    const nicknameChanged = formData.nickname.trim() !== initialData.nickname;
-    const imageChanged = file !== null;
-    return nicknameChanged || imageChanged;
-  }, [formData.nickname, initialData.nickname, file]);
+  const nicknameChanged = formData.nickname.trim() !== initialData.nickname;
+  const imageChanged = file !== null;
+
+  const hasChanges = nicknameChanged || imageChanged;
 
   const handleNicknameChange = (value: string) => {
     setFormData((prev) => ({ ...prev, nickname: value }));
