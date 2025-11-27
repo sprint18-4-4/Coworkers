@@ -26,5 +26,6 @@ export interface PostTaskResponse {
   description: string;
   startDate: string;
   frequencyType: Frequency;
-  monthDay?: number;
+  monthDay?: number | null;
+  weekDays?: number[];
 }
