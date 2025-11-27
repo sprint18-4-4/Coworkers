@@ -1,4 +1,5 @@
 "use client";
+
 import { useGetArticles } from "@/api/hooks";
 import BestArticleCard from "../../Article/BestArticleCard";
 import { useDevice } from "@/hooks";
