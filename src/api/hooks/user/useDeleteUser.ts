@@ -3,7 +3,8 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { ApiErrorResponse } from "@/types";
 import { deleteUser } from "@/api/axios";
-import { toastKit } from "@/utils";
+import { toastKit, tokenStorage } from "@/utils";
+import { clearAuthCookies } from "@/utils/setAuthCookies";
 
 type UseDeleteUserOptions = {
   onSuccess?: () => void;
@@ -16,7 +17,11 @@ const useDeleteUser = (options?: UseDeleteUserOptions) => {
 
   return useMutation({
     mutationFn: deleteUser,
-    onSuccess: () => {
+    onSuccess: async () => {
+      await clearAuthCookies();
+
+      tokenStorage.clearTokens();
+
       success("회원 탈퇴가 완료되었습니다.");
       options?.onSuccess?.();
 
