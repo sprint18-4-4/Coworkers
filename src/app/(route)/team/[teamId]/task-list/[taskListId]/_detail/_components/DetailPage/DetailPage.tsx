@@ -41,9 +41,10 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
         aria-modal="true"
         className={cn(
           "w-full min-h-[calc(100vh-52px)] flex flex-col px-4 py-3 space-y-6 bg-background-primary",
-          "fixed inset-x-0 inset-y-10 z-[999] shadow-lg",
+          "fixed inset-x-0 inset-y-10 z-[999] shadow-lg hide-scrollbar",
           "tablet:px-7 tablet:py-10 tablet:inset-x-[150px] tablet:inset-y-0",
-          "pc:static pc:min-w-[200px] pc:p-10 pc:max-h-[calc(100vh)] pc:overflow-y-auto",
+          "pc:sticky pc:top-0 pc:w-[420px] pc:min-w-[420px] pc:left-auto pc:right-0",
+          "pc:max-h-[100vh] pc:overflow-y-auto pc:shadow-none",
         )}
       >
         <button aria-label="닫기" onClick={onClickClose}>
