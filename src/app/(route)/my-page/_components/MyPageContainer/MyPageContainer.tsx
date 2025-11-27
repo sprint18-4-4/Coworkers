@@ -1,10 +1,10 @@
 import { FormEvent } from "react";
+import { SaveChangesSnackbar } from "@/common";
 import { CenteredCardLayout } from "@/app/(route)/_components";
 import MyProfileForm from "../MyProfileForm/MyProfileForm";
 import DeleteAccountButton from "../DeleteAccountButton/DeleteAccountButton";
 import PasswordInputSection from "../PasswordInputSection/PasswordInputSection";
 import useMyProfileSettings from "../../_hook/useMyProfileSettings";
-import { SaveChangesSnackbar } from "@/common";
 import { UserData } from "../../_types/type";
 
 const MyPageContainer = ({ userData }: { userData: UserData }) => {

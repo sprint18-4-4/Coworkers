@@ -1,8 +1,8 @@
 "use client";
 
-import { ProfileEdit, Input } from "@/common";
-import { useDevice } from "@/hooks";
 import { FormEvent } from "react";
+import { useDevice } from "@/hooks";
+import { ProfileEdit, Input } from "@/common";
 
 interface MyProfileFormProps {
   nickname: string;
