@@ -40,14 +40,18 @@ const MyPageContainer = ({ userData }: { userData: UserData }) => {
       }
     >
       <MyProfileForm
-        nickname={formData.nickname}
-        email={userData.email}
-        imageUrl={userData.image}
-        onNicknameChange={handlers.onNicknameChange}
-        onImageChange={handlers.onImageChange}
+        userInfo={{
+          nickname: formData.nickname,
+          email: userData.email,
+          imageUrl: userData.image,
+        }}
         imagePreview={imagePreview}
         nicknameError={errors.nickname}
-        onSubmit={handleFormSubmit}
+        handlers={{
+          onNicknameChange: handlers.onNicknameChange,
+          onImageChange: handlers.onImageChange,
+          onSubmit: handleFormSubmit,
+        }}
       />
       <PasswordInputSection />
       <DeleteAccountButton />

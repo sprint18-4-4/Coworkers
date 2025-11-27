@@ -5,25 +5,25 @@ import { useDevice } from "@/hooks";
 import { ProfileEdit, Input } from "@/common";
 
 interface MyProfileFormProps {
-  nickname: string;
-  email: string;
-  imageUrl: string | null;
+  userInfo: {
+    nickname: string;
+    email: string;
+    imageUrl: string | null;
+  };
   imagePreview: string;
   nicknameError?: string;
-  onNicknameChange: (value: string) => void;
-  onImageChange: (file: File) => void;
-  onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
+  handlers: {
+    onNicknameChange: (value: string) => void;
+    onImageChange: (file: File) => void;
+    onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
+  };
 }
 
 const MyProfileForm = ({
-  nickname,
-  email,
-  imageUrl,
+  userInfo: { nickname, email, imageUrl },
   imagePreview,
   nicknameError,
-  onNicknameChange,
-  onImageChange,
-  onSubmit,
+  handlers: { onNicknameChange, onImageChange, onSubmit },
 }: MyProfileFormProps) => {
   const { isMobile } = useDevice();
 
