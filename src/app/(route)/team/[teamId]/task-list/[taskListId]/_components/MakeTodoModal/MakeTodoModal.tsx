@@ -17,7 +17,7 @@ interface MakeTodoModalProps {
 }
 
 const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalProps) => {
-  const [order, setOrder] = useState("ONCE");
+  const [order, setOrder] = useState("");
   const [openPicker, setOpenPicker] = useState<OpenPicker>(null);
 
   const { formData, setFormData, isFormValid, onSubmit, onChangeDate, onChangeTime } = useTodoForm({
@@ -47,6 +47,7 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
                 <div className="flex-[2]">
                   <Input
                     readOnly
+                    maxLength={30}
                     className={cn(MODAL_STYLES.periodDiv, openPicker === "date" && MODAL_STYLES.periodDivPressed)}
                     value={formatToKoreanDate(formData.startDate)}
                     onClick={() => setOpenPicker((prev) => (prev === "date" ? null : "date"))}
@@ -55,6 +56,7 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
                 <div className="flex-[1.5]">
                   <Input
                     readOnly
+                    maxLength={200}
                     className={cn(MODAL_STYLES.periodDiv, openPicker === "time" && MODAL_STYLES.periodDivPressed)}
                     value={`${formData.startTime.period === "am" ? "오전" : "오후"} ${formData.startTime.value}`}
                     onClick={() => setOpenPicker((prev) => (prev === "time" ? null : "time"))}

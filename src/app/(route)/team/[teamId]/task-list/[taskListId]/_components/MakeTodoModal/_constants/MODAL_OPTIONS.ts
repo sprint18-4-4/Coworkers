@@ -5,6 +5,7 @@ export const MODAL_STYLES = {
 } as const;
 
 export const REPEAT_OPTIONS = [
+  { label: "반복 안함", value: "" },
   { label: "한 번", value: "ONCE" },
   { label: "매일", value: "DAILY" },
   { label: "주 반복", value: "WEEKLY" },
