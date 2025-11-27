@@ -6,9 +6,12 @@ interface UseTodoFormProps {
   onClose: () => void;
   groupId: string;
   taskListId: string;
+  order: Frequency;
+  weekDays: number[];
+  monthDay: number | null;
 }
 
-export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) => {
+export const useTodoForm = ({ onClose, groupId, taskListId, order, weekDays, monthDay }: UseTodoFormProps) => {
   const [formData, setFormData] = useState({
     title: "",
     startDate: new Date(),
@@ -16,7 +19,6 @@ export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) 
       period: "am" as "am" | "pm",
       value: "01:30" as HalfHour,
     },
-    frequencyType: "ONCE" as Frequency,
     todoMemo: "",
   });
 
@@ -27,12 +29,12 @@ export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) 
     formData.todoMemo.trim().length > 0 &&
     formData.startDate !== null &&
     formData.startTime.value !== null &&
-    formData.frequencyType;
+    (order === "WEEKLY" ? weekDays.length > 0 : order === "MONTHLY" ? monthDay !== null : true);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!isFormValid) return;
 
-    e.preventDefault();
     postTask({
       groupId,
       taskListId,
@@ -40,11 +42,12 @@ export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) 
         name: formData.title.trim(),
         description: formData.todoMemo.trim(),
         startDate: formData.startDate.toISOString(),
-        frequencyType: formData.frequencyType,
-        // TODO(지권): monthDay 테스트 필요
-        // monthDay: formData.startDate.getDate(),
+        frequencyType: order,
+        ...(order === "WEEKLY" ? { weekDays } : {}),
+        ...(order === "MONTHLY" ? { monthDay } : {}),
       },
     });
+
     onClose();
   };
 
