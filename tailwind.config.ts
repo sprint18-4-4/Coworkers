@@ -1,5 +1,6 @@
 import { flexCenter, flexColCenter, customShadow } from "./src/utils/customPlugins";
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
@@ -108,7 +109,23 @@ const config: Config = {
       },
     },
   },
-  plugins: [flexCenter, flexColCenter, customShadow],
+  plugins: [
+    flexCenter,
+    flexColCenter,
+    customShadow,
+    plugin(function ({ addBase }) {
+      addBase({
+        img: {
+          "-webkit-user-drag": "none",
+          "user-drag": "none",
+          "user-select": "none",
+          "-webkit-user-select": "none",
+          "-moz-user-select": "none",
+          "-ms-user-select": "none",
+        },
+      });
+    }),
+  ],
 };
 
 export default config;
