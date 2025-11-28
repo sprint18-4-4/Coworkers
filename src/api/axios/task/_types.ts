@@ -113,10 +113,3 @@ export interface TaskGroupItem {
 }
 
 export type TaskResponse = TaskGroupItem[];
-
-// DELETE Todo
-// TODO(지권): 임시 이름 변경
-export interface DeleteTaskListRequest {
-  groupId: number;
-  id: number;
-}

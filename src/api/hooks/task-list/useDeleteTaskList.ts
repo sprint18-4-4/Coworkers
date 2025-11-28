@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
-import { DeleteTaskListRequest } from "@/api/axios/task/_types";
 import { deleteTaskList } from "@/api/axios";
+import { DeleteTaskListRequest } from "@/api/axios/task-list/_types";
 
 const useDeleteTaskList = () => {
   const { success, error } = toastKit();

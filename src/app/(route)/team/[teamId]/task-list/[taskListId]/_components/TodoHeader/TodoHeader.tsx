@@ -14,7 +14,7 @@ const TodoItem = ({ data }: { data: TaskList }) => {
 
   const options = [
     { label: "수정하기", action: () => setIsEditModalOpen(true) },
-    // { label: "삭제하기", action: () => deleteTodo({ groupId: data.groupId, id: data.id }) },
+    { label: "삭제하기", action: () => deleteTodo({ groupId: data.groupId, id: data.id }) },
   ];
 
   const totalCount = data.tasks?.length ?? 0;
