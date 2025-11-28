@@ -16,3 +16,4 @@ export type { ApiErrorResponse } from "./ApiType";
 export type { PostTodoRequest, PostTodoResponse } from "./taskList/postTodoType";
 export type { DeleteTodoRequest } from "./taskList/DeleteTodoType";
 export type { PatchTodoRequest } from "./taskList/PatchTodoType";
+export type { ArticleCommentType } from "./ArticleCommentType";

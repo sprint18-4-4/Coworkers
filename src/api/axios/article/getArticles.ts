@@ -1,5 +1,5 @@
 import { instance } from "@/lib";
-import { GetArticlesRequest, GetArticlesResponse } from "../_types/type";
+import { GetArticlesRequest, GetArticlesResponse } from "./_types/type";
 
 const getArticles = async (params: GetArticlesRequest): Promise<GetArticlesResponse> => {
   const { data } = await instance.get<GetArticlesResponse>("/articles", { params });

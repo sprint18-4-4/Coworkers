@@ -25,10 +25,10 @@ export { default as usePatchResetPassword } from "./auth/ResetPassword/usePatchR
 export { default as usePatchUserProfile } from "./user/usePatchUserProfile";
 export { default as usePatchUserPassword } from "./user/usePatchUserPassword";
 export { default as useDeleteUser } from "./user/useDeleteUser";
-export { default as useGetArticleComments } from "./article/useGetArticleComments";
-export { default as usePostArticleComment } from "./article/usePostArticleComment";
+export { default as useGetArticleComments } from "./articleComment/useGetArticleComments";
+export { default as usePostArticleComment } from "./articleComment/usePostArticleComment";
 export { default as usePostArticleLike } from "./article/usePostArticleLike";
 export { default as useDeleteArticleLike } from "./article/useDeleteArticleLike";
 export { default as useDeleteArticle } from "./article/useDeleteArticle";
-export { default as useDeleteArticleComment } from "./article/useDeleteArticleComment";
-export { default as usePatchArticleComment } from "./article/usePatchArticleComment";
+export { default as useDeleteArticleComment } from "./articleComment/useDeleteArticleComment";
+export { default as usePatchArticleComment } from "./articleComment/usePatchArticleComment";

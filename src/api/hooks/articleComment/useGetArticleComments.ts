@@ -1,5 +1,5 @@
 import { getArticleComments } from "@/api/axios";
-import { GetArticleCommentsRequest } from "@/api/axios/article/_types/type";
+import { GetArticleCommentsRequest } from "@/api/axios/articleComment/_types/type";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetArticleComments = (params: GetArticleCommentsRequest) => {

@@ -13,7 +13,7 @@ import { formatTime } from "@/utils";
 import { useParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import ArticleEditCommentModal from "./ArticleEditCommentModal";
-import { ArticleCommentType } from "@/api/axios/article/_types/type";
+import { ArticleCommentType } from "@/types";
 
 const ArticleComments = () => {
   const { id } = useParams();

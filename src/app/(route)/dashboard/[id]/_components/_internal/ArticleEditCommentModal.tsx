@@ -1,4 +1,4 @@
-import { ArticleCommentType } from "@/api/axios/article/_types/type";
+import { ArticleCommentType } from "@/types";
 import { usePatchArticleComment } from "@/api/hooks";
 import { BaseButton, Input, Modal } from "@/common";
 import { ChangeEvent, FormEvent, useState } from "react";
