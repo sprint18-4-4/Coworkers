@@ -41,6 +41,8 @@ const MyProfileForm = ({
         onChange={(e) => onNicknameChange(e.target.value)}
         placeholder="이름을 입력해주세요."
         error={nicknameError}
+        minLength={2}
+        maxLength={20}
       />
       <Input label="이메일" type="email" value={email} disabled />
     </form>
