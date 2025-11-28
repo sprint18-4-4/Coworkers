@@ -1,5 +1,5 @@
 import { instance } from "@/lib";
-import { PatchTodoRequest } from "@/types";
+import { PatchTodoRequest } from "./_type";
 
 const patchTodo = async ({ groupId, id, name }: PatchTodoRequest) => {
   const response = await instance.patch(`/groups/${groupId}/task-lists/${id}`, { name });

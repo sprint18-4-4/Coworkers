@@ -1,4 +1,4 @@
-import { DoneBy, Frequency, TaskUser } from "@/types";
+import { Frequency, TaskUser } from "@/types";
 
 // GET TaskListDetail
 
@@ -36,7 +36,7 @@ export interface GetTaskListDetailResponse {
   displayIndex: number;
   commentCount: number;
   writer: TaskUser;
-  doneBy: DoneBy;
+  doneBy: { user: TaskUser };
   recurring: Recurring;
 }
 

@@ -1,7 +1,7 @@
-import { patchTodo } from "@/api/axios";
-import { PatchTodoRequest } from "@/types";
-import { toastKit } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toastKit } from "@/utils";
+import { patchTodo } from "@/api/axios";
+import { PatchTodoRequest } from "@/api/axios/task-list/_type";
 
 const usePatchTodo = () => {
   const { success, error } = toastKit();

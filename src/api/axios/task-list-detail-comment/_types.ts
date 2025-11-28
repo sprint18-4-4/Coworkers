@@ -1,6 +1,6 @@
-// POST TaskListComment
-
 import { TaskUser } from "@/types";
+
+// POST TaskListComment
 
 export interface PostTaskListCommentRequest {
   groupId: number;
