@@ -16,7 +16,7 @@ interface FormStateType {
 }
 
 const ArticleForm = () => {
-  const { mutate: postArticle } = usePostArticle();
+  const { mutate: postArticle, isPending } = usePostArticle();
   const [preview, setPreview] = useState<string | null>(null);
   const [formState, setFormState] = useState<FormStateType>({
     title: "",
@@ -110,8 +110,8 @@ const ArticleForm = () => {
           )}
         </label>
       </div>
-      <BaseButton type="submit" variant="solid" size="large">
-        등록하기
+      <BaseButton type="submit" variant="solid" size="large" disabled={isPending}>
+        {isPending ? "등록 중..." : "등록하기"}
       </BaseButton>
     </form>
   );
