@@ -2,7 +2,7 @@ import { HeroSection, KanbanSection, DetailSection, CooperationSection, Conversi
 
 export default function Page() {
   return (
-    <main className="min-h-dvh">
+    <main className="mobile:h-[calc(100vh-62px)] h-dvh">
       <HeroSection />
       <KanbanSection />
       <DetailSection />
