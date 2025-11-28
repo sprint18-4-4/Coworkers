@@ -19,7 +19,7 @@ export interface GetArticleRequest {
 export type GetArticleResponse = ArticleDetail;
 
 export interface PostArticleRequest {
-  image?: string | null;
+  image?: string;
   content: string;
   title: string;
 }

@@ -3,12 +3,34 @@
 import Image from "next/image";
 import { Input, InputBox, BaseButton, Icon } from "@/common";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { postImageUpload } from "@/api/axios";
+import { usePostArticle } from "@/api/hooks";
 
 const LABEL_STYLE = "text-text-primary text-lg-bold";
 const INPUT_AREA_STYLE = "flex flex-col gap-4";
 
+interface FormStateType {
+  title: string;
+  content: string;
+  image: File | null;
+}
+
 const ArticleForm = () => {
+  const { mutate: postArticle } = usePostArticle();
   const [preview, setPreview] = useState<string | null>(null);
+  const [formState, setFormState] = useState<FormStateType>({
+    title: "",
+    content: "",
+    image: null,
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -18,25 +40,57 @@ const ArticleForm = () => {
 
     const previewUrl = URL.createObjectURL(file);
     setPreview(previewUrl);
+    setFormState((prev) => ({
+      ...prev,
+      image: file,
+    }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const { title, content, image } = formState;
+
+    try {
+      const imageURL = image && (await postImageUpload(image));
+      const newFormData = {
+        title: title,
+        content: content,
+        ...(imageURL && { image: imageURL }),
+      };
+      postArticle(newFormData);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-8 mt-10">
       <div className={INPUT_AREA_STYLE}>
         <label htmlFor="articleTitle" className={LABEL_STYLE}>
           제목 <span className="text-status-danger">*</span>
         </label>
-        <Input id="articleTitle" placeholder="제목을 입력해주세요." />
+        <Input
+          name="title"
+          id="articleTitle"
+          placeholder="제목을 입력해주세요."
+          value={formState.title}
+          onChange={handleChange}
+        />
       </div>
 
       <div className={INPUT_AREA_STYLE}>
         <label htmlFor="articleContent" className={LABEL_STYLE}>
           내용 <span className="text-status-danger">*</span>
         </label>
-        <InputBox id="articleContent" placeholder="내용을 입력해주세요." size="lg" />
+        <InputBox
+          name="content"
+          id="articleContent"
+          placeholder="내용을 입력해주세요."
+          size="lg"
+          value={formState.content}
+          onChange={handleChange}
+        />
       </div>
 
       <div className={INPUT_AREA_STYLE}>

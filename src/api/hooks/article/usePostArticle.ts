@@ -1,7 +1,7 @@
 import { postArticle } from "@/api/axios";
 import { toastKit } from "@/utils";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const usePostArticle = () => {
   const router = useRouter();
