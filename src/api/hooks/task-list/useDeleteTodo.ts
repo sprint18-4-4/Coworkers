@@ -1,7 +1,7 @@
-import { deleteTodo } from "@/api/axios";
-import { DeleteTodoRequest } from "@/types";
-import { toastKit } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toastKit } from "@/utils";
+import { deleteTodo } from "@/api/axios";
+import { DeleteTodoRequest } from "@/api/axios/task-list/_types";
 
 const useDeleteTodo = () => {
   const { success, error } = toastKit();

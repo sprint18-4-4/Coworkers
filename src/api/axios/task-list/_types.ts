@@ -1,4 +1,6 @@
-import { Frequency, TaskGroupItem } from "@/types";
+import { Frequency, TaskUser } from "@/types";
+
+// GET TaskList
 
 export interface GetTaskListRequest {
   groupId: number;
@@ -6,7 +8,29 @@ export interface GetTaskListRequest {
   date?: string | null;
 }
 
-export type GetTaskListResponse = TaskGroupItem[];
+interface TaskDoneBy {
+  user: TaskUser;
+}
+
+export interface TaskGroupItem {
+  doneBy: TaskDoneBy;
+  writer: TaskUser;
+  displayIndex: number;
+  commentCount: number;
+  deletedAt: string;
+  recurringId: number;
+  frequency: Frequency;
+  updatedAt: string;
+  doneAt: string;
+  date: string;
+  description: string;
+  name: string;
+  id: number;
+}
+
+export type TaskListResponse = TaskGroupItem[];
+
+// POST Task
 
 export interface PostTaskRequest {
   groupId: number;
@@ -28,4 +52,35 @@ export interface PostTaskResponse {
   frequencyType: Frequency;
   monthDay?: number | null;
   weekDays?: number[];
+}
+
+// POST Todo
+
+export interface PostTodoRequest {
+  groupId: number;
+  name: string;
+}
+
+export interface PostTodoResponse {
+  displayIndex: number;
+  groupId: number;
+  updatedAt: string;
+  createdAt: string;
+  name: string;
+  id: number;
+}
+
+// DELETE Todo
+
+export interface DeleteTodoRequest {
+  groupId: number;
+  id: number;
+}
+
+// PATCH Todo
+
+export interface PatchTodoRequest {
+  groupId: number;
+  id: number;
+  name: string;
 }
