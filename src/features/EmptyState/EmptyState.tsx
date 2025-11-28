@@ -1,23 +1,20 @@
-import { cn } from "@/utils";
-import { ReactNode } from "react";
+import Image from "next/image";
 
-interface EmptyStateProps {
-  ariaLabel: string;
-  text: ReactNode;
-}
-
-const EmptyState = ({ ariaLabel, text }: EmptyStateProps) => {
+const EmptyState = () => {
   return (
-    <div
-      role="status"
-      aria-label={ariaLabel}
-      className={cn(
-        "w-full h-[426px] flex-col-center text-center text-md-regular text-text-default",
-        "tablet:h-[571px]",
-        "pc:h-[328px]",
-      )}
-    >
-      {text}
+    <div role="status" className="w-full flex-col-center">
+      <Image
+        src="/illustrations/empty-idle.png"
+        alt=""
+        width={120}
+        height={120}
+        priority
+        aria-hidden
+        draggable="false"
+      />
+      <div className="flex-col-center gap-2 mt-3">
+        <h2 className="text-lg-medium">텅— 비어 있어요.</h2>
+      </div>
     </div>
   );
 };

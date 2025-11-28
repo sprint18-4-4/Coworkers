@@ -1,16 +1,16 @@
 import { FormEvent, useState } from "react";
-import { usePostTodo } from "@/api/hooks";
+import { usePostTaskList } from "@/api/hooks";
 import { BaseButton, Input, Modal } from "@/common";
 
 interface TaskListCreateModalProps {
   isOpen: boolean;
   onClose: () => void;
-  groupId: string;
+  groupId: number;
 }
 
 const TaskListCreateModal = ({ isOpen, onClose, groupId }: TaskListCreateModalProps) => {
   const [todoName, setTodoName] = useState("");
-  const { mutate: postTodo, isPending } = usePostTodo();
+  const { mutate: postTodo, isPending } = usePostTaskList();
 
   const handleCreateTodo = (e: FormEvent<HTMLFormElement>) => {
     if (!todoName || todoName.trim() === "") return;

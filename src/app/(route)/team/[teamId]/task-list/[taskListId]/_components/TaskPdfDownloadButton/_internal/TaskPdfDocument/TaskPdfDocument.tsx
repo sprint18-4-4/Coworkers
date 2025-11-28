@@ -1,6 +1,6 @@
 "use client";
 
-import { TaskGroupItem, TaskListData } from "@/types";
+import { TaskGroupItem, TaskResponse } from "@/api/axios/task/_types";
 import { getFrequencyLabel } from "@/utils";
 import { Document, Page, Text, View, StyleSheet, Font } from "@react-pdf/renderer";
 import { format } from "date-fns";
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 });
 
 interface TaskPdfDocumentProps {
-  data: TaskListData;
+  data: TaskResponse;
 }
 
 const TaskPdfDocument = ({ data }: TaskPdfDocumentProps) => {

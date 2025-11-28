@@ -24,3 +24,4 @@ export { default as Select } from "./Select/Select";
 export { default as ProgressBar } from "./ProgressBar/ProgressBar";
 export { default as ProgressBadge } from "./ProgressBadge/ProgressBadge";
 export { default as InputPassword } from "./Input/InputPassword/InputPassword";
+export { default as LinkButton } from "./asProp/LinkButton/LinkButton";

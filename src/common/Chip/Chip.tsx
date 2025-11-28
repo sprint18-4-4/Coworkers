@@ -1,4 +1,4 @@
-import { cn, formatCount } from "@/utils";
+import { cn, formatClampedCount } from "@/utils";
 import Link from "next/link";
 
 /**
@@ -30,7 +30,7 @@ const Chip = ({ title, count, isActive }: ChipProps) => {
       )}
     >
       <span className="text-sm-medium tablet:text-lg-medium">{title}</span>
-      <span className={cn("text-lg-bold", !isActive && "text-brand-primary")}>{formatCount(count)}</span>
+      <span className={cn("text-lg-bold", !isActive && "text-brand-primary")}>{formatClampedCount(count)}</span>
     </Link>
   );
 };

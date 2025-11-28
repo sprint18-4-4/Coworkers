@@ -27,9 +27,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const MOCK_PATH = {
-  id: "27453",
-  teamId: "3449",
-  taskListId: "4871",
+  id: 27453,
+  teamId: 3449,
+  taskListId: 4871,
 };
 
 export const Default: Story = {
