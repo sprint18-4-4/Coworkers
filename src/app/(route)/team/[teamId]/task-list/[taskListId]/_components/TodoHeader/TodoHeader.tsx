@@ -10,11 +10,11 @@ import { GetGroupsResponse } from "@/api/axios/group/_types/type";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const { mutate: deleteTodo } = useDeleteTodo({ groupId: String(data.groupId), id: String(data.id) });
+  const { mutate: deleteTodo } = useDeleteTodo();
 
   const options = [
     { label: "수정하기", action: () => setIsEditModalOpen(true) },
-    { label: "삭제하기", action: () => deleteTodo() },
+    { label: "삭제하기", action: () => deleteTodo({ groupId: String(data.groupId), id: String(data.id) }) },
   ];
 
   const totalCount = data.tasks?.length ?? 0;

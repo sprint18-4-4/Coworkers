@@ -6,7 +6,8 @@ const getTaskList = async ({ groupId, taskListId, date }: GetTaskListRequest): P
     params: date ? { date } : undefined,
   });
 
-  return response.data || [];
+  const data = response.data.reverse();
+  return data || [];
 };
 
 export default getTaskList;
