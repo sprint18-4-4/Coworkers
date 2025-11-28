@@ -1,4 +1,4 @@
-import { Frequency } from "../FrequencyType";
+import { Frequency } from "@/types";
 
 export interface MyHistoryItem {
   displayIndex: number;
