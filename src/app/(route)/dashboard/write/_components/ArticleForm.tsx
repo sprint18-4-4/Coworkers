@@ -5,9 +5,7 @@ import { Input, InputBox, BaseButton, Icon } from "@/common";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { postImageUpload } from "@/api/axios";
 import { usePostArticle } from "@/api/hooks";
-
-const LABEL_STYLE = "text-text-primary text-lg-bold";
-const INPUT_AREA_STYLE = "flex flex-col gap-4";
+import { INPUT_AREA_STYLE, LABEL_STYLE } from "./STYLE";
 
 interface FormStateType {
   title: string;
