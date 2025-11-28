@@ -4,8 +4,8 @@ import { cn } from "@/utils";
 import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
 import { CommentSection, ContentSection, HeaderSection } from "../_internal";
-import useGetTaskListDetail from "@/api/hooks/task-list-detail/useGetTaskListDetail";
-import useTaskListMutations from "../../../../../../../../../hooks/useTaskMutations/useListDataMutations";
+import useGetTaskListDetail from "@/api/hooks/task/useGetTaskListDetail";
+import { useTaskMutations } from "@/hooks";
 
 interface DetailPageProps {
   id: number;
@@ -28,7 +28,7 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
 
   const isDone = taskDetail?.doneAt !== null;
 
-  const { toggleTaskDone } = useTaskListMutations({ teamId, taskListId });
+  const { toggleTaskDone } = useTaskMutations({ teamId, taskListId });
 
   // TODO(지권): 에러, 로딩 상태 처리 추가 필요
   if (isPending) return <div>로딩중</div>;
