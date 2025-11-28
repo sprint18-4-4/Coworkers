@@ -78,3 +78,11 @@ export interface DeleteArticleLikeRequest {
 }
 
 export type DeleteArticleLikeResponse = PostArticleLikeResponse;
+
+export interface DeleteArticleRequest {
+  articleId: number;
+}
+export interface DeleteArticleResponse {
+  id?: number;
+  message?: string;
+}
