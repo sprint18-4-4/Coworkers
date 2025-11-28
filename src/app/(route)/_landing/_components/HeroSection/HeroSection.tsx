@@ -1,12 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ResponsiveImage } from "../_internal";
 import { cn } from "@/utils";
-import {
-  BASE_BUTTON_BASE_STYLE,
-  BASE_BUTTON_STYLE_BY_SIZE,
-  BASE_BUTTON_STYLE_BY_VARIANT,
-} from "@/common/Button/BUTTON_STYLES";
+import { ResponsiveImage } from "../_internal";
+import { LinkButton } from "@/common";
 
 const HeroSection = () => {
   return (
@@ -31,17 +26,14 @@ const HeroSection = () => {
               </h1>
             </div>
           </div>
-          <Link
+          <LinkButton
             href="/login"
-            className={cn(
-              BASE_BUTTON_BASE_STYLE,
-              BASE_BUTTON_STYLE_BY_SIZE.large,
-              BASE_BUTTON_STYLE_BY_VARIANT.solid,
-              "mobile:hidden tablet:hidden pc:flex ml-[30px] w-[160px]",
-            )}
+            size="large"
+            variant="solid"
+            className="mobile:hidden tablet:hidden pc:flex ml-[30px] w-[160px]"
           >
             지금 시작하기
-          </Link>
+          </LinkButton>
         </div>
         <div className="relative flex-1 w-full pc:min-w-[1330px] min-h-0 tablet:h-screen">
           <ResponsiveImage
@@ -54,17 +46,14 @@ const HeroSection = () => {
             ImageClassName="object-fill tablet:object-cover object-left w-full h-full"
           />
         </div>
-        <Link
+        <LinkButton
           href="/login"
-          className={cn(
-            BASE_BUTTON_BASE_STYLE,
-            BASE_BUTTON_STYLE_BY_SIZE.large,
-            BASE_BUTTON_STYLE_BY_VARIANT.solid,
-            "pc:hidden flex w-[160px] absolute bottom-[52px] right-4 tablet:right-8",
-          )}
+          size="large"
+          variant="solid"
+          className="pc:hidden flex w-[160px] absolute bottom-[52px] right-4 tablet:right-8"
         >
           지금 시작하기
-        </Link>
+        </LinkButton>
       </div>
     </section>
   );

@@ -1,10 +1,4 @@
-import Link from "next/link";
-import { cn } from "@/utils";
-import {
-  BASE_BUTTON_BASE_STYLE,
-  BASE_BUTTON_STYLE_BY_SIZE,
-  BASE_BUTTON_STYLE_BY_VARIANT,
-} from "@/common/Button/BUTTON_STYLES";
+import { LinkButton } from "@/common";
 
 const ConversionSection = () => {
   return (
@@ -16,17 +10,9 @@ const ConversionSection = () => {
             팀원 모두와 같은 방향, 같은 속도로 나아가는 가장 쉬운 방법
           </p>
         </div>
-        <Link
-          href="/login"
-          className={cn(
-            BASE_BUTTON_BASE_STYLE,
-            BASE_BUTTON_STYLE_BY_SIZE.large,
-            BASE_BUTTON_STYLE_BY_VARIANT.solid,
-            "block w-[160px]",
-          )}
-        >
+        <LinkButton href="/login" size="large" variant="solid" className="w-[160px]">
           지금 시작하기
-        </Link>
+        </LinkButton>
       </div>
     </footer>
   );
