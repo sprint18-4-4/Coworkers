@@ -1,5 +1,5 @@
 import { getTaskListComment } from "@/api/axios";
-import { GetTaskListCommentRequest } from "@/api/axios/task-list-detail-comment/_types";
+import { GetTaskListCommentRequest } from "@/api/axios/comment/_types";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetTaskListComment = ({ taskId }: GetTaskListCommentRequest) => {

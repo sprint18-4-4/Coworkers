@@ -2,7 +2,7 @@ import { Frequency, TaskUser } from "@/types";
 
 // GET TaskListDetail
 
-export interface GetTaskListDetailRequest {
+export interface GetTaskDetailRequest {
   groupId: number;
   taskListId: number;
   taskId: number;
@@ -23,7 +23,7 @@ export interface Recurring {
   writerId: number;
 }
 
-export interface GetTaskListDetailResponse {
+export interface GetTaskDetailResponse {
   id: number;
   name: string;
   description: string | null;
@@ -40,9 +40,17 @@ export interface GetTaskListDetailResponse {
   recurring: Recurring;
 }
 
-// PATCH TaskListDetail
+// PATCH Task
 
-export interface PatchTaskListDetailRequest {
+export interface PatchTaskRequest {
+  groupId: number;
+  id: number;
+  name: string;
+}
+
+// PATCH TaskDetail
+
+export interface PatchTaskDetailRequest {
   groupId: number;
   taskListId: number;
   taskId: number;
@@ -53,7 +61,7 @@ export interface PatchTaskListDetailRequest {
   };
 }
 
-export interface PatchTaskListDetailResponse {
+export interface PatchTaskDetailResponse {
   displayIndex: number;
   writerId: number;
   userId: number;
@@ -68,10 +76,40 @@ export interface PatchTaskListDetailResponse {
   id: number;
 }
 
-// DELETE TaskListDetail
+// DELETE Task
 
-export interface DeleteTaskListDetailRequest {
+export interface DeleteTaskRequest {
   groupId: number;
   taskListId: number;
   taskId: number;
 }
+
+// GET TaskList
+
+export interface GetTaskRequest {
+  groupId: number;
+  taskListId: number;
+  date?: string | null;
+}
+
+interface TaskDoneBy {
+  user: TaskUser;
+}
+
+export interface TaskGroupItem {
+  doneBy: TaskDoneBy;
+  writer: TaskUser;
+  displayIndex: number;
+  commentCount: number;
+  deletedAt: string;
+  recurringId: number;
+  frequency: Frequency;
+  updatedAt: string;
+  doneAt: string;
+  date: string;
+  description: string;
+  name: string;
+  id: number;
+}
+
+export type TaskResponse = TaskGroupItem[];

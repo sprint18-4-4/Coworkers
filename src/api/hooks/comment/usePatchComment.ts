@@ -1,5 +1,5 @@
 import { patchComment } from "@/api/axios";
-import { PatchCommentRequest } from "@/api/axios/task-list-detail-comment/_types";
+import { PatchCommentRequest } from "@/api/axios/comment/_types";
 import { toastKit } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 

@@ -1,8 +1,8 @@
 import { postRecurring } from "@/api/axios";
 import { useMutation } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
-import { PostTaskRequest } from "@/api/axios/task-list/_types";
 import { useQueryClient } from "@tanstack/react-query";
+import { PostTaskRequest } from "@/api/axios/recurring/_types";
 
 const usePostRecurring = () => {
   const { success, error } = toastKit();

@@ -1,29 +1,29 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
-import { postTodo } from "@/api/axios";
-import { PostTodoRequest } from "@/api/axios/task-list/_types";
+import { deleteTaskList } from "@/api/axios";
+import { DeleteTaskListRequest } from "@/api/axios/task-list/_types";
 
-const usePostTodo = () => {
+const useDeleteTaskList = () => {
   const { success, error } = toastKit();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ groupId, name }: PostTodoRequest) => postTodo({ groupId, name }),
+    mutationFn: ({ groupId, id }: DeleteTaskListRequest) => deleteTaskList({ groupId, id }),
 
     onSuccess: (_data, variables) => {
       const { groupId } = variables;
 
-      success("할 일 추가 성공");
-      // TODO(지권): groupId 네이밍 변경
+      success("할 일 삭제 성공");
       queryClient.invalidateQueries({
+        // TODO(지권): groupId 네이밍 변경
         queryKey: ["groups", groupId],
       });
     },
 
     onError: () => {
-      error("할 일 추가 실패");
+      error("할 일 삭제 실패");
     },
   });
 };
 
-export default usePostTodo;
+export default useDeleteTaskList;

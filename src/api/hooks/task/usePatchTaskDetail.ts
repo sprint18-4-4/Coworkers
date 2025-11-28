@@ -1,15 +1,15 @@
-import { patchTaskListDetail } from "@/api/axios";
-import { PatchTaskListDetailRequest } from "@/api/axios/task-list-detail/_types";
 import { toastKit } from "@/utils";
+import { patchTaskDetail } from "@/api/axios";
+import { PatchTaskDetailRequest } from "@/api/axios/task/_types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const usePatchTaskListDetail = () => {
+const usePatchTaskDetail = () => {
   const { success, error } = toastKit();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ groupId, taskListId, taskId, body }: PatchTaskListDetailRequest) =>
-      patchTaskListDetail({ groupId, taskListId, taskId, body }),
+    mutationFn: ({ groupId, taskListId, taskId, body }: PatchTaskDetailRequest) =>
+      patchTaskDetail({ groupId, taskListId, taskId, body }),
 
     onSuccess: (_data, variables) => {
       if (!variables) return;
@@ -30,4 +30,4 @@ const usePatchTaskListDetail = () => {
   });
 };
 
-export default usePatchTaskListDetail;
+export default usePatchTaskDetail;

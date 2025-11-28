@@ -1,15 +1,15 @@
-// TODO(지권): useDetailDataMutations.ts 파일 중복
-
-import { useDeleteTaskListDetail, usePatchTaskListDetail } from "@/api/hooks";
+import { usePatchTaskDetail } from "@/api/hooks";
+// TODO(지권): 삭제 요청 확인 필요
+import useDeleteTask from "@/api/hooks/task/useDeleteTask";
 
 interface UseTaskListMutationsProps {
   teamId: number;
   taskListId: number;
 }
 
-const useTaskListMutations = ({ teamId, taskListId }: UseTaskListMutationsProps) => {
-  const { mutate: patchTaskListDetailMutate } = usePatchTaskListDetail();
-  const { mutate: deleteTaskListDetailMutate } = useDeleteTaskListDetail();
+const useTaskMutations = ({ teamId, taskListId }: UseTaskListMutationsProps) => {
+  const { mutate: patchTaskListDetailMutate } = usePatchTaskDetail();
+  const { mutate: deleteTaskListDetailMutate } = useDeleteTask();
 
   const toggleTaskDone = (taskId: number, isDone: boolean) => {
     patchTaskListDetailMutate({
@@ -49,4 +49,4 @@ const useTaskListMutations = ({ teamId, taskListId }: UseTaskListMutationsProps)
   };
 };
 
-export default useTaskListMutations;
+export default useTaskMutations;

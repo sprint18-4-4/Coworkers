@@ -1,8 +1,8 @@
 import { cn } from "@/utils";
 import { EmptyState, TaskListItem } from "@/features";
-import { MyHistoryResponse } from "@/api/axios/my-history/_types";
+import { GetHistoryResponse } from "@/api/axios/user/_types/type";
 
-const WorkHistorySection = ({ data }: { data: MyHistoryResponse }) => {
+const WorkHistorySection = ({ data }: { data: GetHistoryResponse }) => {
   return (
     <article
       className={cn(
