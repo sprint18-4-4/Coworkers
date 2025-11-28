@@ -43,7 +43,7 @@ const HeroSection = () => {
             지금 시작하기
           </Link>
         </div>
-        <div className="relative w-full flex-1 min-h-0 h-screen">
+        <div className="relative flex-1 w-full pc:min-w-[1330px] min-h-0 tablet:h-screen">
           <ResponsiveImage
             ImageInfo={{ alt: "대시보드 이미지", width: 1330, height: 1080 }}
             Src={{
@@ -51,7 +51,7 @@ const HeroSection = () => {
               tabletSrc: "/landing/img-1-1.png",
               desktopSrc: "/landing/img-1.png",
             }}
-            ImageClassName="object-cover object-left w-full h-full"
+            ImageClassName="object-fill tablet:object-cover object-left w-full h-full"
           />
         </div>
         <Link
