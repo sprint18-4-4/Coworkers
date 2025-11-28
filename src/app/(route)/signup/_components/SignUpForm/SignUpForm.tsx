@@ -23,6 +23,9 @@ const SignUpForm = () => {
       password: validatePassword,
       passwordConfirmation: (value, formData) => validatePasswordConfirm(formData?.password ?? "", value),
     },
+    validationTriggers: {
+      password: ["passwordConfirmation"],
+    },
     onSubmit: async (values) => {
       const { email, nickname, password, passwordConfirmation } = values;
       postSignup({
