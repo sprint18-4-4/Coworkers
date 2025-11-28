@@ -22,7 +22,7 @@ const ArticleForm = () => {
     image: null,
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleTextChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormState((prev) => ({
       ...prev,
@@ -73,7 +73,7 @@ const ArticleForm = () => {
           id="articleTitle"
           placeholder="제목을 입력해주세요."
           value={formState.title}
-          onChange={handleChange}
+          onChange={handleTextChange}
         />
       </div>
 
@@ -87,7 +87,7 @@ const ArticleForm = () => {
           placeholder="내용을 입력해주세요."
           size="lg"
           value={formState.content}
-          onChange={handleChange}
+          onChange={handleTextChange}
         />
       </div>
 
