@@ -3,7 +3,7 @@ import { Dropdown, Icon, Profile } from "@/common";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import { HEADER_STYLES } from "./HEADER_STYLES";
 import EditDataModal from "../EditDataModal/EditDataModal";
-import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_type";
+import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types";
 import { useDetailDataMutations } from "../../../_hooks";
 
 interface HeaderSectionProps {
