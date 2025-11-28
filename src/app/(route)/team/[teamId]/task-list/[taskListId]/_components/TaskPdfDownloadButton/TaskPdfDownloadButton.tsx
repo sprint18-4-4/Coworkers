@@ -2,9 +2,9 @@
 
 import dynamic from "next/dynamic";
 import { toastKit } from "@/utils";
-import { TaskListData } from "@/types";
 import { format } from "date-fns";
 import { TaskPdfDocument } from "./_internal";
+import { TaskListResponse } from "@/api/axios/task-list/_types";
 
 const PDFViewer = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink), {
   ssr: false,
@@ -12,7 +12,7 @@ const PDFViewer = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.
 });
 
 interface TaskPdfDownloadButtonProps {
-  data: TaskListData;
+  data: TaskListResponse;
 }
 
 const TaskPdfDownloadButton = ({ data }: TaskPdfDownloadButtonProps) => {

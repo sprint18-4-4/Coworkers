@@ -6,8 +6,8 @@ interface EditTodoModalProps {
   isOpen: boolean;
   onClose: () => void;
   TodoItem: {
-    groupId: string;
-    id: string;
+    groupId: number;
+    id: number;
   };
 }
 
@@ -21,8 +21,8 @@ const TaskItemEditModal = ({ isOpen, onClose, TodoItem }: EditTodoModalProps) =>
 
     e.preventDefault();
     patchTodo({
-      groupId: String(TodoItem?.groupId),
-      id: String(TodoItem?.id),
+      groupId: TodoItem?.groupId,
+      id: TodoItem?.id,
       name: todoName,
     });
     setTodoName("");

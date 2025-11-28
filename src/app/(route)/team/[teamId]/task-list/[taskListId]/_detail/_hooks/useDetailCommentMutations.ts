@@ -7,9 +7,9 @@ interface Comment {
 }
 
 interface UseCommentMutationsProps {
-  groupId: string;
-  taskListId: string;
-  taskId: string;
+  groupId: number;
+  taskListId: number;
+  taskId: number;
   comment: Comment;
 }
 
@@ -36,10 +36,10 @@ const useDetailCommentMutations = ({ groupId, taskListId, taskId, comment }: Use
   const { mutate: deleteComment } = useDeleteComment();
   const { mutate: updateComment } = usePatchComment();
 
-  const handleUpdateComment = (commentId: string, newContent: string) => {
+  const handleUpdateComment = (commentId: number, newContent: string) => {
     updateComment({
-      taskId: String(taskId),
-      commentId: String(commentId),
+      taskId: taskId,
+      commentId: commentId,
       content: newContent,
     });
   };
