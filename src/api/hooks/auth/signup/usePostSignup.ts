@@ -29,7 +29,7 @@ const usePostSignup = () => {
       tokenStorage.setAccessToken(data.accessToken);
 
       success("회원가입이 완료되었습니다!");
-      router.push("/login");
+      router.push("/");
     },
     onError: (err: AxiosError<ErrorResponse>) => {
       const responseData = err.response?.data;
