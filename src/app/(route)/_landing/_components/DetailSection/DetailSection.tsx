@@ -4,10 +4,10 @@ import { DETAIL_SECTION } from "../../_constants";
 const DetailSection = () => {
   return (
     <section className="pt-[45px] pc:pt-[83px] bg-brand-primary">
-      <div className="flex flex-col pc:flex-row-reverse pc:justify-center gap-[30px] pc:gap-[108px]">
+      <div className="flex flex-col gap-[30px] pc:gap-[108px] pc:flex-row-reverse pc:justify-center">
         <FeatureBlock
           iconSrc={DETAIL_SECTION.iconSrc}
-          iconAlt="체크 아이콘"
+          iconAlt=""
           title={DETAIL_SECTION.title}
           description={DETAIL_SECTION.description}
           titleClassName="text-lg-bold tablet:text-2xl-bold text-text-inverse"

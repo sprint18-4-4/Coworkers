@@ -10,7 +10,7 @@ const ConversionSection = () => {
             팀원 모두와 같은 방향, 같은 속도로 나아가는 가장 쉬운 방법
           </p>
         </div>
-        <LinkButton href="/login" size="large" variant="solid" className="w-[160px]">
+        <LinkButton href="/login" size="large" className="w-[160px]">
           지금 시작하기
         </LinkButton>
       </div>

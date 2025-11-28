@@ -4,10 +4,10 @@ import { COOPERATION_SECTION } from "../../_constants";
 const CooperationSection = () => {
   return (
     <section className="pt-[44px] tablet:pt-[77px] pc:pt-[100px] bg-background-secondary">
-      <div className="flex flex-col pc:flex-row pc:justify-center gap-[24px] pc:gap-[108px]">
+      <div className="flex flex-col gap-[24px] pc:gap-[108px] pc:flex-row pc:justify-center">
         <FeatureBlock
           iconSrc={COOPERATION_SECTION.iconSrc}
-          iconAlt="채팅 아이콘"
+          iconAlt=""
           title={COOPERATION_SECTION.title}
           description={COOPERATION_SECTION.description}
           titleClassName="text-lg-bold tablet:text-2xl-bold text-brand-primary"

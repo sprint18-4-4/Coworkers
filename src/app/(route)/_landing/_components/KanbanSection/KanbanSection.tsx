@@ -5,10 +5,10 @@ const KanbanSection = () => {
   return (
     <section className="w-full py-[45px] tablet:py-[80px] pc:py-[100px] bg-icon-inverse">
       <div className="w-full pc:max-w-[1920px] pc:mx-auto">
-        <div className="flex flex-col pc:flex-row pc:justify-center mx-auto tablet:gap-6 pc:gap-[100px]">
+        <div className="mx-auto flex flex-col tablet:gap-6 pc:gap-[100px] pc:flex-row pc:justify-center">
           <FeatureBlock
             iconSrc={KANBAN_SECTION.iconSrc}
-            iconAlt="체크 아이콘"
+            iconAlt=""
             title={KANBAN_SECTION.title}
             description={KANBAN_SECTION.title}
             titleClassName="text-lg-bold tablet:text-2xl-bold text-brand-primary"
