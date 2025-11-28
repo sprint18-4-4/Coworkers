@@ -1,7 +1,7 @@
-import { patchTodo } from "@/api/axios";
-import { PatchTodoRequest } from "@/types";
-import { toastKit } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toastKit } from "@/utils";
+import { patchTodo } from "@/api/axios";
+import { PatchTodoRequest } from "@/api/axios/task-list/_types";
 
 const usePatchTodo = () => {
   const { success, error } = toastKit();
@@ -16,7 +16,7 @@ const usePatchTodo = () => {
       success("할 일 수정 성공");
       // TODO(지권): groupId 네이밍 변경
       queryClient.invalidateQueries({
-        queryKey: ["groups", Number(groupId)],
+        queryKey: ["groups", groupId],
       });
     },
 

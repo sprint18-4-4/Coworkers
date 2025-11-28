@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { Frequency } from "@/types";
 import { useTodoForm } from "./_hooks";
 import { cn, formatToKoreanDate } from "@/utils";
 import { BaseButton, DatePicker, Input, InputBox, Modal, Select, Time } from "@/common";
-import { AnimatedCollapse } from "./_internal";
+import { AnimatedCollapse, RepeatMonthlySelect, RepeatWeeklySelect } from "./_internal";
 import { MODAL_STYLES, REPEAT_OPTIONS } from "./_constants";
 
 type OpenPicker = "date" | "time" | null;
@@ -12,18 +13,25 @@ type OpenPicker = "date" | "time" | null;
 interface MakeTodoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  groupId: string;
-  taskListId: string;
+  groupId: number;
+  taskListId: number;
 }
 
 const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalProps) => {
-  const [order, setOrder] = useState("ONCE");
+  const [order, setOrder] = useState<Frequency>("ONCE");
   const [openPicker, setOpenPicker] = useState<OpenPicker>(null);
+  const [weekDays, setWeekDays] = useState<number[]>([]);
+  const [monthDay, setMonthDay] = useState<number | null>(null);
 
   const { formData, setFormData, isFormValid, onSubmit, onChangeDate, onChangeTime } = useTodoForm({
     onClose,
-    groupId,
-    taskListId,
+    groupId: Number(groupId),
+    taskListId: Number(taskListId),
+    repeatConfig: {
+      order,
+      weekDays,
+      monthDay,
+    },
   });
 
   return (
@@ -47,6 +55,7 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
                 <div className="flex-[2]">
                   <Input
                     readOnly
+                    maxLength={30}
                     className={cn(MODAL_STYLES.periodDiv, openPicker === "date" && MODAL_STYLES.periodDivPressed)}
                     value={formatToKoreanDate(formData.startDate)}
                     onClick={() => setOpenPicker((prev) => (prev === "date" ? null : "date"))}
@@ -55,6 +64,7 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
                 <div className="flex-[1.5]">
                   <Input
                     readOnly
+                    maxLength={200}
                     className={cn(MODAL_STYLES.periodDiv, openPicker === "time" && MODAL_STYLES.periodDivPressed)}
                     value={`${formData.startTime.period === "am" ? "오전" : "오후"} ${formData.startTime.value}`}
                     onClick={() => setOpenPicker((prev) => (prev === "time" ? null : "time"))}
@@ -76,7 +86,18 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
 
             <div className={MODAL_STYLES.baseDiv} onClick={(e) => e.preventDefault()}>
               <p>반복 설정</p>
-              <Select value={order} options={REPEAT_OPTIONS} onChange={setOrder} />
+              <Select
+                value={order}
+                options={REPEAT_OPTIONS}
+                onChange={(value) => {
+                  setOrder(value);
+                  if (value !== "WEEKLY") {
+                    setWeekDays([]);
+                  }
+                }}
+              />
+              {order === "WEEKLY" && <RepeatWeeklySelect weekDays={weekDays} setWeekDays={setWeekDays} />}
+              {order === "MONTHLY" && <RepeatMonthlySelect monthDay={monthDay} setMonthDay={setMonthDay} />}
             </div>
 
             <InputBox

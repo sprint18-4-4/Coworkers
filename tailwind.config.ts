@@ -1,5 +1,6 @@
 import { flexCenter, flexColCenter, customShadow } from "./src/utils/customPlugins";
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
