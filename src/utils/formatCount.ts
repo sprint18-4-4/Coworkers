@@ -11,7 +11,8 @@
  * ```
  */
 
-export const formatCount = (count: number): string => {
-  if (count > 99) return "99+";
-  return String(count);
+export const formatClampedCount = (count: number, maxCount: number = 99): string => {
+  const safeCount = Math.max(0, count);
+  if (safeCount > maxCount) return `${maxCount}+`;
+  return String(safeCount);
 };
