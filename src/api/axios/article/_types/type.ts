@@ -21,7 +21,7 @@ export type GetArticleResponse = ArticleDetail;
 
 export interface GetArticleCommentsRequest {
   articleId: number;
-  limit: number;
+  limit?: number;
   cursor?: number;
 }
 
