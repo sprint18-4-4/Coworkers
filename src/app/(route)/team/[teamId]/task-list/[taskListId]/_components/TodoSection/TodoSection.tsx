@@ -145,16 +145,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
 
         <div className="mt-[37px] min-h-[250px]">
           {/* TODO(지권): 로딩, 에러 추가 예정 */}
-          {(data?.length === 0 || !data) && (
-            <EmptyState
-              ariaLabel="할 일이 없습니다."
-              text={
-                <span>
-                  현재 할 일이 없습니다. <br /> 새 할 일을 추가해보세요.
-                </span>
-              }
-            />
-          )}
+          {(data?.length === 0 || !data) && <EmptyState />}
 
           <ul className="flex flex-col gap-3">
             {data?.map((item) => {
