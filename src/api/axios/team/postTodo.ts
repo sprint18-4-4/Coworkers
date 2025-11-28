@@ -1,5 +1,5 @@
 import { instance } from "@/lib";
-import { PostTodoRequest, PostTodoResponse } from "./_type";
+import { PostTodoRequest, PostTodoResponse } from "../task-list/_type";
 
 const postTodo = async ({ groupId, name }: PostTodoRequest): Promise<PostTodoResponse> => {
   const response = await instance.post(`/groups/${groupId}/task-lists`, { name });

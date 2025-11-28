@@ -1,5 +1,5 @@
 import { instance } from "@/lib";
-import { DeleteTodoRequest } from "./_type";
+import { DeleteTodoRequest } from "../task-list/_type";
 
 const deleteTodo = async ({ groupId, id }: DeleteTodoRequest) => {
   const response = await instance.delete(`/groups/${groupId}/task-lists/${id}`);
