@@ -13,8 +13,6 @@ export { default as postTodo } from "./task-list/postTodo";
 export { default as deleteTodo } from "./task-list/deleteTodo";
 export { default as patchTodo } from "./task-list/patchTodo";
 export { default as getTaskListDetail } from "./task-list-detail/getTaskListDetail";
-export { default as postTaskListComment } from "./task-list-detail/postTaskListComment";
-export { default as getTaskListComment } from "./task-list-detail/getTaskListComment";
 export { default as postSignup } from "./auth/signup";
 export { default as postCreateTeam } from "./team-creation/postCreateTeam";
 export { default as postImageUpload } from "./image/postImageUpload";
