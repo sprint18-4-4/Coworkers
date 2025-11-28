@@ -1,5 +1,5 @@
 export interface PostTodoRequest {
-  groupId: string;
+  groupId: number;
   name: string;
 }
 

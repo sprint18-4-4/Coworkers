@@ -4,8 +4,8 @@ import { usePostRecurring } from "@/api/hooks";
 
 interface UseTodoFormProps {
   onClose: () => void;
-  groupId: string;
-  taskListId: string;
+  groupId: number;
+  taskListId: number;
   repeatConfig: {
     order: Frequency;
     weekDays: number[];
@@ -44,7 +44,7 @@ export const useTodoForm = ({ onClose, groupId, taskListId, repeatConfig }: UseT
     postRecurring({
       groupId,
       taskListId,
-      formData: {
+      body: {
         name: formData.title.trim(),
         description: formData.todoMemo.trim(),
         startDate: formData.startDate.toISOString(),

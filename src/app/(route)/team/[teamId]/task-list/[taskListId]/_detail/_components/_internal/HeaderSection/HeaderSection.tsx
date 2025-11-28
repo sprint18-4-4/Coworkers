@@ -10,9 +10,9 @@ interface HeaderSectionProps {
   data: GetTaskListDetailResponse;
   isDone: boolean;
   taskPath: {
-    id: string;
-    teamId: string;
-    taskListId: string;
+    id: number;
+    teamId: number;
+    taskListId: number;
   };
 }
 

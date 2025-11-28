@@ -1,11 +1,8 @@
 import { instance } from "@/lib";
-import { PostTaskRequest, PostTaskResponse } from "./_types/type";
+import { PostTaskRequest, PostTaskResponse } from "./_type";
 
-const postRecurring = async ({ groupId, taskListId, formData }: PostTaskRequest): Promise<PostTaskResponse> => {
-  const response = await instance.post<PostTaskResponse>(
-    `/groups/${groupId}/task-lists/${taskListId}/recurring`,
-    formData,
-  );
+const postRecurring = async ({ groupId, taskListId, body }: PostTaskRequest): Promise<PostTaskResponse> => {
+  const response = await instance.post<PostTaskResponse>(`/groups/${groupId}/task-lists/${taskListId}/recurring`, body);
 
   return response.data;
 };

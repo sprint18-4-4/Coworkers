@@ -1,4 +1,4 @@
 export interface DeleteTodoRequest {
-  groupId: string;
-  id: string;
+  groupId: number;
+  id: number;
 }

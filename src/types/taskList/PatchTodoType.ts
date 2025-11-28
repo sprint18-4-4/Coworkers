@@ -1,5 +1,5 @@
 export interface PatchTodoRequest {
-  groupId: string;
-  id: string;
+  groupId: number;
+  id: number;
   name: string;
 }

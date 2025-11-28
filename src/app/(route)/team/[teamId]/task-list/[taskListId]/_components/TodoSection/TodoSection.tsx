@@ -77,10 +77,10 @@ type WeekDirection = "prev" | "next";
 
 interface TodoSectionProps {
   data: TaskListData;
-  teamId: string;
+  teamId: number;
   onClickDateItem: (date: Date) => void;
   selectedDate: Date;
-  taskListId: string;
+  taskListId: number;
   sectionName: string;
 }
 
@@ -105,7 +105,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
     e.preventDefault();
     if (!editingTask) return;
 
-    updateTask(String(editingTask.id), editForm.name, editForm.description);
+    updateTask(editingTask.id, editForm.name, editForm.description);
     setIsEditModal(false);
   };
 
@@ -121,7 +121,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
 
   const options = (task: { id: number; name: string; description?: string }) => [
     { label: "수정하기", action: () => handleOpenEditModal(task) },
-    { label: "삭제하기", action: () => deleteTask(String(task.id)) },
+    { label: "삭제하기", action: () => deleteTask(task.id) },
   ];
 
   return (
@@ -164,7 +164,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
                   key={item.id}
                   item={item}
                   onOpenDetail={() => onClickTaskListItem(item.id.toString())}
-                  onToggleTodo={() => toggleTaskDone(String(item.id), isDone)}
+                  onToggleTodo={() => toggleTaskDone(item.id, isDone)}
                   options={options(item)}
                 />
               );

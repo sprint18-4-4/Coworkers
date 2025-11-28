@@ -3,9 +3,9 @@
 import { TaskUser } from "@/types";
 
 export interface PostTaskListCommentRequest {
-  groupId: string;
-  taskListId: string;
-  taskId: string;
+  groupId: number;
+  taskListId: number;
+  taskId: number;
   content: string;
 }
 
@@ -20,7 +20,7 @@ export interface PostTaskListCommentResponse {
 // GET TaskListComment
 
 export interface GetTaskListCommentRequest {
-  taskId: string;
+  taskId: number;
 }
 
 export interface GetTaskListCommentResponse {
@@ -36,15 +36,15 @@ export interface GetTaskListCommentResponse {
 // DELETE TaskListComment
 
 export interface DeleteTaskListCommentRequest {
-  taskId: string;
-  commentId: string;
+  taskId: number;
+  commentId: number;
 }
 
 // PATCH TaskListComment
 
 export interface PatchCommentRequest {
-  taskId: string;
-  commentId: string;
+  taskId: number;
+  commentId: number;
   content: string;
 }
 

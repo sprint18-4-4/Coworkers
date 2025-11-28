@@ -28,7 +28,7 @@ const useDeleteTaskListDetail = () => {
         queryKey: ["task-list-detail", groupId, taskListId, taskId],
       });
       queryClient.invalidateQueries({
-        queryKey: ["groups", Number(groupId)],
+        queryKey: ["groups", groupId],
       });
 
       router.replace(`/team/${groupId}/task-list/${taskListId}`);

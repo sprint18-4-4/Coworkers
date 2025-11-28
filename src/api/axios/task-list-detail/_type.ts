@@ -3,9 +3,9 @@ import { DoneBy, Frequency, TaskUser } from "@/types";
 // GET TaskListDetail
 
 export interface GetTaskListDetailRequest {
-  groupId: string;
-  taskListId: string;
-  taskId: string;
+  groupId: number;
+  taskListId: number;
+  taskId: number;
 }
 
 export interface Recurring {
@@ -43,9 +43,9 @@ export interface GetTaskListDetailResponse {
 // PATCH TaskListDetail
 
 export interface PatchTaskListDetailRequest {
-  groupId: string;
-  taskListId: string;
-  taskId: string;
+  groupId: number;
+  taskListId: number;
+  taskId: number;
   body: {
     name?: string;
     description?: string;
@@ -71,7 +71,7 @@ export interface PatchTaskListDetailResponse {
 // DELETE TaskListDetail
 
 export interface DeleteTaskListDetailRequest {
-  groupId: string;
-  taskListId: string;
-  taskId: string;
+  groupId: number;
+  taskListId: number;
+  taskId: number;
 }

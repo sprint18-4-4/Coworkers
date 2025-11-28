@@ -13,8 +13,8 @@ type OpenPicker = "date" | "time" | null;
 interface MakeTodoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  groupId: string;
-  taskListId: string;
+  groupId: number;
+  taskListId: number;
 }
 
 const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalProps) => {
@@ -25,8 +25,8 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
 
   const { formData, setFormData, isFormValid, onSubmit, onChangeDate, onChangeTime } = useTodoForm({
     onClose,
-    groupId,
-    taskListId,
+    groupId: Number(groupId),
+    taskListId: Number(taskListId),
     repeatConfig: {
       order,
       weekDays,
