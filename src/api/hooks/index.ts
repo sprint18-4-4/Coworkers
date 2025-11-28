@@ -25,3 +25,4 @@ export { default as usePatchResetPassword } from "./auth/ResetPassword/usePatchR
 export { default as usePatchUserProfile } from "./user/usePatchUserProfile";
 export { default as usePatchUserPassword } from "./user/usePatchUserPassword";
 export { default as useDeleteUser } from "./user/useDeleteUser";
+export { default as usePostArticle } from "./article/usePostArticle";
