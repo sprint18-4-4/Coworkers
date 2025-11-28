@@ -1,7 +1,7 @@
 export { default as getGroups } from "./group/getGroups/getGroups";
-export { default as postLogin } from "./auth/login/login";
+export { default as postLogin } from "./auth/login";
 export { default as getUser } from "./user/getUser/getUser";
-export { default as postResetPassword } from "./auth/resetPassword/resetPassword";
+export { default as postResetPassword } from "./auth/resetPassword";
 export { default as getHistory } from "./my-history/getHistory";
 export { default as deleteGroup } from "./group/deleteGroup/deleteGroup";
 export { default as getTaskList } from "./task-list/getTaskList";
@@ -13,7 +13,7 @@ export { default as postTodo } from "./task-list/postTodo";
 export { default as deleteTodo } from "./task-list/deleteTodo";
 export { default as patchTodo } from "./task-list/patchTodo";
 export { default as getTaskListDetail } from "./task-list-detail/getTaskListDetail";
-export { default as postSignup } from "./auth/signup/signup";
+export { default as postSignup } from "./auth/signup";
 export { default as postCreateTeam } from "./team-creation/postCreateTeam";
 export { default as postImageUpload } from "./image/postImageUpload";
 export { default as postTaskListComment } from "./task-list-detail-comment/postTaskListComment";
@@ -23,7 +23,7 @@ export { default as patchComment } from "./task-list-detail-comment/patchComment
 export { default as patchTaskListDetail } from "./task-list-detail/patchTaskListDetail";
 export { default as deleteTaskListDetail } from "./task-list-detail/deleteTaskListDetail";
 export { default as postTeamJoin } from "./team-join/postTeamJoin";
-export { default as patchResetPassword } from "./auth/resetPassword/patchResetPassword";
+export { default as patchResetPassword } from "./auth/patchResetPassword";
 export { default as patchUserProfile } from "./user/patchUser/patchUserProfile";
 export { default as patchUserPassword } from "./user/patchUserPassword/patchUserPassword";
 export { default as deleteUser } from "./user/deleteUser/deleteUser";
