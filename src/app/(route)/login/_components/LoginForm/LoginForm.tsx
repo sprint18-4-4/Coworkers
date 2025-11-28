@@ -73,12 +73,16 @@ const LoginForm = () => {
             {...register("email")}
             placeholder="이메일을 입력해주세요."
             error={errors.email}
+            minLength={4}
+            maxLength={30}
           />
           <InputPassword
             label="비밀번호"
             {...register("password")}
             placeholder="비밀번호을 입력해주세요."
             error={errors.password}
+            minLength={8}
+            maxLength={20}
           />
         </div>
         <div className="flex justify-between text-md-medium tablet:text-lg-medium">
