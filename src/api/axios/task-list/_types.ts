@@ -1,11 +1,11 @@
 // POST Todo
 
-export interface PostTodoRequest {
+export interface PostTaskListRequest {
   groupId: number;
   name: string;
 }
 
-export interface PostTodoResponse {
+export interface PostTaskListResponse {
   displayIndex: number;
   groupId: number;
   updatedAt: string;
@@ -14,9 +14,9 @@ export interface PostTodoResponse {
   id: number;
 }
 
-// DELETE Todo
+// DELETE TaskList
 
-export interface DeleteTodoRequest {
+export interface DeleteTaskListRequest {
   groupId: number;
   id: number;
 }
