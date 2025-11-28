@@ -7,6 +7,7 @@ import { useGetArticle } from "@/api/hooks";
 import ArticleTitle from "../../../_components/Article/_internal/ArticleTitle";
 import ArticleWriter from "../../../_components/Article/_internal/ArticleWriter";
 import ArticleContent from "../../../_components/Article/_internal/ArticleContent";
+import ArticleLikeButton from "./ArticleLikeButton";
 
 const ArticleBody = () => {
   const router = useRouter();
@@ -26,7 +27,7 @@ const ArticleBody = () => {
   }
 
   return (
-    <section>
+    <section className="relative">
       <div className="flex flex-col gap-4 border-b border-border-primary">
         <div className="flex items-center justify-between">
           <ArticleTitle title={article.title} />
@@ -40,6 +41,8 @@ const ArticleBody = () => {
       <div className="pt-6">
         <ArticleContent content={article.content} />
       </div>
+
+      <ArticleLikeButton />
     </section>
   );
 };

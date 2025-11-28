@@ -1,22 +1,37 @@
 "use client";
 
-import { useGetArticle, useGetArticleComments, useGetUser } from "@/api/hooks";
-import { InputReply, Profile } from "@/common";
+import { useGetArticle, useGetArticleComments, useGetUser, usePostArticleComment } from "@/api/hooks";
+import { Dropdown, InputReply, Profile } from "@/common";
+import { useDevice } from "@/hooks";
+import { formatTime } from "@/utils";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const ArticleComments = () => {
   const { id } = useParams();
+  const { isPc } = useDevice();
   const articleId = Number(id);
 
   const { data: userInfo } = useGetUser();
   const { data: article } = useGetArticle({ articleId });
   const { data: articleComments } = useGetArticleComments({ articleId });
+  const { mutate: postArticleComment } = usePostArticleComment();
   const [commentValue, setCommentValue] = useState("");
+
+  const handleCommentSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    postArticleComment({ articleId, body: { content: commentValue } });
+  };
+
+  const options = [
+    { label: "수정하기", action: () => {} },
+    { label: "삭제하기", action: () => {} },
+  ];
 
   if (!article || !articleComments) {
     return null;
   }
+
   return (
     <section className="flex flex-col gap-9 py-10">
       <div className="flex flex-col gap-4">
@@ -24,13 +39,27 @@ const ArticleComments = () => {
           <span>댓글</span>
           <span className="text-brand-primary">{article.commentCount}</span>
         </div>
-        <form aria-label="댓글 작성" className="flex items-center gap-3 w-full">
+        <form aria-label="댓글 작성" className="flex items-center gap-3 w-full" onSubmit={handleCommentSubmit}>
           <Profile src={userInfo?.image ?? null} />
           <InputReply value={commentValue} onChange={setCommentValue} isSubmitting={false} />
         </form>
       </div>
 
-      <ul className=""></ul>
+      <ul className="flex flex-col gap-5">
+        {articleComments.list.map((comment) => (
+          <li key={comment.id} className="flex gap-2 items-start border-t border-border-primary py-4">
+            <Profile src={comment.writer.image} />
+            <div className="flex-1">
+              <span className="text-text-primary text-md-bold">{comment.writer.nickname}</span>
+              <p className="text-text-primary text-md-regular">{comment.content}</p>
+              <span className="text-state-400 text-md-regular">{formatTime(comment.createdAt)}</span>
+            </div>
+            {userInfo?.id === comment.writer.id && (
+              <Dropdown iconName="kebab" options={options} placement={isPc ? "bottom-left" : "bottom-right"} />
+            )}
+          </li>
+        ))}
+      </ul>
     </section>
   );
 };
