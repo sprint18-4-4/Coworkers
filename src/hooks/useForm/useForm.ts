@@ -10,9 +10,10 @@ interface UseFormOptions {
   initialValues: FormValues;
   validationRules?: AuthValidationRules;
   onSubmit: (values: FormValues) => Promise<void>;
+  validationTriggers?: Record<string, string[]>;
 }
 
-const useForm = ({ initialValues, validationRules, onSubmit }: UseFormOptions) => {
+const useForm = ({ initialValues, validationRules, onSubmit, validationTriggers }: UseFormOptions) => {
   const [formData, setFormData] = useState<FormValues>(initialValues);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,13 +21,20 @@ const useForm = ({ initialValues, validationRules, onSubmit }: UseFormOptions) =
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    const newFormData = { ...formData, [name]: value };
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
+    setFormData(newFormData);
     if (errors[name]) clearError(name);
+
+    if (validationTriggers && validationTriggers[name]) {
+      validationTriggers[name].forEach((targetField) => {
+        if (newFormData[targetField]) {
+          {
+            validateField(targetField, newFormData[targetField], newFormData);
+          }
+        }
+      });
+    }
   };
 
   const handleBlur = (name: string) => {
