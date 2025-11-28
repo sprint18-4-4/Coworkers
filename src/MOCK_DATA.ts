@@ -1,4 +1,4 @@
-import { GetTaskListDetailResponse } from "./api/axios/task-list-detail/_types/type";
+import { GetTaskListDetailResponse } from "./api/axios/task-list-detail/_type";
 import { DateNumber, Day, TaskGroupItem, TaskListItemType } from "./types";
 
 export const USER_MOCK_DATA = {

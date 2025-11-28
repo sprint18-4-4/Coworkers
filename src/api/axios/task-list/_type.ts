@@ -1,17 +1,17 @@
 import { Frequency, TaskGroupItem } from "@/types";
 
 export interface GetTaskListRequest {
-  groupId: string;
-  taskListId: string;
+  groupId: number;
+  taskListId: number;
   date?: string | null;
 }
 
 export type GetTaskListResponse = TaskGroupItem[];
 
 export interface PostTaskRequest {
-  groupId: string;
-  taskListId: string;
-  formData: {
+  groupId: number;
+  taskListId: number;
+  body: {
     name: string;
     description: string;
     startDate: string;

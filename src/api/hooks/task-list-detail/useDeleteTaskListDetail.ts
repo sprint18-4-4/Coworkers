@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
 import { deleteTaskListDetail } from "@/api/axios";
-import { DeleteTaskListDetailRequest } from "@/api/axios/task-list-detail/_types/type";
+import { DeleteTaskListDetailRequest } from "@/api/axios/task-list-detail/_type";
 
 const useDeleteTaskListDetail = () => {
   const { success, error } = toastKit();
@@ -28,7 +28,7 @@ const useDeleteTaskListDetail = () => {
         queryKey: ["task-list-detail", groupId, taskListId, taskId],
       });
       queryClient.invalidateQueries({
-        queryKey: ["groups", Number(groupId)],
+        queryKey: ["groups", groupId],
       });
 
       router.replace(`/team/${groupId}/task-list/${taskListId}`);
