@@ -12,6 +12,8 @@ import { useDevice } from "@/hooks";
 import { formatTime } from "@/utils";
 import { useParams } from "next/navigation";
 import { FormEvent, useState } from "react";
+import ArticleEditCommentModal from "./ArticleEditCommentModal";
+import { ArticleCommentType } from "@/api/axios/article/_types/type";
 
 const ArticleComments = () => {
   const { id } = useParams();
@@ -25,6 +27,8 @@ const ArticleComments = () => {
   const { mutate: deleteArticleComment } = useDeleteArticleComment();
 
   const [commentValue, setCommentValue] = useState("");
+  const [selectedComment, setSelectedComment] = useState<ArticleCommentType | null>(null);
+  const [isOpenEditCommentModal, setIsOpenEditCommentModal] = useState(false);
 
   const handleCommentSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,6 +57,7 @@ const ArticleComments = () => {
         </form>
       </div>
 
+      {/* TODO(상인): 추후 시간 남으면 컴포넌트로 빼기 */}
       <ul className="flex flex-col gap-5">
         {articleComments.list.map((comment) => (
           <li key={comment.id} className="flex gap-2 items-start border-t border-border-primary py-4">
@@ -66,7 +71,13 @@ const ArticleComments = () => {
               <Dropdown
                 iconName="kebab"
                 options={[
-                  { label: "수정하기", action: () => {} },
+                  {
+                    label: "수정하기",
+                    action: () => {
+                      setIsOpenEditCommentModal(true);
+                      setSelectedComment(comment);
+                    },
+                  },
                   { label: "삭제하기", action: () => deleteArticleComment({ commentId: comment.id }) },
                 ]}
                 placement={isPc ? "bottom-left" : "bottom-right"}
@@ -75,6 +86,12 @@ const ArticleComments = () => {
           </li>
         ))}
       </ul>
+
+      <ArticleEditCommentModal
+        comment={selectedComment}
+        isOpen={isOpenEditCommentModal}
+        onClose={() => setIsOpenEditCommentModal(false)}
+      />
     </section>
   );
 };

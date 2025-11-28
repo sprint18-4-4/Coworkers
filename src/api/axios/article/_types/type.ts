@@ -1,6 +1,14 @@
 import { CommentUser } from "@/types";
 import { ArticleDetail, ArticleListItem } from "@/types/ArticleType";
 
+export type ArticleCommentType = {
+  writer: CommentUser;
+  id: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export interface GetArticlesRequest {
   page?: number;
   pageSize?: number;
@@ -27,15 +35,7 @@ export interface GetArticleCommentsRequest {
 
 export interface GetArticleCommentsResponse {
   nextCursor: number;
-  list: [
-    {
-      writer: CommentUser;
-      id: number;
-      content: string;
-      createdAt: string;
-      updatedAt: string;
-    },
-  ];
+  list: ArticleCommentType[];
 }
 
 export interface PostArticleCommentsRequest {
@@ -45,13 +45,7 @@ export interface PostArticleCommentsRequest {
   };
 }
 
-export interface PostArticleCommentsResponse {
-  writer: CommentUser;
-  id: number;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-}
+export type PostArticleCommentsResponse = ArticleCommentType;
 
 export interface PostArticleLikeRequest {
   articleId: number;
