@@ -3,7 +3,11 @@ import { cn } from "@/utils";
 import { DeviceImage } from "../_internal";
 import { LinkButton } from "@/common";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  link?: string;
+}
+
+const HeroSection = ({ link = "/login" }: HeroSectionProps) => {
   return (
     <section className="w-full h-fit tablet:h-screen bg-background-secondary">
       <div className="relative h-svh flex flex-col justify-between tablet:h-full pc:flex-row">
@@ -34,7 +38,7 @@ const HeroSection = () => {
             </div>
           </div>
           {/* TODO(김원선): 버튼 컴포넌트 as prop이 따로 구현되면 변경 예정 */}
-          <LinkButton href="/login" size="large" className="mobile:hidden tablet:hidden pc:flex ml-[30px] w-[160px]">
+          <LinkButton href={link} size="large" className="mobile:hidden tablet:hidden pc:flex ml-[30px] w-[160px]">
             지금 시작하기
           </LinkButton>
         </div>
@@ -50,7 +54,7 @@ const HeroSection = () => {
           />
         </div>
         <LinkButton
-          href="/login"
+          href={link}
           size="large"
           className="flex w-[160px] absolute bottom-[52px] right-4 tablet:right-8 pc:hidden"
         >

@@ -1,6 +1,10 @@
 import { LinkButton } from "@/common";
 
-const ConversionSection = () => {
+interface ConversionSectionProps {
+  link?: string;
+}
+
+const ConversionSection = ({ link = "login" }: ConversionSectionProps) => {
   return (
     <footer className="py-[60px] tablet:py-[70px] pc:py-[90px]">
       <div className="flex-col-center gap-7">
@@ -10,7 +14,7 @@ const ConversionSection = () => {
             팀원 모두와 같은 방향, 같은 속도로 나아가는 가장 쉬운 방법
           </p>
         </div>
-        <LinkButton href="/login" size="large" className="w-[160px]">
+        <LinkButton href={link} size="large" className="w-[160px]">
           지금 시작하기
         </LinkButton>
       </div>
