@@ -1,4 +1,3 @@
-// /stores/useArticleSearchStore.ts
 import { create } from "zustand";
 
 type ArticleSearchState = {
