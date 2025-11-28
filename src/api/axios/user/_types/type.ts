@@ -22,7 +22,7 @@ export type PatchUserPasswordResponse = {
   message: string;
 };
 
-// GET myHistory
+// GET History
 export interface MyHistoryItem {
   displayIndex: number;
   writerId: number;
@@ -38,6 +38,6 @@ export interface MyHistoryItem {
   id: number;
 }
 
-export interface MyHistoryResponse {
+export interface GetHistoryResponse {
   tasksDone: MyHistoryItem[];
 }

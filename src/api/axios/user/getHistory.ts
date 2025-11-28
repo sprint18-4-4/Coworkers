@@ -1,8 +1,8 @@
 import { instance } from "@/lib";
-import { MyHistoryResponse } from "./_types/type";
+import { GetHistoryResponse } from "./_types/type";
 
-const getHistory = async (): Promise<MyHistoryResponse> => {
-  const response = await instance.get<MyHistoryResponse>("/user/history");
+const getHistory = async (): Promise<GetHistoryResponse> => {
+  const response = await instance.get<GetHistoryResponse>("/user/history");
 
   return response.data || [];
 };
