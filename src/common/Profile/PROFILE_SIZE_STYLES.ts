@@ -57,6 +57,6 @@ export const EDIT_BUTTON_SIZE = {
 } as const;
 
 export const EDIT_ICON_SIZE = {
-  md: "size-2 tablet:size-2",
-  lg: "size-3.5 tablet:size-3.5",
+  md: "size-3 tablet:size-3",
+  lg: "size-[18px] tablet:size-[18px]",
 } as const;
