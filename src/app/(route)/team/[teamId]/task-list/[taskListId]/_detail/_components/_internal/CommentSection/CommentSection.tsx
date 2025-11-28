@@ -5,7 +5,7 @@ import { CommentItem, InputReply, Profile } from "@/common";
 import { useGetTaskListComment } from "@/api/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDetailCommentMutations } from "../../../_hooks";
-import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_type";
+import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types";
 
 interface CommentSectionProps {
   data: GetTaskListDetailResponse;
