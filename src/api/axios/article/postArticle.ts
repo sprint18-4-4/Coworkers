@@ -1,8 +1,8 @@
 import { instance } from "@/lib";
-import { PostArticleRequest } from "./_types/type";
+import { PostArticleRequest, PostArticleResponse } from "./_type";
 
 const postArticle = async (body: PostArticleRequest) => {
-  const { data } = await instance.post("/articles", body);
+  const { data } = await instance.post<PostArticleResponse>("/articles", body);
   return data;
 };
 
