@@ -1,5 +1,3 @@
-// TODO(지권): useDetailDataMutations.ts 파일 중복
-
 import { useDeleteTaskListDetail, usePatchTaskListDetail } from "@/api/hooks";
 
 interface UseTaskListMutationsProps {
