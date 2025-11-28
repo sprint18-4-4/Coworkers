@@ -5,7 +5,7 @@ interface UseTaskListMutationsProps {
   taskListId: number;
 }
 
-const useTaskListMutations = ({ teamId, taskListId }: UseTaskListMutationsProps) => {
+const useTaskMutations = ({ teamId, taskListId }: UseTaskListMutationsProps) => {
   const { mutate: patchTaskListDetailMutate } = usePatchTaskListDetail();
   const { mutate: deleteTaskListDetailMutate } = useDeleteTaskListDetail();
 
@@ -47,4 +47,4 @@ const useTaskListMutations = ({ teamId, taskListId }: UseTaskListMutationsProps)
   };
 };
 
-export default useTaskListMutations;
+export default useTaskMutations;

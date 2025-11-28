@@ -4,7 +4,7 @@ import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import { HEADER_STYLES } from "./HEADER_STYLES";
 import EditDataModal from "../EditDataModal/EditDataModal";
 import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_type";
-import useTaskListMutations from "../../../../_hooks/useListDataMutations";
+import { useTaskMutations } from "@/hooks";
 
 interface HeaderSectionProps {
   data: GetTaskListDetailResponse;
@@ -23,7 +23,7 @@ const HeaderSection = ({ data, isDone, taskPath }: HeaderSectionProps) => {
     description: data.description || "",
   });
 
-  const { updateTask, deleteTask } = useTaskListMutations({
+  const { updateTask, deleteTask } = useTaskMutations({
     teamId: taskPath.teamId,
     taskListId: taskPath.taskListId,
   });

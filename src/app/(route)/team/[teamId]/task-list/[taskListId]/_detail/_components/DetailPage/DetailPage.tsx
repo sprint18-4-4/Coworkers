@@ -5,7 +5,7 @@ import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
 import { CommentSection, ContentSection, HeaderSection } from "../_internal";
 import useGetTaskListDetail from "@/api/hooks/task-list-detail/useGetTaskListDetail";
-import useTaskListMutations from "../../../_hooks/useListDataMutations";
+import useTaskListMutations from "../../../../../../../../../hooks/useTaskMutations/useListDataMutations";
 
 interface DetailPageProps {
   id: number;

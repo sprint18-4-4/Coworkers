@@ -9,9 +9,10 @@ import { DateItem, DatePicker, Icon } from "@/common";
 import { EmptyState, TaskListItem } from "@/features";
 import { TODO_STYLES } from "../../_constants";
 import TaskPdfDownloadButton from "../TaskPdfDownloadButton/TaskPdfDownloadButton";
-import useTaskListMutations from "../../_hooks/useListDataMutations";
+import { useTaskMutations } from "@/hooks";
 import EditDataModal from "../../_detail/_components/_internal/EditDataModal/EditDataModal";
 import { TaskListResponse } from "@/api/axios/task-list/_type";
+
 // TODO(지권): EditDataModal 네이밍 및 위치 변경 필요
 
 interface TodoSectionHeaderProps {
@@ -91,7 +92,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
   const [editingTask, setEditingTask] = useState<{ id: number; name: string; description?: string } | null>(null);
   const [editForm, setEditForm] = useState({ name: "", description: "" });
 
-  const { toggleTaskDone, deleteTask, updateTask } = useTaskListMutations({ teamId, taskListId });
+  const { toggleTaskDone, deleteTask, updateTask } = useTaskMutations({ teamId, taskListId });
 
   const handleOpenEditModal = (task: { id: number; name: string; description?: string }) => {
     setEditingTask(task);
