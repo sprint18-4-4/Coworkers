@@ -3,7 +3,7 @@ import { toastKit } from "@/utils";
 import { postTaskList } from "@/api/axios";
 import { PostTaskListRequest } from "@/api/axios/task-list/_types";
 
-const usePostTodo = () => {
+const usePostTaskList = () => {
   const { success, error } = toastKit();
   const queryClient = useQueryClient();
 
@@ -26,4 +26,4 @@ const usePostTodo = () => {
   });
 };
 
-export default usePostTodo;
+export default usePostTaskList;

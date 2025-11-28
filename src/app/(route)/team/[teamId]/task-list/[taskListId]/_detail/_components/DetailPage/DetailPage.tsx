@@ -4,7 +4,7 @@ import { cn } from "@/utils";
 import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
 import { CommentSection, ContentSection, HeaderSection } from "../_internal";
-import useGetTaskListDetail from "@/api/hooks/task/useGetTaskListDetail";
+import useGetTaskDetail from "@/api/hooks/task/useGetTaskDetail";
 import { useTaskMutations } from "@/hooks";
 
 interface DetailPageProps {
@@ -20,7 +20,7 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
     router.back();
   };
 
-  const { data: taskDetail, isPending } = useGetTaskListDetail({
+  const { data: taskDetail, isPending } = useGetTaskDetail({
     groupId: teamId,
     taskListId: taskListId,
     taskId: id,

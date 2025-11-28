@@ -6,7 +6,7 @@ import TaskListCreateModal from "../TaskListCreateModal/TaskListCreateModal";
 import TaskItemEditModal from "../TaskItemEditModal/TaskItemEditModal";
 import { TaskList } from "@/types";
 import { GetGroupsResponse } from "@/api/axios/group/_types/type";
-import useDeleteTaskList from "@/api/hooks/task-list/useDeleteTask";
+import useDeleteTaskList from "@/api/hooks/task-list/useDeleteTaskList";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);

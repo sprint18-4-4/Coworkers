@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTask } from "@/api/axios";
 import { DeleteTaskRequest } from "@/api/axios/task/_types";
 
-const useDeleteTaskListDetail = () => {
+const useDeleteTask = () => {
   const { success, error } = toastKit();
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -39,4 +39,4 @@ const useDeleteTaskListDetail = () => {
   });
 };
 
-export default useDeleteTaskListDetail;
+export default useDeleteTask;

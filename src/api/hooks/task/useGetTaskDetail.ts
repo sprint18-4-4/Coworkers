@@ -2,7 +2,7 @@ import { getTaskDetail } from "@/api/axios";
 import { GetTaskDetailRequest } from "@/api/axios/task/_types";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetTaskListDetail = ({ groupId, taskListId, taskId }: GetTaskDetailRequest) => {
+const useGetTaskDetail = ({ groupId, taskListId, taskId }: GetTaskDetailRequest) => {
   return useQuery({
     queryKey: ["task-list-detail", groupId, taskListId, taskId],
     queryFn: () => getTaskDetail({ groupId, taskListId, taskId }),
@@ -11,4 +11,4 @@ const useGetTaskListDetail = ({ groupId, taskListId, taskId }: GetTaskDetailRequ
     enabled: !!taskId,
   });
 };
-export default useGetTaskListDetail;
+export default useGetTaskDetail;

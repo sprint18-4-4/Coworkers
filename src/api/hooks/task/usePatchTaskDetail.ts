@@ -3,7 +3,7 @@ import { patchTaskDetail } from "@/api/axios";
 import { PatchTaskDetailRequest } from "@/api/axios/task/_types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const usePatchTaskListDetail = () => {
+const usePatchTaskDetail = () => {
   const { success, error } = toastKit();
   const queryClient = useQueryClient();
 
@@ -30,4 +30,4 @@ const usePatchTaskListDetail = () => {
   });
 };
 
-export default usePatchTaskListDetail;
+export default usePatchTaskDetail;

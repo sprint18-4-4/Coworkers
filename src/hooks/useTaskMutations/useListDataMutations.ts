@@ -1,4 +1,6 @@
-import { useDeleteTaskListDetail, usePatchTaskListDetail } from "@/api/hooks";
+import { usePatchTaskDetail } from "@/api/hooks";
+// TODO(지권): 삭제 요청 확인 필요
+import useDeleteTask from "@/api/hooks/task/useDeleteTask";
 
 interface UseTaskListMutationsProps {
   teamId: number;
@@ -6,8 +8,8 @@ interface UseTaskListMutationsProps {
 }
 
 const useTaskMutations = ({ teamId, taskListId }: UseTaskListMutationsProps) => {
-  const { mutate: patchTaskListDetailMutate } = usePatchTaskListDetail();
-  const { mutate: deleteTaskListDetailMutate } = useDeleteTaskListDetail();
+  const { mutate: patchTaskListDetailMutate } = usePatchTaskDetail();
+  const { mutate: deleteTaskListDetailMutate } = useDeleteTask();
 
   const toggleTaskDone = (taskId: number, isDone: boolean) => {
     patchTaskListDetailMutate({
