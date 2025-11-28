@@ -52,7 +52,7 @@ const PasswordInputSection = () => {
               type="button"
               variant="solid"
               size="small"
-              className="px-3"
+              className="px-3 transition-colors duration-300"
               onClick={() => setChangePasswordOpen(true)}
             >
               변경하기
