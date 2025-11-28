@@ -39,7 +39,7 @@ const ArticleLikeButton = () => {
       <ArticleLike likeCount={article?.likeCount} />
     </span>
   ) : (
-    <span className="flex items-center gap-1 absolute right-0 cursor-pointer" onClick={handleLikeClick}>
+    <span className="flex items-center gap-1 absolute right-0 bottom-[-40px] cursor-pointer" onClick={handleLikeClick}>
       <Icon name={isLiked ? "heartActive" : "heartDefault"} className="size-6 tablet:size-6" />
       <ArticleLike likeCount={article?.likeCount} />
     </span>

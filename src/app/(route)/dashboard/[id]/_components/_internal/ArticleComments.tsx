@@ -1,6 +1,12 @@
 "use client";
 
-import { useGetArticle, useGetArticleComments, useGetUser, usePostArticleComment } from "@/api/hooks";
+import {
+  useDeleteArticleComment,
+  useGetArticle,
+  useGetArticleComments,
+  useGetUser,
+  usePostArticleComment,
+} from "@/api/hooks";
 import { Dropdown, InputReply, Profile } from "@/common";
 import { useDevice } from "@/hooks";
 import { formatTime } from "@/utils";
@@ -16,17 +22,19 @@ const ArticleComments = () => {
   const { data: article } = useGetArticle({ articleId });
   const { data: articleComments } = useGetArticleComments({ articleId });
   const { mutate: postArticleComment } = usePostArticleComment();
+  const { mutate: deleteArticleComment } = useDeleteArticleComment();
+
   const [commentValue, setCommentValue] = useState("");
 
   const handleCommentSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postArticleComment({ articleId, body: { content: commentValue } });
+    postArticleComment(
+      { articleId, body: { content: commentValue } },
+      {
+        onSuccess: () => setCommentValue(""),
+      },
+    );
   };
-
-  const options = [
-    { label: "수정하기", action: () => {} },
-    { label: "삭제하기", action: () => {} },
-  ];
 
   if (!article || !articleComments) {
     return null;
@@ -55,7 +63,14 @@ const ArticleComments = () => {
               <span className="text-state-400 text-md-regular">{formatTime(comment.createdAt)}</span>
             </div>
             {userInfo?.id === comment.writer.id && (
-              <Dropdown iconName="kebab" options={options} placement={isPc ? "bottom-left" : "bottom-right"} />
+              <Dropdown
+                iconName="kebab"
+                options={[
+                  { label: "수정하기", action: () => {} },
+                  { label: "삭제하기", action: () => deleteArticleComment({ commentId: comment.id }) },
+                ]}
+                placement={isPc ? "bottom-left" : "bottom-right"}
+              />
             )}
           </li>
         ))}

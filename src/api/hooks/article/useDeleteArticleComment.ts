@@ -10,6 +10,7 @@ const useDeleteArticleComment = () => {
     mutationFn: deleteArticleComment,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["articleComments"] });
+      queryClient.invalidateQueries({ queryKey: ["article"] });
       success("댓글을 성공적으로 삭제하였습니다.");
     },
     onError: () => {
