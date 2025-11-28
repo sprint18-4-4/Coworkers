@@ -4,6 +4,7 @@ import EmptyState from "./EmptyState";
 const meta: Meta<typeof EmptyState> = {
   title: "State/EmptyState",
   component: EmptyState,
+  tags: ["autodocs"],
   parameters: {
     layout: "centered",
   },
