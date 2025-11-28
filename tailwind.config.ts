@@ -110,23 +110,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    flexCenter,
-    flexColCenter,
-    customShadow,
-    plugin(function ({ addBase }) {
-      addBase({
-        img: {
-          "-webkit-user-drag": "none",
-          "user-drag": "none",
-          "user-select": "none",
-          "-webkit-user-select": "none",
-          "-moz-user-select": "none",
-          "-ms-user-select": "none",
-        },
-      });
-    }),
-  ],
+  plugins: [flexCenter, flexColCenter, customShadow],
 };
 
 export default config;

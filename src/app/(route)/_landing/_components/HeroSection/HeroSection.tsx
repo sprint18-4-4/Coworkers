@@ -16,7 +16,14 @@ const HeroSection = () => {
           )}
         >
           <div className="pc:mr-[167px]">
-            <Image src="/landing/land-1.svg" alt="" width={48} height={48} className="size-9 pc:size-12" />
+            <Image
+              src="/landing/land-1.svg"
+              alt=""
+              width={48}
+              height={48}
+              className="size-9 pc:size-12"
+              draggable={false}
+            />
             <div className="mt-[6px] ml-[23px] pc:ml-[30px]">
               <p className="text-md-medium tablet:text-lg-medium pc:text-xl-medium text-state-400">
                 함께 만들어가는 To Do list

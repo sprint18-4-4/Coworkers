@@ -28,7 +28,15 @@ const DeviceImage = ({
     <picture>
       <source media="(max-width: 430px)" srcSet={mobileSrc} />
       <source media="(min-width: 431px) and (max-width: 745px)" srcSet={tabletSrc} />
-      <Image src={desktopSrc} alt={alt} width={width} height={height} className={ImageClassName} priority />
+      <Image
+        src={desktopSrc}
+        alt={alt}
+        width={width}
+        height={height}
+        className={ImageClassName}
+        priority
+        draggable={false}
+      />
     </picture>
   );
 };
