@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Input, InputBox, BaseButton, Icon } from "@/common";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 const LABEL_STYLE = "text-text-primary text-lg-bold";
 const INPUT_AREA_STYLE = "flex flex-col gap-4";
@@ -20,7 +20,7 @@ const ArticleForm = () => {
     setPreview(previewUrl);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
   return (

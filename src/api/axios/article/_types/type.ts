@@ -17,3 +17,11 @@ export interface GetArticleRequest {
 }
 
 export type GetArticleResponse = ArticleDetail;
+
+export interface PostArticleRequest {
+  image?: string | null;
+  content: string;
+  title: string;
+}
+
+export type PostArticleResponse = ArticleListItem;
