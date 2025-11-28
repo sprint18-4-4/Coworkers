@@ -1,6 +1,6 @@
 import { GetTaskListDetailResponse } from "./api/axios/task-list-detail/_type";
 import { DateNumber, Day, TaskListItemType } from "./types";
-import { TaskGroupItem } from "./api/axios/task-list/_type";
+import { TaskGroupItem } from "./api/axios/recurring/_type";
 
 export const USER_MOCK_DATA = {
   teamId: "1",

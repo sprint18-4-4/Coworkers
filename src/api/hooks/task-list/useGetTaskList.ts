@@ -1,6 +1,6 @@
 import { getTaskList } from "@/api/axios";
 import { useQuery } from "@tanstack/react-query";
-import { GetTaskListRequest } from "@/api/axios/task-list/_type";
+import { GetTaskListRequest } from "@/api/axios/recurring/_type";
 
 const useGetTaskList = ({ groupId, taskListId, date }: GetTaskListRequest) => {
   return useQuery({

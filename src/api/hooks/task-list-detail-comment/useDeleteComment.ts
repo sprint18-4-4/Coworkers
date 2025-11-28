@@ -1,5 +1,5 @@
 import { deleteComment } from "@/api/axios";
-import { DeleteTaskListCommentRequest } from "@/api/axios/task-list-detail-comment/_types";
+import { DeleteTaskListCommentRequest } from "@/api/axios/comment/_types";
 import { toastKit } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
