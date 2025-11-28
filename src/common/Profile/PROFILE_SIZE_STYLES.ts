@@ -26,8 +26,8 @@ export const DEFAULT_ICON_SIZE = {
 // 프로필 이미지 수정 컴포넌트
 
 export const SIZE_CLASSES = {
-  md: "size-16 rounded-[20px]",
-  lg: "size-[100px] rounded-[32px]",
+  md: "w-[77px] h-[78px] rounded-[20px]",
+  lg: "w-[112px] h-[116px] rounded-[32px]",
 } as const;
 
 export const IMAGE_SIZE_VALUES = {
