@@ -2,7 +2,7 @@ import { Frequency, TaskUser } from "@/types";
 
 // GET TaskListDetail
 
-export interface GetTaskListDetailRequest {
+export interface GetTaskDetailRequest {
   groupId: number;
   taskListId: number;
   taskId: number;
@@ -23,7 +23,7 @@ export interface Recurring {
   writerId: number;
 }
 
-export interface GetTaskListDetailResponse {
+export interface GetTaskDetailResponse {
   id: number;
   name: string;
   description: string | null;
@@ -40,9 +40,17 @@ export interface GetTaskListDetailResponse {
   recurring: Recurring;
 }
 
-// PATCH TaskListDetail
+// PATCH Task
 
-export interface PatchTaskListDetailRequest {
+export interface PatchTaskRequest {
+  groupId: number;
+  id: number;
+  name: string;
+}
+
+// PATCH TaskDetail
+
+export interface PatchTaskDetailRequest {
   groupId: number;
   taskListId: number;
   taskId: number;
@@ -53,7 +61,7 @@ export interface PatchTaskListDetailRequest {
   };
 }
 
-export interface PatchTaskListDetailResponse {
+export interface PatchTaskDetailResponse {
   displayIndex: number;
   writerId: number;
   userId: number;
@@ -68,9 +76,9 @@ export interface PatchTaskListDetailResponse {
   id: number;
 }
 
-// DELETE TaskListDetail
+// DELETE Task
 
-export interface DeleteTaskListDetailRequest {
+export interface DeleteTaskRequest {
   groupId: number;
   taskListId: number;
   taskId: number;
@@ -78,7 +86,7 @@ export interface DeleteTaskListDetailRequest {
 
 // GET TaskList
 
-export interface GetTaskListRequest {
+export interface GetTaskRequest {
   groupId: number;
   taskListId: number;
   date?: string | null;
@@ -104,12 +112,4 @@ export interface TaskGroupItem {
   id: number;
 }
 
-export type TaskListResponse = TaskGroupItem[];
-
-// PATCH Todo
-
-export interface PatchTodoRequest {
-  groupId: number;
-  id: number;
-  name: string;
-}
+export type TaskResponse = TaskGroupItem[];

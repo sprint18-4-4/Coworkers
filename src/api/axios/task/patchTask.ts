@@ -1,10 +1,10 @@
 import { instance } from "@/lib";
-import { PatchTodoRequest } from "./_types";
+import { PatchTaskRequest } from "./_types";
 
-const patchTodo = async ({ groupId, id, name }: PatchTodoRequest) => {
+const patchTask = async ({ groupId, id, name }: PatchTaskRequest) => {
   const response = await instance.patch(`/groups/${groupId}/task-lists/${id}`, { name });
 
   return response.data;
 };
 
-export default patchTodo;
+export default patchTask;
