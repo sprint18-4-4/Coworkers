@@ -15,7 +15,7 @@ const SaveChangesSnackbar = ({ title, onSave, buttonText, formId, className, dis
   return (
     <div
       role="status"
-      className={cn("w-full min-w-[343px] max-w-[868px] bg-brand-primary p-3 rounded-lg flex items-center", className)}
+      className={cn("w-full py-12 px-6 bg-brand-primary p-3 rounded-lg flex items-center gap-3", className)}
     >
       <span className="flex items-center gap-2 flex-grow text-md-semibold text-text-inverse tablet:text-lg-semibold">
         <Icon name="alert" className="hidden tablet:block tablet:size-6" />
