@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { Dropdown, Icon, Todo } from "@/common";
-import type { MyHistoryItem, TaskListItemType } from "@/types";
+import type { TaskListItemType } from "@/types";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import EditModal from "./_internal/EditModal/EditModal";
 import DeleteModal from "./_internal/DeleteModal/DeleteModal";
+import { MyHistoryItem } from "@/api/axios/user/_types/type";
 
 interface TaskListItemProps {
   item: TaskListItemType | MyHistoryItem;

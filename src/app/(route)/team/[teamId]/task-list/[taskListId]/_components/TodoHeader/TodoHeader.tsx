@@ -3,18 +3,18 @@ import Link from "next/link";
 import { cn } from "@/utils";
 import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
 import TaskListCreateModal from "../TaskListCreateModal/TaskListCreateModal";
-import { useDeleteTodo } from "@/api/hooks";
 import TaskItemEditModal from "../TaskItemEditModal/TaskItemEditModal";
 import { TaskList } from "@/types";
 import { GetGroupsResponse } from "@/api/axios/group/_types/type";
+import useDeleteTaskList from "@/api/hooks/task-list/useDeleteTaskList";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const { mutate: deleteTodo } = useDeleteTodo();
+  const { mutate: deleteTodo } = useDeleteTaskList();
 
   const options = [
     { label: "수정하기", action: () => setIsEditModalOpen(true) },
-    { label: "삭제하기", action: () => deleteTodo({ groupId: String(data.groupId), id: String(data.id) }) },
+    { label: "삭제하기", action: () => deleteTodo({ groupId: data.groupId, id: data.id }) },
   ];
 
   const totalCount = data.tasks?.length ?? 0;
@@ -42,7 +42,7 @@ const TodoItem = ({ data }: { data: TaskList }) => {
         <TaskItemEditModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
-          TodoItem={{ groupId: String(data.groupId), id: String(data.id) }}
+          TodoItem={{ groupId: data.groupId, id: data.id }}
         />
       )}
     </>
@@ -51,7 +51,7 @@ const TodoItem = ({ data }: { data: TaskList }) => {
 
 interface TodoHeaderProps {
   data: GetGroupsResponse | undefined;
-  groupId: string;
+  groupId: number;
   isLoading: boolean;
 }
 

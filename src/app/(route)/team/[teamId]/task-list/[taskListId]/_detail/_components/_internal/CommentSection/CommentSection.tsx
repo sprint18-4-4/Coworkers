@@ -5,24 +5,24 @@ import { CommentItem, InputReply, Profile } from "@/common";
 import { useGetTaskListComment } from "@/api/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDetailCommentMutations } from "../../../_hooks";
-import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types/type";
+import { GetTaskDetailResponse } from "@/api/axios/task/_types";
 
 interface CommentSectionProps {
-  data: GetTaskListDetailResponse;
+  data: GetTaskDetailResponse;
 }
 
 const CommentSection = ({ data }: CommentSectionProps) => {
   const queryClient = useQueryClient();
   const [commentValue, setCommentValue] = useState("");
 
-  const { data: commentData } = useGetTaskListComment({ taskId: String(data.id) });
+  const { data: commentData } = useGetTaskListComment({ taskId: data.id });
   const myData = queryClient.getQueryData<UserResponse>(["user"]);
   const myComment = myData?.id === data.writer.id;
 
   const { postCommentPending, deleteComment, handleUpdateComment, handleSubmitComment } = useDetailCommentMutations({
-    groupId: String(data.recurring.groupId),
-    taskListId: String(data.recurring.taskListId),
-    taskId: String(data.id),
+    groupId: data.recurring.groupId,
+    taskListId: data.recurring.taskListId,
+    taskId: data.id,
     comment: {
       commentValue,
       setCommentValue,
@@ -48,8 +48,8 @@ const CommentSection = ({ data }: CommentSectionProps) => {
             key={comment.id}
             comment={comment}
             showKebab={myComment}
-            onDelete={() => deleteComment({ taskId: String(data.id), commentId: String(comment.id) })}
-            onUpdate={(commentId, newContent) => handleUpdateComment(String(commentId), newContent)}
+            onDelete={() => deleteComment({ taskId: data.id, commentId: comment.id })}
+            onUpdate={(commentId, newContent) => handleUpdateComment(commentId, newContent)}
           />
         ))}
       </ul>
