@@ -3,7 +3,7 @@
 import { FormEvent } from "react";
 import { useDevice } from "@/hooks";
 import { ProfileEdit, Input, BaseButton } from "@/common";
-import useTeamCreation from "../../_hooks/useTeamCreation";
+import { useTeamCreation } from "../../_hooks";
 
 const TeamCreateForm = () => {
   const { isMobile } = useDevice();
@@ -26,6 +26,7 @@ const TeamCreateForm = () => {
           value={name}
           onChange={(e) => handleNameChange(e.target.value)}
           error={errorMessage}
+          maxLength={30}
         />
       </div>
       <div className="w-full flex-col-center gap-5">

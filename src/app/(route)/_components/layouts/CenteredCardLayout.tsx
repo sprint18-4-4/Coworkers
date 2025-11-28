@@ -35,11 +35,11 @@ const CenteredCardLayout = ({
   bottomContent,
 }: CenteredCardLayoutProps) => {
   return (
-    <section className={cn("w-full min-h-screen mobile:min-h-[calc(100vh-52px)] flex-center", sectionClassName)}>
+    <section className={cn("w-full min-h-screen mobile:h-[calc(100vh-52px)] flex-center", sectionClassName)}>
       <div
         className={cn(
           "mx-4 px-[22px] rounded-[20px]",
-          "w-full bg-background-primary flex-col-center",
+          "w-full bg-background-primary flex flex-col items-center justify-center",
           "tablet:h-svh tablet:mx-[61px] tablet:px-[45px]",
           className,
         )}
