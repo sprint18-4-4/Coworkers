@@ -26,6 +26,7 @@ const TeamCreateForm = () => {
           value={name}
           onChange={(e) => handleNameChange(e.target.value)}
           error={errorMessage}
+          minLength={2}
           maxLength={30}
         />
       </div>
