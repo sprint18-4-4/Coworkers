@@ -1,5 +1,5 @@
 import { getTaskListDetail } from "@/api/axios";
-import { GetTaskListDetailRequest } from "@/api/axios/task-list-detail/_types/type";
+import { GetTaskListDetailRequest } from "@/api/axios/task-list-detail/_types";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetTaskListDetail = ({ groupId, taskListId, taskId }: GetTaskListDetailRequest) => {

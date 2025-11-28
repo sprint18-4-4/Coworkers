@@ -3,16 +3,16 @@ import { Dropdown, Icon, Profile } from "@/common";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import { HEADER_STYLES } from "./HEADER_STYLES";
 import EditDataModal from "../EditDataModal/EditDataModal";
-import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types/type";
+import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types";
 import { useDetailDataMutations } from "../../../_hooks";
 
 interface HeaderSectionProps {
   data: GetTaskListDetailResponse;
   isDone: boolean;
   taskPath: {
-    id: string;
-    teamId: string;
-    taskListId: string;
+    id: number;
+    teamId: number;
+    taskListId: number;
   };
 }
 
