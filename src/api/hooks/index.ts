@@ -30,3 +30,4 @@ export { default as usePostArticleComment } from "./article/usePostArticleCommen
 export { default as usePostArticleLike } from "./article/usePostArticleLike";
 export { default as useDeleteArticleLike } from "./article/useDeleteArticleLike";
 export { default as useDeleteArticle } from "./article/useDeleteArticle";
+export { default as useDeleteArticleComment } from "./article/useDeleteArticleComment";

@@ -31,3 +31,4 @@ export { default as getArticleComments } from "./article/getArticleComments";
 export { default as postArticleComment } from "./article/postArticleComment";
 export { default as postArticleLike } from "./article/postArticleLike";
 export { default as deleteArticle } from "./article/deleteArticle";
+export { default as deleteArticleComment } from "./article/deleteArticleComment";

@@ -86,3 +86,12 @@ export interface DeleteArticleResponse {
   id?: number;
   message?: string;
 }
+
+export interface DeleteArticleCommentRequest {
+  commentId: number;
+}
+
+export interface DeleteArticleCommentResponse {
+  id?: number;
+  message?: string;
+}
