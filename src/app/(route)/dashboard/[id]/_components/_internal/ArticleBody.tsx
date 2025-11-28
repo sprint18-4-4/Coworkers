@@ -1,25 +1,24 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Dropdown } from "@/common";
 import { useDevice } from "@/hooks";
-import { useGetArticle } from "@/api/hooks";
+import { useDeleteArticle, useGetArticle } from "@/api/hooks";
 import ArticleTitle from "../../../_components/Article/_internal/ArticleTitle";
 import ArticleWriter from "../../../_components/Article/_internal/ArticleWriter";
 import ArticleContent from "../../../_components/Article/_internal/ArticleContent";
 import ArticleLikeButton from "./ArticleLikeButton";
 
 const ArticleBody = () => {
-  const router = useRouter();
   const { id } = useParams();
   const articleId = Number(id);
   const { isPc } = useDevice();
 
   const { data: article } = useGetArticle({ articleId });
-
+  const { mutate: deleteArticle } = useDeleteArticle();
   const options = [
-    { label: "수정하기", action: () => router.push(`/dashboard/${articleId}/edit`) },
-    { label: "삭제하기", action: () => {} },
+    { label: "수정하기", action: () => {} },
+    { label: "삭제하기", action: () => deleteArticle({ articleId }) },
   ];
 
   if (!article) {

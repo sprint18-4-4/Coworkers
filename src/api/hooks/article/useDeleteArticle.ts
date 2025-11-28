@@ -14,8 +14,8 @@ const useDeleteArticle = () => {
       success("게시물을 성공적으로 삭제하였습니다.");
       router.replace("/dashboard");
     },
-    onError: (err) => {
-      error(err.message);
+    onError: () => {
+      error("게시물을 삭제하지 못하였습니다.");
     },
   });
 };
