@@ -1,6 +1,6 @@
 import { cn } from "@/utils";
 import { EmptyState, TaskListItem } from "@/features";
-import { MyHistoryResponse } from "@/types";
+import { MyHistoryResponse } from "@/api/axios/my-history/_types";
 
 const WorkHistorySection = ({ data }: { data: MyHistoryResponse }) => {
   return (
@@ -11,7 +11,7 @@ const WorkHistorySection = ({ data }: { data: MyHistoryResponse }) => {
       )}
     >
       {/* TODO(지권): 에러, 로딩 상태 처리 필요 */}
-      {data?.tasksDone?.length === 0 && <EmptyState ariaLabel="업무 기록 없음" text="완료한 업무 기록이 없습니다." />}
+      {data?.tasksDone?.length === 0 && <EmptyState />}
       {data?.tasksDone?.length > 0 && (
         <section>
           <ul className="flex flex-col gap-3">

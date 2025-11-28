@@ -5,7 +5,7 @@ import { BaseButton, Input, Modal } from "@/common";
 interface TaskListCreateModalProps {
   isOpen: boolean;
   onClose: () => void;
-  groupId: string;
+  groupId: number;
 }
 
 const TaskListCreateModal = ({ isOpen, onClose, groupId }: TaskListCreateModalProps) => {

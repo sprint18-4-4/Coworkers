@@ -8,9 +8,9 @@ import useGetTaskListDetail from "@/api/hooks/task-list-detail/useGetTaskListDet
 import { useDetailDataMutations } from "../../_hooks";
 
 interface DetailPageProps {
-  id: string;
-  teamId: string;
-  taskListId: string;
+  id: number;
+  teamId: number;
+  taskListId: number;
 }
 
 const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
@@ -22,7 +22,7 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
 
   const { data: taskDetail, isPending } = useGetTaskListDetail({
     groupId: teamId,
-    taskListId: String(taskListId),
+    taskListId: taskListId,
     taskId: id,
   });
 

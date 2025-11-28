@@ -8,7 +8,7 @@ import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 import { DetailPage } from "./_detail/_components";
 import { useGetGroups, useGetTaskList } from "@/api/hooks";
 
-const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId: string }> }) => {
+const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId: number }> }) => {
   const { teamId, taskListId } = use(params);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -19,7 +19,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
 
   const { data: taskList } = useGetTaskList({
     groupId: teamId,
-    taskListId: String(taskListId),
+    taskListId: taskListId,
     ...(searchParams.get("date") && { date: searchParams.get("date") }),
   });
 
@@ -71,7 +71,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
         onClick={onClickFloatingButton}
       />
 
-      {selectedId && <DetailPage teamId={teamId} taskListId={taskListId} id={selectedId} />}
+      {selectedId && <DetailPage teamId={teamId} taskListId={taskListId} id={Number(selectedId)} />}
       {searchParams.get("w") && (
         <MakeTodoModal
           isOpen={!!searchParams.get("w")}
@@ -88,7 +88,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: string; taskListId
   );
 };
 
-const Page = ({ params }: { params: Promise<{ teamId: string; taskListId: string }> }) => {
+const Page = ({ params }: { params: Promise<{ teamId: number; taskListId: number }> }) => {
   return (
     // TODO(지권): 로딩 화면 추가 필요
     <Suspense fallback={""}>

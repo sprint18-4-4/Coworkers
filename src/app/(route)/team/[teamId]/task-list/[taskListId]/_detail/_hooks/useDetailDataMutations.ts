@@ -3,9 +3,9 @@ import { useDeleteTaskListDetail, usePatchTaskListDetail } from "@/api/hooks";
 
 interface UseDetailDataMutationsProps {
   taskPath: {
-    teamId: string;
-    taskListId: string;
-    id: string;
+    teamId: number;
+    taskListId: number;
+    id: number;
   };
 }
 

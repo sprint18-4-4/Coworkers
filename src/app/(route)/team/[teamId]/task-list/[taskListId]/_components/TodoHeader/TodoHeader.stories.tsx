@@ -74,7 +74,7 @@ export const TodoHeaderStory: Story = {
       teamId: "",
       updatedAt: "",
     },
-    groupId: "3800",
+    groupId: 3800,
     isLoading: false,
   },
 };

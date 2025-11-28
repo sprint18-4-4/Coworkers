@@ -36,3 +36,9 @@ export interface User {
 export type UserRole = "ADMIN" | "MEMBER";
 
 export type UserResponse = User;
+
+export interface TaskUser {
+  id: number;
+  nickname: string;
+  image: string;
+}

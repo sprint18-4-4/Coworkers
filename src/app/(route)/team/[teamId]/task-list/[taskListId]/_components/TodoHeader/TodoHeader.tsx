@@ -14,7 +14,7 @@ const TodoItem = ({ data }: { data: TaskList }) => {
 
   const options = [
     { label: "수정하기", action: () => setIsEditModalOpen(true) },
-    { label: "삭제하기", action: () => deleteTodo({ groupId: String(data.groupId), id: String(data.id) }) },
+    { label: "삭제하기", action: () => deleteTodo({ groupId: data.groupId, id: data.id }) },
   ];
 
   const totalCount = data.tasks?.length ?? 0;
@@ -42,7 +42,7 @@ const TodoItem = ({ data }: { data: TaskList }) => {
         <TaskItemEditModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
-          TodoItem={{ groupId: String(data.groupId), id: String(data.id) }}
+          TodoItem={{ groupId: data.groupId, id: data.id }}
         />
       )}
     </>
@@ -51,7 +51,7 @@ const TodoItem = ({ data }: { data: TaskList }) => {
 
 interface TodoHeaderProps {
   data: GetGroupsResponse | undefined;
-  groupId: string;
+  groupId: number;
   isLoading: boolean;
 }
 
