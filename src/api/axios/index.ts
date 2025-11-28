@@ -29,3 +29,4 @@ export { default as patchUserPassword } from "./user/patchUserPassword/patchUser
 export { default as deleteUser } from "./user/deleteUser/deleteUser";
 export { default as getArticleComments } from "./article/getArticleComments";
 export { default as postArticleComment } from "./article/postArticleComment";
+export { default as postArticleLike } from "./article/postArticleLike";

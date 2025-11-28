@@ -52,3 +52,29 @@ export interface PostArticleCommentsResponse {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface PostArticleLikeRequest {
+  articleId: number;
+}
+
+export interface PostArticleLikeResponse {
+  updatedAt: string;
+  createdAt: string;
+  likeCount: number;
+  writer: {
+    nickname: string;
+    id: number;
+  };
+  image: string;
+  title: string;
+  id: number;
+  commentCount: number;
+  isLiked: boolean;
+  content: string;
+}
+
+export interface DeleteArticleLikeRequest {
+  articleId: number;
+}
+
+export type DeleteArticleLikeResponse = PostArticleLikeResponse;
