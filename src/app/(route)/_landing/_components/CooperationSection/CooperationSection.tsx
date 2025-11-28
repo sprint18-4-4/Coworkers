@@ -1,11 +1,11 @@
-import { ResponsiveImage, TextContent } from "../_internal";
+import { DeviceImage, FeatureBlock } from "../_internal";
 import { COOPERATION_SECTION } from "../../_constants";
 
 const CooperationSection = () => {
   return (
     <section className="pt-[44px] tablet:pt-[77px] pc:pt-[100px] bg-background-secondary">
       <div className="flex flex-col pc:flex-row pc:justify-center gap-[24px] pc:gap-[108px]">
-        <TextContent
+        <FeatureBlock
           iconSrc={COOPERATION_SECTION.iconSrc}
           iconAlt="채팅 아이콘"
           title={COOPERATION_SECTION.title}
@@ -15,7 +15,7 @@ const CooperationSection = () => {
           className="pc:mt-[180px] pc:ml-[76px]"
         />
         <div className="relative h-fit mx-5 tablet:mx-[66px] pc:mx-0">
-          <ResponsiveImage
+          <DeviceImage
             ImageInfo={{ alt: "대시보드 이미지", width: 940, height: 800 }}
             Src={{
               mobileSrc: COOPERATION_SECTION.mobileSrc,

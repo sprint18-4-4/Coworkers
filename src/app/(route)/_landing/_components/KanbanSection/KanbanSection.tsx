@@ -1,4 +1,4 @@
-import { ResponsiveImage, TextContent } from "../_internal";
+import { DeviceImage, FeatureBlock } from "../_internal";
 import { KANBAN_SECTION } from "../../_constants";
 
 const KanbanSection = () => {
@@ -6,7 +6,7 @@ const KanbanSection = () => {
     <section className="w-full py-[45px] tablet:py-[80px] pc:py-[100px] bg-icon-inverse">
       <div className="w-full pc:max-w-[1920px] pc:mx-auto">
         <div className="flex flex-col pc:flex-row pc:justify-center mx-auto tablet:gap-6 pc:gap-[100px]">
-          <TextContent
+          <FeatureBlock
             iconSrc={KANBAN_SECTION.iconSrc}
             iconAlt="체크 아이콘"
             title={KANBAN_SECTION.title}
@@ -16,7 +16,7 @@ const KanbanSection = () => {
             className="pc:mt-[78px] pc:ml-[76px]"
           />
           <div className="relative h-fit ml-[35px] tablet:ml-[30px]">
-            <ResponsiveImage
+            <DeviceImage
               ImageInfo={{ alt: "대시보드 이미지", width: 1024, height: 600 }}
               Src={{
                 mobileSrc: KANBAN_SECTION.mobileSrc,

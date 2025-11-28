@@ -1,11 +1,11 @@
-import { ResponsiveImage, TextContent } from "../_internal";
+import { DeviceImage, FeatureBlock } from "../_internal";
 import { DETAIL_SECTION } from "../../_constants";
 
 const DetailSection = () => {
   return (
     <section className="pt-[45px] pc:pt-[83px] bg-brand-primary">
       <div className="flex flex-col pc:flex-row-reverse pc:justify-center gap-[30px] pc:gap-[108px]">
-        <TextContent
+        <FeatureBlock
           iconSrc={DETAIL_SECTION.iconSrc}
           iconAlt="체크 아이콘"
           title={DETAIL_SECTION.title}
@@ -15,7 +15,7 @@ const DetailSection = () => {
           className="pc:mt-[180px] pc:ml-[0] pc:mr-[35px]"
         />
         <div className="relative min-h-0 tablet:ml-[45px] pc:ml-0">
-          <ResponsiveImage
+          <DeviceImage
             ImageInfo={{ alt: "대시보드 이미지", width: 982, height: 667 }}
             Src={{
               mobileSrc: DETAIL_SECTION.mobileSrc,

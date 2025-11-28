@@ -12,7 +12,7 @@ interface LandingHeaderProps {
   descriptionClassName?: string;
 }
 
-const LandingHeader = ({
+const FeatureBlock = ({
   iconSrc,
   iconAlt,
   title,
@@ -32,4 +32,4 @@ const LandingHeader = ({
   );
 };
 
-export default LandingHeader;
+export default FeatureBlock;
