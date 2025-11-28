@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
 import { deleteTaskListDetail } from "@/api/axios";
-import { DeleteTaskListDetailRequest } from "@/api/axios/task-list-detail/_type";
+import { DeleteTaskListDetailRequest } from "@/api/axios/task-list-detail/_types";
 
 const useDeleteTaskListDetail = () => {
   const { success, error } = toastKit();
