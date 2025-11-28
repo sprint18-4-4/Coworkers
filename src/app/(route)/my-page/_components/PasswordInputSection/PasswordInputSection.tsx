@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useForm } from "@/hooks";
 import { usePatchUserPassword } from "@/api/hooks";
-import { Input, BaseButton, Modal } from "@/common";
+import { Input, BaseButton, Modal, InputPassword } from "@/common";
 import { validatePassword, validatePasswordConfirm } from "@/utils";
 
 const PasswordInputSection = () => {
@@ -66,19 +66,21 @@ const PasswordInputSection = () => {
           <h2 className="text-lg-medium text-text-primary">비밀번호 변경</h2>
 
           <form id="passwordChangeForm" onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-            <Input
+            <InputPassword
               label="새 비밀번호"
-              type="password"
               placeholder="새 비밀번호를 입력해주세요."
               {...register("password")}
               error={errors.password}
+              minLength={8}
+              maxLength={20}
             />
-            <Input
+            <InputPassword
               label="새 비밀번호 확인"
-              type="password"
               placeholder="새 비밀번호를 다시 한 번 입력해주세요."
               {...register("passwordConfirmation")}
               error={errors.passwordConfirmation}
+              minLength={8}
+              maxLength={20}
             />
           </form>
         </Modal.Body>
