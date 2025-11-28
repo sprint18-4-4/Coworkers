@@ -3,7 +3,7 @@
 import { useGetArticles } from "@/api/hooks";
 import { Select } from "@/common";
 import { useState } from "react";
-import DefaultArticleCard from "../../Article/DefaultArticleCard";
+import DefaultArticleCard from "../../../../(route)/dashboard/_components/Article/DefaultArticleCard";
 import { SelectOption } from "@/common/Select/_types/types";
 
 const DashBoardAllArticles = () => {
