@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
 import { patchTodo } from "@/api/axios";
-import { PatchTodoRequest } from "@/api/axios/recurring/_type";
+import { PatchTodoRequest } from "@/api/axios/task/_types";
 
 const usePatchTodo = () => {
   const { success, error } = toastKit();

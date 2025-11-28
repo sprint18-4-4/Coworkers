@@ -75,3 +75,41 @@ export interface DeleteTaskListDetailRequest {
   taskListId: number;
   taskId: number;
 }
+
+// GET TaskList
+
+export interface GetTaskListRequest {
+  groupId: number;
+  taskListId: number;
+  date?: string | null;
+}
+
+interface TaskDoneBy {
+  user: TaskUser;
+}
+
+export interface TaskGroupItem {
+  doneBy: TaskDoneBy;
+  writer: TaskUser;
+  displayIndex: number;
+  commentCount: number;
+  deletedAt: string;
+  recurringId: number;
+  frequency: Frequency;
+  updatedAt: string;
+  doneAt: string;
+  date: string;
+  description: string;
+  name: string;
+  id: number;
+}
+
+export type TaskListResponse = TaskGroupItem[];
+
+// PATCH Todo
+
+export interface PatchTodoRequest {
+  groupId: number;
+  id: number;
+  name: string;
+}

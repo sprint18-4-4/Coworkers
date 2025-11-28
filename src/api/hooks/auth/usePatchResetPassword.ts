@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
-import patchResetPassword from "@/api/axios/auth/resetPassword/patchResetPassword";
+import { patchResetPassword } from "@/api/axios";
 import { ApiErrorResponse } from "@/types";
 import { toastKit } from "@/utils";
 

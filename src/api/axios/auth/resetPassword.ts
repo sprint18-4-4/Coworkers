@@ -1,7 +1,7 @@
 import axios from "axios";
 import { instance } from "@/lib";
 import { ApiErrorResponse } from "@/types";
-import { ResetPasswordRequest, ResetPasswordResponse } from "./_types/type";
+import { ResetPasswordRequest, ResetPasswordResponse } from "./types";
 
 const postResetPassword = async (request: ResetPasswordRequest): Promise<ResetPasswordResponse> => {
   try {

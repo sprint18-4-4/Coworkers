@@ -23,6 +23,9 @@ const SignUpForm = () => {
       password: validatePassword,
       passwordConfirmation: (value, formData) => validatePasswordConfirm(formData?.password ?? "", value),
     },
+    validationTriggers: {
+      password: ["passwordConfirmation"],
+    },
     onSubmit: async (values) => {
       const { email, nickname, password, passwordConfirmation } = values;
       postSignup({
@@ -43,6 +46,8 @@ const SignUpForm = () => {
           placeholder="이름을 입력해주세요."
           {...register("nickname")}
           error={errors.nickname}
+          minLength={2}
+          maxLength={20}
         />
         <Input
           label="이메일"
@@ -50,18 +55,24 @@ const SignUpForm = () => {
           placeholder="이메일을 입력해주세요."
           {...register("email")}
           error={errors.email}
+          minLength={4}
+          maxLength={30}
         />
         <InputPassword
           label="비밀번호"
           placeholder="비밀번호을 입력해주세요."
           {...register("password")}
           error={errors.password}
+          minLength={8}
+          maxLength={20}
         />
         <InputPassword
           label="비밀번호 확인"
           placeholder="비밀번호를 다시 한 번 입력해주세요."
           {...register("passwordConfirmation")}
           error={errors.passwordConfirmation}
+          minLength={8}
+          maxLength={20}
         />
       </div>
       <Link href="/login" className="w-fit ml-auto mt-3 text-brand-primary text-md-medium tablet:text-lg-medium">

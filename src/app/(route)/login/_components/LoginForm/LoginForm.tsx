@@ -7,21 +7,13 @@ import { Input, InputPassword, BaseButton } from "@/common";
 import { usePostLogin } from "@/api/hooks";
 import { useForm } from "@/hooks";
 import { ValidationRules } from "@/types";
-import { toastKit, validateEmail, validatePasswordForLogin } from "@/utils";
+import { toastKit, validateEmail, validatePassword } from "@/utils";
 import { useEmailStore } from "@/stores";
 import ResetPassword from "../ResetPassword/ResetPassword";
 
 const loginRules: ValidationRules = {
   email: (value) => validateEmail(value),
-  password: (value) => {
-    const result = validatePasswordForLogin(value);
-    if (!result.isValid) return result;
-
-    if (value.length < 8) {
-      return { isValid: false, ErrorMessage: "" };
-    }
-    return { isValid: true };
-  },
+  password: (value) => validatePassword(value),
 };
 
 const LoginForm = () => {
@@ -73,12 +65,16 @@ const LoginForm = () => {
             {...register("email")}
             placeholder="이메일을 입력해주세요."
             error={errors.email}
+            minLength={4}
+            maxLength={30}
           />
           <InputPassword
             label="비밀번호"
             {...register("password")}
             placeholder="비밀번호을 입력해주세요."
             error={errors.password}
+            minLength={8}
+            maxLength={20}
           />
         </div>
         <div className="flex justify-between text-md-medium tablet:text-lg-medium">

@@ -4,6 +4,22 @@ import type { NextRequest } from "next/server";
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("accessToken")?.value;
 
+  const { pathname } = req.nextUrl;
+
+  // 이미 로그인한 유저가 로그인/회원가입 페이지 접근 시 차단
+  const authRoutes = ["/login", "/signup", "/reset-password"];
+
+  if (token && authRoutes.includes(pathname)) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  // 비로그인 유저 -> 로그인 필요한 페이지 접근 시 차단
+  const protectedRoutes = ["/my-page", "/my-history", "/team", "/team-creation", "/team-join", "dashboard"];
+
+  if (!token && protectedRoutes.some((route) => pathname.startsWith(route))) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
   if (!token && req.nextUrl.pathname.startsWith("/team")) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
@@ -47,5 +63,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/team/:path*"],
+  matcher: ["/team/:path*", "/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

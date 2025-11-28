@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { toastKit } from "@/utils";
 import { format } from "date-fns";
 import { TaskPdfDocument } from "./_internal";
-import { TaskListResponse } from "@/api/axios/recurring/_type";
+import { TaskListResponse } from "@/api/axios/task/_types";
 
 const PDFViewer = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink), {
   ssr: false,

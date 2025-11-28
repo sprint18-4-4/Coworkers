@@ -13,17 +13,17 @@ interface ImageInfo {
   height: number;
 }
 
-interface ResponsiveImageProps {
+interface DeviceImageProps {
   ImageInfo: ImageInfo;
   Src: ImageSource;
   ImageClassName?: string;
 }
 
-const ResponsiveImage = ({
+const DeviceImage = ({
   ImageInfo: { alt, width, height },
   Src: { mobileSrc, tabletSrc, desktopSrc },
   ImageClassName = "",
-}: ResponsiveImageProps) => {
+}: DeviceImageProps) => {
   return (
     <picture>
       <source media="(max-width: 430px)" srcSet={mobileSrc} />
@@ -33,11 +33,12 @@ const ResponsiveImage = ({
         alt={alt}
         width={width}
         height={height}
-        className={cn("w-full h-auto object-contain", ImageClassName)}
+        className={ImageClassName}
         priority
+        draggable={false}
       />
     </picture>
   );
 };
 
-export default ResponsiveImage;
+export default DeviceImage;

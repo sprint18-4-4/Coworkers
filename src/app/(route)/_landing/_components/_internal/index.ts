@@ -1,2 +1,2 @@
-export { default as ResponsiveImage } from "./ResponsiveImage/ResponsiveImage";
-export { default as TextContent } from "./TextContent/TextContent";
+export { default as DeviceImage } from "./DeviceImage/DeviceImage";
+export { default as FeatureBlock } from "./FeatureBlock/FeatureBlock";

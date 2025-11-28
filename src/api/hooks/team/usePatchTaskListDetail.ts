@@ -1,6 +1,6 @@
-import { patchTaskListDetail } from "@/api/axios";
-import { PatchTaskListDetailRequest } from "@/api/axios/task-list-detail/_type";
 import { toastKit } from "@/utils";
+import { patchTaskListDetail } from "@/api/axios";
+import { PatchTaskListDetailRequest } from "@/api/axios/task/_types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const usePatchTaskListDetail = () => {
