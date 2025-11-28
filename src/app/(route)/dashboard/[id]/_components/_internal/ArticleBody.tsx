@@ -8,16 +8,21 @@ import ArticleTitle from "../../../_components/Article/_internal/ArticleTitle";
 import ArticleWriter from "../../../_components/Article/_internal/ArticleWriter";
 import ArticleContent from "../../../_components/Article/_internal/ArticleContent";
 import ArticleLikeButton from "./ArticleLikeButton";
+import ArticleEditModal from "./ArticleEditModal";
+import { useState } from "react";
 
 const ArticleBody = () => {
   const { id } = useParams();
-  const articleId = Number(id);
   const { isPc } = useDevice();
+  const articleId = Number(id);
 
   const { data: article } = useGetArticle({ articleId });
   const { mutate: deleteArticle } = useDeleteArticle();
+
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+
   const options = [
-    { label: "수정하기", action: () => {} },
+    { label: "수정하기", action: () => setIsOpenEditModal(true) },
     { label: "삭제하기", action: () => deleteArticle({ articleId }) },
   ];
 
@@ -42,6 +47,8 @@ const ArticleBody = () => {
       </div>
 
       <ArticleLikeButton />
+
+      <ArticleEditModal isOpen={isOpenEditModal} onClose={() => setIsOpenEditModal(false)} />
     </section>
   );
 };
