@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
 import { postTodo } from "@/api/axios";
-import { PostTodoRequest } from "@/api/axios/task-list/_type";
+import { PostTodoRequest } from "@/api/axios/task-list/_types";
 
 const usePostTodo = () => {
   const { success, error } = toastKit();
