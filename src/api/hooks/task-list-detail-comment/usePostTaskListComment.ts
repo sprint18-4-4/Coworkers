@@ -3,9 +3,9 @@ import { toastKit } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface UsePostTaskListCommentParams {
-  groupId: string;
-  taskListId: string;
-  taskId: string;
+  groupId: number;
+  taskListId: number;
+  taskId: number;
 }
 
 const usePostTaskListComment = ({ groupId, taskListId, taskId }: UsePostTaskListCommentParams) => {
