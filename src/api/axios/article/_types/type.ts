@@ -95,3 +95,12 @@ export interface DeleteArticleCommentResponse {
   id?: number;
   message?: string;
 }
+
+export interface PatchArticleCommentRequest {
+  commentId: number;
+  body: {
+    content: string;
+  };
+}
+
+export type PatchArticleCommentResponse = PostArticleCommentsResponse;

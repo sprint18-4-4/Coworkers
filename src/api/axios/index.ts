@@ -32,3 +32,4 @@ export { default as postArticleComment } from "./article/postArticleComment";
 export { default as postArticleLike } from "./article/postArticleLike";
 export { default as deleteArticle } from "./article/deleteArticle";
 export { default as deleteArticleComment } from "./article/deleteArticleComment";
+export { default as patchArticleComment } from "./article/patchArticleComment";
