@@ -1,7 +1,7 @@
-import { deleteTodo } from "@/api/axios";
-import { DeleteTodoRequest } from "@/types";
-import { toastKit } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toastKit } from "@/utils";
+import { deleteTodo } from "@/api/axios";
+import { DeleteTodoRequest } from "@/api/axios/task-list/_types";
 
 const useDeleteTodo = () => {
   const { success, error } = toastKit();
@@ -16,7 +16,7 @@ const useDeleteTodo = () => {
       success("할 일 삭제 성공");
       queryClient.invalidateQueries({
         // TODO(지권): groupId 네이밍 변경
-        queryKey: ["groups", Number(groupId)],
+        queryKey: ["groups", groupId],
       });
     },
 

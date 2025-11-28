@@ -1,5 +1,5 @@
 import { instance } from "@/lib";
-import { PostTaskListCommentRequest, PostTaskListCommentResponse } from "./_types/type";
+import { PostTaskListCommentRequest, PostTaskListCommentResponse } from "./_types";
 
 const postTaskListComment = async ({
   taskId,

@@ -1,5 +1,5 @@
 import { instance } from "@/lib";
-import { GetTaskListCommentRequest, GetTaskListCommentResponse } from "./_types/type";
+import { GetTaskListCommentRequest, GetTaskListCommentResponse } from "./_types";
 
 const getTaskListComment = async ({ taskId }: GetTaskListCommentRequest): Promise<GetTaskListCommentResponse[]> => {
   const response = await instance.get<GetTaskListCommentResponse[]>(`/tasks/${taskId}/comments`);

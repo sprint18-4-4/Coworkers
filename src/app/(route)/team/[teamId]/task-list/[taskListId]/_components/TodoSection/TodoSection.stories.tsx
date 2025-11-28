@@ -24,8 +24,8 @@ const meta: Meta<typeof TodoSection> = {
     sectionName: { control: "text" },
   },
   args: {
-    teamId: "1",
-    taskListId: "1",
+    teamId: 1,
+    taskListId: 1,
     selectedDate: new Date(),
     sectionName: "할 일 목록",
     onClickDateItem: () => {},

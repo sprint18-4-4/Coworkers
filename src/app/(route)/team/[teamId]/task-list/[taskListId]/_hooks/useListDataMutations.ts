@@ -3,15 +3,15 @@
 import { useDeleteTaskListDetail, usePatchTaskListDetail } from "@/api/hooks";
 
 interface UseTaskListMutationsProps {
-  teamId: string;
-  taskListId: string;
+  teamId: number;
+  taskListId: number;
 }
 
 const useTaskListMutations = ({ teamId, taskListId }: UseTaskListMutationsProps) => {
   const { mutate: patchTaskListDetailMutate } = usePatchTaskListDetail();
   const { mutate: deleteTaskListDetailMutate } = useDeleteTaskListDetail();
 
-  const toggleTaskDone = (taskId: string, isDone: boolean) => {
+  const toggleTaskDone = (taskId: number, isDone: boolean) => {
     patchTaskListDetailMutate({
       groupId: teamId,
       taskListId,
@@ -22,7 +22,7 @@ const useTaskListMutations = ({ teamId, taskListId }: UseTaskListMutationsProps)
     });
   };
 
-  const updateTask = (taskId: string, name: string, description?: string) => {
+  const updateTask = (taskId: number, name: string, description?: string) => {
     patchTaskListDetailMutate({
       groupId: teamId,
       taskListId,
@@ -34,7 +34,7 @@ const useTaskListMutations = ({ teamId, taskListId }: UseTaskListMutationsProps)
     });
   };
 
-  const deleteTask = (taskId: string) => {
+  const deleteTask = (taskId: number) => {
     deleteTaskListDetailMutate({
       groupId: teamId,
       taskListId,

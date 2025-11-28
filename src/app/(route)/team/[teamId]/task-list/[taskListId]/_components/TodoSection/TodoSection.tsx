@@ -4,17 +4,18 @@ import { cn } from "@/utils";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { addDays, format } from "date-fns";
-import { DateValue, TaskListData } from "@/types";
+import { DateValue } from "@/types";
 import { DateItem, DatePicker, Icon } from "@/common";
 import { EmptyState, TaskListItem } from "@/features";
 import { TODO_STYLES } from "../../_constants";
 import TaskPdfDownloadButton from "../TaskPdfDownloadButton/TaskPdfDownloadButton";
 import useTaskListMutations from "../../_hooks/useListDataMutations";
 import EditDataModal from "../../_detail/_components/_internal/EditDataModal/EditDataModal";
+import { TaskListResponse } from "@/api/axios/task-list/_types";
 // TODO(지권): EditDataModal 네이밍 및 위치 변경 필요
 
 interface TodoSectionHeaderProps {
-  data: TaskListData;
+  data: TaskListResponse;
   selectedDate: Date;
   onClickMoveWeek: (direction: "prev" | "next") => void;
   onClickCalendar: (date: Date) => void;
@@ -76,11 +77,11 @@ const TodoSectionHeader = ({
 type WeekDirection = "prev" | "next";
 
 interface TodoSectionProps {
-  data: TaskListData;
-  teamId: string;
+  data: TaskListResponse;
+  teamId: number;
   onClickDateItem: (date: Date) => void;
   selectedDate: Date;
-  taskListId: string;
+  taskListId: number;
   sectionName: string;
 }
 
@@ -105,7 +106,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
     e.preventDefault();
     if (!editingTask) return;
 
-    updateTask(String(editingTask.id), editForm.name, editForm.description);
+    updateTask(editingTask.id, editForm.name, editForm.description);
     setIsEditModal(false);
   };
 
@@ -121,7 +122,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
 
   const options = (task: { id: number; name: string; description?: string }) => [
     { label: "수정하기", action: () => handleOpenEditModal(task) },
-    { label: "삭제하기", action: () => deleteTask(String(task.id)) },
+    { label: "삭제하기", action: () => deleteTask(task.id) },
   ];
 
   return (
@@ -155,7 +156,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
                   key={item.id}
                   item={item}
                   onOpenDetail={() => onClickTaskListItem(item.id.toString())}
-                  onToggleTodo={() => toggleTaskDone(String(item.id), isDone)}
+                  onToggleTodo={() => toggleTaskDone(item.id, isDone)}
                   options={options(item)}
                 />
               );
