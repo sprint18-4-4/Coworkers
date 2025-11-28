@@ -1,3 +1,4 @@
+import { CommentUser } from "@/types";
 import { ArticleDetail, ArticleListItem } from "@/types/ArticleType";
 
 export interface GetArticlesRequest {
@@ -17,3 +18,22 @@ export interface GetArticleRequest {
 }
 
 export type GetArticleResponse = ArticleDetail;
+
+export interface GetArticleCommentsRequest {
+  articleId: number;
+  limit: number;
+  cursor?: number;
+}
+
+export interface GetArticleCommentsResponse {
+  nextCursor: number;
+  list: [
+    {
+      writer: CommentUser;
+      id: number;
+      content: string;
+      createdAt: string;
+      updatedAt: string;
+    },
+  ];
+}
