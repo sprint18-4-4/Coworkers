@@ -1,14 +1,19 @@
 import { FormEvent, useState } from "react";
 import { DateValue, Frequency, HalfHour } from "@/types";
-import { usePostTask } from "@/api/hooks";
+import { usePostRecurring } from "@/api/hooks";
 
 interface UseTodoFormProps {
   onClose: () => void;
   groupId: string;
   taskListId: string;
+  repeatConfig: {
+    order: Frequency;
+    weekDays: number[];
+    monthDay: number | null;
+  };
 }
 
-export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) => {
+export const useTodoForm = ({ onClose, groupId, taskListId, repeatConfig }: UseTodoFormProps) => {
   const [formData, setFormData] = useState({
     title: "",
     startDate: new Date(),
@@ -16,35 +21,39 @@ export const useTodoForm = ({ onClose, groupId, taskListId }: UseTodoFormProps) 
       period: "am" as "am" | "pm",
       value: "01:30" as HalfHour,
     },
-    frequencyType: "ONCE" as Frequency,
     todoMemo: "",
   });
 
-  const { mutate: postTask } = usePostTask();
+  const { mutate: postRecurring } = usePostRecurring();
 
   const isFormValid =
     formData.title.trim().length > 0 &&
     formData.todoMemo.trim().length > 0 &&
     formData.startDate !== null &&
     formData.startTime.value !== null &&
-    formData.frequencyType;
+    (repeatConfig.order === "WEEKLY"
+      ? repeatConfig.weekDays.length > 0
+      : repeatConfig.order === "MONTHLY"
+        ? repeatConfig.monthDay !== null
+        : true);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!isFormValid) return;
 
-    e.preventDefault();
-    postTask({
+    postRecurring({
       groupId,
       taskListId,
       formData: {
         name: formData.title.trim(),
         description: formData.todoMemo.trim(),
         startDate: formData.startDate.toISOString(),
-        frequencyType: formData.frequencyType,
-        // TODO(지권): monthDay 테스트 필요
-        // monthDay: formData.startDate.getDate(),
+        frequencyType: repeatConfig.order,
+        ...(repeatConfig.order === "WEEKLY" ? { weekDays: repeatConfig.weekDays } : {}),
+        ...(repeatConfig.order === "MONTHLY" ? { monthDay: repeatConfig.monthDay } : {}),
       },
     });
+
     onClose();
   };
 

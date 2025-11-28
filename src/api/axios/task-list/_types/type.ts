@@ -16,8 +16,8 @@ export interface PostTaskRequest {
     description: string;
     startDate: string;
     frequencyType: Frequency;
-    // TODO(지권): monthDay 테스트 필요
-    // monthDay: number;
+    monthDay?: number | null;
+    weekDays?: number[];
   };
 }
 
@@ -26,5 +26,6 @@ export interface PostTaskResponse {
   description: string;
   startDate: string;
   frequencyType: Frequency;
-  monthDay: number;
+  monthDay?: number | null;
+  weekDays?: number[];
 }

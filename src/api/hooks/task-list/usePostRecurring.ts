@@ -1,4 +1,4 @@
-import { postTask } from "@/api/axios";
+import { postRecurring } from "@/api/axios";
 import { useMutation } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
 import { PostTaskRequest } from "@/api/axios/task-list/_types/type";
@@ -9,7 +9,8 @@ const usePostRecurring = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ groupId, taskListId, formData }: PostTaskRequest) => postTask({ groupId, taskListId, formData }),
+    mutationFn: ({ groupId, taskListId, formData }: PostTaskRequest) =>
+      postRecurring({ groupId, taskListId, formData }),
 
     onSuccess: (_data, variables) => {
       success("할 일 추가 성공");
