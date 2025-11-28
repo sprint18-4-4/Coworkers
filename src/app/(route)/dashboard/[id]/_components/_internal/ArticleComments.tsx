@@ -1,4 +1,5 @@
 "use client";
+
 import { useGetArticle, useGetArticleComments, useGetUser } from "@/api/hooks";
 import { InputReply, Profile } from "@/common";
 import { useParams } from "next/navigation";
@@ -17,7 +18,7 @@ const ArticleComments = () => {
     return null;
   }
   return (
-    <section className="py-10">
+    <section className="flex flex-col gap-9 py-10">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-1 text-lg-bold text-text-primary">
           <span>댓글</span>
@@ -28,6 +29,8 @@ const ArticleComments = () => {
           <InputReply value={commentValue} onChange={setCommentValue} isSubmitting={false} />
         </form>
       </div>
+
+      <ul className=""></ul>
     </section>
   );
 };

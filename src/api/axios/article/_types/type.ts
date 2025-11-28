@@ -37,3 +37,18 @@ export interface GetArticleCommentsResponse {
     },
   ];
 }
+
+export interface PostArticleCommentsRequest {
+  articleId: number;
+  body: {
+    content: string;
+  };
+}
+
+export interface PostArticleCommentsResponse {
+  writer: CommentUser;
+  id: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}

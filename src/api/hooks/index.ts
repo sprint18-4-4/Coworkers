@@ -26,3 +26,4 @@ export { default as usePatchUserProfile } from "./user/usePatchUserProfile";
 export { default as usePatchUserPassword } from "./user/usePatchUserPassword";
 export { default as useDeleteUser } from "./user/useDeleteUser";
 export { default as useGetArticleComments } from "./article/useGetArticleComments";
+export { default as usePostArticleComment } from "./article/usePostArticleComment";

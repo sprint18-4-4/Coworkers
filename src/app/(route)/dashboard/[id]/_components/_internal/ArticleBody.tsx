@@ -2,11 +2,11 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { Dropdown } from "@/common";
+import { useDevice } from "@/hooks";
+import { useGetArticle } from "@/api/hooks";
 import ArticleTitle from "../../../_components/Article/_internal/ArticleTitle";
 import ArticleWriter from "../../../_components/Article/_internal/ArticleWriter";
 import ArticleContent from "../../../_components/Article/_internal/ArticleContent";
-import { useDevice } from "@/hooks";
-import { useGetArticle } from "@/api/hooks";
 
 const ArticleBody = () => {
   const router = useRouter();
