@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
-import { postTodo } from "@/api/axios";
-import { PostTodoRequest } from "@/api/axios/task-list/_types";
+import { postTaskList } from "@/api/axios";
+import { PostTaskListRequest } from "@/api/axios/task-list/_types";
 
 const usePostTodo = () => {
   const { success, error } = toastKit();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ groupId, name }: PostTodoRequest) => postTodo({ groupId, name }),
+    mutationFn: ({ groupId, name }: PostTaskListRequest) => postTaskList({ groupId, name }),
 
     onSuccess: (_data, variables) => {
       const { groupId } = variables;

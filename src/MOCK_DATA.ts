@@ -1,5 +1,5 @@
 import { DateNumber, Day, TaskListItemType } from "./types";
-import { GetTaskListDetailResponse } from "./api/axios/task/_types";
+import { GetTaskDetailResponse } from "./api/axios/task/_types";
 import { TaskGroupItem } from "./api/axios/task/_types";
 
 export const USER_MOCK_DATA = {
@@ -151,7 +151,7 @@ export const COMMENT_MOCK_DATA = {
   user: { id: 1, nickname: "안해나", image: "" },
 };
 
-export const TASK_DETAIL_MOCK_DATA: GetTaskListDetailResponse = {
+export const TASK_DETAIL_MOCK_DATA: GetTaskDetailResponse = {
   id: 0,
   name: "회의록 정리하기",
   description: "팀 회의에서 나온 내용을 정리하는 작업입니다.",

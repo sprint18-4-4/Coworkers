@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
-import { patchTodo } from "@/api/axios";
-import { PatchTodoRequest } from "@/api/axios/task/_types";
+import { patchTask } from "@/api/axios";
+import { PatchTaskRequest } from "@/api/axios/task/_types";
 
-const usePatchTodo = () => {
+const usePatchTask = () => {
   const { success, error } = toastKit();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ groupId, id, name }: PatchTodoRequest) => patchTodo({ groupId, id, name }),
+    mutationFn: ({ groupId, id, name }: PatchTaskRequest) => patchTask({ groupId, id, name }),
 
     onSuccess: (_data, variables) => {
       const { groupId } = variables;
@@ -26,4 +26,4 @@ const usePatchTodo = () => {
   });
 };
 
-export default usePatchTodo;
+export default usePatchTask;

@@ -3,11 +3,11 @@ import { Dropdown, Icon, Profile } from "@/common";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import { HEADER_STYLES } from "./HEADER_STYLES";
 import EditDataModal from "../EditDataModal/EditDataModal";
-import { GetTaskListDetailResponse } from "@/api/axios/task/_types";
+import { GetTaskDetailResponse } from "@/api/axios/task/_types";
 import { useTaskMutations } from "@/hooks";
 
 interface HeaderSectionProps {
-  data: GetTaskListDetailResponse;
+  data: GetTaskDetailResponse;
   isDone: boolean;
   taskPath: {
     id: number;

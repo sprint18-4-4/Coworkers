@@ -5,6 +5,7 @@ export { default as postResetPassword } from "./auth/resetPassword";
 export { default as getHistory } from "./user/getHistory";
 export { default as deleteGroup } from "./group/deleteGroup/deleteGroup";
 export { default as postRecurring } from "./recurring/postRecurring";
+export { default as getTask } from "./task/getTask";
 export { default as getTaskList } from "./task/getTask";
 export { default as patchTask } from "./task/patchTask";
 export { default as deleteTask } from "./task/deleteTask";

@@ -1,8 +1,8 @@
 import { toastKit } from "@/utils";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteTaskListDetail } from "@/api/axios";
-import { DeleteTaskListDetailRequest } from "@/api/axios/task/_types";
+import { deleteTask } from "@/api/axios";
+import { DeleteTaskRequest } from "@/api/axios/task/_types";
 
 const useDeleteTaskListDetail = () => {
   const { success, error } = toastKit();
@@ -10,8 +10,7 @@ const useDeleteTaskListDetail = () => {
   const router = useRouter();
 
   return useMutation({
-    mutationFn: ({ groupId, taskListId, taskId }: DeleteTaskListDetailRequest) =>
-      deleteTaskListDetail({ groupId, taskListId, taskId }),
+    mutationFn: ({ groupId, taskListId, taskId }: DeleteTaskRequest) => deleteTask({ groupId, taskListId, taskId }),
 
     onSuccess: (_data, variables) => {
       if (!variables) return;

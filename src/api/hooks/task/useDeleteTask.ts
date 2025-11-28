@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toastKit } from "@/utils";
-import { deleteTodo } from "@/api/axios";
-import { DeleteTodoRequest } from "@/api/axios/task-list/_types";
+import { DeleteTaskListRequest } from "@/api/axios/task/_types";
+import { deleteTaskList } from "@/api/axios";
 
-const useDeleteTodo = () => {
+const useDeleteTaskList = () => {
   const { success, error } = toastKit();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ groupId, id }: DeleteTodoRequest) => deleteTodo({ groupId, id }),
+    mutationFn: ({ groupId, id }: DeleteTaskListRequest) => deleteTaskList({ groupId, id }),
 
     onSuccess: (_data, variables) => {
       const { groupId } = variables;
@@ -26,4 +26,4 @@ const useDeleteTodo = () => {
   });
 };
 
-export default useDeleteTodo;
+export default useDeleteTaskList;
