@@ -5,7 +5,9 @@ import { Input, InputBox, BaseButton, Icon } from "@/common";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { postImageUpload } from "@/api/axios";
 import { usePostArticle } from "@/api/hooks";
-import { INPUT_AREA_STYLE, LABEL_STYLE } from "./STYLE";
+import { INPUT_AREA_STYLE, LABEL_STYLE } from "../_constants/STYLE";
+import { MAX_IMAGE_SIZE } from "../_constants/MAX_IMAGE_SIZE";
+import { toastKit } from "@/utils";
 
 interface FormStateType {
   title: string;
@@ -22,6 +24,8 @@ const ArticleForm = () => {
     image: null,
   });
 
+  const { error } = toastKit();
+
   const handleTextChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormState((prev) => ({
@@ -34,6 +38,15 @@ const ArticleForm = () => {
     const file = e.target.files?.[0];
     if (!file) {
       return;
+    }
+    if (file.size > MAX_IMAGE_SIZE) {
+      error("이미지 파일, 최대 용량은 10MB입니다.");
+      e.target.value = "";
+      return;
+    }
+
+    if (preview) {
+      URL.revokeObjectURL(preview);
     }
 
     const previewUrl = URL.createObjectURL(file);
@@ -74,6 +87,8 @@ const ArticleForm = () => {
           placeholder="제목을 입력해주세요."
           value={formState.title}
           onChange={handleTextChange}
+          required
+          maxLength={30}
         />
       </div>
 
