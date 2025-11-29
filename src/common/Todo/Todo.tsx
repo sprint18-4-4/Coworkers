@@ -66,7 +66,7 @@ const Todo = ({ id, title, completed, onChangeCompleted, type = "team" }: TodoPr
           completed ? "text-slate-400 line-through" : "text-text-primary",
           type === "team"
             ? "max-w-[300px] tablet:max-w-[580px] pc:max-w-[234px]"
-            : "max-w-[200px] tablet:max-w-[170px] pc:max-w-[550px]",
+            : "max-w-[150px] tablet:max-w-[170px] pc:max-w-[550px]",
         )}
       >
         {title}

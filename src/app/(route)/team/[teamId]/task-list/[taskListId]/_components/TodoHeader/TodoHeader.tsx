@@ -78,7 +78,7 @@ const TodoHeader = ({ data, groupId, isPending, isError }: TodoHeaderProps) => {
             variant="outlinedPrimary"
             aria-label="할 일 추가"
             onClick={() => setIsAddTodoModalOpen(true)}
-            className="max-w-[130px] h-9 px-4 text-nowrap rounded-[40px] bg-background-primary hidden tablet:hidden pc:flex items-center"
+            className="max-w-[130px] h-9 px-4 text-nowrap rounded-[40px] bg-background-primary mobile:hidden tablet:hidden pc:flex items-center"
           >
             <Icon name="plus" className="size-5 tablet:size-5" />
             <span className="text-lg-semibold">할 일 추가</span>

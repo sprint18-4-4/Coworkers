@@ -43,7 +43,7 @@ const TodoSectionHeader = ({
 
   return (
     <header className="flex items-center justify-between relative">
-      <h3 className="text-2lg-bold text-text-primary flex-1 overflow-hidden text-ellipsis">
+      <h3 className="text-2lg-bold text-text-primary flex-1 overflow-hidden text-ellipsis text-nowrap">
         {sectionName || "로딩중..."}
       </h3>
 
