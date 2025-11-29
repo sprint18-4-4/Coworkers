@@ -6,12 +6,13 @@ import { useRouter } from "next/navigation";
 import { addDays, format } from "date-fns";
 import { DateValue } from "@/types";
 import { DateItem, DatePicker, Icon } from "@/common";
-import { EmptyState, TaskListItem } from "@/features";
+import { EmptyState, LoadingSpinner, TaskListItem } from "@/features";
 import { TODO_STYLES } from "../../_constants";
 import TaskPdfDownloadButton from "../TaskPdfDownloadButton/TaskPdfDownloadButton";
 import { useTaskMutations } from "@/hooks";
 import EditDataModal from "../../_detail/_components/_internal/EditDataModal/EditDataModal";
 import { TaskResponse } from "@/api/axios/task/_types";
+import ErrorState from "@/features/ErrorState/ErrorState";
 // TODO(지권): EditDataModal 네이밍 및 위치 변경 필요
 
 interface TodoSectionHeaderProps {
@@ -77,19 +78,32 @@ const TodoSectionHeader = ({
 type WeekDirection = "prev" | "next";
 
 interface TodoSectionProps {
+  sectionName: string;
   data: TaskResponse;
   teamId: number;
   onClickDateItem: (date: Date) => void;
   selectedDate: Date;
   taskListId: number;
-  sectionName: string;
+  taskStatus: {
+    isPending: boolean;
+    isError: boolean;
+  };
 }
 
-const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, sectionName }: TodoSectionProps) => {
+const TodoSection = ({
+  data,
+  teamId,
+  onClickDateItem,
+  selectedDate,
+  taskListId,
+  sectionName,
+  taskStatus,
+}: TodoSectionProps) => {
   const router = useRouter();
   const [isEditModal, setIsEditModal] = useState(false);
   const [editingTask, setEditingTask] = useState<{ id: number; name: string; description?: string } | null>(null);
   const [editForm, setEditForm] = useState({ name: "", description: "" });
+  const { isPending, isError } = taskStatus;
 
   const { toggleTaskDone, deleteTask, updateTask } = useTaskMutations({ teamId, taskListId });
 
@@ -143,25 +157,28 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
 
         <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
 
-        <div className="mt-[37px] min-h-[250px]">
-          {/* TODO(지권): 로딩, 에러 추가 예정 */}
-          {(data?.length === 0 || !data) && <EmptyState />}
+        <div className="mt-[37px] min-h-[250px] flex-center">
+          {isPending && <LoadingSpinner />}
+          {isError && <ErrorState />}
+          {data?.length === 0 && !isPending && <EmptyState />}
 
-          <ul className="flex flex-col">
-            {data?.map((item) => {
-              const isDone = item.doneAt !== null;
+          {data?.length > 0 && !isPending && (
+            <ul className="w-full flex flex-col gap-3 self-start">
+              {data?.map((item) => {
+                const isDone = item.doneAt !== null;
 
-              return (
-                <TaskListItem
-                  key={item.id}
-                  item={item}
-                  onOpenDetail={() => onClickTaskListItem(item.id.toString())}
-                  onToggleTodo={() => toggleTaskDone(item.id, isDone)}
-                  options={options(item)}
-                />
-              );
-            })}
-          </ul>
+                return (
+                  <TaskListItem
+                    key={item.id}
+                    item={item}
+                    onOpenDetail={() => onClickTaskListItem(item.id.toString())}
+                    onToggleTodo={() => toggleTaskDone(item.id, isDone)}
+                    options={options(item)}
+                  />
+                );
+              })}
+            </ul>
+          )}
         </div>
       </section>
 

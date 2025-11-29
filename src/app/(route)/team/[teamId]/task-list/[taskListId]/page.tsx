@@ -18,7 +18,11 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId
   const { data: groups, isLoading: isLoadingGroup } = useGetGroups({ id: Number(teamId) });
   const taskListName = groups?.taskLists?.find((taskList) => taskList.id === Number(taskListId))?.name ?? "";
 
-  const { data: taskList } = useGetTask({
+  const {
+    data: taskList,
+    isPending: isPendingTask,
+    isError: isErrorTask,
+  } = useGetTask({
     groupId: teamId,
     taskListId: taskListId,
     ...(searchParams.get("date") && { date: searchParams.get("date") }),
@@ -61,6 +65,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId
             onClickDateItem={onClickDateItem}
             selectedDate={selectedDate}
             taskListId={taskListId}
+            taskStatus={{ isPending: isPendingTask, isError: isErrorTask }}
           />
         </div>
       </PageLayout>
