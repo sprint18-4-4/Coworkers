@@ -51,3 +51,11 @@ export interface DeleteArticleResponse {
   id?: number;
   message?: string;
 }
+
+export interface PostArticleRequest {
+  image?: string;
+  content: string;
+  title: string;
+}
+
+export type PostArticleResponse = ArticleListItem;

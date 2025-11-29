@@ -27,6 +27,7 @@ export { default as patchResetPassword } from "./auth/patchResetPassword";
 export { default as patchUserProfile } from "./user/patchUser/patchUserProfile";
 export { default as patchUserPassword } from "./user/patchUserPassword/patchUserPassword";
 export { default as deleteUser } from "./user/deleteUser/deleteUser";
+export { default as postArticle } from "./article/postArticle";
 export { default as getArticleComments } from "./articleComment/getArticleComments";
 export { default as postArticleComment } from "./articleComment/postArticleComment";
 export { default as postArticleLike } from "./article/postArticleLike";
