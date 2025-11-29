@@ -13,7 +13,6 @@ const TeamJoinForm = () => {
         placeholder="팀 링크를 입력해주세요."
         value={token}
         onChange={(e) => handleTokenChange(e.target.value)}
-        disabled={isLoading}
       />
       <div className="flex-col-center gap-5 tablet:gap-6">
         <BaseButton type="submit" variant="solid" size="large" disabled={isLoading || !isValid}>
