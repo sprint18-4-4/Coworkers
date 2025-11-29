@@ -16,7 +16,7 @@ const PasswordInputSection = () => {
     },
   });
 
-  const { register, errors, handleSubmit, reset, meta } = useForm({
+  const { register, errors, handleSubmit, reset, meta, values } = useForm({
     initialValues: {
       password: "",
       passwordConfirmation: "",
@@ -24,6 +24,9 @@ const PasswordInputSection = () => {
     validationRules: {
       password: validatePassword,
       passwordConfirmation: (value, formData) => validatePasswordConfirm(formData?.password ?? "", value),
+    },
+    validationTriggers: {
+      password: ["passwordConfirmation"],
     },
     onSubmit: async (values) => {
       const { password, passwordConfirmation } = values;
@@ -45,7 +48,7 @@ const PasswordInputSection = () => {
         <Input
           label="비밀번호"
           type="password"
-          defaultValue={"123123"}
+          defaultValue={"fakePassword"}
           disabled
           addonAfter={
             <BaseButton
@@ -86,12 +89,7 @@ const PasswordInputSection = () => {
         </Modal.Body>
 
         <Modal.Footer className="flex gap-3">
-          <BaseButton
-            variant="outlinedSecondary"
-            size="large"
-            className="flex-1"
-            onClick={() => setChangePasswordOpen(false)}
-          >
+          <BaseButton variant="outlinedSecondary" size="large" className="flex-1" onClick={handleModalClose}>
             닫기
           </BaseButton>
           <BaseButton
