@@ -61,12 +61,12 @@ const Todo = ({ id, title, completed, onChangeCompleted, type = "team" }: TodoPr
       </span>
       <span
         className={cn(
-          "ml-[7px] text-xs-regular truncate",
+          "ml-[7px] text-xs-regular inline-block overflow-hidden text-ellipsis",
           "tablet:ml-2 tablet:text-md-regular",
           completed ? "text-slate-400 line-through" : "text-text-primary",
           type === "team"
             ? "max-w-[300px] tablet:max-w-[580px] pc:max-w-[234px]"
-            : "max-w-[220px] tablet:max-w-[400px] pc:max-w-[550px]",
+            : "max-w-[200px] tablet:max-w-[170px] pc:max-w-[550px]",
         )}
       >
         {title}

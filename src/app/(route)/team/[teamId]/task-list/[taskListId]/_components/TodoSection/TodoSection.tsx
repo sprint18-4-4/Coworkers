@@ -43,7 +43,9 @@ const TodoSectionHeader = ({
 
   return (
     <header className="flex items-center justify-between relative">
-      <h3 className="text-2lg-bold text-text-primary">{sectionName || "로딩중..."}</h3>
+      <h3 className="text-2lg-bold text-text-primary flex-1 overflow-hidden text-ellipsis">
+        {sectionName || "로딩중..."}
+      </h3>
 
       <div className="flex items-center gap-2">
         <time dateTime={monthDateTime} className="text-sm-medium text-text-primary">

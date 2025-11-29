@@ -76,7 +76,12 @@ const TaskListItem = ({ item, onOpenDetail, onToggleTodo, options }: TaskListIte
                 e.stopPropagation();
               }}
             >
-              <Dropdown iconName="kebab" options={options} iconClassName="size-4 tablet:size-4" />
+              <Dropdown
+                iconName="kebab"
+                options={options}
+                iconClassName="size-4 tablet:size-4"
+                placement="bottom-right"
+              />
             </div>
           )}
         </div>

@@ -13,7 +13,7 @@ const DateItem = ({ onClick, selectedDate }: { onClick: (date: Date) => void; se
   const week = getWeek(selectedDate);
 
   return (
-    <div className={cn("w-full flex items-center justify-around mt-6", "tablet:gap-3")}>
+    <div className={cn("w-full flex flex-wrap items-center justify-around mt-6 gap-1", "tablet:gap-3")}>
       {week.map((day) => {
         const formatted = format(day, "d");
         const weekday = format(day, "EEE", { locale: ko });
@@ -29,7 +29,7 @@ const DateItem = ({ onClick, selectedDate }: { onClick: (date: Date) => void; se
               onClick(day);
             }}
             className={cn(
-              "box-border flex-col-center gap-1 rounded-lg flex-1 h-[49px] py-2 border",
+              "box-border flex-col-center gap-1 rounded-lg flex-1 h-[49px] py-2 border ",
               "tablet:flex-1 tablet:min-h-[68px] tablet:px-4 tablet:py-3 tablet:rounded-xl",
               isSelected ? "bg-slate-800 text-white" : "border hover:bg-gray-100 transition-colors",
             )}
