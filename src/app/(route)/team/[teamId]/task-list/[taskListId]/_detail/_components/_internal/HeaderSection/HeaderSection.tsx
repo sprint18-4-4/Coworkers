@@ -3,11 +3,11 @@ import { Dropdown, Icon, Profile } from "@/common";
 import { cn, formatToKoreanDate, getFrequencyLabel } from "@/utils";
 import { HEADER_STYLES } from "./HEADER_STYLES";
 import EditDataModal from "../EditDataModal/EditDataModal";
-import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types";
-import { useDetailDataMutations } from "../../../_hooks";
+import { GetTaskDetailResponse } from "@/api/axios/task/_types";
+import { useTaskMutations } from "@/hooks";
 
 interface HeaderSectionProps {
-  data: GetTaskListDetailResponse;
+  data: GetTaskDetailResponse;
   isDone: boolean;
   taskPath: {
     id: number;
@@ -23,13 +23,14 @@ const HeaderSection = ({ data, isDone, taskPath }: HeaderSectionProps) => {
     description: data.description || "",
   });
 
-  const { submitDetailEdit, detailDelete } = useDetailDataMutations({
-    taskPath,
+  const { updateTask, deleteTask } = useTaskMutations({
+    teamId: taskPath.teamId,
+    taskListId: taskPath.taskListId,
   });
 
   const options = [
     { value: "edit", label: "수정하기", action: () => setIsEditModal(true) },
-    { value: "delete", label: "삭제하기", action: () => detailDelete() },
+    { value: "delete", label: "삭제하기", action: () => deleteTask(taskPath.id) },
   ];
 
   return (
@@ -89,7 +90,11 @@ const HeaderSection = ({ data, isDone, taskPath }: HeaderSectionProps) => {
           setIsEditModal={setIsEditModal}
           form={form}
           setForm={setForm}
-          handleEdit={(e) => submitDetailEdit(e, form, setIsEditModal)}
+          handleEdit={(e) => {
+            e.preventDefault();
+            updateTask(taskPath.id, form.name, form.description);
+            setIsEditModal(false);
+          }}
         />
       )}
     </>

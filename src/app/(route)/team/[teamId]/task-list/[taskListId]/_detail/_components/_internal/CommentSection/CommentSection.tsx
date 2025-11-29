@@ -5,10 +5,10 @@ import { CommentItem, InputReply, Profile } from "@/common";
 import { useGetTaskListComment } from "@/api/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDetailCommentMutations } from "../../../_hooks";
-import { GetTaskListDetailResponse } from "@/api/axios/task-list-detail/_types";
+import { GetTaskDetailResponse } from "@/api/axios/task/_types";
 
 interface CommentSectionProps {
-  data: GetTaskListDetailResponse;
+  data: GetTaskDetailResponse;
 }
 
 const CommentSection = ({ data }: CommentSectionProps) => {

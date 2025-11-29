@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { BaseButton, Input, Modal } from "@/common";
-import { usePatchTodo } from "@/api/hooks";
+import { usePatchTask } from "@/api/hooks";
 
 interface EditTodoModalProps {
   isOpen: boolean;
@@ -14,7 +14,7 @@ interface EditTodoModalProps {
 const TaskItemEditModal = ({ isOpen, onClose, TodoItem }: EditTodoModalProps) => {
   const [todoName, setTodoName] = useState("");
 
-  const { mutate: patchTodo, isPending } = usePatchTodo();
+  const { mutate: patchTodo, isPending } = usePatchTask();
 
   const handleUpdateTodo = (e: FormEvent<HTMLFormElement>) => {
     if (!todoName || todoName.trim() === "") return;

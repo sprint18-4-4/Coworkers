@@ -1,5 +1,5 @@
 import { getArticles } from "@/api/axios";
-import { GetArticlesRequest } from "@/api/axios/article/_types/type";
+import { GetArticlesRequest } from "@/api/axios/article/_type";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetArticles = (params: GetArticlesRequest) => {
