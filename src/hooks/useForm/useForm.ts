@@ -101,6 +101,7 @@ const useForm = ({ initialValues, validationRules, onSubmit, validationTriggers 
     register,
     errors,
     handleSubmit,
+    values: formData,
     setValue,
     reset,
     meta: {
