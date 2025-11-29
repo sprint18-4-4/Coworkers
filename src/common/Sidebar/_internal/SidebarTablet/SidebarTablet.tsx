@@ -43,17 +43,17 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
             <>
               {user.memberships.length > 0 && (
                 <>
-                  <div className={cn("w-full flex flex-col gap-2", isOpen && "pb-3")}>
-                    <SidebarDropdown isOpen={isOpen} membership={user.memberships} />
-
-                    {isOpen && <AddTeamButton />}
-                  </div>
-
+                  <SidebarDropdown isOpen={isOpen} membership={user.memberships} />
                   <hr className={cn("w-full text-background-tertiary", !isOpen && "hidden")} />
                 </>
               )}
 
-              <SidebarLink title="자유게시판" isOpen={isOpen} />
+              <SidebarLink title="자유게시판" isOpen={isOpen} href="/dashboard" iconName="board" />
+              {isOpen ? (
+                <AddTeamButton />
+              ) : (
+                <SidebarLink title="팀 추가하기" isOpen={isOpen} href="/team-creation" iconName="plus" />
+              )}
             </>
           )}
         </section>

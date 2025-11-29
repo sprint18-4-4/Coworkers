@@ -3,6 +3,7 @@ import { Membership } from "@/types";
 import { useIsActivePath } from "@/utils";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
+import SidebarTooltip from "../SidebarTooltip/SidebarTooltip";
 
 const DropdownItem = ({ title, id, isOpen }: { title: string; id: string; isOpen: boolean }) => {
   const isActive = useIsActivePath(`/team/${id}`);
@@ -18,7 +19,10 @@ const DropdownItem = ({ title, id, isOpen }: { title: string; id: string; isOpen
           : "bg-transparent text-text-primary hover:bg-gray-100 transition-colors",
       )}
     >
-      <Icon name="chess" className={cn("size-5 tablet:size-5", isActive ? "text-brand-primary" : "text-slate-300")} />
+      <div className="relative flex items-center justify-center">
+        <Icon name="chess" className={cn("size-5 tablet:size-5", isActive ? "text-brand-primary" : "text-slate-300")} />
+        {!isOpen && <SidebarTooltip title={title} />}
+      </div>
       {isOpen && <span className="flex-1 min-w-0 text-lg-regular truncate">{title}</span>}
     </Link>
   );
@@ -29,7 +33,7 @@ const SidebarDropdown = ({ isOpen, membership }: { isOpen: boolean; membership: 
     <details className="group w-full rounded-xl bg-white">
       <summary
         className={cn(
-          "list-none px-4 py-2 flex items-center justify-between cursor-pointer rounded-xl select-none",
+          "list-none px-4 h-[52px] flex items-center justify-between cursor-pointer rounded-xl select-none",
           "hover:bg-gray-100 transition-colors",
         )}
       >
@@ -45,13 +49,15 @@ const SidebarDropdown = ({ isOpen, membership }: { isOpen: boolean; membership: 
         )}
       </summary>
 
-      <ul className="flex flex-col gap-2 mt-2">
-        {membership.map((item, index) => (
-          <li key={index}>
-            <DropdownItem title={item.group.name} id={item.group.id.toString()} isOpen={isOpen} />
-          </li>
-        ))}
-      </ul>
+      <div className="h-[300px] overflow-y-auto hide-scrollbar">
+        <ul className="flex flex-col gap-2 mt-2">
+          {membership.map((item, index) => (
+            <li key={index}>
+              <DropdownItem title={item.group.name} id={item.group.id.toString()} isOpen={isOpen} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </details>
   );
 };
