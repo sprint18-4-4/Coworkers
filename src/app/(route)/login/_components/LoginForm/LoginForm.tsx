@@ -21,7 +21,7 @@ const LoginForm = () => {
 
   const isInitialized = useRef(false);
 
-  const { mutate: postLogin } = usePostLogin();
+  const { mutateAsync: postLogin } = usePostLogin();
 
   const { email, isRemembered, setEmail, toggleRemember } = useEmailStore();
 
@@ -30,6 +30,7 @@ const LoginForm = () => {
   const { register, errors, handleSubmit, meta, setValue } = useForm({
     initialValues: { email: "", password: "" },
     validationRules: loginRules,
+    keepLockOnSuccess: true,
     onSubmit: async (values) => {
       if (isRemembered) {
         setEmail(values.email);

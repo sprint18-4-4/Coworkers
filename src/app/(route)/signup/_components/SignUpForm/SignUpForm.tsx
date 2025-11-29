@@ -14,9 +14,10 @@ const INITIAL_VALUES = {
 };
 
 const SignUpForm = () => {
-  const { mutate: postSignup } = usePostSignup();
+  const { mutateAsync: postSignup } = usePostSignup();
   const { register, errors, handleSubmit, meta } = useForm({
     initialValues: INITIAL_VALUES,
+    keepLockOnSuccess: true,
     validationRules: {
       email: validateEmail,
       nickname: validateName,
