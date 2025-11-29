@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { CommentSection, ContentSection, HeaderSection } from "../_internal";
 import useGetTaskDetail from "@/api/hooks/task/useGetTaskDetail";
 import { useTaskMutations } from "@/hooks";
+import { LoadingSpinner } from "@/features";
+import ErrorState from "@/features/ErrorState/ErrorState";
 
 interface DetailPageProps {
   id: number;
@@ -20,7 +22,11 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
     router.back();
   };
 
-  const { data: taskDetail, isPending } = useGetTaskDetail({
+  const {
+    data: taskDetail,
+    isPending: isPendingTaskDetail,
+    isError: isErrorTaskDetail,
+  } = useGetTaskDetail({
     groupId: teamId,
     taskListId: taskListId,
     taskId: id,
@@ -29,10 +35,6 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
   const isDone = taskDetail?.doneAt !== null;
 
   const { toggleTaskDone } = useTaskMutations({ teamId, taskListId });
-
-  // TODO(지권): 에러, 로딩 상태 처리 추가 필요
-  if (isPending) return <div>로딩중</div>;
-  if (!taskDetail) return <div>데이터 없음</div>;
 
   return (
     <>
@@ -43,7 +45,8 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
           "w-full min-h-[calc(100vh-52px)] flex flex-col px-4 py-3 space-y-6 bg-background-primary",
           "fixed inset-x-0 inset-y-10 z-[999] shadow-lg hide-scrollbar",
           "tablet:px-7 tablet:py-10 tablet:inset-x-[150px] tablet:inset-y-0",
-          "pc:sticky pc:top-0 pc:w-[420px] pc:min-w-[420px] pc:left-auto pc:right-0",
+          "pc:top-0 pc:bottom-0 pc:right-0 pc:left-auto",
+          "pc:w-[420px] pc:min-w-[420px]",
           "pc:max-h-[100vh] pc:overflow-y-auto pc:shadow-none",
         )}
       >
@@ -51,21 +54,29 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
           <Icon name="x" className="size-6 tablet-6" />
         </button>
 
-        <HeaderSection
-          data={taskDetail}
-          isDone={isDone}
-          taskPath={{
-            id,
-            teamId,
-            taskListId,
-          }}
-        />
+        {(isPendingTaskDetail || isErrorTaskDetail) && (
+          <div className="w-full h-full flex-center">{isPendingTaskDetail ? <LoadingSpinner /> : <ErrorState />}</div>
+        )}
 
-        <hr />
+        {!isPendingTaskDetail && !isErrorTaskDetail && (
+          <>
+            <HeaderSection
+              data={taskDetail}
+              isDone={isDone}
+              taskPath={{
+                id,
+                teamId,
+                taskListId,
+              }}
+            />
 
-        <ContentSection content={taskDetail?.description ?? ""} />
+            <hr />
 
-        <CommentSection data={taskDetail} />
+            <ContentSection content={taskDetail?.description ?? ""} />
+
+            <CommentSection data={taskDetail} />
+          </>
+        )}
       </article>
 
       <BaseButton

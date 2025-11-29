@@ -22,7 +22,7 @@ const TaskListCreateModal = ({ isOpen, onClose, groupId }: TaskListCreateModalPr
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} className="flex-col-center gap-4 px-4 py-8">
+    <Modal isOpen={isOpen} onClose={onClose} className="flex-col-center gap-4 px-4 py-8 select-none">
       <Modal.CloseIcon onClose={onClose} />
       <h2 className="text-lg-medium text-text-primary">할 일 목록</h2>
       <form onSubmit={handleCreateTodo} className="flex-col-center gap-4 w-[280px]">

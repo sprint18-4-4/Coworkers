@@ -1,6 +1,5 @@
 import { flexCenter, flexColCenter, customShadow } from "./src/utils/customPlugins";
 import type { Config } from "tailwindcss";
-import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
@@ -12,7 +11,7 @@ const config: Config = {
     screens: {
       mobile: { max: "430px" }, // 0–430px
       tablet: { min: "431px" }, // 431–744px
-      pc: { min: "745px" }, // 745px 이상
+      pc: { min: "940px" }, // 940px 이상
     },
 
     extend: {

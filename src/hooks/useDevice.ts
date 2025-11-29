@@ -14,7 +14,7 @@ const useDevice = () => {
     const queries = {
       mobile: "(max-width: 430px)",
       tablet: "(min-width: 431px) and (max-width: 744px)",
-      pc: "(min-width: 745px)",
+      pc: "(min-width: 940px)",
     };
 
     const mobile = window.matchMedia(queries.mobile);
