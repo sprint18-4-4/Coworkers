@@ -7,6 +7,7 @@ import { TodoSection, TodoHeader, MakeTodoModal } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 import { DetailPage } from "./_detail/_components";
 import { useGetGroups, useGetTask } from "@/api/hooks";
+import { LoadingSpinner } from "@/features";
 
 const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId: number }> }) => {
   const { teamId, taskListId } = use(params);
@@ -90,8 +91,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId
 
 const Page = ({ params }: { params: Promise<{ teamId: number; taskListId: number }> }) => {
   return (
-    // TODO(지권): 로딩 화면 추가 필요
-    <Suspense fallback={""}>
+    <Suspense fallback={<LoadingSpinner />}>
       <TaskListPage params={params} />
     </Suspense>
   );

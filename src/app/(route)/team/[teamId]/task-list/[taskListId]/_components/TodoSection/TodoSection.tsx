@@ -130,7 +130,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
       <section
         className={cn(
           "bg-background-primary px-[17px] py-[38px] mt-[22px] rounded-[20px]",
-          "pc:px-[42px] pc:max-w-[819px] pc:flex-1",
+          "pc:px-[42px] pc:max-w-[819px] pc:w-full",
         )}
       >
         <TodoSectionHeader
@@ -147,7 +147,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
           {/* TODO(지권): 로딩, 에러 추가 예정 */}
           {(data?.length === 0 || !data) && <EmptyState />}
 
-          <ul className="flex flex-col gap-3">
+          <ul className="flex flex-col">
             {data?.map((item) => {
               const isDone = item.doneAt !== null;
 
