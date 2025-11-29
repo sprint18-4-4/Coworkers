@@ -16,7 +16,7 @@ const SidebarTablet = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
       )}
     >
       <header className="flex items-center gap-[10px] px-6 py-8 relative">
-        <Link href="/" className="flex items-center gap-1">
+        <Link href="/" aria-label="홈으로 이동" className="flex items-center gap-1">
           <Icon name="logo" />
           {isOpen && <h2 className="text-brand-primary font-bold text-5 leading-none pr-[22px] m-0">COWORKERS</h2>}
         </Link>

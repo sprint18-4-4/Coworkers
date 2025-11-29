@@ -38,20 +38,16 @@ const LeftMobile = ({ isOpen, handleOpenDropdown, user }: SidebarProps) => {
           onClick={() => handleOpenDropdown(isOpen)}
           aria-label="사이드바 닫기"
         />
-
-        <div className="min-w-0 flex flex-col gap-2">
-          {user?.memberships.map((membership) => (
-            <MobileMenuItem key={membership.groupId} membership={membership} isOpen={isOpen} />
-          ))}
-
-          <AddTeamButton />
-        </div>
+        {user?.memberships.map((membership) => (
+          <MobileMenuItem key={membership.groupId} membership={membership} isOpen={isOpen} />
+        ))}
 
         <hr />
 
         <div className="w-full">
-          <SidebarLink title="자유게시판" isOpen={isOpen} />
+          <SidebarLink title="자유게시판" isOpen={isOpen} href="/dashboard" iconName="board" />
         </div>
+        <AddTeamButton />
       </nav>
     </>
   );

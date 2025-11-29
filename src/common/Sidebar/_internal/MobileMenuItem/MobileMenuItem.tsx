@@ -14,6 +14,7 @@ const MobileMenuItem = ({ membership, isOpen }: MobileMenuItemProps) => {
   return (
     <Link
       href={`/team/${membership.groupId}`}
+      aria-label={`${membership.group.name} 팀으로 이동`}
       className={cn(
         "w-full min-h-[52px] p-4 flex gap-3 items-center rounded-xl",
         "text-text-primary bg-background-primary hover:bg-gray-200 transition-colors",
@@ -21,7 +22,11 @@ const MobileMenuItem = ({ membership, isOpen }: MobileMenuItemProps) => {
       )}
     >
       <Icon name="chess" className={cn("size-5 tablet:size-5", isActive ? "text-brand-primary" : "text-slate-300")} />
-      {isOpen && <span className={cn(isActive ? "text-lg-semibold" : "text-lg-regular")}>{membership.group.name}</span>}
+      {isOpen && (
+        <span className={cn("flex-1 truncate", isActive ? "text-lg-semibold" : "text-lg-regular")}>
+          {membership.group.name}
+        </span>
+      )}
     </Link>
   );
 };

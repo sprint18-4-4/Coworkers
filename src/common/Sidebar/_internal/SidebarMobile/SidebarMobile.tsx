@@ -16,12 +16,16 @@ const SidebarMobile = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
       >
         <div className={cn("flex items-center", user && "gap-3")}>
           {user && (
-            <button onClick={() => handleOpenDropdown(isOpen)}>
+            <button aria-label="메뉴 열기" onClick={() => handleOpenDropdown(isOpen)}>
               <Icon name="menu" className="size-6 tablet:size-6" />
             </button>
           )}
 
-          <Link href="/" className="text-brand-primary font-bold text-5 pr-[22px] flex items-center gap-[2px]">
+          <Link
+            href="/"
+            aria-label="홈으로 이동"
+            className="text-brand-primary font-bold text-5 pr-[22px] flex items-center gap-[2px]"
+          >
             <Icon name="logo" className="size-6 tablet:size-6" />
             {!user && <span>COWORKERS</span>}
           </Link>
@@ -41,7 +45,7 @@ const SidebarMobile = ({ user, isOpen, handleOpenDropdown, options }: SidebarDro
             }
           />
         ) : (
-          <Link href="/login" className="text-sm font-medium">
+          <Link href="/login" aria-label="로그인 페이지로 이동" className="text-sm font-medium">
             로그인
           </Link>
         )}

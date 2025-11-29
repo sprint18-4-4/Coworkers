@@ -20,6 +20,7 @@ const SidebarLink = ({ title, isOpen, href = "dashboard", iconName = "board" }: 
     <div className="relative w-full flex items-center justify-center group">
       <Link
         href={href}
+        aria-label={title}
         className={cn(
           "h-[52px] rounded-xl p-4 flex items-center gap-3 bg-white",
           isOpen ? "w-full" : "w-[52px]",

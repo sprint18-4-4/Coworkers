@@ -49,15 +49,13 @@ const SidebarDropdown = ({ isOpen, membership }: { isOpen: boolean; membership: 
         )}
       </summary>
 
-      <div className="h-[300px] overflow-y-auto hide-scrollbar">
-        <ul className="flex flex-col gap-2 mt-2">
-          {membership.map((item, index) => (
-            <li key={index}>
-              <DropdownItem title={item.group.name} id={item.group.id.toString()} isOpen={isOpen} />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="flex flex-col gap-2 mt-2">
+        {membership.map((item, index) => (
+          <li key={index}>
+            <DropdownItem title={item.group.name} id={item.group.id.toString()} isOpen={isOpen} />
+          </li>
+        ))}
+      </ul>
     </details>
   );
 };
