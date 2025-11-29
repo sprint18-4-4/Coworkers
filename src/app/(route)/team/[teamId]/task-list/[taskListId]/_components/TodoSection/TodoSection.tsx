@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/utils";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addDays, format } from "date-fns";
 import { DateValue } from "@/types";
@@ -118,7 +118,7 @@ const TodoSection = ({
     setIsEditModal(true);
   };
 
-  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEdit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!editingTask) return;
 
@@ -162,9 +162,9 @@ const TodoSection = ({
         <div className="mt-[37px] min-h-[250px] flex-center">
           {isPending && <LoadingSpinner />}
           {isError && <ErrorState />}
-          {data?.length === 0 && !isPending && <EmptyState />}
+          {data?.length === 0 && !isPending && !isError && <EmptyState />}
 
-          {data?.length > 0 && !isPending && (
+          {data?.length > 0 && !isPending && !isError && (
             <ul className="w-full flex flex-col gap-3 self-start">
               {data?.map((item) => {
                 const isDone = item.doneAt !== null;
