@@ -4,8 +4,8 @@ import { cn } from "@/utils";
 import { BaseButton, Icon } from "@/common";
 import { useRouter } from "next/navigation";
 import { CommentSection, ContentSection, HeaderSection } from "../_internal";
-import useGetTaskListDetail from "@/api/hooks/task-list-detail/useGetTaskListDetail";
-import { useDetailDataMutations } from "../../_hooks";
+import useGetTaskDetail from "@/api/hooks/task/useGetTaskDetail";
+import { useTaskMutations } from "@/hooks";
 
 interface DetailPageProps {
   id: number;
@@ -20,7 +20,7 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
     router.back();
   };
 
-  const { data: taskDetail, isPending } = useGetTaskListDetail({
+  const { data: taskDetail, isPending } = useGetTaskDetail({
     groupId: teamId,
     taskListId: taskListId,
     taskId: id,
@@ -28,7 +28,7 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
 
   const isDone = taskDetail?.doneAt !== null;
 
-  const { toggleDone } = useDetailDataMutations({ taskPath: { teamId, taskListId, id } });
+  const { toggleTaskDone } = useTaskMutations({ teamId, taskListId });
 
   // TODO(지권): 에러, 로딩 상태 처리 추가 필요
   if (isPending) return <div>로딩중</div>;
@@ -72,7 +72,7 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
         size="large"
         aria-label={isDone ? "완료 상태 취소하기" : "완료 상태로 변경하기"}
         variant={isDone ? "outlinedPrimary" : "solid"}
-        onClick={() => toggleDone(isDone)}
+        onClick={() => toggleTaskDone(id, isDone)}
         className={cn(
           "fixed bottom-4 right-4 z-[999] max-w-[132px] h-[40px] rounded-[40px]",
           isDone && "bg-background-inverse",

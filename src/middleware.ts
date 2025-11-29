@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // 비로그인 유저 -> 로그인 필요한 페이지 접근 시 차단
-  const protectedRoutes = ["/my-page", "/my-history", "/team", "/team-creation", "/team-join", "dashboard"];
+  const protectedRoutes = ["/my-page", "/my-history", "/team", "/team-creation", "/team-join", "/dashboard"];
 
   if (!token && protectedRoutes.some((route) => pathname.startsWith(route))) {
     return NextResponse.redirect(new URL("/login", req.url));
