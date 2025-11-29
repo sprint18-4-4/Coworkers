@@ -1,26 +1,28 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import { FormEvent, useRef, useState } from "react";
 import { usePostTeamJoin, useGetUser } from "@/api/hooks";
-import { toastKit } from "@/utils";
 
 type UseTeamJoinReturn = {
   token: string;
-  isSubmitting: boolean;
+  isLoading: boolean;
+  isValid: boolean;
   handleTokenChange: (value: string) => void;
   handleSubmit: (e: FormEvent) => Promise<void>;
 };
 
 const useTeamJoin = (): UseTeamJoinReturn => {
-  const router = useRouter();
   const [token, setToken] = useState("");
 
-  const { error } = toastKit();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
 
-  const { data: user, isPending: isLoadingUser } = useGetUser();
+  const { data: user } = useGetUser();
 
-  const { mutateAsync, isPending } = usePostTeamJoin();
+  const { mutate, isPending } = usePostTeamJoin();
+
+  const isLoading = isSubmitting || isPending;
+  const isValid = token.trim().length >= 8;
 
   const handleTokenChange = (value: string) => {
     setToken(value);
@@ -29,30 +31,33 @@ const useTeamJoin = (): UseTeamJoinReturn => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!token.trim()) {
-      error("팀 링크를 입력해주세요.");
-      return;
-    }
+    if (isSubmittingRef.current || isPending || !isValid || !user) return;
 
-    if (isLoadingUser) {
-      error("사용자 정보를 불러오는 중입니다...");
-    }
+    isSubmittingRef.current = true;
+    setIsSubmitting(true);
 
-    if (!user || !user.email) {
-      error("로그인이 필요합니다.");
-      router.push("/login");
-      return;
-    }
-
-    await mutateAsync({
-      userEmail: user.email,
-      token: token.trim(),
-    });
+    mutate(
+      {
+        userEmail: user.email,
+        token: token.trim(),
+      },
+      {
+        onSuccess: () => {
+          isSubmittingRef.current = true;
+          setIsSubmitting(true);
+        },
+        onError: () => {
+          isSubmittingRef.current = false;
+          setIsSubmitting(false);
+        },
+      },
+    );
   };
 
   return {
     token,
-    isSubmitting: isPending || isLoadingUser,
+    isLoading,
+    isValid,
     handleTokenChange,
     handleSubmit,
   };
