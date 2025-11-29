@@ -10,6 +10,7 @@ type ErrorResponse = {
     email?: {
       message: string;
     };
+    nickname?: { message: string };
   };
 };
 
@@ -29,12 +30,15 @@ const usePostSignup = () => {
       tokenStorage.setAccessToken(data.accessToken);
 
       success("회원가입이 완료되었습니다!");
-      router.push("/");
+      router.replace("/");
     },
     onError: (err: AxiosError<ErrorResponse>) => {
       const responseData = err.response?.data;
 
-      const errorMessage = responseData?.details?.email?.message || "회원가입에 실패했습니다. 다시 시도해주세요.";
+      const emailError = responseData?.details?.email?.message;
+      const nicknameError = responseData?.details?.nickname?.message;
+
+      const errorMessage = nicknameError || emailError || "회원가입에 실패했습니다. 다시 시도해주세요.";
 
       error(errorMessage);
     },
