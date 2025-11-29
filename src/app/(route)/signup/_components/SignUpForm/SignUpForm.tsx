@@ -29,7 +29,7 @@ const SignUpForm = () => {
     },
     onSubmit: async (values) => {
       const { email, nickname, password, passwordConfirmation } = values;
-      postSignup({
+      await postSignup({
         email,
         nickname,
         password,

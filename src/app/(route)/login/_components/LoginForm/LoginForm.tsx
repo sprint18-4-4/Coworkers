@@ -35,7 +35,7 @@ const LoginForm = () => {
       if (isRemembered) {
         setEmail(values.email);
       }
-      postLogin(
+      await postLogin(
         { email: values.email, password: values.password },
         {
           onSuccess: () => {
