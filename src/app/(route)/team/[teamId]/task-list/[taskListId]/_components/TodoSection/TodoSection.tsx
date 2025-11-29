@@ -143,7 +143,7 @@ const TodoSection = ({
     <>
       <section
         className={cn(
-          "bg-background-primary px-[17px] py-[38px] mt-[22px] rounded-[20px]",
+          "bg-background-primary px-[17px] py-[38px] my-[22px] rounded-[20px]",
           "pc:px-[42px] pc:max-w-[819px] pc:w-full",
         )}
       >
