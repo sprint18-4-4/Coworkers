@@ -90,6 +90,13 @@ export const validateTeamName = (
     };
   }
 
+  if (trimmedName.length > 30) {
+    return {
+      isValid: false,
+      error: "팀 이름은 최대 30자까지 가능합니다.",
+    };
+  }
+
   const isDuplicate = existingMemberships?.some((membership) => membership.group.name === trimmedName);
 
   if (isDuplicate) {
