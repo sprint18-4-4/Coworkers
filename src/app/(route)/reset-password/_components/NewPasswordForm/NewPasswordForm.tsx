@@ -1,31 +1,44 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { InputPassword, BaseButton } from "@/common";
 import { toastKit, validatePassword, validatePasswordConfirm } from "@/utils";
 import { usePatchResetPassword } from "@/api/hooks";
 import { useForm } from "@/hooks";
 
 const NewPasswordForm = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const { error } = toastKit();
 
-  const { mutate } = usePatchResetPassword();
+  useEffect(() => {
+    if (!token) {
+      error("유효하지 않은 접근입니다.");
+      router.replace("/");
+    }
+  }, [token, router, error]);
+
+  const { mutateAsync: resetPassword } = usePatchResetPassword();
 
   const { register, errors, handleSubmit, meta } = useForm({
     initialValues: { password: "", passwordConfirm: "" },
+    keepLockOnSuccess: true,
     validationRules: {
       password: validatePassword,
       passwordConfirm: (value, formData) => validatePasswordConfirm(formData?.password ?? "", value),
     },
+    validationTriggers: {
+      password: ["passwordConfirm"],
+    },
     onSubmit: async (values) => {
       if (!token) {
-        error("유효하지 않은 접근입니다.");
-        return;
+        error("토큰이 유효하지 않습니다.");
+        throw new Error("Token missing");
       }
 
-      mutate({
+      await resetPassword({
         password: values.password,
         passwordConfirmation: values.passwordConfirm,
         token,
