@@ -1,3 +1,5 @@
+"use client";
+
 import { FormEvent } from "react";
 import { SaveChangesSnackbar } from "@/common";
 import { CenteredCardLayout } from "@/app/(route)/_components";
@@ -7,7 +9,7 @@ import PasswordInputSection from "../PasswordInputSection/PasswordInputSection";
 import useMyProfileSettings from "../../_hook/useMyProfileSettings";
 import { UserData } from "../../_types/type";
 
-const MyPageContainer = ({ userData }: { userData: UserData }) => {
+const MyPageContent = ({ userData }: { userData: UserData }) => {
   const profile = useMyProfileSettings({
     nickname: userData?.nickname,
     email: userData?.email,
@@ -61,4 +63,4 @@ const MyPageContainer = ({ userData }: { userData: UserData }) => {
   );
 };
 
-export default MyPageContainer;
+export default MyPageContent;
