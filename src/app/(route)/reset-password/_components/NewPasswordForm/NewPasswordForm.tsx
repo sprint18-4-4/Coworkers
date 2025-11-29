@@ -54,12 +54,16 @@ const NewPasswordForm = () => {
           {...register("password")}
           placeholder="비밀번호 (영문, 숫자, 특수문자 포함)를 입력해주세요."
           error={errors.password}
+          minLength={8}
+          maxLength={20}
         />
         <InputPassword
           label="비밀번호 확인"
           {...register("passwordConfirm")}
           placeholder="새 비밀번호를 다시 한번 입력해주세요."
           error={errors.passwordConfirm}
+          minLength={8}
+          maxLength={20}
         />
       </div>
       <div className="text-lg-semibold flex-col-center gap-6 mt-10">
