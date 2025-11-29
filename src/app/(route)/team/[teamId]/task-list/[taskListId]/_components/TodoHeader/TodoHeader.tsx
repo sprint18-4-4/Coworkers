@@ -73,18 +73,16 @@ const TodoHeader = ({ data, groupId, isPending, isError }: TodoHeaderProps) => {
       <aside className={cn("flex flex-col items-start gap-2", "pc:w-[270px] pc:gap-6")}>
         <div className="w-full flex items-center justify-between">
           <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
-          {isPc && (
-            <BaseButton
-              size="large"
-              variant="outlinedPrimary"
-              aria-label="할 일 추가"
-              onClick={() => setIsAddTodoModalOpen(true)}
-              className="w-[112px] h-10 px-4 text-nowrap rounded-[40px] bg-background-primary"
-            >
-              <Icon name="plus" className="size-5 tablet:size-5" />
-              <span className="text-lg-semibold">할 일 추가</span>
-            </BaseButton>
-          )}
+          <BaseButton
+            size="large"
+            variant="outlinedPrimary"
+            aria-label="할 일 추가"
+            onClick={() => setIsAddTodoModalOpen(true)}
+            className="max-w-[130px] h-9 px-4 text-nowrap rounded-[40px] bg-background-primary hidden tablet:hidden pc:flex items-center"
+          >
+            <Icon name="plus" className="size-5 tablet:size-5" />
+            <span className="text-lg-semibold">할 일 추가</span>
+          </BaseButton>
         </div>
 
         <section className={cn("flex items-center justify-between gap-12 w-full", "pc:flex-col pc:gap-11")}>
@@ -114,18 +112,16 @@ const TodoHeader = ({ data, groupId, isPending, isError }: TodoHeaderProps) => {
                 />
               ))}
 
-            {!isPc && (
-              <BaseButton
-                size="large"
-                variant="outlinedPrimary"
-                aria-label="할 일 추가"
-                onClick={() => setIsAddTodoModalOpen(true)}
-                className="w-[112px] h-10 px-4 text-nowrap rounded-[40px] bg-background-primary select-none"
-              >
-                <Icon name="plus" className="size-5 tablet:size-5" />
-                <span className="text-lg-semibold">할 일 추가</span>
-              </BaseButton>
-            )}
+            <BaseButton
+              size="large"
+              variant="outlinedPrimary"
+              aria-label="할 일 추가"
+              onClick={() => setIsAddTodoModalOpen(true)}
+              className="w-[112px] h-10 px-4 text-nowrap rounded-[40px] bg-background-primary select-none pc:hidden"
+            >
+              <Icon name="plus" className="size-5 tablet:size-5" />
+              <span className="text-lg-semibold">할 일 추가</span>
+            </BaseButton>
           </div>
         </section>
       </aside>
