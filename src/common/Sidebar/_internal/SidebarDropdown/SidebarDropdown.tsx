@@ -4,6 +4,8 @@ import { useIsActivePath } from "@/utils";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 import SidebarTooltip from "../SidebarTooltip/SidebarTooltip";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 
 const DropdownItem = ({ title, id, isOpen }: { title: string; id: string; isOpen: boolean }) => {
   const isActive = useIsActivePath(`/team/${id}`);
@@ -29,12 +31,16 @@ const DropdownItem = ({ title, id, isOpen }: { title: string; id: string; isOpen
 };
 
 const SidebarDropdown = ({ isOpen, membership }: { isOpen: boolean; membership: Membership[] }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <details className="group w-full rounded-xl bg-white">
-      <summary
+    <section className="group w-full rounded-xl bg-white">
+      <button
+        onClick={() => setOpen((v) => !v)}
         className={cn(
-          "list-none px-4 h-[52px] flex items-center justify-between cursor-pointer rounded-xl select-none",
+          "w-full px-4 h-[52px] flex items-center justify-between cursor-pointer rounded-xl select-none",
           "hover:bg-gray-100 transition-colors",
+          open && "bg-gray-50",
         )}
       >
         <span className="flex items-center gap-3">
@@ -42,21 +48,29 @@ const SidebarDropdown = ({ isOpen, membership }: { isOpen: boolean; membership: 
           {isOpen && <span className="text-lg-semibold text-slate-400">팀 선택</span>}
         </span>
         {isOpen && (
-          <Icon
-            name="downArrow"
-            className="size-5 tablet:size-5 group-open:rotate-180 transition-transform text-icon-primary"
-          />
+          <Icon name="downArrow" className={cn("size-5 tablet:size-5 transition-transform", open && "rotate-180")} />
         )}
-      </summary>
+      </button>
 
-      <ul className="flex flex-col gap-2 mt-2">
-        {membership.map((item, index) => (
-          <li key={index}>
-            <DropdownItem title={item.group.name} id={item.group.id.toString()} isOpen={isOpen} />
-          </li>
-        ))}
-      </ul>
-    </details>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <ul className="flex flex-col gap-2 mt-2">
+              {membership.map((item) => (
+                <li key={item.group.id}>
+                  <DropdownItem title={item.group.name} id={item.group.id.toString()} isOpen={isOpen} />
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
   );
 };
 
