@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { SidebarMobile, SidebarTablet } from "./_internal";
 import { useGetUser } from "@/api/hooks";
 import { useLogout } from "@/hooks/";
@@ -17,13 +17,25 @@ import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    const initialIsOpen = typeof window !== "undefined" ? localStorage.getItem("sidebarOpen") : null;
+    if (initialIsOpen !== null) {
+      startTransition(() => {
+        setIsOpen(initialIsOpen === "true");
+      });
+    }
+  }, []);
   const router = useRouter();
 
   const { data: user } = useGetUser();
   const { logout } = useLogout();
 
-  const handleOpenDropdown = (prev: boolean) => {
-    setIsOpen(!prev);
+  const handleOpenDropdown = () => {
+    const newOpenState = !isOpen;
+    setIsOpen(newOpenState);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("sidebarOpen", String(newOpenState));
+    }
   };
 
   const options = [
