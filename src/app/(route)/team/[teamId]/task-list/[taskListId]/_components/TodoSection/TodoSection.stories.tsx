@@ -22,6 +22,7 @@ const meta: Meta<typeof TodoSection> = {
     selectedDate: { control: "date" },
     onClickDateItem: { action: "dateSelected" },
     sectionName: { control: "text" },
+    taskStatus: { control: "object" },
   },
   args: {
     teamId: 1,
@@ -45,5 +46,9 @@ type Story = StoryObj<typeof TodoSection>;
 export const Default: Story = {
   args: {
     data: TASK_GROUP_MOCK_DATA,
+    taskStatus: {
+      isPending: false,
+      isError: false,
+    },
   },
 };
