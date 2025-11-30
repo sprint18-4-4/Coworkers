@@ -34,3 +34,4 @@ export { default as useDeleteArticle } from "./article/useDeleteArticle";
 export { default as useDeleteArticleComment } from "./articleComment/useDeleteArticleComment";
 export { default as usePatchArticleComment } from "./articleComment/usePatchArticleComment";
 export { default as useGetInvitation } from "./group/useGetInvitation";
+export { default as useDeleteMember } from "./group/useDeleteMember";

@@ -6,17 +6,17 @@ interface WidgetProfileProps {
 }
 
 const WidgetProfile = ({ members }: WidgetProfileProps) => {
-  console.log(members);
   return (
     <ul className="flex flex-col gap-[18px]">
       {members.map((member) => (
         <li key={member.userId}>
           <ProfileItem
+            onClick={() => {}}
             type="memberItem"
             src={member.userImage || null}
             name={member.userName}
             email={member.userEmail}
-            onClick={() => {}}
+            dropdownOptions={[{ label: "삭제하기", action: () => {} }]}
           />
         </li>
       ))}

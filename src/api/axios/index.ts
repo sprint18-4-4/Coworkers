@@ -35,3 +35,4 @@ export { default as deleteArticle } from "./article/deleteArticle";
 export { default as deleteArticleComment } from "./articleComment/deleteArticleComment";
 export { default as patchArticleComment } from "./articleComment/patchArticleComment";
 export { default as getInvitation } from "./group/getInvitation";
+export { default as deleteMember } from "./group/deleteMember";

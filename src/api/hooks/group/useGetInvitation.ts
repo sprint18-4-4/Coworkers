@@ -1,5 +1,4 @@
 import { getInvitation } from "@/api/axios";
-import { GetInvitationRequest } from "@/api/axios/group/_type";
 import { toastKit } from "@/utils";
 import { useMutation } from "@tanstack/react-query";
 
