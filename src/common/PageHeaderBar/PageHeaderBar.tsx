@@ -1,6 +1,7 @@
 import { cn } from "@/utils";
 import { ReactNode } from "react";
 import Dropdown from "../Dropdown/Dropdown";
+import { LoadingSpinner } from "@/features";
 
 /**
  * @author jikwon
@@ -16,6 +17,7 @@ interface PageHeaderBarProps {
 }
 
 const PageHeaderBar = ({ title, isDropdown = true }: PageHeaderBarProps) => {
+  // TODO(지권): 수정하기, 삭제하기 기능 추가
   const options = [
     { label: "수정하기", action: () => {} },
     { label: "삭제하기", action: () => {} },
@@ -28,7 +30,9 @@ const PageHeaderBar = ({ title, isDropdown = true }: PageHeaderBarProps) => {
         "pc:px-[26px] pc:py-[18px] pc:justify-between pc:bg-background-primary pc:rounded-xl",
       )}
     >
-      <h2 className={cn("text-lg-bold text-text-primary", "tablet:text-2xl-bold", "pc:text-2xl-bold")}>{title}</h2>
+      <h2 className={cn("text-lg-bold text-text-primary", "tablet:text-2xl-bold", "pc:text-2xl-bold")}>
+        {title || <LoadingSpinner size="sm" />}
+      </h2>
       {isDropdown && (
         <Dropdown iconName="setting" options={options} iconClassName="size-5 tablet:size-6 text-slate-400" />
       )}

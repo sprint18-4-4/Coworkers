@@ -33,8 +33,10 @@ const TaskListItem = ({ item, onOpenDetail, onToggleTodo, options }: TaskListIte
     <>
       <li
         className={cn(
-          "flex flex-col items-start rounded-lg gap-[10px]",
-          item.doneAt === null ? "border border-border-primary" : "bg-background-secondary",
+          "flex flex-col items-start rounded-lg gap-[10px] border transition-colors",
+          item.doneAt === null
+            ? "border-border-primary bg-background-primary"
+            : "border-background-secondary bg-background-secondary",
           onOpenDetail && "cursor-pointer",
         )}
         style={{ padding: "12px 14px" }}
@@ -74,7 +76,12 @@ const TaskListItem = ({ item, onOpenDetail, onToggleTodo, options }: TaskListIte
                 e.stopPropagation();
               }}
             >
-              <Dropdown iconName="kebab" options={options} iconClassName="size-4 tablet:size-4" />
+              <Dropdown
+                iconName="kebab"
+                options={options}
+                iconClassName="size-4 tablet:size-4"
+                placement="bottom-right"
+              />
             </div>
           )}
         </div>

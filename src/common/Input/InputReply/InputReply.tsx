@@ -31,6 +31,7 @@ interface InputReplyProps {
 
 const InputReply = ({ value, onChange, isSubmitting, className }: InputReplyProps) => {
   const { ref: textareaRef, resetHeight } = useAutoHeight(48, 200);
+  const isDisabled = !value.trim() || isSubmitting;
 
   useEffect(() => {
     if (value === "") {
@@ -45,6 +46,7 @@ const InputReply = ({ value, onChange, isSubmitting, className }: InputReplyProp
         ref={textareaRef}
         placeholder="댓글을 달아주세요."
         size="sm"
+        maxLength={250}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         textareaClassName="border-none"
@@ -53,10 +55,11 @@ const InputReply = ({ value, onChange, isSubmitting, className }: InputReplyProp
       />
       <button
         type="submit"
-        disabled={!value.trim || isSubmitting}
+        disabled={isDisabled}
         className={cn(
           "size-6 rounded-full text-text-inverse mb-3 mr-2 flex-center",
           value ? "bg-brand-primary" : "bg-icon-primary",
+          isDisabled && "cursor-not-allowed",
         )}
         aria-label={value ? "댓글 작성" : "입력 필요"}
       >

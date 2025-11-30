@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useRef } from "react";
 import useFormValidation from "./useFormValidation";
 import { FormValues, ValidationRules } from "@/types";
 
@@ -11,11 +11,20 @@ interface UseFormOptions {
   validationRules?: AuthValidationRules;
   onSubmit: (values: FormValues) => Promise<void>;
   validationTriggers?: Record<string, string[]>;
+  keepLockOnSuccess?: boolean;
 }
 
-const useForm = ({ initialValues, validationRules, onSubmit, validationTriggers }: UseFormOptions) => {
+const useForm = ({
+  initialValues,
+  validationRules,
+  onSubmit,
+  validationTriggers,
+  keepLockOnSuccess = false,
+}: UseFormOptions) => {
   const [formData, setFormData] = useState<FormValues>(initialValues);
   const [isLoading, setIsLoading] = useState(false);
+
+  const isSubmittingRef = useRef(false);
 
   const { errors, validateForm, validateField, clearError, clearAllErrors } = useFormValidation(validationRules);
 
@@ -60,13 +69,21 @@ const useForm = ({ initialValues, validationRules, onSubmit, validationTriggers 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (isSubmittingRef.current) return;
+
     const isValid = validateForm(formData);
     if (!isValid) return;
 
+    isSubmittingRef.current = true;
     setIsLoading(true);
     try {
       await onSubmit(formData);
-    } finally {
+      if (!keepLockOnSuccess) {
+        isSubmittingRef.current = false;
+        setIsLoading(false);
+      }
+    } catch {
+      isSubmittingRef.current = false;
       setIsLoading(false);
     }
   };
@@ -101,6 +118,7 @@ const useForm = ({ initialValues, validationRules, onSubmit, validationTriggers 
     register,
     errors,
     handleSubmit,
+    values: formData,
     setValue,
     reset,
     meta: {

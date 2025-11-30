@@ -40,6 +40,7 @@ const CommentEdit = ({ initialComment, onClose, className, onSubmit }: CommentEd
         onChange={(e) => setComment(e.target.value)}
         placeholder="댓글을 입력해주세요."
         size="sm"
+        maxLength={250}
         textareaClassName="border-none p-0 bg-icon-inverse rounded-none tablet:text-md-regular pc:text-md-regular"
       />
       <div className="flex justify-end gap-2 mt-2">
