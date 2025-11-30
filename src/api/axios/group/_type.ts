@@ -43,6 +43,6 @@ export interface GetInvitationRequest {
 export type GetInvitationResponse = string;
 
 export interface DeleteMemberRequest {
-  groupId: number;
+  id: number;
   memberUserId: number;
 }
