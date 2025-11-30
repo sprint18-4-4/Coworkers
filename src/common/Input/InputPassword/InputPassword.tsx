@@ -21,6 +21,7 @@ const InputPassword = ({ label, error, ...props }: PasswordInputProps) => {
           type="button"
           tabIndex={-1}
           onClick={() => setShowPassword((prev) => !prev)}
+          onMouseDown={(e) => e.preventDefault()}
           aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
           className="h-full flex items-center justify-center"
         >
