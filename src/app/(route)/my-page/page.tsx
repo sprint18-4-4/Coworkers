@@ -1,22 +1,15 @@
 "use client";
 
-import NotFound from "@/app/not-found";
-import { useGetUser } from "@/api/hooks";
-import MyPageContainer from "./_components/MyPageContainer/MyPageContainer";
+import { LoadingSpinner } from "@/features";
+import dynamic from "next/dynamic";
+
+const MyPageContainer = dynamic(() => import("./_components/MypageContainer"), {
+  ssr: false,
+  loading: () => <LoadingSpinner className="h-full flex-center" size="lg" />,
+});
 
 const MyPage = () => {
-  const { data: userData, isLoading, isError } = useGetUser();
-
-  // TODO(김원선): 스피너 생기면 적용
-  if (isLoading) {
-    return <span>로딩 중...</span>;
-  }
-
-  if (isError || !userData) {
-    return NotFound();
-  }
-
-  return <MyPageContainer userData={userData} />;
+  return <MyPageContainer />;
 };
 
 export default MyPage;
