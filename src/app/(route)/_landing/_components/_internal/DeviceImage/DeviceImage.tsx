@@ -34,6 +34,7 @@ const DeviceImage = ({
         width={width}
         height={height}
         className={ImageClassName}
+        quality={85}
         priority
         draggable={false}
       />

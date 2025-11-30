@@ -1,4 +1,9 @@
+"use client";
+
+import { useRef, useState } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { cn } from "@/utils";
 import { DeviceImage } from "../_internal";
 import { LinkButton } from "@/common";
@@ -8,10 +13,38 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ link = "/login" }: HeroSectionProps) => {
+  const container = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
+
+      tl.from(".hero-text-item", {
+        x: -50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+      })
+
+        .from(
+          ".hero-image",
+          {
+            x: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        );
+    },
+    { scope: container },
+  );
+
   return (
-    <section className={cn("pc:min-h-screen overflow-hidden bg-background-secondary pc:pl-8")}>
+    <section ref={container} className={cn("pc:min-h-screen overflow-hidden bg-background-secondary pc:pl-8")}>
       <div className={cn("relative flex flex-col justify-between", "pc:flex-row pc:gap-28")}>
-        <div className="flex flex-col justify-between pc:pl-[44px] pc:mb-[228px]">
+        <div className="flex flex-col justify-between pc:pl-[44px] pc:mb-[228px] hero-text-item">
           <div className={cn("pl-[20px] pt-[34px]", "tablet:pl-[35px] tablet:pt-[89px]", "pc:pt-[208px] pc:pl-0")}>
             <Image
               src="/landing/land-1.svg"
@@ -34,7 +67,7 @@ const HeroSection = ({ link = "/login" }: HeroSectionProps) => {
             지금 시작하기
           </LinkButton>
         </div>
-        <div className="min-w-full pc:min-w-[1330px]">
+        <div className={cn("min-w-full pc:min-w-[1330px]", "hero-image")}>
           <DeviceImage
             ImageInfo={{ alt: "대시보드 이미지", width: 1330, height: 1080 }}
             Src={{
@@ -48,7 +81,7 @@ const HeroSection = ({ link = "/login" }: HeroSectionProps) => {
         <LinkButton
           href={link}
           size="large"
-          className="flex w-[160px] absolute bottom-[52px] right-4 tablet:right-8 pc:hidden"
+          className="hero-image flex w-[160px] absolute bottom-[52px] right-4 tablet:right-8 pc:hidden"
         >
           지금 시작하기
         </LinkButton>
