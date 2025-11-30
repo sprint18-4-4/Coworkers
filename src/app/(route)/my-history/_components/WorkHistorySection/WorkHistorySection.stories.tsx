@@ -13,4 +13,12 @@ export default meta;
 
 type Story = StoryObj<typeof WorkHistorySection>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    data: {
+      tasksDone: [],
+    },
+    isLoading: false,
+    isError: false,
+  },
+};
