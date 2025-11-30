@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetGroups } from "@/api/hooks";
+import { useGetGroups, useGetInvitation } from "@/api/hooks";
 import { BaseButton, FloatingButton, Modal } from "@/common";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -13,13 +13,17 @@ const MemberWidget = () => {
 
   const { teamId } = useParams();
   const id = Number(teamId);
+
   const { data: groups } = useGetGroups({ id });
+  const { mutate: getInvitation, isPending: isPendingInvitation } = useGetInvitation();
 
   if (!groups) {
     return null;
   }
 
-  const handleInviteLinkClick = () => {};
+  const handleInviteLinkClick = () => {
+    getInvitation({ id });
+  };
 
   return (
     <>
@@ -45,8 +49,8 @@ const MemberWidget = () => {
           <p>그룹에 참여할 수 있는 링크를 복사합니다.</p>
         </Modal.Body>
         <Modal.Footer>
-          <BaseButton onClick={handleInviteLinkClick} variant="solid" size="large">
-            링크 복사하기
+          <BaseButton onClick={handleInviteLinkClick} variant="solid" size="large" disabled={isPendingInvitation}>
+            {isPendingInvitation ? "요청 중..." : "링크 복사하기"}
           </BaseButton>
         </Modal.Footer>
       </Modal>

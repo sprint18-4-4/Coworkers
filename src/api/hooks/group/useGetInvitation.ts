@@ -1,15 +1,20 @@
 import { getInvitation } from "@/api/axios";
 import { GetInvitationRequest } from "@/api/axios/group/_type";
-import { useQuery } from "@tanstack/react-query";
+import { toastKit } from "@/utils";
+import { useMutation } from "@tanstack/react-query";
 
-const useGetInvitation = ({ id }: GetInvitationRequest) => {
-  return useQuery({
-    queryKey: ["getInvitation", id],
-    queryFn: () => getInvitation({ id }),
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 60 * 24,
-    retry: 1,
-    enabled: !!id,
+const useGetInvitation = () => {
+  const { success, error } = toastKit();
+  return useMutation({
+    mutationKey: ["getInvitation"],
+    mutationFn: getInvitation,
+    onSuccess: (data) => {
+      navigator.clipboard.writeText(data);
+      success("클립보드에 성공적으로 복사하였습니다.");
+    },
+    onError: () => {
+      error("초대 링크를 복사하지 못하였습니다.");
+    },
   });
 };
 
