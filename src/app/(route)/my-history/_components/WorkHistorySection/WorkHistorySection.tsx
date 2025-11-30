@@ -1,8 +1,15 @@
 import { cn } from "@/utils";
-import { EmptyState, TaskListItem } from "@/features";
+import { EmptyState, LoadingSpinner, TaskListItem } from "@/features";
 import { GetHistoryResponse } from "@/api/axios/user/_types/type";
+import ErrorState from "@/features/ErrorState/ErrorState";
 
-const WorkHistorySection = ({ data }: { data: GetHistoryResponse }) => {
+interface Props {
+  data: GetHistoryResponse;
+  isLoading: boolean;
+  isError: boolean;
+}
+
+const WorkHistorySection = ({ data, isLoading, isError }: Props) => {
   return (
     <article
       className={cn(
@@ -10,8 +17,11 @@ const WorkHistorySection = ({ data }: { data: GetHistoryResponse }) => {
         "tablet:px-[30px] tablet:py-[46px]",
       )}
     >
-      {/* TODO(지권): 에러, 로딩 상태 처리 필요 */}
-      {data?.tasksDone?.length === 0 && <EmptyState />}
+      <div className="flex-1 flex-center">
+        {isLoading && <LoadingSpinner />}
+        {isError && <ErrorState />}
+        {data?.tasksDone?.length === 0 && !isLoading && !isError && <EmptyState />}
+      </div>
       {data?.tasksDone?.length > 0 && (
         <section>
           <ul className="flex flex-col gap-3">
