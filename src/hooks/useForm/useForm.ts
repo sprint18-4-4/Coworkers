@@ -118,6 +118,7 @@ const useForm = ({
     register,
     errors,
     handleSubmit,
+    values: formData,
     setValue,
     reset,
     meta: {

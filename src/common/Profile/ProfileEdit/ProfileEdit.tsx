@@ -92,7 +92,7 @@ const ProfileEdit = ({ src, alt = "프로필", size = "lg", onChange, iconType =
           EDIT_BUTTON_SIZE[size],
         )}
       >
-        <Icon name="smallPencil" className={cn("text-icon-primary", EDIT_ICON_SIZE[size])} />
+        <Icon name="pencil" className={cn("text-icon-primary", EDIT_ICON_SIZE[size])} />
       </div>
       <input
         type="file"
