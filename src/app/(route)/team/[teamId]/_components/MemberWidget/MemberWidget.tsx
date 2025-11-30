@@ -19,6 +19,8 @@ const MemberWidget = () => {
     return null;
   }
 
+  const handleInviteLinkClick = () => {};
+
   return (
     <>
       <span className="fixed right-3 bottom-3">
@@ -43,7 +45,7 @@ const MemberWidget = () => {
           <p>그룹에 참여할 수 있는 링크를 복사합니다.</p>
         </Modal.Body>
         <Modal.Footer>
-          <BaseButton variant="solid" size="large">
+          <BaseButton onClick={handleInviteLinkClick} variant="solid" size="large">
             링크 복사하기
           </BaseButton>
         </Modal.Footer>
