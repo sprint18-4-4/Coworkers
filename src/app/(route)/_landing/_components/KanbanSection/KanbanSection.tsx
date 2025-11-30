@@ -19,7 +19,7 @@ const KanbanSection = () => {
       gsap.from(".feature-block", {
         scrollTrigger: {
           trigger: ".feature-block",
-          start: "top 80%",
+          start: "top 85%",
           toggleActions: "play none none reverse",
         },
         y: 0,
@@ -30,7 +30,7 @@ const KanbanSection = () => {
       gsap.from(".feature-image", {
         scrollTrigger: {
           trigger: ".feature-image",
-          start: "top 80%",
+          start: "top 85%",
           toggleActions: "play none none reverse",
         },
         y: 0,

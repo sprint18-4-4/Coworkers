@@ -19,7 +19,7 @@ const DetailSection = () => {
       gsap.from(".feature-block", {
         scrollTrigger: {
           trigger: ".feature-block",
-          start: "top 65%",
+          start: "top 85%",
           toggleActions: "play none none reverse",
         },
         y: 50,
@@ -30,7 +30,7 @@ const DetailSection = () => {
       gsap.from(".feature-image", {
         scrollTrigger: {
           trigger: ".feature-image",
-          start: "top 65%",
+          start: "top 85%",
           toggleActions: "play none none reverse",
         },
         y: 30,

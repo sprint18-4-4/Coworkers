@@ -23,6 +23,7 @@ const ConversionSection = ({ link = "login" }: ConversionSectionProps) => {
         scrollTrigger: {
           trigger: ".feature-block",
           start: "top bottom",
+          invalidateOnRefresh: true,
           toggleActions: "play none none reverse",
         },
         y: 0,

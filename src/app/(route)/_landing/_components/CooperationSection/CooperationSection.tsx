@@ -19,7 +19,7 @@ const CooperationSection = () => {
       gsap.from(".feature-block", {
         scrollTrigger: {
           trigger: ".feature-block",
-          start: "top 30%",
+          start: "top 95%",
           toggleActions: "play none none reverse",
         },
         y: 50,
@@ -30,7 +30,7 @@ const CooperationSection = () => {
       gsap.from(".feature-image", {
         scrollTrigger: {
           trigger: ".feature-image",
-          start: "top 40%",
+          start: "top 95%",
           toggleActions: "play none none reverse",
         },
         y: 30,
