@@ -10,6 +10,7 @@ interface Props {
 }
 
 const WorkHistorySection = ({ data, isLoading, isError }: Props) => {
+  const showState = isLoading || isError || data?.tasksDone?.length === 0;
   return (
     <article
       className={cn(
@@ -17,11 +18,13 @@ const WorkHistorySection = ({ data, isLoading, isError }: Props) => {
         "tablet:px-[30px] tablet:py-[46px]",
       )}
     >
-      <div className="flex-1 flex-center">
-        {isLoading && <LoadingSpinner />}
-        {isError && <ErrorState />}
-        {data?.tasksDone?.length === 0 && !isLoading && !isError && <EmptyState />}
-      </div>
+      {showState && (
+        <div className="flex-1 flex-center">
+          {isLoading && <LoadingSpinner />}
+          {isError && <ErrorState />}
+          {data?.tasksDone?.length === 0 && !isLoading && !isError && <EmptyState />}
+        </div>
+      )}
       {data?.tasksDone?.length > 0 && (
         <section>
           <ul className="flex flex-col gap-3">
