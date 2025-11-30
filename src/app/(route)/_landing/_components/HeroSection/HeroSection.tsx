@@ -42,7 +42,7 @@ const HeroSection = ({ link = "/login" }: HeroSectionProps) => {
   );
 
   return (
-    <section ref={container} className={cn("pc:min-h-screen overflow-hidden bg-background-secondary pc:pl-8")}>
+    <section ref={container} className={cn("overflow-hidden bg-background-secondary pc:pl-8")}>
       <div className={cn("relative flex flex-col justify-between", "pc:flex-row pc:gap-28")}>
         <div className="flex flex-col justify-between pc:pl-[44px] pc:mb-[228px] hero-text-item">
           <div className={cn("pl-[20px] pt-[34px]", "tablet:pl-[35px] tablet:pt-[89px]", "pc:pt-[208px] pc:pl-0")}>
