@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetArticles } from "@/api/hooks";
-import BestArticleCard from "../../Article/BestArticleCard";
+import BestArticleCard from "../../../../(route)/dashboard/_components/Article/BestArticleCard";
 import { useDevice } from "@/hooks";
 import { useState } from "react";
 import Pagination from "./_internal/Pagination";

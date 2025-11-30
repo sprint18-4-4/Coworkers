@@ -16,7 +16,7 @@ const usePostLogin = () => {
 
       tokenStorage.setAccessToken(data.accessToken);
 
-      router.push("/team");
+      router.replace("/team");
     },
     onError: (error) => {
       console.error("로그인 실패", error);
