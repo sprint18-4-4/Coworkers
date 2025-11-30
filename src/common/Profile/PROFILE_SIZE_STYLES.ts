@@ -26,8 +26,8 @@ export const DEFAULT_ICON_SIZE = {
 // 프로필 이미지 수정 컴포넌트
 
 export const SIZE_CLASSES = {
-  md: "size-16 rounded-[20px]",
-  lg: "size-[100px] rounded-[32px]",
+  md: "w-[77px] h-[78px] rounded-[20px]",
+  lg: "w-[112px] h-[116px] rounded-[32px]",
 } as const;
 
 export const IMAGE_SIZE_VALUES = {
@@ -57,6 +57,6 @@ export const EDIT_BUTTON_SIZE = {
 } as const;
 
 export const EDIT_ICON_SIZE = {
-  md: "size-2 tablet:size-2",
-  lg: "size-3.5 tablet:size-3.5",
+  md: "size-3 tablet:size-3",
+  lg: "size-[18px] tablet:size-[18px]",
 } as const;
