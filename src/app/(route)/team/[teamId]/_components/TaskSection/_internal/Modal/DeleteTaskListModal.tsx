@@ -17,9 +17,9 @@ const DeleteTaskListModal = ({ isOpen, onClose, groupId, taskListId }: DeleteTas
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <Modal.Body className="flex-col-center gap-2">
+      <Modal.Body className="flex-col-center gap-3">
         <Icon name="alert" className="text-status-danger" />
-        <h3>정말로 삭제하시겠습니까?</h3>
+        <h3 className="text-text-primary text-lg-bold">정말로 삭제하시겠습니까?</h3>
       </Modal.Body>
       <Modal.Footer>
         <BaseButton onClick={onClose} variant="outlinedSecondary" size="large">

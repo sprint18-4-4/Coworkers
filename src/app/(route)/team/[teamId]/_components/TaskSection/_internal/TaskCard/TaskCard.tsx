@@ -7,11 +7,13 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import DeleteTaskListModal from "../Modal/DeleteTaskListModal";
+import EditTaskListModal from "../Modal/EditTaskListModal";
 
 const TaskHeader = ({ name, taskList }: { name: string; taskList: TaskList }) => {
   const { teamId } = useParams();
 
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
   const taskListId = taskList.id;
   const totalTasks = taskList.tasks.length;
@@ -28,7 +30,7 @@ const TaskHeader = ({ name, taskList }: { name: string; taskList: TaskList }) =>
           iconName="kebab"
           iconClassName="size-6 tablet:size-6 text-state-300"
           options={[
-            { label: "수정하기", action: () => {} },
+            { label: "수정하기", action: () => setIsOpenEditModal(true) },
             { label: "삭제하기", action: () => setIsOpenDeleteModal(true) },
           ]}
         />
@@ -39,6 +41,13 @@ const TaskHeader = ({ name, taskList }: { name: string; taskList: TaskList }) =>
         onClose={() => setIsOpenDeleteModal(false)}
         groupId={Number(teamId)}
         taskListId={taskList.id}
+      />
+
+      <EditTaskListModal
+        isOpen={isOpenEditModal}
+        onClose={() => setIsOpenEditModal(false)}
+        groupId={Number(teamId)}
+        taskList={taskList}
       />
     </div>
   );
