@@ -6,15 +6,19 @@ import { TaskList } from "@/types";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-const TaskHeader = ({ name, taskListId }: { name: string; taskListId: number }) => {
+const TaskHeader = ({ name, taskList }: { name: string; taskList: TaskList }) => {
   const { teamId } = useParams();
+  const taskListId = taskList.id;
+  const totalTasks = taskList.tasks.length;
+  const completedCount = taskList.tasks.filter((task) => task.doneAt !== null).length;
+
   return (
     <div className="flex justify-between items-center h-[25px]">
       <Link href={`/team/${teamId}/task-list/${taskListId}`} className="text-lg-semibold text-text-primary">
         {name}
       </Link>
       <div className="flex items-center">
-        <ProgressBadge current={5} total={5} />
+        <ProgressBadge current={completedCount} total={totalTasks} />
         <button>
           <Icon name="kebab" className="size-6 tablet:size-6 text-state-300" />
         </button>
@@ -50,7 +54,7 @@ interface TaskCardProps {
 const TaskCard = ({ item, isRenderList }: TaskCardProps) => {
   return (
     <article className="flex flex-col gap-4 px-5 py-4 border border-border-primary rounded-xl bg-background-primary">
-      <TaskHeader name={item.name} taskListId={item.id} />
+      <TaskHeader name={item.name} taskList={item} />
       {isRenderList && <Tasks item={item} />}
     </article>
   );
