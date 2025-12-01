@@ -2,9 +2,6 @@
 
 import { ProfileItem } from "@/common";
 import { GroupMember } from "@/types/Group/GroupData";
-import DeleteMemberModal from "../../Modal/DeleteMemberModal";
-import { useState } from "react";
-
 /**
  * @author sangin
  * 1. 멤버 강퇴는 관리자만 가능하다.
@@ -13,12 +10,10 @@ import { useState } from "react";
 
 interface WidgetProfileProps {
   members: GroupMember[];
+  onClickDelete: (member: GroupMember) => void;
 }
 
-const WidgetProfile = ({ members }: WidgetProfileProps) => {
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
-  const [selectedMember, setSelectedMember] = useState<GroupMember | null>(null);
-
+const WidgetProfile = ({ members, onClickDelete }: WidgetProfileProps) => {
   return (
     <>
       <ul className="flex flex-col gap-[18px]">
@@ -32,22 +27,13 @@ const WidgetProfile = ({ members }: WidgetProfileProps) => {
               dropdownOptions={[
                 {
                   label: "삭제하기",
-                  action: () => {
-                    setSelectedMember(member);
-                    setIsOpenDeleteModal(true);
-                  },
+                  action: () => onClickDelete(member),
                 },
               ]}
             />
           </li>
         ))}
       </ul>
-
-      <DeleteMemberModal
-        isOpen={isOpenDeleteModal}
-        onClose={() => setIsOpenDeleteModal(false)}
-        member={selectedMember}
-      />
     </>
   );
 };

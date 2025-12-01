@@ -33,7 +33,12 @@ const DeleteMemberModal = ({ isOpen, onClose, member }: DeleteMemberModalProps) 
       return;
     }
 
-    deleteMember({ id: Number(teamId), memberUserId: member.userId });
+    deleteMember(
+      { id: Number(teamId), memberUserId: member.userId },
+      {
+        onSuccess: () => onClose(),
+      },
+    );
   };
 
   return (
