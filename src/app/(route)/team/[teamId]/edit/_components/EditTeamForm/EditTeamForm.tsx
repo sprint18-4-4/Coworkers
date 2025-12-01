@@ -1,15 +1,14 @@
 "use client";
 
 import { useDevice } from "@/hooks";
-import { ProfileEdit, Input, BaseButton } from "@/common";
+import { ProfileEdit, Input, BaseButton, LinkButton } from "@/common";
 import { useGetGroups, usePatchGroup } from "@/api/hooks";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useParams } from "next/navigation";
-import Link from "next/link";
 
 const EditTeamForm = () => {
   const [formData, setFormData] = useState({
-    image: null, // TODO(상인): 이미지 편집이 완료되면 구현 string | null
+    image: null,
     name: "",
   });
 
@@ -18,11 +17,12 @@ const EditTeamForm = () => {
   const id = Number(teamId);
   const { data: groups } = useGetGroups({ id });
 
-  const { mutate: patchGroup } = usePatchGroup();
+  const { mutate: patchGroup, isPending } = usePatchGroup();
+
+  const isDisabledEditButton = isPending || !formData.name;
 
   const profileSize = isMobile ? "md" : "lg";
 
-  // 이미지 수정에 따라 변경될 수도
   const handleFormDataChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -50,15 +50,12 @@ const EditTeamForm = () => {
         <p className="text-xs-regular text-text-default tablet:text-lg-regular text-center pb-4">
           팀 이름은 회사명이나 모임 이름 등으로 설정하면 좋아요.
         </p>
-        <BaseButton type="submit" variant="solid" size="large" className="w-full">
-          수정하기
+        <BaseButton type="submit" variant="solid" size="large" className="w-full" disabled={isDisabledEditButton}>
+          {isPending ? "수정 중..." : "수정하기"}
         </BaseButton>
-        {/* TODO(상인): 추후 as prop */}
-        <Link href={`/team/${teamId}`} className="w-full">
-          <BaseButton type="button" variant="outlinedSecondary" size="large" className="w-full">
-            돌아가기
-          </BaseButton>
-        </Link>
+        <LinkButton href={`/team/${teamId}`} variant="outlinedSecondary" size="large" className="w-full">
+          돌아가기
+        </LinkButton>
       </div>
     </form>
   );
