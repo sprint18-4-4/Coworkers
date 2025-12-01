@@ -8,7 +8,7 @@ import ArticleTitle from "../../../_components/Article/_internal/ArticleTitle";
 import ArticleWriter from "../../../_components/Article/_internal/ArticleWriter";
 import ArticleContent from "../../../_components/Article/_internal/ArticleContent";
 import ArticleLikeButton from "./ArticleLikeButton";
-import ArticleEditModal from "./ArticleEditModal";
+import ArticleEditModal from "../Modal/ArticleEditModal";
 import { useState } from "react";
 
 const ArticleBody = () => {
