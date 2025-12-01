@@ -5,28 +5,22 @@ import TaskCard from "../TaskCard/TaskCard";
 import { ChangeEvent, useState } from "react";
 import { usePostTaskList } from "@/api/hooks";
 import { useParams } from "next/navigation";
+import { TaskList } from "@/types";
 
 type ColumnTitle = "할 일" | "진행중" | "완료";
 
 interface TaskColumnProps {
   title: ColumnTitle;
-  items: []; // 추후 변경
+  items: TaskList[];
 }
 
 const TaskColumn = ({ title, items }: TaskColumnProps) => {
   const { mutate: postTaskList, isPending } = usePostTaskList();
   const { teamId } = useParams();
-
   const [taskValue, setTaskValue] = useState("");
   const [isOpenCreateTaskModal, setIsOpenCreateTaskModal] = useState(false);
 
-  const isCompletedColumn = () => {
-    if (title === "완료") {
-      return true;
-    }
-
-    return false;
-  };
+  const isRenderList = title !== "완료";
 
   const handleCreateTaskClick = () => {
     postTaskList(
@@ -43,8 +37,8 @@ const TaskColumn = ({ title, items }: TaskColumnProps) => {
   return (
     <section className="flex-1 flex flex-col gap-5">
       <ProgressButton onClick={() => setIsOpenCreateTaskModal(true)} text={title} className="w-full h-[38px]" />
-      {items.map((item, index) => (
-        <TaskCard key={index} item={item} isRenderList={isCompletedColumn()} /> // 추후 index -> item.id 변경
+      {items.map((item) => (
+        <TaskCard key={item.id} item={item} isRenderList={isRenderList} />
       ))}
 
       <Modal isOpen={isOpenCreateTaskModal} onClose={() => setIsOpenCreateTaskModal(false)}>

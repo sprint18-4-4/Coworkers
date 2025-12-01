@@ -1,13 +1,18 @@
 import { ProgressBadge } from "@/common";
 import { Icon } from "@/common";
 import { Todo } from "@/common";
+import { TaskList } from "@/types";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 
-// 추후 Item 받기
-const TaskHeader = () => {
+const TaskHeader = ({ name, taskListId }: { name: string; taskListId: number }) => {
+  const { teamId } = useParams();
   return (
     <div className="flex justify-between items-center h-[25px]">
-      <span className="text-lg-semibold text-text-primary">법인 설립</span>
+      <Link href={`/team/${teamId}/task-list/${taskListId}`} className="text-lg-semibold text-text-primary">
+        {name}
+      </Link>
       <div className="flex items-center">
         <ProgressBadge current={5} total={5} />
         <button>
@@ -18,7 +23,6 @@ const TaskHeader = () => {
   );
 };
 
-// 추후 Item 받기
 const Tasks = () => {
   const [completed, setCompleted] = useState(false);
   return (
@@ -31,35 +35,19 @@ const Tasks = () => {
           onChangeCompleted={(_, next) => setCompleted(next)}
         />
       </li>
-      <li>
-        <Todo
-          id={1}
-          title="법인 설립 안내 드리기"
-          completed={completed}
-          onChangeCompleted={(_, next) => setCompleted(next)}
-        />
-      </li>
-      <li>
-        <Todo
-          id={2}
-          title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex cupiditate, accusamus, voluptates enim in nesciunt nam, alias neque odio architecto non maxime ullam? Cupiditate molestiae impedit ipsum placeat maiores debitis."
-          completed={completed}
-          onChangeCompleted={(_, next) => setCompleted(next)}
-        />
-      </li>
     </ul>
   );
 };
 
 interface TaskCardProps {
-  item: [];
+  item: TaskList;
   isRenderList: boolean;
 }
 
 const TaskCard = ({ item, isRenderList }: TaskCardProps) => {
   return (
     <article className="flex flex-col gap-4 px-5 py-4 border border-border-primary rounded-xl bg-background-primary">
-      <TaskHeader />
+      <TaskHeader name={item.name} taskListId={item.id} />
       {isRenderList && <Tasks />}
     </article>
   );
