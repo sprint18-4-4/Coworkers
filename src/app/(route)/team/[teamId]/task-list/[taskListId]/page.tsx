@@ -54,7 +54,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId
     <div className={cn(selectedId && "pc:flex")}>
       <PageLayout ariaLabel="목록 페이지">
         <h1 className="sr-only">목록 페이지</h1>
-        <PageHeaderBar title={groups?.name} />
+        <PageHeaderBar title={groups?.name} id={teamId} />
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
           <TodoHeader data={groups} isPending={isPendingGroup} isError={isErrorGroup} groupId={teamId} />
