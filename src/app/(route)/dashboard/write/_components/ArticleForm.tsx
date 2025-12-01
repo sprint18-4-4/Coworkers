@@ -24,6 +24,8 @@ const ArticleForm = () => {
     image: null,
   });
 
+  const isSubmitDisabled = isPending || !formState.title.trim() || !formState.content.trim();
+
   const { error } = toastKit();
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -123,7 +125,7 @@ const ArticleForm = () => {
           )}
         </label>
       </div>
-      <BaseButton type="submit" variant="solid" size="large" disabled={isPending}>
+      <BaseButton type="submit" variant="solid" size="large" disabled={isSubmitDisabled}>
         {isPending ? "등록 중..." : "등록하기"}
       </BaseButton>
     </form>
