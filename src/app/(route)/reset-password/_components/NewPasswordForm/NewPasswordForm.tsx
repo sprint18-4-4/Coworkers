@@ -2,10 +2,11 @@
 
 import { useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { InputPassword, BaseButton } from "@/common";
-import { toastKit, validatePassword, validatePasswordConfirm } from "@/utils";
-import { usePatchResetPassword } from "@/api/hooks";
 import { useForm } from "@/hooks";
+import { usePatchResetPassword } from "@/api/hooks";
+import { InputPassword, BaseButton } from "@/common";
+import { OverlayLoading } from "@/app/(route)/_components";
+import { toastKit, validatePassword, validatePasswordConfirm } from "@/utils";
 
 const NewPasswordForm = () => {
   const router = useRouter();
@@ -47,7 +48,8 @@ const NewPasswordForm = () => {
   });
 
   return (
-    <form onSubmit={handleSubmit} className="w-full mt-8 gap-3 flex flex-col">
+    <form onSubmit={handleSubmit} className="relative w-full mt-8 gap-3 flex flex-col">
+      {meta.isLoading && <OverlayLoading />}
       <div className="flex-col-center gap-6">
         <InputPassword
           label="새 비밀번호"
