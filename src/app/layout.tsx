@@ -33,6 +33,7 @@ export default function RootLayout({
           <main className="flex-1 min-w-0 bg-background-secondary">{children}</main>
           <ToasterContainer />
         </QueryProviders>
+        <div id="portal-root" />
       </body>
     </html>
   );

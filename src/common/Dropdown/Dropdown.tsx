@@ -5,32 +5,14 @@ import { MouseEvent, ReactNode, useRef, useState } from "react";
 import { cn } from "@/utils";
 import Icon, { IconKeys } from "../Icon/Icon";
 import { DropdownOption } from "./_types/types";
+import Portal from "../Portal/Portal";
+import { DropdownPlacement, getPositionByPlacement } from "@/utils/getPositionByPlacement";
 
-/**
- * @author sangin
- *
- * @example
- * ```tsx
- * const options = [
- *   { label: "마이 히스토리", action: ()=>{} },
- *   { label: "로그아웃", action: ()=>{} },
- * ];
- *
- * <Dropdown
- *   iconName={kebab}
- *   options={options}
- *   iconClassName="tablet:size-9 text-red-200"
- * />
- * ```
- */
-
-type DropdownPlacement = "bottom-left" | "bottom-right" | "top-left" | "top-right";
-
-const PLACEMENT_BY_STYLE = {
-  "bottom-left": "left-0 top-full",
-  "bottom-right": "right-0 top-full",
-  "top-left": "left-0 bottom-full",
-  "top-right": "right-0 bottom-full",
+const PLACEMENT_TRANSFORM: Record<DropdownPlacement, string> = {
+  "bottom-left": "translate-x-0 translate-y-0",
+  "top-left": "translate-x-0 -translate-y-full",
+  "bottom-right": "-translate-x-full translate-y-0",
+  "top-right": "-translate-x-full -translate-y-full",
 };
 
 interface DropdownProps {
@@ -51,12 +33,19 @@ const Dropdown = ({
   placement = "bottom-left",
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
 
-  const placementStyle = PLACEMENT_BY_STYLE[placement];
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const dropdownRef = useRef<HTMLUListElement | null>(null);
 
   const handleDropdownClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    if (!triggerRef.current) return;
+
+    const rect = triggerRef.current.getBoundingClientRect();
+    const pos = getPositionByPlacement(rect, placement);
+
+    setPosition(pos);
     setIsOpen((prev) => !prev);
   };
 
@@ -66,35 +55,41 @@ const Dropdown = ({
   };
 
   useDropdownClose(dropdownRef, () => setIsOpen(false), isOpen);
+
   return (
-    <div className="relative inline-block" ref={dropdownRef}>
-      <button aria-label="드롭다운 버튼" onClick={handleDropdownClick}>
-        <span>
-          {iconName ? <Icon aria-label="드롭다운 아이콘" name={iconName} className={iconClassName} /> : image}
-        </span>
+    <>
+      <button ref={triggerRef} aria-label="드롭다운 버튼" onClick={handleDropdownClick}>
+        {iconName ? <Icon name={iconName} className={iconClassName} /> : image}
       </button>
 
       {isOpen && (
-        <ul
-          className={cn(
-            "absolute mt-1 min-w-[120px] bg-background-primary border rounded-xl shadow-md z-10  overflow-hidden",
-            placementStyle,
-          )}
-        >
-          {options.map((option) => (
-            <li key={option.label}>
-              <button
-                aria-label="드롭다운 메뉴"
-                className={cn("w-full px-3 py-2 hover:bg-state-200 transition", `text-${textAlign}`)}
-                onClick={() => handleOptionClick(option)}
-              >
-                <span className="text-md-regular text-text-primary">{option.label}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
+        <Portal>
+          <ul
+            ref={dropdownRef}
+            style={{
+              position: "absolute",
+              top: position.top,
+              left: position.left,
+            }}
+            className={cn(
+              "min-w-[120px] bg-background-primary border rounded-xl shadow-md",
+              PLACEMENT_TRANSFORM[placement],
+            )}
+          >
+            {options.map((option) => (
+              <li key={option.label}>
+                <button
+                  className={cn("w-full px-3 py-2 hover:bg-state-200 transition", `text-${textAlign}`)}
+                  onClick={() => handleOptionClick(option)}
+                >
+                  <span className="text-md-regular text-text-primary">{option.label}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </Portal>
       )}
-    </div>
+    </>
   );
 };
 

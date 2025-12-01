@@ -23,10 +23,12 @@ const TaskHeader = ({ name, taskList }: { name: string; taskList: TaskList }) =>
       <Link href={`/team/${teamId}/task-list/${taskListId}`} className="text-lg-semibold text-text-primary">
         {name}
       </Link>
-      <div className="flex items-center  leading-none">
+
+      <div className="flex items-center leading-none">
         <ProgressBadge current={completedCount} total={totalTasks} />
         <Dropdown
           iconName="kebab"
+          placement="bottom-right"
           iconClassName="size-6 tablet:size-6 text-state-300"
           options={[
             { label: "수정하기", action: () => setIsOpenEditModal(true) },

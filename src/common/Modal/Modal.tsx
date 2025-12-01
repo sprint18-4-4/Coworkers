@@ -11,6 +11,7 @@ import {
 } from "./MODAL_STYLE";
 import Icon from "../Icon/Icon";
 import { ModalProps, ModalContentProps } from "./_types/ModalProps";
+import Portal from "../Portal/Portal";
 
 /**
  * @author sangin
@@ -34,9 +35,11 @@ const Modal = ({ isOpen, onClose, className, children }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className={MODAL_OVERLAY_STYLE} onClick={handleOverlayClick}>
-      <div className={cn(MODAL_BASE_STYLE, className)}>{children}</div>
-    </div>
+    <Portal>
+      <div className={MODAL_OVERLAY_STYLE} onClick={handleOverlayClick}>
+        <div className={cn(MODAL_BASE_STYLE, className)}>{children}</div>
+      </div>
+    </Portal>
   );
 };
 
