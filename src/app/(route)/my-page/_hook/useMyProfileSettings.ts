@@ -3,7 +3,7 @@ import { UserData } from "../_types/type";
 import { usePatchUserProfile } from "@/api/hooks";
 import { useImageUpload } from "@/hooks";
 import { validateName } from "@/utils";
-import { PatchUserProfileRequest } from "@/api/axios/user/_types/type";
+import { PatchUserProfileRequest } from "@/api/axios/user/type";
 
 export interface UseMyProfileSettingsReturn {
   formData: {

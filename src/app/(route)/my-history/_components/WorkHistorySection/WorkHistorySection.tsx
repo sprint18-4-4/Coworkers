@@ -1,6 +1,6 @@
 import { cn } from "@/utils";
 import { EmptyState, TaskListItem } from "@/features";
-import { GetHistoryResponse } from "@/api/axios/user/_types/type";
+import { GetHistoryResponse } from "@/api/axios/user/type";
 
 const WorkHistorySection = ({ data }: { data: GetHistoryResponse }) => {
   return (
