@@ -10,7 +10,7 @@ const usePostArticle = () => {
     mutationFn: postArticle,
     onSuccess: (data) => {
       success("게시물 등록을 성공했습니다.");
-      router.push(`/dashboard/${data.id}`);
+      router.replace(`/dashboard/${data.id}`);
     },
     onError: () => {
       error("게시물을 등록하지 못하였습니다.");

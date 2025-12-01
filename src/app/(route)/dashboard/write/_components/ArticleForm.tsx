@@ -88,7 +88,7 @@ const ArticleForm = () => {
           value={formState.title}
           onChange={handleTextChange}
           required
-          maxLength={30}
+          maxLength={40}
         />
       </div>
 
