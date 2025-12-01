@@ -20,7 +20,7 @@ import { useDeleteGroup } from "@/api/hooks";
 
 interface PageHeaderBarProps {
   title: ReactNode;
-  id: number;
+  id?: number;
   isDropdown?: boolean;
 }
 
@@ -35,6 +35,8 @@ const PageHeaderBar = ({ title, id, isDropdown = true }: PageHeaderBarProps) => 
   ];
 
   const handleTeamDelete = () => {
+    if (!id) return;
+
     deleteGroup(
       { id },
       {
@@ -55,7 +57,12 @@ const PageHeaderBar = ({ title, id, isDropdown = true }: PageHeaderBarProps) => 
           {title || <LoadingSpinner size="sm" />}
         </h2>
         {isDropdown && (
-          <Dropdown iconName="setting" options={options} iconClassName="size-5 tablet:size-6 text-slate-400" />
+          <Dropdown
+            iconName="setting"
+            options={options}
+            placement="bottom-right"
+            iconClassName="size-5 tablet:size-6 text-slate-400"
+          />
         )}
       </div>
 

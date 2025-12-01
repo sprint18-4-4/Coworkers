@@ -111,7 +111,6 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
           </div>
         </Modal.Body>
         <Modal.Footer>
-          {/* TODO(지권): Disabled 상태 추가 필요 */}
           <BaseButton type="submit" variant="solid" size="large" className="mt-4" disabled={!isFormValid}>
             만들기
           </BaseButton>
