@@ -1,32 +1,31 @@
 "use client";
 
 import Image from "next/image";
-import { Input, InputBox, BaseButton, Icon } from "@/common";
+import { Input, InputBox, BaseButton, Icon, FloatingButton } from "@/common";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { postImageUpload } from "@/api/axios";
 import { usePostArticle } from "@/api/hooks";
 import { INPUT_AREA_STYLE, LABEL_STYLE } from "../_constants/STYLE";
-import { MAX_IMAGE_SIZE } from "../_constants/MAX_IMAGE_SIZE";
 import { toastKit } from "@/utils";
+import useImageUpload from "@/hooks/useImageUpload";
 
 interface FormStateType {
   title: string;
   content: string;
-  image: File | null;
 }
 
 const ArticleForm = () => {
   const { mutate: postArticle, isPending } = usePostArticle();
-  const [preview, setPreview] = useState<string | null>(null);
+
   const [formState, setFormState] = useState<FormStateType>({
     title: "",
     content: "",
-    image: null,
   });
 
-  const isSubmitDisabled = isPending || !formState.title.trim() || !formState.content.trim();
+  const { preview, file, handleImageChange, uploadImage, isUploading, clear } = useImageUpload();
 
   const { error } = toastKit();
+
+  const isSubmitDisabled = isPending || isUploading || !formState.title.trim() || !formState.content.trim();
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -36,44 +35,32 @@ const ArticleForm = () => {
     }));
   };
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) {
-      return;
-    }
-    if (file.size > MAX_IMAGE_SIZE) {
-      error("이미지 파일, 최대 용량은 10MB입니다.");
-      e.target.value = "";
-      return;
-    }
-
-    if (preview) {
-      URL.revokeObjectURL(preview);
-    }
-
-    const previewUrl = URL.createObjectURL(file);
-    setPreview(previewUrl);
-    setFormState((prev) => ({
-      ...prev,
-      image: file,
-    }));
+  const handleRemoveImage = () => {
+    clear();
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const { title, content, image } = formState;
+    const { title, content } = formState;
 
     try {
-      const imageURL = image && (await postImageUpload(image));
+      let imageUrl: string | null = null;
+
+      if (file) {
+        imageUrl = await uploadImage();
+      }
+
       const newFormData = {
-        title: title,
-        content: content,
-        ...(imageURL && { image: imageURL }),
+        title,
+        content,
+        ...(imageUrl && { image: imageUrl }),
       };
+
       postArticle(newFormData);
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
+      error("게시글 등록 중 오류가 발생했습니다.");
     }
   };
 
@@ -110,23 +97,45 @@ const ArticleForm = () => {
 
       <div className={INPUT_AREA_STYLE}>
         <label className={LABEL_STYLE}>이미지</label>
-        <input id="articleImg" type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
 
-        <label
-          htmlFor="articleImg"
-          className="size-[120px] rounded-xl border border-border-primary flex-center cursor-pointer overflow-hidden hover:border-state-400 transition relative"
-        >
-          {preview ? (
-            <Image src={preview} alt="미리보기" fill className="w-full h-full object-cover" />
-          ) : (
-            <span className="flex-cols-center gap-2">
-              <Icon name="imgUpload" />
-            </span>
+        <input
+          id="articleImg"
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={(e) => {
+            const selectedFile = e.target.files?.[0];
+            if (selectedFile) handleImageChange(selectedFile);
+          }}
+        />
+
+        <div className="relative size-[120px]">
+          <label
+            htmlFor="articleImg"
+            className="w-full h-full rounded-xl border border-border-primary flex-center cursor-pointer overflow-hidden hover:border-state-400 transition relative"
+          >
+            {preview ? (
+              <Image src={preview} alt="미리보기" fill className="object-cover" />
+            ) : (
+              <span className="flex flex-col items-center gap-2 text-text-300 text-sm">
+                <Icon name="imgUpload" />
+              </span>
+            )}
+          </label>
+
+          {preview && (
+            <FloatingButton
+              iconName="x"
+              type="button"
+              onClick={handleRemoveImage}
+              className="absolute -top-2 -right-2 w-6 h-6 rounded-full flex-center"
+            />
           )}
-        </label>
+        </div>
       </div>
+
       <BaseButton type="submit" variant="solid" size="large" disabled={isSubmitDisabled}>
-        {isPending ? "등록 중..." : "등록하기"}
+        {isPending || isUploading ? "등록 중..." : "등록하기"}
       </BaseButton>
     </form>
   );
