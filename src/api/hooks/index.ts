@@ -1,7 +1,7 @@
 export { default as usePostLogin } from "./auth/usePostLogin";
 export { default as useGetUser } from "./user/useGetUser";
 export { default as useGetGroups } from "./group/useGetGroups";
-export { default as useGetHistory } from "./my-history/useGetHistory";
+export { default as useGetHistory } from "./user/useGetHistory";
 export { default as useGetTask } from "./task/useGetTask";
 export { default as usePatchTask } from "./task/usePatchTask";
 export { default as usePostRecurring } from "./recurring/usePostRecurring";

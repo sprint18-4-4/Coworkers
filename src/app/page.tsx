@@ -8,7 +8,7 @@ export default async function Page() {
   const startDestination = token ? "/team" : "/login";
 
   return (
-    <main className="mobile:h-[calc(100vh-62px)] h-dvh">
+    <main className="mobile:h-[calc(100vh-52px)] min-w-0 min-h-screen">
       <HeroSection link={startDestination} />
       <KanbanSection />
       <DetailSection />
