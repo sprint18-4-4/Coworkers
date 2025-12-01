@@ -4,6 +4,7 @@ import { useGetGroups } from "@/api/hooks";
 import { TaskColumn } from "./_internal";
 import { useParams } from "next/navigation";
 import { getTaskListStatus } from "@/utils";
+import { getUncompletedTaskCount } from "@/utils/getTaskCount";
 
 const TaskSection = () => {
   const { teamId } = useParams();
@@ -18,12 +19,13 @@ const TaskSection = () => {
   const todoLists = taskLists.filter((list) => getTaskListStatus(list) === "TODO");
   const inProgressLists = taskLists.filter((list) => getTaskListStatus(list) === "IN_PROGRESS");
   const doneLists = taskLists.filter((list) => getTaskListStatus(list) === "DONE");
+  const todoCount = getUncompletedTaskCount(taskLists);
 
   return (
     <section className="w-full max-w-[842px]">
       <span className="flex gap-2 my-8">
         <span className="text-lg-medium text-text-primary">할 일 목록</span>
-        <span className="text-lg-regular text-text-default">(4개)</span>
+        <span className="text-lg-regular text-text-default">{todoCount}개</span>
       </span>
 
       <div className="flex flex-col gap-4 pc:flex-row">

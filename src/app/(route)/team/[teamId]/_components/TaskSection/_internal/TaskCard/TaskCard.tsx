@@ -1,10 +1,10 @@
 import { ProgressBadge } from "@/common";
 import { Icon } from "@/common";
 import { Todo } from "@/common";
+import { useTaskMutations } from "@/hooks";
 import { TaskList } from "@/types";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useState } from "react";
 
 const TaskHeader = ({ name, taskListId }: { name: string; taskListId: number }) => {
   const { teamId } = useParams();
@@ -23,18 +23,21 @@ const TaskHeader = ({ name, taskListId }: { name: string; taskListId: number }) 
   );
 };
 
-const Tasks = () => {
-  const [completed, setCompleted] = useState(false);
+const Tasks = ({ item }: { item: TaskList }) => {
+  const { teamId } = useParams();
+  const { toggleTaskDone } = useTaskMutations({ teamId: Number(teamId), taskListId: item.id });
   return (
     <ul className="flex flex-col gap-2">
-      <li>
-        <Todo
-          id={0}
-          title="법인 설립 안내 드리기"
-          completed={completed}
-          onChangeCompleted={(_, next) => setCompleted(next)}
-        />
-      </li>
+      {item.tasks.map((task) => (
+        <li key={task.id}>
+          <Todo
+            id={task.id}
+            title={task.name}
+            completed={task.doneAt !== null}
+            onChangeCompleted={() => toggleTaskDone(task.id, task.doneAt !== null)}
+          />
+        </li>
+      ))}
     </ul>
   );
 };
@@ -48,7 +51,7 @@ const TaskCard = ({ item, isRenderList }: TaskCardProps) => {
   return (
     <article className="flex flex-col gap-4 px-5 py-4 border border-border-primary rounded-xl bg-background-primary">
       <TaskHeader name={item.name} taskListId={item.id} />
-      {isRenderList && <Tasks />}
+      {isRenderList && <Tasks item={item} />}
     </article>
   );
 };
