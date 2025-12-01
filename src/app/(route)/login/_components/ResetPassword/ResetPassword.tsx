@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { toastKit } from "@/utils";
-import { Modal, Input, BaseButton } from "@/common";
 import { useForm } from "@/hooks";
 import { validateEmail } from "@/utils";
 import { usePostResetPassword } from "@/api/hooks";
+import { Modal, Input, BaseButton } from "@/common";
 
 interface ResetPasswordModalProps {
   isOpen: boolean;

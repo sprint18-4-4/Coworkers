@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useForm } from "@/hooks";
 import { usePostSignup } from "@/api/hooks";
+import { OverlayLoading } from "@/app/(route)/_components";
 import { Input, InputPassword, BaseButton } from "@/common";
 import { validateEmail, validateName, validatePassword, validatePasswordConfirm } from "@/utils";
 
@@ -39,7 +40,8 @@ const SignUpForm = () => {
   });
 
   return (
-    <form onSubmit={handleSubmit} className="w-full mt-8 mb-10 flex flex-col">
+    <form onSubmit={handleSubmit} className="relative w-full mt-8 mb-10 flex flex-col">
+      {meta.isLoading && <OverlayLoading />}
       <div className="flex-col-center gap-6">
         <Input
           label="이름"
@@ -81,7 +83,7 @@ const SignUpForm = () => {
       </Link>
       <div className="text-lg-semibold mt-10">
         <BaseButton variant="solid" size="large" type="submit" disabled={!meta.isValid || meta.isLoading}>
-          회원가입
+          {meta.isLoading ? "가입 중..." : "회원가입"}
         </BaseButton>
       </div>
     </form>

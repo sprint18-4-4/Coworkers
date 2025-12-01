@@ -2,8 +2,9 @@
 
 import { FormEvent } from "react";
 import { useDevice } from "@/hooks";
-import { ProfileEdit, Input, BaseButton } from "@/common";
 import { useTeamCreation } from "../../_hooks";
+import { OverlayLoading } from "@/app/(route)/_components";
+import { ProfileEdit, Input, BaseButton } from "@/common";
 
 const TeamCreateForm = () => {
   const { isMobile } = useDevice();
@@ -17,7 +18,8 @@ const TeamCreateForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="w-full flex-col-center gap-10">
+    <form onSubmit={onSubmit} className="relative w-full flex-col-center gap-10">
+      {isSubmitting && <OverlayLoading />}
       <div className="w-full flex-col-center gap-3 tablet:gap-6">
         <ProfileEdit iconType="imgUpload" src={preview || null} onChange={handleImageChange} size={profileSize} />
         <Input
