@@ -35,3 +35,14 @@ export interface PatchGroupRequest {
 }
 
 export type PatchGroupResponse = Group;
+
+export interface GetInvitationRequest {
+  id: number;
+}
+
+export type GetInvitationResponse = string;
+
+export interface DeleteMemberRequest {
+  id: number;
+  memberUserId: number;
+}
