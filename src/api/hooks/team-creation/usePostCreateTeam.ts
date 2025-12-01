@@ -1,6 +1,6 @@
 import { postCreateTeam } from "@/api/axios";
 import { toastKit } from "@/utils";
-import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
