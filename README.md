@@ -149,6 +149,7 @@ npm run dev
 │   │       ├── _constants
 │   │       └── page.tsx
 │   ├── constants
+│   │   └── 공통 상수
 │   ├── common
 │   │   └── 공통 컴포넌트
 │   ├── hooks
