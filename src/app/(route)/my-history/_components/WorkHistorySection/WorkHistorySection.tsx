@@ -1,6 +1,6 @@
 import { cn } from "@/utils";
 import { EmptyState, LoadingSpinner, TaskListItem } from "@/features";
-import { GetHistoryResponse } from "@/api/axios/user/_types/type";
+import { GetHistoryResponse } from "@/api/axios/user/type";
 import ErrorState from "@/features/ErrorState/ErrorState";
 
 interface Props {
