@@ -63,7 +63,7 @@ export type PostArticleResponse = ArticleListItem;
 export interface PatchArticleRequest {
   articleId: number;
   body: {
-    image?: string;
+    image?: string | null;
     content?: string;
     title?: string;
   };

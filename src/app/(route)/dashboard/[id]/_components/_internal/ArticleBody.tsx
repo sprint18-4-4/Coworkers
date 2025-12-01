@@ -51,7 +51,14 @@ const ArticleBody = () => {
 
       <ArticleLikeButton />
 
-      <ArticleEditModal isOpen={isOpenEditModal} onClose={() => setIsOpenEditModal(false)} />
+      {isOpenEditModal && (
+        <ArticleEditModal
+          key={article.id}
+          isOpen={isOpenEditModal}
+          onClose={() => setIsOpenEditModal(false)}
+          article={article}
+        />
+      )}
     </section>
   );
 };
