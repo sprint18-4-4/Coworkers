@@ -1,6 +1,13 @@
 <img src="https://private-user-images.githubusercontent.com/169524126/521039880-a378be81-f539-4529-8701-5d3b4193c61a.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjQ2Mjk3MjAsIm5iZiI6MTc2NDYyOTQyMCwicGF0aCI6Ii8xNjk1MjQxMjYvNTIxMDM5ODgwLWEzNzhiZTgxLWY1MzktNDUyOS04NzAxLTVkM2I0MTkzYzYxYS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUxMjAxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MTIwMVQyMjUwMjBaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iNmU5YWVjOTFhY2U5Nzk0ZTIzNWYyZjAzY2IwNjA3NjdmOTNlMWQ1YTExZTcxYzIwYjdjZTQyNTMzYzUzOTAwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.df0yEL2wQ0DOsEMSjsRKCNr-O_5kLEBqfNDZMbkELZc" />
 
-# Coworkers Frontend
+# Coworkers
+
+### 팀원
+
+|        [@SanginJeong](https://github.com/SanginJeong)        |        [@KimWonSeon](https://github.com/KimWonSeon)         |          [@wlrnjs](https://github.com/wlrnjs)           |
+| :----------------------------------------------------------: | :---------------------------------------------------------: | :-----------------------------------------------------: |
+| <img src="https://github.com/SanginJeong.png" width="150" /> | <img src="https://github.com/KimWonSeon.png" width="150" /> | <img src="https://github.com/wlrnjs.png" width="150" /> |
+|                       **정상인 / PL**                        |                       **김원선 / FE**                       |                     **서지권 / FE**                     |
 
 ## 기술 스택
 
