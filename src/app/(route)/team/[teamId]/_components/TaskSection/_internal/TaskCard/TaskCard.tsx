@@ -1,5 +1,4 @@
 import { Dropdown, ProgressBadge } from "@/common";
-import { Icon } from "@/common";
 import { Todo } from "@/common";
 import { useTaskMutations } from "@/hooks";
 import { TaskList } from "@/types";

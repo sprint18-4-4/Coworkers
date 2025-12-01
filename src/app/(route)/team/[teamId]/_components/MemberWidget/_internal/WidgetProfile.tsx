@@ -1,12 +1,9 @@
 "use client";
 
-import { useDeleteMember } from "@/api/hooks";
 import { ProfileItem } from "@/common";
-import { useCheckAdmin } from "@/hooks";
-import { UserRole } from "@/types";
 import { GroupMember } from "@/types/Group/GroupData";
-import { toastKit } from "@/utils";
-import { useParams } from "next/navigation";
+import DeleteMemberModal from "../../Modal/DeleteMemberModal";
+import { useState } from "react";
 
 /**
  * @author sangin
@@ -19,48 +16,39 @@ interface WidgetProfileProps {
 }
 
 const WidgetProfile = ({ members }: WidgetProfileProps) => {
-  const { mutate: deleteMember } = useDeleteMember();
-  const { teamId } = useParams();
-
-  const { error } = toastKit();
-  const isAdmin = useCheckAdmin();
-
-  const handleDeleteClick = (userId: number, role: UserRole) => {
-    if (!isAdmin) {
-      error("관리자만 이용 가능합니다.");
-      return;
-    }
-
-    if (role === "ADMIN") {
-      error("관리자는 내보낼 수 없습니다.");
-      return;
-    }
-
-    deleteMember({ id: Number(teamId), memberUserId: userId });
-  };
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [selectedMember, setSelectedMember] = useState<GroupMember | null>(null);
 
   return (
-    <ul className="flex flex-col gap-[18px]">
-      {members.map((member) => (
-        <li key={member.userId}>
-          <ProfileItem
-            onClick={() => {}}
-            type="memberItem"
-            src={member.userImage || null}
-            name={member.userName}
-            email={member.userEmail}
-            dropdownOptions={[
-              {
-                label: "삭제하기",
-                action: () => {
-                  handleDeleteClick(member.userId, member.role);
+    <>
+      <ul className="flex flex-col gap-[18px]">
+        {members.map((member) => (
+          <li key={member.userId}>
+            <ProfileItem
+              type="memberItem"
+              src={member.userImage || null}
+              name={member.userName}
+              email={member.userEmail}
+              dropdownOptions={[
+                {
+                  label: "삭제하기",
+                  action: () => {
+                    setSelectedMember(member);
+                    setIsOpenDeleteModal(true);
+                  },
                 },
-              },
-            ]}
-          />
-        </li>
-      ))}
-    </ul>
+              ]}
+            />
+          </li>
+        ))}
+      </ul>
+
+      <DeleteMemberModal
+        isOpen={isOpenDeleteModal}
+        onClose={() => setIsOpenDeleteModal(false)}
+        member={selectedMember}
+      />
+    </>
   );
 };
 
