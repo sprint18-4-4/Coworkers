@@ -1,5 +1,5 @@
 import { getGroups } from "@/api/axios";
-import { GetGroupsRequest } from "../../axios/group/_types/type";
+import { GetGroupsRequest } from "../../axios/group/_type";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetGroups = ({ id }: GetGroupsRequest) => {

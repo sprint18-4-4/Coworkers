@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useRef } from "react";
 import Link from "next/link";
 import { Icon } from "@/common";
 import { cn } from "@/utils";
-import { GetGroupsResponse } from "@/api/axios/group/_types/type";
+import { GetGroupsResponse } from "@/api/axios/group/_type";
 import { TaskList } from "@/types/Group/GroupData";
 import { useDropdownClose } from "@/hooks";
 

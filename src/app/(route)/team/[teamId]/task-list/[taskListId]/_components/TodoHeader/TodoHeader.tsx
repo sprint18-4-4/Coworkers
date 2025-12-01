@@ -5,7 +5,7 @@ import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
 import TaskListCreateModal from "../TaskListCreateModal/TaskListCreateModal";
 import TaskItemEditModal from "../TaskItemEditModal/TaskItemEditModal";
 import { TaskList } from "@/types";
-import { GetGroupsResponse } from "@/api/axios/group/_types/type";
+import { GetGroupsResponse } from "@/api/axios/group/_type";
 import useDeleteTaskList from "@/api/hooks/task-list/useDeleteTaskList";
 import { EmptyState, LoadingSpinner } from "@/features";
 import ErrorState from "@/features/ErrorState/ErrorState";
