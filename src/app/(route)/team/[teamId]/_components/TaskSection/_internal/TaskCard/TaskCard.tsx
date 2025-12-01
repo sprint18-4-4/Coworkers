@@ -1,13 +1,18 @@
-import { ProgressBadge } from "@/common";
+import { Dropdown, ProgressBadge } from "@/common";
 import { Icon } from "@/common";
 import { Todo } from "@/common";
 import { useTaskMutations } from "@/hooks";
 import { TaskList } from "@/types";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useState } from "react";
+import DeleteTaskListModal from "../Modal/DeleteTaskListModal";
 
 const TaskHeader = ({ name, taskList }: { name: string; taskList: TaskList }) => {
   const { teamId } = useParams();
+
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+
   const taskListId = taskList.id;
   const totalTasks = taskList.tasks.length;
   const completedCount = taskList.tasks.filter((task) => task.doneAt !== null).length;
@@ -17,12 +22,24 @@ const TaskHeader = ({ name, taskList }: { name: string; taskList: TaskList }) =>
       <Link href={`/team/${teamId}/task-list/${taskListId}`} className="text-lg-semibold text-text-primary">
         {name}
       </Link>
-      <div className="flex items-center">
+      <div className="flex items-center  leading-none">
         <ProgressBadge current={completedCount} total={totalTasks} />
-        <button>
-          <Icon name="kebab" className="size-6 tablet:size-6 text-state-300" />
-        </button>
+        <Dropdown
+          iconName="kebab"
+          iconClassName="size-6 tablet:size-6 text-state-300"
+          options={[
+            { label: "수정하기", action: () => {} },
+            { label: "삭제하기", action: () => setIsOpenDeleteModal(true) },
+          ]}
+        />
       </div>
+
+      <DeleteTaskListModal
+        isOpen={isOpenDeleteModal}
+        onClose={() => setIsOpenDeleteModal(false)}
+        groupId={Number(teamId)}
+        taskListId={taskList.id}
+      />
     </div>
   );
 };
