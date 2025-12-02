@@ -27,5 +27,6 @@ export interface Task {
   name: string;
   tasks: Task[];
   updatedAt: string;
+  date: string;
   doneAt?: string | null;
 }
