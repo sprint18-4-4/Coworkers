@@ -12,9 +12,6 @@ import ErrorState from "@/features/ErrorState/ErrorState";
 import { useDevice } from "@/hooks";
 import { TaskDropdown } from "./_internal";
 
-// 1. 모바일, 태블릿 드롭다운 표시 로직 수정 isPc 사용
-// 2. 드롭다운 디자인 수정
-
 const TodoItem = ({ data }: { data: TaskList }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { mutate: deleteTodo } = useDeleteTaskList();
@@ -68,6 +65,8 @@ const TodoHeader = ({ data, groupId, isPending, isError }: TodoHeaderProps) => {
   const [isTabletMenuOpen, setIsTabletMenuOpen] = useState(false);
   const { isPc } = useDevice();
 
+  const hasTaskLists = !!data && Array.isArray(data.taskLists) && data.taskLists.length > 0;
+
   return (
     <>
       <aside className={cn("flex flex-col items-start gap-2", "pc:w-[270px] pc:gap-6")}>
@@ -95,7 +94,7 @@ const TodoHeader = ({ data, groupId, isPending, isError }: TodoHeaderProps) => {
 
             {!isPending &&
               !isError &&
-              data?.taskLists?.length &&
+              hasTaskLists &&
               (isPc ? (
                 <div className="max-h-[300px] w-full overflow-y-scroll hide-scrollbar">
                   <ul className="space-y-1 w-full">
