@@ -44,8 +44,8 @@ const DetailPage = ({ id, teamId, taskListId }: DetailPageProps) => {
         className={cn(
           "w-full min-h-[calc(100vh-52px)] flex flex-col px-4 py-3 space-y-6 bg-background-primary",
           "fixed inset-x-0 inset-y-10 z-[999] shadow-lg hide-scrollbar",
-          "tablet:px-7 tablet:py-10 tablet:inset-x-[150px] tablet:inset-y-0",
-          "pc:top-0 pc:bottom-0 pc:right-0 pc:left-auto",
+          "tablet:top-0 tablet:bottom-0 tablet:right-0 tablet:left-auto",
+          "tablet:w-[520px] tablet:min-w-[520px]",
           "pc:w-[420px] pc:min-w-[420px]",
           "pc:max-h-[100vh] pc:overflow-y-auto pc:shadow-none",
         )}
