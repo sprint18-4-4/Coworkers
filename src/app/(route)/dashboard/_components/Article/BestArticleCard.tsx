@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { useGetArticle } from "@/api/hooks";
 import { Icon } from "@/common";
 import ArticleBestBadge from "./_internal/ArticleBestBadge";
@@ -20,12 +19,9 @@ const BestArticleCard = ({ articleId }: { articleId: number }) => {
       <article className="h-full flex flex-col gap-3 pc:gap-4 rounded-[20px] border bg-background-primary px-5 py-6">
         <ArticleBestBadge />
 
-        <div className="flex justify-between gap-4">
-          <div className="flex flex-col gap-3">
-            <ArticleTitle title={article?.title} />
-            <ArticleContent content={article?.content} />
-          </div>
-          {/* {article.image && <Image src={article.image} alt="게시글 이미지" width={60} height={60} />} */}
+        <div className="flex flex-col gap-4">
+          <ArticleTitle title={article?.title} />
+          <ArticleContent content={article?.content} image={article.image} imgSize={60} layout="row" />
         </div>
 
         <footer className="flex justify-between items-center">

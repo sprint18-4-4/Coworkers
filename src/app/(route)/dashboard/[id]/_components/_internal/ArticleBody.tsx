@@ -46,7 +46,7 @@ const ArticleBody = () => {
       </div>
 
       <div className="pt-6">
-        <ArticleContent content={article.content} image={article.image} />
+        <ArticleContent content={article.content} image={article.image} imgSize={200} />
       </div>
 
       <ArticleLikeButton />
