@@ -11,7 +11,6 @@ import { cn } from "@/utils";
  *   <PageHeaderBar title="경영관리팀" />
  *
  *   <div aria-label="나의 히스토리 컨텐츠" className="pc:flex pc:gap-[86px]">
- *     <MyWorkHistory title="나의 히스토리" items={MY_HISTORY_ITEM_MOCK_DATA.map((item) => ({ item }))} />
  *     <WorkHistorySection />
  *   </div>
  * </PageLayout>

@@ -12,6 +12,7 @@ const usePatchGroup = () => {
     onSuccess: () => {
       success("팀 이름을 성공적으로 변경하였습니다.");
       queryClient.invalidateQueries({ queryKey: ["groups"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
       router.back();
     },
     onError: () => {
