@@ -16,7 +16,10 @@ const usePostRecurring = () => {
       const { groupId, taskListId } = variables;
 
       queryClient.invalidateQueries({
-        queryKey: ["task-list", groupId, taskListId],
+        queryKey: ["task-list", String(groupId), String(taskListId)],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["groups", groupId],
       });
     },
 

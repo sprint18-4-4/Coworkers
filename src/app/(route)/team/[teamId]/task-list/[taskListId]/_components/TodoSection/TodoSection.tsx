@@ -13,7 +13,6 @@ import { useTaskMutations } from "@/hooks";
 import EditDataModal from "../../_detail/_components/_internal/EditDataModal/EditDataModal";
 import { TaskResponse } from "@/api/axios/task/_types";
 import ErrorState from "@/features/ErrorState/ErrorState";
-// TODO(지권): EditDataModal 네이밍 및 위치 변경 필요
 
 interface TodoSectionHeaderProps {
   data: TaskResponse;

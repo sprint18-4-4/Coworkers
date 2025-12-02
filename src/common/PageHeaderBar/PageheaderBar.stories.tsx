@@ -1,5 +1,8 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import PageHeaderBar from "./PageHeaderBar";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const meta: Meta<typeof PageHeaderBar> = {
   component: PageHeaderBar,
@@ -14,9 +17,11 @@ const meta: Meta<typeof PageHeaderBar> = {
   },
   decorators: [
     (Story) => (
-      <div className="w-full">
-        <Story />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div className="w-full">
+          <Story />
+        </div>
+      </QueryClientProvider>
     ),
   ],
 };
