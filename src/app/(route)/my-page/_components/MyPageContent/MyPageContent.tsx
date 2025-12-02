@@ -1,13 +1,14 @@
 "use client";
 
 import { FormEvent } from "react";
+import { UserData } from "../../_types/type";
 import { SaveChangesSnackbar } from "@/common";
 import { CenteredCardLayout } from "@/app/(route)/_components";
+import { OverlayLoading } from "@/app/(route)/_components";
 import MyProfileForm from "../MyProfileForm/MyProfileForm";
 import DeleteAccountButton from "../DeleteAccountButton/DeleteAccountButton";
 import PasswordInputSection from "../PasswordInputSection/PasswordInputSection";
 import useMyProfileSettings from "../../_hook/useMyProfileSettings";
-import { UserData } from "../../_types/type";
 
 const MyPageContent = ({ userData }: { userData: UserData }) => {
   const profile = useMyProfileSettings({
@@ -28,7 +29,7 @@ const MyPageContent = ({ userData }: { userData: UserData }) => {
       title="계정 설정"
       titleClassName="w-full text-left mb-[35px]"
       sectionClassName="flex-col gap-7 px-4 tablet:px-[60px]"
-      className="min-w-[343px] max-w-[940px] max-h-[600px] tablet:max-h-[720px] gap-[35px] py-8 mx-0"
+      className="relative min-w-[343px] max-w-[940px] max-h-[600px] tablet:max-h-[720px] gap-[35px] py-8 mx-0"
       bottomContent={
         <div className="w-full max-w-[940px] h-[57px] tablet:px-6 pc:px-9">
           {hasChanges && (
@@ -43,6 +44,7 @@ const MyPageContent = ({ userData }: { userData: UserData }) => {
         </div>
       }
     >
+      {isSaving && <OverlayLoading />}
       <MyProfileForm
         userInfo={{
           nickname: formData.nickname,
