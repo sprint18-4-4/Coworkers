@@ -1,5 +1,11 @@
+import { Metadata } from "next";
 import { CenteredCardLayout } from "../_components";
 import { TeamCreateForm } from "./_components/";
+
+export const metadata: Metadata = {
+  title: "Coworkers | 팀 생성하기",
+  description: "팀을 생성하여 팀을 꾸려보세요.",
+};
 
 const TeamCreatePage = () => {
   return (

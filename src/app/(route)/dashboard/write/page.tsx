@@ -1,5 +1,11 @@
 import { PageLayout } from "@/common";
 import { ArticleForm } from "./_components";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Coworkers | 글쓰기",
+  description: "게시글을 작성하여 팀원들과 공유해보세요.",
+};
 
 const DashboardWritePage = () => {
   return (
