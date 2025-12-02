@@ -35,3 +35,4 @@ export { default as useDeleteArticleComment } from "./articleComment/useDeleteAr
 export { default as usePatchArticleComment } from "./articleComment/usePatchArticleComment";
 export { default as useGetInvitation } from "./group/useGetInvitation";
 export { default as useDeleteMember } from "./group/useDeleteMember";
+export { default as usePatchArticle } from "./article/usePatchArticle";

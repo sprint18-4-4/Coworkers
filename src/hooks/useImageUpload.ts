@@ -10,6 +10,7 @@ interface UsePostImageUploadReturn {
   uploadImage: () => Promise<string | null>;
   isUploading: boolean;
   reset: () => void;
+  clear: () => void;
 }
 
 const useImageUpload = (initialImage?: string): UsePostImageUploadReturn => {
@@ -32,6 +33,14 @@ const useImageUpload = (initialImage?: string): UsePostImageUploadReturn => {
     }
     setFile(null);
     setPreview(initialImage || "");
+  };
+
+  const clear = () => {
+    if (preview && !preview.startsWith("http")) {
+      URL.revokeObjectURL(preview);
+    }
+    setFile(null);
+    setPreview("");
   };
 
   useEffect(() => {
@@ -69,6 +78,7 @@ const useImageUpload = (initialImage?: string): UsePostImageUploadReturn => {
     uploadImage,
     isUploading: uploadMutation.isPending,
     reset,
+    clear,
   };
 };
 

@@ -15,11 +15,16 @@ const EditTaskListModal = ({ isOpen, onClose, groupId, taskList }: EditTaskListM
 
   const [title, setTitle] = useState("");
 
+  const isDisabledEditButton = isPending || !title.trim();
+
   const handleEditClick = () => {
     patchTask(
       { groupId, id: taskList.id, name: title },
       {
-        onSuccess: () => onClose(),
+        onSuccess: () => {
+          onClose();
+          setTitle("");
+        },
       },
     );
   };
@@ -35,7 +40,7 @@ const EditTaskListModal = ({ isOpen, onClose, groupId, taskList }: EditTaskListM
         />
       </Modal.Body>
       <Modal.Footer>
-        <BaseButton onClick={handleEditClick} variant="solid" size="large" disabled={isPending}>
+        <BaseButton onClick={handleEditClick} variant="solid" size="large" disabled={isDisabledEditButton}>
           {isPending ? "수정 중..." : "수정하기"}
         </BaseButton>
       </Modal.Footer>

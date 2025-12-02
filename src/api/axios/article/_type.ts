@@ -59,3 +59,14 @@ export interface PostArticleRequest {
 }
 
 export type PostArticleResponse = ArticleListItem;
+
+export interface PatchArticleRequest {
+  articleId: number;
+  body: {
+    image?: string | null;
+    content?: string;
+    title?: string;
+  };
+}
+
+export type PatchArticleResponse = ArticleDetail;

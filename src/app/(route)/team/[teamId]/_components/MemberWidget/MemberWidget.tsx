@@ -1,7 +1,7 @@
 "use client";
 
-import { useGetGroups, useGetInvitation } from "@/api/hooks";
-import { BaseButton, FloatingButton, Modal } from "@/common";
+import { useGetGroups } from "@/api/hooks";
+import { FloatingButton } from "@/common";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import WidgetProfile from "./_internal/WidgetProfile";

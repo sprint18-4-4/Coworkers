@@ -10,8 +10,8 @@ interface PaginationProps {
 }
 
 const Pagination = ({ page, totalPages, onPrev, onNext, maxDots = 5 }: PaginationProps) => {
-  const startPage = Math.max(1, page - Math.floor(maxDots / 2));
-  const endPage = Math.min(totalPages, startPage + maxDots - 1);
+  const startPage = Math.floor((page - 1) / maxDots) * maxDots + 1;
+  const endPage = Math.min(startPage + maxDots - 1, totalPages);
 
   const visiblePages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 
