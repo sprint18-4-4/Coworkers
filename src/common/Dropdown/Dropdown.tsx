@@ -72,7 +72,7 @@ const Dropdown = ({
               left: position.left,
             }}
             className={cn(
-              "min-w-[120px] bg-background-primary border rounded-xl shadow-md",
+              "min-w-[120px] bg-background-primary border rounded-xl shadow-md z-[999]",
               PLACEMENT_TRANSFORM[placement],
             )}
           >
