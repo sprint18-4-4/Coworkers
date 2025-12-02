@@ -6,23 +6,28 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import WidgetProfile from "./_internal/WidgetProfile";
 import WidgetHeader from "./_internal/WidgetHeader";
+import DeleteMemberModal from "../Modal/DeleteMemberModal";
+import { GroupMember } from "@/types/Group/GroupData";
+import InviteMemberModal from "../Modal/InviteMemberModal";
 
 const MemberWidget = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenInviteModal, setIsOpenInviteModal] = useState(false);
   const [isOpenWidget, setIsOpenWidget] = useState(false);
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [selectedMember, setSelectedMember] = useState<GroupMember | null>(null);
 
   const { teamId } = useParams();
   const id = Number(teamId);
 
   const { data: groups } = useGetGroups({ id });
-  const { mutate: getInvitation, isPending: isPendingInvitation } = useGetInvitation();
 
   if (!groups) {
     return null;
   }
 
-  const handleInviteLinkClick = () => {
-    getInvitation({ id });
+  const handleDeleteClick = (member: GroupMember) => {
+    setSelectedMember(member);
+    setIsOpenDeleteModal(true);
   };
 
   return (
@@ -34,26 +39,21 @@ const MemberWidget = () => {
           <aside className="absolute bottom-[65px] right-0 flex flex-col gap-6 w-[240px] border border-border-primary rounded-xl bg-background-primary px-5 py-[24px]">
             <WidgetHeader
               setIsOpenWidget={setIsOpenWidget}
-              setIsOpenModal={setIsOpenModal}
+              setIsOpenModal={setIsOpenInviteModal}
               memberCount={groups.members.length}
             />
-            <WidgetProfile members={groups.members} />
+            <WidgetProfile members={groups.members} onClickDelete={handleDeleteClick} />
           </aside>
         )}
       </span>
 
-      <Modal isOpen={isOpenModal} onClose={() => setIsOpenModal(false)}>
-        <Modal.CloseIcon onClose={() => setIsOpenModal(false)} />
-        <Modal.Body className="flex-col-center gap-2">
-          <h3 className="text-text-primary text-lg-medium">멤버 초대</h3>
-          <p>그룹에 참여할 수 있는 링크를 복사합니다.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <BaseButton onClick={handleInviteLinkClick} variant="solid" size="large" disabled={isPendingInvitation}>
-            {isPendingInvitation ? "요청 중..." : "링크 복사하기"}
-          </BaseButton>
-        </Modal.Footer>
-      </Modal>
+      <InviteMemberModal isOpen={isOpenInviteModal} onClose={() => setIsOpenInviteModal(false)} groupId={id} />
+
+      <DeleteMemberModal
+        isOpen={isOpenDeleteModal}
+        onClose={() => setIsOpenDeleteModal(false)}
+        member={selectedMember}
+      />
     </>
   );
 };
