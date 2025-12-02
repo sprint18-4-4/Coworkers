@@ -1,5 +1,11 @@
 import { CenteredCardLayout } from "@/app/(route)/_components";
 import EditTeamForm from "./_components/EditTeamForm/EditTeamForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Coworkers | 팀 수정하기",
+  description: "팀 이름과 이미지를 수정해보세요.",
+};
 
 const TeamEditPage = () => {
   return (

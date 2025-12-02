@@ -3,7 +3,7 @@ import { UserData } from "../_types/type";
 import { usePatchUserProfile } from "@/api/hooks";
 import { useImageUpload } from "@/hooks";
 import { validateName } from "@/utils";
-import { PatchUserProfileRequest } from "@/api/axios/user/_types/type";
+import { PatchUserProfileRequest } from "@/api/axios/user/type";
 
 export interface UseMyProfileSettingsReturn {
   formData: {
@@ -18,7 +18,7 @@ export interface UseMyProfileSettingsReturn {
   handlers: {
     onNicknameChange: (value: string) => void;
     onImageChange: (file: File) => void;
-    onSave: () => Promise<void>;
+    onSave: () => void;
   };
 }
 
@@ -28,6 +28,7 @@ const useMyProfileSettings = (initialData: UserData): UseMyProfileSettingsReturn
   });
 
   const [nicknameError, setNicknameError] = useState<string>("");
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const {
     preview,
@@ -38,26 +39,33 @@ const useMyProfileSettings = (initialData: UserData): UseMyProfileSettingsReturn
     reset: resetImage,
   } = useImageUpload(initialData.image || undefined);
 
-  const { mutate: updateProfile, isPending: isUpdating } = usePatchUserProfile({
+  const { mutateAsync: updateProfileAsync, isPending } = usePatchUserProfile({
     onSuccess: () => {
       resetImage();
       setNicknameError("");
     },
   });
 
-  const isSaving = isUploading || isUpdating;
+  const isSaving = isProcessing || isUploading || isPending;
 
   const nicknameChanged = formData.nickname.trim() !== initialData.nickname;
   const imageChanged = file !== null;
 
   const hasChanges = nicknameChanged || imageChanged;
 
+  useEffect(() => {
+    if (!hasChanges && isProcessing) {
+      setIsProcessing(false);
+    }
+  }, [hasChanges, isProcessing]);
+
+  useEffect(() => {
+    setFormData({ nickname: initialData.nickname });
+  }, [initialData.nickname]);
+
   const handleNicknameChange = (value: string) => {
     setFormData((prev) => ({ ...prev, nickname: value }));
-
-    if (nicknameError) {
-      setNicknameError("");
-    }
+    setNicknameError("");
   };
 
   const validateForm = (): boolean => {
@@ -72,33 +80,43 @@ const useMyProfileSettings = (initialData: UserData): UseMyProfileSettingsReturn
   };
 
   const handleSaveChanges = async (): Promise<void> => {
-    if (isSaving) return;
+    if (isSaving) {
+      return;
+    }
 
     if (!validateForm()) {
       return;
     }
 
-    const uploadedImageUrl = file ? await uploadImage() : undefined;
+    setIsProcessing(true);
 
-    if (file && !uploadedImageUrl) {
-      return;
+    try {
+      const uploadedImageUrl = file ? await uploadImage() : undefined;
+
+      if (file && !uploadedImageUrl) {
+        setIsProcessing(false);
+        throw new Error("이미지 업로드에 실패했습니다. 다시 시도해주세요.");
+      }
+
+      const requestBody: Partial<PatchUserProfileRequest> = {};
+
+      if (formData.nickname.trim() !== initialData.nickname) {
+        requestBody.nickname = formData.nickname.trim();
+      }
+
+      if (uploadedImageUrl) {
+        requestBody.image = uploadedImageUrl;
+      }
+
+      if (Object.keys(requestBody).length === 0) {
+        setIsProcessing(false);
+        return;
+      }
+
+      await updateProfileAsync(requestBody as PatchUserProfileRequest);
+    } catch {
+      setIsProcessing(false);
     }
-
-    const requestBody: Partial<PatchUserProfileRequest> = {};
-
-    if (formData.nickname.trim() !== initialData.nickname) {
-      requestBody.nickname = formData.nickname.trim();
-    }
-
-    if (uploadedImageUrl) {
-      requestBody.image = uploadedImageUrl;
-    }
-
-    if (Object.keys(requestBody).length === 0) {
-      return;
-    }
-
-    updateProfile(requestBody as PatchUserProfileRequest);
   };
 
   useEffect(() => {

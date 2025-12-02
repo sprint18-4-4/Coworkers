@@ -1,71 +1,60 @@
 "use client";
 
-import { FloatingButton, Icon, ProfileItem } from "@/common";
+import { useGetGroups } from "@/api/hooks";
+import { FloatingButton } from "@/common";
+import { useParams } from "next/navigation";
 import { useState } from "react";
+import WidgetProfile from "./_internal/WidgetProfile";
+import WidgetHeader from "./_internal/WidgetHeader";
+import DeleteMemberModal from "../Modal/DeleteMemberModal";
+import { GroupMember } from "@/types/Group/GroupData";
+import InviteMemberModal from "../Modal/InviteMemberModal";
 
 const MemberWidget = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenInviteModal, setIsOpenInviteModal] = useState(false);
+  const [isOpenWidget, setIsOpenWidget] = useState(false);
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [selectedMember, setSelectedMember] = useState<GroupMember | null>(null);
+
+  const { teamId } = useParams();
+  const id = Number(teamId);
+
+  const { data: groups } = useGetGroups({ id });
+
+  if (!groups) {
+    return null;
+  }
+
+  const handleDeleteClick = (member: GroupMember) => {
+    setSelectedMember(member);
+    setIsOpenDeleteModal(true);
+  };
 
   return (
-    // TODO(상인): 일단은 맨 오른쪽 하단에 두고, 추후 변경
-    <span className="fixed right-3 bottom-3">
-      <FloatingButton iconName="user" onClick={() => setIsOpen((prev) => !prev)} />
+    <>
+      <span className="fixed right-3 bottom-3">
+        <FloatingButton iconName="user" onClick={() => setIsOpenWidget((prev) => !prev)} />
 
-      {isOpen && (
-        <aside className="absolute bottom-[65px] right-0 flex flex-col gap-6 w-[240px] border border-border-primary rounded-xl bg-background-primary px-5 py-[24px]">
-          <header className="flex justify-between items-center">
-            <span className="flex gap-2">
-              <span className="text-lg-medium text-text-primary">멤버</span>
-              <span className="text-lg-regular text-text-default">(4명)</span>
-            </span>
+        {isOpenWidget && (
+          <aside className="absolute bottom-[65px] right-0 flex flex-col gap-6 w-[240px] border border-border-primary rounded-xl bg-background-primary px-5 py-[24px]">
+            <WidgetHeader
+              setIsOpenWidget={setIsOpenWidget}
+              setIsOpenModal={setIsOpenInviteModal}
+              memberCount={groups.members.length}
+            />
+            <WidgetProfile members={groups.members} onClickDelete={handleDeleteClick} />
+          </aside>
+        )}
+      </span>
 
-            <button onClick={() => {}} className="flex items-center gap-1 text-lg-semibold text-brand-primary">
-              <span>초대하기</span>
-              <Icon name="plus" className="size-4 tablet:size-4" />
-            </button>
-          </header>
+      <InviteMemberModal isOpen={isOpenInviteModal} onClose={() => setIsOpenInviteModal(false)} groupId={id} />
 
-          <ul className="flex flex-col gap-[18px]">
-            <li>
-              <ProfileItem
-                type="memberItem"
-                src="/profile.jpg"
-                name="우지은"
-                email="jieun@codeit.com"
-                onClick={() => {}}
-              />
-            </li>
-            <li>
-              <ProfileItem
-                type="memberItem"
-                src="/profile.jpg"
-                name="우지은"
-                email="jieun@codeit.com"
-                onClick={() => {}}
-              />
-            </li>
-            <li>
-              <ProfileItem
-                type="memberItem"
-                src="/profile.jpg"
-                name="우지은"
-                email="jieun@codeit.com"
-                onClick={() => {}}
-              />
-            </li>
-            <li>
-              <ProfileItem
-                type="memberItem"
-                src="/profile.jpg"
-                name="우지은"
-                email="jieun@codeit.com"
-                onClick={() => {}}
-              />
-            </li>
-          </ul>
-        </aside>
-      )}
-    </span>
+      <DeleteMemberModal
+        isOpen={isOpenDeleteModal}
+        onClose={() => setIsOpenDeleteModal(false)}
+        member={selectedMember}
+      />
+    </>
   );
 };
 

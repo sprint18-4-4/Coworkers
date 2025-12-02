@@ -17,11 +17,10 @@ const DefaultArticleCard = ({ articleId }: { articleId: number }) => {
     <Link href={`/dashboard/${article.id}`} className="block">
       <article className="flex flex-col gap-3 w-full pc:gap-4 rounded-[20px] border bg-background-primary px-5 py-6">
         <div className="flex justify-between gap-4">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col w-full gap-3">
             <ArticleTitle title={article?.title} />
-            <ArticleContent content={article?.content} />
+            <ArticleContent content={article?.content} image={article.image} imgSize={60} layout="row" />
           </div>
-          {/* {article.image && <Image src={article.image} alt="게시글 이미지" width={60} height={60} />} */}
         </div>
         <footer className="flex justify-between items-center">
           <ArticleWriter nickname={article.writer.nickname} createdAt={article.createdAt} />

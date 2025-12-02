@@ -5,8 +5,12 @@ import { BaseButton, Dropdown, Icon, ProgressBadge } from "@/common";
 import TaskListCreateModal from "../TaskListCreateModal/TaskListCreateModal";
 import TaskItemEditModal from "../TaskItemEditModal/TaskItemEditModal";
 import { TaskList } from "@/types";
-import { GetGroupsResponse } from "@/api/axios/group/_types/type";
+import { GetGroupsResponse } from "@/api/axios/group/_type";
 import useDeleteTaskList from "@/api/hooks/task-list/useDeleteTaskList";
+import { EmptyState, LoadingSpinner } from "@/features";
+import ErrorState from "@/features/ErrorState/ErrorState";
+import { useDevice } from "@/hooks";
+import { TaskDropdown } from "./_internal";
 
 const TodoItem = ({ data }: { data: TaskList }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -52,43 +56,72 @@ const TodoItem = ({ data }: { data: TaskList }) => {
 interface TodoHeaderProps {
   data: GetGroupsResponse | undefined;
   groupId: number;
-  isLoading: boolean;
+  isPending: boolean;
+  isError: boolean;
 }
 
-const TodoHeader = ({ data, groupId, isLoading }: TodoHeaderProps) => {
+const TodoHeader = ({ data, groupId, isPending, isError }: TodoHeaderProps) => {
   const [isAddTodoModalOpen, setIsAddTodoModalOpen] = useState(false);
+  const [isTabletMenuOpen, setIsTabletMenuOpen] = useState(false);
+  const { isPc } = useDevice();
+
+  const hasTaskLists = !!data && Array.isArray(data.taskLists) && data.taskLists.length > 0;
 
   return (
     <>
       <aside className={cn("flex flex-col items-start gap-2", "pc:w-[270px] pc:gap-6")}>
-        <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
-
-        <section className={cn("flex items-center justify-between gap-12 w-full", "pc:flex-col pc:gap-11")}>
-          <div className="pc:max-h-[300px] pc:w-full pc:overflow-y-scroll hide-scrollbar">
-            {/* TODO(지권): 로딩 화면 개선 필요 */}
-            {isLoading && <p className="h-[300px] bg-white rounded-xl p-4">로딩 중...</p>}
-
-            {!isLoading && data?.taskLists?.length && (
-              <ul className="pc:space-y-1">
-                {data.taskLists.map((item) => (
-                  <TodoItem key={item.id} data={item} />
-                ))}
-              </ul>
-            )}
-
-            {!isLoading && !data?.taskLists?.length && <p>할 일 목록이 없습니다.</p>}
-          </div>
-
+        <div className="w-full flex items-center justify-between">
+          <h2 className={cn("text-xs-semibold text-text-default", "pc:text-xl-bold pc:text-text-primary")}>할 일</h2>
           <BaseButton
             size="large"
             variant="outlinedPrimary"
             aria-label="할 일 추가"
             onClick={() => setIsAddTodoModalOpen(true)}
-            className="w-[112px] h-10 px-4 text-nowrap rounded-[40px] bg-background-primary"
+            className="max-w-[130px] h-9 px-4 text-nowrap rounded-[40px] bg-background-primary mobile:hidden tablet:hidden pc:flex items-center"
           >
             <Icon name="plus" className="size-5 tablet:size-5" />
             <span className="text-lg-semibold">할 일 추가</span>
           </BaseButton>
+        </div>
+
+        <section className={cn("flex items-center justify-between gap-12 w-full", "pc:flex-col pc:gap-11")}>
+          <div className="w-full flex justify-between items-center pc:w-full">
+            {(isPending || isError) && (
+              <div className="flex-center h-[50px]">{isPending ? <LoadingSpinner size="sm" /> : <ErrorState />}</div>
+            )}
+
+            {data?.taskLists?.length === 0 && <EmptyState />}
+
+            {!isPending &&
+              !isError &&
+              hasTaskLists &&
+              (isPc ? (
+                <div className="max-h-[300px] w-full overflow-y-scroll hide-scrollbar">
+                  <ul className="space-y-1 w-full">
+                    {data.taskLists.map((item) => (
+                      <TodoItem key={item.id} data={item} />
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <TaskDropdown
+                  data={data}
+                  isTabletMenuOpen={isTabletMenuOpen}
+                  setIsTabletMenuOpen={setIsTabletMenuOpen}
+                />
+              ))}
+
+            <BaseButton
+              size="large"
+              variant="outlinedPrimary"
+              aria-label="할 일 추가"
+              onClick={() => setIsAddTodoModalOpen(true)}
+              className="w-[112px] h-10 px-4 text-nowrap rounded-[40px] bg-background-primary select-none pc:hidden"
+            >
+              <Icon name="plus" className="size-5 tablet:size-5" />
+              <span className="text-lg-semibold">할 일 추가</span>
+            </BaseButton>
+          </div>
         </section>
       </aside>
 

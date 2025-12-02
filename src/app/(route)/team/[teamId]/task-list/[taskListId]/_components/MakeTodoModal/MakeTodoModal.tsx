@@ -36,7 +36,7 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
 
   return (
     <form onSubmit={onSubmit}>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} className="select-none">
         <Modal.Body className="flex-col-center gap-4">
           <h2 className="text-text-primary text-lg-medium">할 일 만들기</h2>
           <p className="text-text-default text-md-medium text-center">
@@ -111,7 +111,6 @@ const MakeTodoModal = ({ isOpen, onClose, groupId, taskListId }: MakeTodoModalPr
           </div>
         </Modal.Body>
         <Modal.Footer>
-          {/* TODO(지권): Disabled 상태 추가 필요 */}
           <BaseButton type="submit" variant="solid" size="large" className="mt-4" disabled={!isFormValid}>
             만들기
           </BaseButton>

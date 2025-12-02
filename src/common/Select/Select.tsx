@@ -67,7 +67,7 @@ const Select = <T,>({ value, options, onChange, className, textAlign = "left" }:
       </button>
 
       {isOpen && (
-        <ul className="absolute left-0 top-full mt-1 w-full bg-background-primary border rounded-xl shadow-md z-10 overflow-hidden">
+        <ul className="absolute left-0 top-full mt-1 w-full bg-background-primary border rounded-xl shadow-md">
           {options.map((option) => (
             <li key={option.label}>
               <button

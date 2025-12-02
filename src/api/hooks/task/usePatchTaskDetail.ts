@@ -22,6 +22,15 @@ const usePatchTaskDetail = () => {
       queryClient.invalidateQueries({
         queryKey: ["task-list-detail", groupId, taskListId, taskId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["groups", Number(groupId)],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["my-history"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["groups", groupId],
+      });
     },
 
     onError: () => {

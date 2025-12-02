@@ -1,66 +1,88 @@
-import { ProgressBadge } from "@/common";
-import { Icon } from "@/common";
+import { Dropdown, ProgressBadge } from "@/common";
 import { Todo } from "@/common";
+import { useTaskMutations } from "@/hooks";
+import { TaskList } from "@/types";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useState } from "react";
+import DeleteTaskListModal from "../Modal/DeleteTaskListModal";
+import EditTaskListModal from "../Modal/EditTaskListModal";
 
-// 추후 Item 받기
-const TaskHeader = () => {
+const TaskHeader = ({ name, taskList }: { name: string; taskList: TaskList }) => {
+  const { teamId } = useParams();
+
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+
+  const taskListId = taskList.id;
+  const totalTasks = taskList.tasks.length;
+  const completedCount = taskList.tasks.filter((task) => task.doneAt !== null).length;
+
   return (
     <div className="flex justify-between items-center h-[25px]">
-      <span className="text-lg-semibold text-text-primary">법인 설립</span>
-      <div className="flex items-center">
-        <ProgressBadge current={5} total={5} />
-        <button>
-          <Icon name="kebab" className="size-6 tablet:size-6 text-state-300" />
-        </button>
+      <Link href={`/team/${teamId}/task-list/${taskListId}`} className="text-lg-semibold text-text-primary">
+        {name}
+      </Link>
+
+      <div className="flex items-center leading-none">
+        <ProgressBadge current={completedCount} total={totalTasks} />
+        <Dropdown
+          iconName="kebab"
+          placement="bottom-right"
+          iconClassName="size-6 tablet:size-6 text-state-300"
+          options={[
+            { label: "수정하기", action: () => setIsOpenEditModal(true) },
+            { label: "삭제하기", action: () => setIsOpenDeleteModal(true) },
+          ]}
+        />
       </div>
+
+      <DeleteTaskListModal
+        isOpen={isOpenDeleteModal}
+        onClose={() => setIsOpenDeleteModal(false)}
+        groupId={Number(teamId)}
+        taskListId={taskList.id}
+      />
+
+      <EditTaskListModal
+        isOpen={isOpenEditModal}
+        onClose={() => setIsOpenEditModal(false)}
+        groupId={Number(teamId)}
+        taskList={taskList}
+      />
     </div>
   );
 };
 
-// 추후 Item 받기
-const Tasks = () => {
-  const [completed, setCompleted] = useState(false);
+const Tasks = ({ item }: { item: TaskList }) => {
+  const { teamId } = useParams();
+  const { toggleTaskDone } = useTaskMutations({ teamId: Number(teamId), taskListId: item.id });
   return (
     <ul className="flex flex-col gap-2">
-      <li>
-        <Todo
-          id={0}
-          title="법인 설립 안내 드리기"
-          completed={completed}
-          onChangeCompleted={(_, next) => setCompleted(next)}
-        />
-      </li>
-      <li>
-        <Todo
-          id={1}
-          title="법인 설립 안내 드리기"
-          completed={completed}
-          onChangeCompleted={(_, next) => setCompleted(next)}
-        />
-      </li>
-      <li>
-        <Todo
-          id={2}
-          title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex cupiditate, accusamus, voluptates enim in nesciunt nam, alias neque odio architecto non maxime ullam? Cupiditate molestiae impedit ipsum placeat maiores debitis."
-          completed={completed}
-          onChangeCompleted={(_, next) => setCompleted(next)}
-        />
-      </li>
+      {item.tasks.map((task) => (
+        <li key={task.id}>
+          <Todo
+            id={task.id}
+            title={task.name}
+            completed={task.doneAt !== null}
+            onChangeCompleted={() => toggleTaskDone(task.id, task.doneAt !== null)}
+          />
+        </li>
+      ))}
     </ul>
   );
 };
 
 interface TaskCardProps {
-  item: [];
+  item: TaskList;
   isRenderList: boolean;
 }
 
 const TaskCard = ({ item, isRenderList }: TaskCardProps) => {
   return (
     <article className="flex flex-col gap-4 px-5 py-4 border border-border-primary rounded-xl bg-background-primary">
-      <TaskHeader />
-      {isRenderList && <Tasks />}
+      <TaskHeader name={item.name} taskList={item} />
+      {isRenderList && <Tasks item={item} />}
     </article>
   );
 };

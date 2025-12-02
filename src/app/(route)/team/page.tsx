@@ -2,6 +2,12 @@ import ImgEmptyTeam from "@/assets/images/empty-team.png";
 import Image from "next/image";
 import { BaseButton, PageLayout } from "@/common";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Coworkers | 팀 페이지",
+  description: "팀을 생성하거나 팀에 참여해보세요.",
+};
 
 const EmptyTeamPage = async () => {
   return (

@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/common";
-import { Input, InputPassword, BaseButton } from "@/common";
-import { usePostLogin } from "@/api/hooks";
 import { useForm } from "@/hooks";
-import { ValidationRules } from "@/types";
-import { toastKit, validateEmail, validatePassword } from "@/utils";
 import { useEmailStore } from "@/stores";
+import { OverlayLoading } from "@/app/(route)/_components";
+import { ValidationRules } from "@/types";
+import { usePostLogin } from "@/api/hooks";
 import ResetPassword from "../ResetPassword/ResetPassword";
+import { Input, InputPassword, BaseButton } from "@/common";
+import { toastKit, validateEmail, validatePassword } from "@/utils";
 
 const loginRules: ValidationRules = {
   email: (value) => validateEmail(value),
@@ -21,7 +22,7 @@ const LoginForm = () => {
 
   const isInitialized = useRef(false);
 
-  const { mutate: postLogin } = usePostLogin();
+  const { mutateAsync: postLogin } = usePostLogin();
 
   const { email, isRemembered, setEmail, toggleRemember } = useEmailStore();
 
@@ -30,11 +31,12 @@ const LoginForm = () => {
   const { register, errors, handleSubmit, meta, setValue } = useForm({
     initialValues: { email: "", password: "" },
     validationRules: loginRules,
+    keepLockOnSuccess: true,
     onSubmit: async (values) => {
       if (isRemembered) {
         setEmail(values.email);
       }
-      postLogin(
+      await postLogin(
         { email: values.email, password: values.password },
         {
           onSuccess: () => {
@@ -57,7 +59,8 @@ const LoginForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="min-w-[300px] w-full mt-8 mb-10 gap-3 flex flex-col">
+      <form onSubmit={handleSubmit} className="relative min-w-[300px] w-full mt-8 mb-10 gap-3 flex flex-col">
+        {meta.isLoading && <OverlayLoading />}
         <div className="flex-col-center gap-6">
           <Input
             label="이메일"

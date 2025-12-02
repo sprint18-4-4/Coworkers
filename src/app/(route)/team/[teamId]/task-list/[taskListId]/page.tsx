@@ -7,6 +7,7 @@ import { TodoSection, TodoHeader, MakeTodoModal } from "./_components";
 import { FloatingButton, PageHeaderBar, PageLayout } from "@/common";
 import { DetailPage } from "./_detail/_components";
 import { useGetGroups, useGetTask } from "@/api/hooks";
+import { LoadingSpinner } from "@/features";
 
 const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId: number }> }) => {
   const { teamId, taskListId } = use(params);
@@ -14,10 +15,14 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("task-id");
 
-  const { data: groups, isLoading: isLoadingGroup } = useGetGroups({ id: Number(teamId) });
+  const { data: groups, isPending: isPendingGroup, isError: isErrorGroup } = useGetGroups({ id: Number(teamId) });
   const taskListName = groups?.taskLists?.find((taskList) => taskList.id === Number(taskListId))?.name ?? "";
 
-  const { data: taskList } = useGetTask({
+  const {
+    data: taskList,
+    isPending: isPendingTask,
+    isError: isErrorTask,
+  } = useGetTask({
     groupId: teamId,
     taskListId: taskListId,
     ...(searchParams.get("date") && { date: searchParams.get("date") }),
@@ -49,10 +54,10 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId
     <div className={cn(selectedId && "pc:flex")}>
       <PageLayout ariaLabel="목록 페이지">
         <h1 className="sr-only">목록 페이지</h1>
-        <PageHeaderBar title={groups?.name} />
+        <PageHeaderBar title={groups?.name} id={teamId} />
 
         <div aria-label="목록 페이지 컨텐츠" className={cn("pc:flex pc:gap-[25px]")}>
-          <TodoHeader data={groups} isLoading={isLoadingGroup} groupId={teamId} />
+          <TodoHeader data={groups} isPending={isPendingGroup} isError={isErrorGroup} groupId={teamId} />
           <TodoSection
             sectionName={taskListName}
             data={taskList ?? []}
@@ -60,6 +65,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId
             onClickDateItem={onClickDateItem}
             selectedDate={selectedDate}
             taskListId={taskListId}
+            taskStatus={{ isPending: isPendingTask, isError: isErrorTask }}
           />
         </div>
       </PageLayout>
@@ -90,8 +96,7 @@ const TaskListPage = ({ params }: { params: Promise<{ teamId: number; taskListId
 
 const Page = ({ params }: { params: Promise<{ teamId: number; taskListId: number }> }) => {
   return (
-    // TODO(지권): 로딩 화면 추가 필요
-    <Suspense fallback={""}>
+    <Suspense fallback={<LoadingSpinner />}>
       <TaskListPage params={params} />
     </Suspense>
   );

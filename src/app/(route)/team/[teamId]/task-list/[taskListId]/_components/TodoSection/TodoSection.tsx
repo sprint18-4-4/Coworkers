@@ -1,18 +1,18 @@
 "use client";
 
 import { cn } from "@/utils";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addDays, format } from "date-fns";
 import { DateValue } from "@/types";
 import { DateItem, DatePicker, Icon } from "@/common";
-import { EmptyState, TaskListItem } from "@/features";
+import { EmptyState, LoadingSpinner, TaskListItem } from "@/features";
 import { TODO_STYLES } from "../../_constants";
 import TaskPdfDownloadButton from "../TaskPdfDownloadButton/TaskPdfDownloadButton";
 import { useTaskMutations } from "@/hooks";
 import EditDataModal from "../../_detail/_components/_internal/EditDataModal/EditDataModal";
 import { TaskResponse } from "@/api/axios/task/_types";
-// TODO(지권): EditDataModal 네이밍 및 위치 변경 필요
+import ErrorState from "@/features/ErrorState/ErrorState";
 
 interface TodoSectionHeaderProps {
   data: TaskResponse;
@@ -42,7 +42,9 @@ const TodoSectionHeader = ({
 
   return (
     <header className="flex items-center justify-between relative">
-      <h3 className="text-2lg-bold text-text-primary">{sectionName || "로딩중..."}</h3>
+      <h3 className="text-2lg-bold text-text-primary flex-1 overflow-hidden text-ellipsis text-nowrap">
+        {sectionName || "로딩중..."}
+      </h3>
 
       <div className="flex items-center gap-2">
         <time dateTime={monthDateTime} className="text-sm-medium text-text-primary">
@@ -77,19 +79,32 @@ const TodoSectionHeader = ({
 type WeekDirection = "prev" | "next";
 
 interface TodoSectionProps {
+  sectionName: string;
   data: TaskResponse;
   teamId: number;
   onClickDateItem: (date: Date) => void;
   selectedDate: Date;
   taskListId: number;
-  sectionName: string;
+  taskStatus: {
+    isPending: boolean;
+    isError: boolean;
+  };
 }
 
-const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, sectionName }: TodoSectionProps) => {
+const TodoSection = ({
+  data,
+  teamId,
+  onClickDateItem,
+  selectedDate,
+  taskListId,
+  sectionName,
+  taskStatus,
+}: TodoSectionProps) => {
   const router = useRouter();
   const [isEditModal, setIsEditModal] = useState(false);
   const [editingTask, setEditingTask] = useState<{ id: number; name: string; description?: string } | null>(null);
   const [editForm, setEditForm] = useState({ name: "", description: "" });
+  const { isPending, isError } = taskStatus;
 
   const { toggleTaskDone, deleteTask, updateTask } = useTaskMutations({ teamId, taskListId });
 
@@ -102,7 +117,7 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
     setIsEditModal(true);
   };
 
-  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEdit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!editingTask) return;
 
@@ -129,8 +144,8 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
     <>
       <section
         className={cn(
-          "bg-background-primary px-[17px] py-[38px] mt-[22px] rounded-[20px]",
-          "pc:px-[42px] pc:max-w-[819px] pc:flex-1",
+          "bg-background-primary px-[17px] py-[38px] my-[22px] rounded-[20px]",
+          "pc:px-[42px] pc:max-w-[819px] pc:w-full",
         )}
       >
         <TodoSectionHeader
@@ -143,25 +158,28 @@ const TodoSection = ({ data, teamId, onClickDateItem, selectedDate, taskListId, 
 
         <DateItem onClick={onClickDateItem} selectedDate={selectedDate} />
 
-        <div className="mt-[37px] min-h-[250px]">
-          {/* TODO(지권): 로딩, 에러 추가 예정 */}
-          {(data?.length === 0 || !data) && <EmptyState />}
+        <div className="mt-[37px] min-h-[250px] flex-center">
+          {isPending && <LoadingSpinner />}
+          {isError && <ErrorState />}
+          {data?.length === 0 && !isPending && !isError && <EmptyState />}
 
-          <ul className="flex flex-col gap-3">
-            {data?.map((item) => {
-              const isDone = item.doneAt !== null;
+          {data?.length > 0 && !isPending && !isError && (
+            <ul className="w-full flex flex-col gap-3 self-start">
+              {data?.map((item) => {
+                const isDone = item.doneAt !== null;
 
-              return (
-                <TaskListItem
-                  key={item.id}
-                  item={item}
-                  onOpenDetail={() => onClickTaskListItem(item.id.toString())}
-                  onToggleTodo={() => toggleTaskDone(item.id, isDone)}
-                  options={options(item)}
-                />
-              );
-            })}
-          </ul>
+                return (
+                  <TaskListItem
+                    key={item.id}
+                    item={item}
+                    onOpenDetail={() => onClickTaskListItem(item.id.toString())}
+                    onToggleTodo={() => toggleTaskDone(item.id, isDone)}
+                    options={options(item)}
+                  />
+                );
+              })}
+            </ul>
+          )}
         </div>
       </section>
 
