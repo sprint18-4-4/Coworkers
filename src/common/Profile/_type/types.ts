@@ -23,7 +23,7 @@ export interface ProfileEditProps extends BaseProfileProps {
 
 export interface ProfileItemProps extends BaseProfileProps {
   name: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export interface MyProfileType extends ProfileItemProps {
