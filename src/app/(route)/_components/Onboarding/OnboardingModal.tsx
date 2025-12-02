@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/utils";
-import { ONBOARDING_STEPS } from "./Constants/onBoardingData";
-import { overlayVariants, modalVariants, contentVariants } from "./Constants/onBoardingAnimations";
+import { ONBOARDING_STEPS } from "./_constants/onBoardingData";
+import { overlayVariants, modalVariants, contentVariants } from "./_constants/onBoardingAnimations";
 
 interface OnboardingModalProps {
   onClose: () => void;

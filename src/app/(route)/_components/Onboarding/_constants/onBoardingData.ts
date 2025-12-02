@@ -1,9 +1,4 @@
-export interface OnboardingStep {
-  id: number;
-  title: string;
-  description: string;
-  imageSrc: string;
-}
+import { OnboardingStep } from "../_type/type";
 
 export const ONBOARDING_STORAGE_KEY = "hasSeenOnboarding";
 
