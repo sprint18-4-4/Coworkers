@@ -1,64 +1,71 @@
 "use client";
 
+import { FormEvent } from "react";
 import { useDevice } from "@/hooks";
-import { ProfileEdit, Input, BaseButton, LinkButton } from "@/common";
-import { useGetGroups, usePatchGroup } from "@/api/hooks";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ProfileEdit, Input, BaseButton, FloatingButton } from "@/common";
+import { useTeamEdit } from "../../_hooks";
 import { useParams } from "next/navigation";
 
-const EditTeamForm = () => {
-  const [formData, setFormData] = useState({
-    image: null,
-    name: "",
-  });
-
+const TeamEditForm = () => {
   const { isMobile } = useDevice();
+  const profileSize = isMobile ? "md" : "lg";
   const { teamId } = useParams();
   const id = Number(teamId);
-  const { data: groups } = useGetGroups({ id });
 
-  const { mutate: patchGroup, isPending } = usePatchGroup();
+  const {
+    name,
+    errorMessage,
+    preview,
+    isValid,
+    isSubmitting,
+    handleNameChange,
+    handleImageChange,
+    handleSubmit,
+    handleRemoveImage,
+  } = useTeamEdit(id);
 
-  const isDisabledEditButton = isPending || !formData.name;
-
-  const profileSize = isMobile ? "md" : "lg";
-
-  const handleFormDataChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleEditSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    patchGroup({ param: { id }, body: formData });
+    handleSubmit();
   };
 
   return (
-    <form onSubmit={handleEditSubmit} className="w-full flex-col-center gap-10">
+    <form onSubmit={onSubmit} className="w-full flex-col-center gap-10">
       <div className="w-full flex-col-center gap-3 tablet:gap-6">
-        <ProfileEdit src={null} onChange={() => {}} size={profileSize} />
+        <div className="relative">
+          <ProfileEdit iconType="imgUpload" src={preview || null} onChange={handleImageChange} size={profileSize} />
+          {preview && (
+            <FloatingButton
+              iconName="x"
+              type="button"
+              onClick={handleRemoveImage}
+              className="absolute -top-1 -right-1 size-6"
+            />
+          )}
+        </div>
         <Input
           label="팀 이름"
-          name="name"
           type="text"
-          placeholder={groups?.name}
-          value={formData.name}
-          onChange={handleFormDataChange}
+          placeholder="팀 이름을 입력해주세요."
+          value={name}
+          onChange={(e) => handleNameChange(e.target.value)}
+          error={errorMessage}
+          minLength={2}
+          maxLength={30}
         />
       </div>
-      <div className="w-full flex-col-center gap-2">
-        <p className="text-xs-regular text-text-default tablet:text-lg-regular text-center pb-4">
+
+      <div className="w-full flex-col-center gap-5">
+        <BaseButton type="submit" variant="solid" size="large" className="w-full" disabled={!isValid || isSubmitting}>
+          {isSubmitting ? "수정 중..." : "수정하기"}
+        </BaseButton>
+
+        <p className="text-xs-regular text-text-default tablet:text-lg-regular text-center">
           팀 이름은 회사명이나 모임 이름 등으로 설정하면 좋아요.
         </p>
-        <BaseButton type="submit" variant="solid" size="large" className="w-full" disabled={isDisabledEditButton}>
-          {isPending ? "수정 중..." : "수정하기"}
-        </BaseButton>
-        <LinkButton href={`/team/${teamId}`} variant="outlinedSecondary" size="large" className="w-full">
-          돌아가기
-        </LinkButton>
       </div>
     </form>
   );
 };
 
-export default EditTeamForm;
+export default TeamEditForm;
